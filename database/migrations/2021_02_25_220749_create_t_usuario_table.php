@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TUsuario extends Migration
+class CreateTUsuarioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,13 @@ class TUsuario extends Migration
     public function up()
     {
         Schema::create('t_usuario', function (Blueprint $table) {
-            $table->bigIncrements('id_usuario');
+            $table->BigIncrements('id_usuario');
             $table->string('nombre_usuario');
             $table->string('apellido_usuario');
             $table->string('puesto');
             $table->string('correo');
             $table->string('contraseña');
             $table->boolean('roll');
-            $table->timestamps();
         });
     }
 

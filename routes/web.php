@@ -21,6 +21,10 @@ Route::get('/Perfil', function () {
     return view('Perfil');
 });
 
+Route::get('/ManoObra', function () {
+    return view('ManoObra');
+});
+
 Route::get('/Principal', function(){
     return view('Principal');
 });
