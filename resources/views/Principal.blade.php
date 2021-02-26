@@ -37,9 +37,6 @@
                   }, );
                 </script>
               </div>
-              @auth
-              {{auth()->user()->name}}
-              @endauth
           </div>
         </div>
       </div>

@@ -12,9 +12,28 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function getLogin(){
+         return view('Acceso');
+     }
+     public function postLogin(){
+        $rules=[
+            'password'=>'required|min:8'
+        ];
+     }
+     public function getRegister(){
+         return view('Perfil');
+     }
+
+     public function postRegister(){
+         $rules=[
+             'password'=>'required|min:8'
+         ];
+     }
+
     public function index()
     {
-        return view('acceso');
+        return view('Acceso');
     }
 
     /**

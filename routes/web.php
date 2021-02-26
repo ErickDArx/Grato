@@ -11,14 +11,14 @@
 |
 */
 
-Route::resource('t_usuario','UsuarioController');
+// Route::get('/','UsuarioController@getLogin')->name('login');
+// Route::post('/','UsuarioController@getLogin')->name('login');
+// Route::get('/Perfil', function () {
+//     return view('Perfil');
+// });
 
-Route::get('/', function () {
-    return view('Acceso');
-});
-
-Route::get('/Perfil', function () {
-    return view('Perfil');
+Route::get('/',function(){
+return view('Acceso');
 });
 
 Route::get('/ManoObra', function () {
@@ -28,5 +28,42 @@ Route::get('/ManoObra', function () {
 Route::get('/Principal', function(){
     return view('Principal');
 });
+
+Route::get('/Perfil', function(){
+    return view('Perfil');
+});
+
+Route::get('/CIF', function(){
+    return view('CIF');
+});
+
+Route::get('/Viaticos', function(){
+    return view('Viaticos');
+});
+
+Route::get('/Equipo', function(){
+    return view('Equipo');
+});
+
+Route::get('/MateriaPrima', function(){
+    return view('MateriaPrima');
+});
+
+Route::get('/Recetario', function(){
+    return view('Recetario');
+});
+
+Route::get('/Pedidos', function(){
+    return view('Pedidos');
+});
+Route::get('/Reportes', function(){
+    return view('Reportes');
+});
+
+Route::get('/Asistentes', function(){
+    return view('Asistentes');
+});
+
+
 Auth::routes();
 
