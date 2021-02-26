@@ -34,7 +34,7 @@
 
                                 <fieldset>
                                     <p type="text" class="form-control" value="">
-                                        
+
                                     </p>
                                 </fieldset>
 
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('store') }}">
                     @csrf
 
                     <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -168,19 +168,15 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="">
-                                        <input id="name" type="text" class="form-control"
-                                            aria-describedby="passwordHelpBlock">
-                                    
+                                        <input name="nombre_usuario" id="nombre_usuario" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="font-weight-bold col-6 ">
                                     Correo Electronico
-
                                 </div>
                                 <div class="col-sm-6 mt-3">
                                     <div class="">
-                                        <input id="email" type="email" class="form-control"
-                                            aria-describedby="passwordHelpBlock">
+                                        <input name="correo" id="correo" type="email" class="form-control">
 
                                     </div>
                                 </div>
@@ -189,8 +185,7 @@
                                 </div>
                                 <div class="col-sm-6 mt-3">
                                     <div class="">
-                                        <input id="password" type="password" class="form-control"
-                                            aria-describedby="passwordHelpBlock">
+                                        <input name="contrasena" id="contraseña" type="password" class="form-control">
 
                                     </div>
                                 </div>
@@ -199,7 +194,7 @@
                                 </div>
                                 <div class="col-sm-6 mt-3">
                                     <div class="">
-                                        <input id="password-confirm" type="password"  class="form-control"
+                                        <input id="password-confirm" type="password" class="form-control"
                                             aria-describedby="passwordHelpBlock">
 
                                     </div>
@@ -210,7 +205,8 @@
                                 <button type="submit" class="Pass-Modal col-sm-12 btn btn-dark rounded mt-2">
                                     {{ __('Añadir asistente') }}
                                 </button>
-                                <a href="{{'Asistentes'}}" class="Pass-Modal col-sm-12 btn btn-outline-gray rounded mt-2">Ver
+                                <a href="{{'Asistentes'}}"
+                                    class="Pass-Modal col-sm-12 btn btn-outline-gray rounded mt-2">Ver
                                     asistentes</a>
 
                             </div>

@@ -17,6 +17,7 @@
 //     return view('Perfil');
 // });
 
+
 Route::get('/',function(){
 return view('Acceso');
 });
@@ -29,9 +30,9 @@ Route::get('/Principal', function(){
     return view('Principal');
 });
 
-Route::get('/Perfil', function(){
-    return view('Perfil');
-});
+Route::get('/Perfil', 'PerfilController@index')->name('Perfil');
+Route::post('/Perfil', 'PerfilController@store')->name('store');
+
 
 Route::get('/CIF', function(){
     return view('CIF');

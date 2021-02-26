@@ -15,12 +15,13 @@ class CreateTUsuarioTable extends Migration
     {
         Schema::create('t_usuario', function (Blueprint $table) {
             $table->BigIncrements('id_usuario');
-            $table->string('nombre_usuario');
-            $table->string('apellido_usuario');
-            $table->string('puesto');
-            $table->string('correo');
-            $table->string('contraseña');
-            $table->boolean('roll');
+            $table->string('nombre_usuario')->nullable();
+            $table->string('apellido_usuario')->nullable();
+            $table->string('puesto')->nullable();
+            $table->string('correo')->nullable();
+            $table->string('contraseña')->nullable();
+            $table->boolean('roll')->nullable();
+            $table->timestamps();
         });
     }
 
