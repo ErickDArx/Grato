@@ -61,7 +61,10 @@ Route::get('/Reportes', function(){
 });
 
 Route::get('/Asistentes', function(){
-    return view('Asistentes');
+    $users = DB::table('users')->get();
+
+    return view('Asistentes', ['users' => $users]);
+
 });
 
 

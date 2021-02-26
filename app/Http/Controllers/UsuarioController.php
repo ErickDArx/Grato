@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\t_usuario;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UsuarioController extends Controller
 {
@@ -13,27 +16,15 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function getLogin(){
-         return view('Acceso');
-     }
-     public function postLogin(){
-        $rules=[
-            'password'=>'required|min:8'
-        ];
-     }
-     public function getRegister(){
-         return view('Perfil');
-     }
-
-     public function postRegister(){
-         $rules=[
-             'password'=>'required|min:8'
-         ];
-     }
-
     public function index()
     {
-        return view('Acceso');
+        $users = DB::table('users')->get();
+
+        return view('Asistentes.index', ['users' => $users]);
+
+        foreach ($users as $user) {
+            echo $user->name;
+        }
     }
 
     /**

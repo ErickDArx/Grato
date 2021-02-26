@@ -25,10 +25,18 @@
             <h4 class="font-weight-normal">Asistentes</h4>
             <h6 class="text-gray">Desglose del personal autorizado en el sistema</h6>
             <div class="">
-
-
             </div>
         </div>
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <h4 class="font-weight-normal">Asistentes</h4>
+          <h6 class="text-gray">Desglose del personal autorizado en el sistema</h6>
+          <div class="">
+            @foreach ($users as $item)
+                <p>{{$item->name}}</p>
+            @endforeach
+          </div>
+      </div>
     </div>
 
 
