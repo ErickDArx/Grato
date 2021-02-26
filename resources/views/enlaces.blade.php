@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
+  {!! htmlScriptTagJsApi([
+    'action' => 'homepage',
+    'callback_then' => 'callbackThen',
+    'callback_catch' => 'callbackCatch'
+]) !!}
     {{-- Favicon --}}
     <link rel="icon" type="image/png" href="././media/Grupo 1.png" />
     {{-- Meta-SEO --}}
