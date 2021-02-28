@@ -26,7 +26,7 @@
 
 
                     <div>
-                        <form class="col-10 container card-body shadow bg-light"
+                        <form class="col-10 container card-body shadow bg-light "
                             style="width: 26rem;margin-bottom: 3rem;border-radius: 1rem;" method="POST"
                             action="{{ route('login') }}">
                             @csrf
@@ -34,11 +34,26 @@
                                 <div class="form-group text-center">
                                     <h3 class="mt-2 font-weight-bold">Ingreso al sistema</h3>
                                 </div>
+                                
+                                
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="text-danger">
+                                            @foreach ($errors->all() as $error)
+                                                <span>{{$error}}</span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                @endif
                                 <div class="form-group text-left">
-                                    <label for="exampleInputEmail1">Usuario o Correo Electrónico</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" required autocomplete="email" autofocus>
+                                    <label>Usuario</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                        name="nombre_usuario" value="{{ old('email') }}" id="nombre_usuario"
+                                        aria-describedby="emailHelp" autofocus required>
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -46,10 +61,13 @@
                                     </span>
                                     @enderror
                                 </div>
+
                                 <div class="form-group text-left">
-                                    <label for="exampleInputPassword1">Contraseña</label>
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                    <label>Contraseña</label>
+                                    <input type="password"
+                                        class="form-control @error('password') is-invalid @enderror" 
+                                        name="password" 
+                                        id="password"
                                         required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">

@@ -3,37 +3,51 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\t_usuario;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+    public function authenticate(Request $request) {
+        
+        $t_usuario = t_usuario::where('nombre_usuario'
+        ,$request->nombre_usuario)->where('password',
+        $request->password)->first();
+
+        // $nombre_usuario = $request->input('nombre_usuario');
+        // $password = $request->input('password');
+
+        if ($t_usuario) {
+            Auth::loginUsingId($t_usuario->id_usuario);
+            return view('Principal');
+         }else{
+            return redirect('login')->with('status', 'Datos Incorrectos!');
+         }
+    }
     protected $redirectTo = '/Principal';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function username()
     {
-        $this->middleware('guest')->except('logout');
+        return 'nombre_usuario';
+    }
+
+    public function index()
+    {
+        return view('Acceso');
+    }
+
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+    
+        return $this->loggedOut($request) ?: redirect('/login');
     }
 }

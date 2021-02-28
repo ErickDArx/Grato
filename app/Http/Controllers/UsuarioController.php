@@ -10,12 +10,7 @@ use App\Http\Controllers\Controller;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    
     public function index()
     {
         $users = DB::table('users')->get();
@@ -27,6 +22,9 @@ class UsuarioController extends Controller
         }
     }
 
+    public function principal(){
+        return view('Principal');
+    }
     /**
      * Show the form for creating a new resource.
      *

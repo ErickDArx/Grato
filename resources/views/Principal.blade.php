@@ -24,6 +24,12 @@
           <div class="card-body">
             <h4 class="font-weight-bold text-oscuro"><i class="fa fa-chart-line mr-2"></i>Menú Principal</h4>
             <h6 class="text-gray">Gráfico de ventas hechas según el mes</h5>
+              @auth
+                  <p>Estas logeado</p>
+              @endauth
+              @guest
+                  <p>No estas logeado</p>
+              @endguest
               <div class="ct-chart ct-golden-section">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js"
                 integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ=="

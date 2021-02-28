@@ -24,22 +24,19 @@
                     <h4 class="font-weight-normal">Perfil</h4>
                     <h6 class="text-gray">Mis datos personales</h6>
                     <div class="">
-                        <div class="disabled col-sm-auto row rounded mt-2 d-flex align-items-center">
+                        <div class="col-sm-auto row rounded mt-2 d-flex align-items-center">
                             <div class="p-3 font-weight-bold col-6">
                                 Nombre del operario(a)
                             </div>
                             <div class="col-6">
-
-
-
-                                <fieldset>
-                                    <p type="text" class="form-control" value="">
-
-                                    </p>
-                                </fieldset>
-
+                                <p class="form-control">{{ auth()->user()->nombre_usuario }}</p>
                             </div>
-
+                            <div class="p-3 font-weight-bold col-6">
+                                Apellido
+                            </div>
+                            <div class="col-6">
+                                <p class="form-control">{{ auth()->user()->apellido_usuario }}</p>
+                            </div>
                         </div>
 
                         <div class="col-sm-auto row rounded  mt-2 d-flex align-items-center">
@@ -51,24 +48,14 @@
                                 <div class="form-group m-0">
 
                                     <fieldset disabled>
-                                        <p class="form-control">Administrador(a)</p>
+                                        <p class="form-control">{{ auth()->user()->puesto }}</p>
                                     </fieldset>
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-auto row rounded  mt-2 d-flex align-items-center">
-                            <div class="p-3 font-weight-bold col-6">
-                                Nombre de usuario
-                            </div>
-                            <div class=" col-6 ">
-                                <div class="form-group m-0">
-                                    <fieldset>
-                                        <input type="text" class="form-control" id="" value="gratocr">
 
-                                    </fieldset>
-                                </div>
-                            </div>
                         </div>
 
                         <div>
@@ -168,7 +155,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="">
-                                        <input name="nombre_usuario" id="nombre_usuario" type="text" class="form-control">
+                                        <input name="nombre_usuario" id="nombre_usuario" type="text"
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="font-weight-bold col-6 ">

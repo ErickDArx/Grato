@@ -1,20 +1,27 @@
 <?php
 
 namespace App;
+use Illuminate\Foundation\Auth\User as AuthenticatableContract;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContracts;
-use Illuminate\Auth\Authenticatable;
-class t_usuario extends Model
+class t_usuario extends AuthenticatableContract
 {
-    public $table = "t_usuario";
+    protected $primaryKey = "id_usuario";
+    protected $remember_token = false;
+    protected $table = "t_usuario";
 
     protected $fillable = [
         'nombre_usuario',
-        'correo',
-        'contraseña',
         'apellido_usuario',
+        'correo',
+        'password',
         'puesto',
         'roll',
+        'created_at',
+        'updated_at'
     ];
+    protected $hidden = [
+        'password',
+    ];
+    protected $guarded = ['id_usuario'];
 }
+

@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+        Laraveles\Spanish\SpanishServiceProvider::class,
         /*
          * Package Service Providers...
          */
