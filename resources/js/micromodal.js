@@ -22,21 +22,3 @@ if(!0!==o.debugMode||!1!==c(i,a))for(var s in a){var l=a[s]
 o.targetModal=s,o.triggers=[].concat(t(l)),new n(o)}},show:function(e,o){var t=o||{}
 t.targetModal=e,!0===t.debugMode&&!1===s(e)||(a=new n(t),a.showModal())},close:function(){a.closeModal()}}}()})
 
-
-
-
-MicroModal.init({
-    onShow: modal => console.info(`${modal.id} is shown`), // [1]
-    onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-    openTrigger: 'data-custom-open', // [3]
-    closeTrigger: 'data-custom-close', // [4]
-    disableScroll: true, // [5]
-    disableFocus: false, // [6]
-    awaitCloseAnimation: false, // [7]
-    debugMode: true // [8]
-  });
-
-var button = document.querySelector('.myButton');
-button.addEventListener('click', function(){
-  MicroModal.show('modal-1');    
-});

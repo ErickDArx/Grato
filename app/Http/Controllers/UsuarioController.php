@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller
 {
-    
+
     public function index()
     {
         $users = DB::table('users')->get();
@@ -22,7 +24,10 @@ class UsuarioController extends Controller
         }
     }
 
-    public function principal(){
+    public function principal()
+    {
+        date_default_timezone_set('America/Costa_Rica');
+        $date = Carbon::now()->locale('es_ES');
         return view('Principal');
     }
     /**
@@ -32,7 +37,6 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**

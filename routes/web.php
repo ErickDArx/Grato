@@ -56,4 +56,15 @@ Route::middleware(['auth'])->group(function () {
 
         return view('Asistentes', ['t_usuario' => $users]);
     });
+
+    Route::get('/home',function(){
+        return view('home');
+    });
+    // Route::get('/Perfil/{id_usuario}', 'PerfilController@editar')->name('editar');
+
+    Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
+
+    Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
+
+    Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 });

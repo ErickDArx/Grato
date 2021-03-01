@@ -2,7 +2,58 @@
 <html lang="es">
 
 <head>
-  @extends('enlaces')
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso</title>
+  {!! htmlScriptTagJsApi([
+  'action' => 'homepage',
+  'callback_then' => 'callbackThen',
+  'callback_catch' => 'callbackCatch'
+  ]) !!}
+  {{-- Favicon --}}
+  <link rel="icon" type="image/png" href="././css/acceso.jpg" />
+  {{-- Meta-SEO --}}
+  <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
+  <meta name="robots" value="Noindex">
+  <meta name="keywords" content="Acceso">
+  <meta name="theme-color" content="#E23636">
+  {{-- Fuente de iconos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Libreria Menú -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+
+  {{-- Estilos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css"
+    integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg=="
+    crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+  <link rel="stylesheet" href="././css/app.css">
+  {{-- Javascript --}}
+
+  <!-- jquery & iScroll -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+  <!-- drawer.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('.drawer').drawer();
+        $('.js-tilt').tilt({
+          option: value,
+          option: value,
+        });
+      });
+  </script>
 </head>
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
@@ -27,22 +78,27 @@
           <div class="">
           </div>
         </div>
+        @foreach ($t_usuario as $item)
 
-        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <h4 class="font-weight-normal">Asistentes</h4>
-          <h6 class="text-gray">Desglose del personal autorizado en el sistema</h6>
-          <div class="">
-            @auth
-            <p>Inicio de sesion exitoso</p>
-            @endauth
-            @guest
-            <p>No esta logeado</p>
-            @endguest
-            @foreach ($t_usuario as $item)
-            <p>{{$item->puesto}}</p>
-            @endforeach
+        @if ($item->roll == 0)
+        <div class="row m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class=" d-flex align-items-center col-sm-6">
+            <h5 class="m-0 font-weight-normal">{{$item->nombre_usuario}} {{$item->apellido_usuario}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <button class="border-dark btn btn-block btn-outline-gray">Editar</button>
+          </div>
+          <div class="col-sm-3">
+            <form action="{{route('eliminar_asistente', $item->id_usuario)}}" method="POST">
+              @method('DELETE')
+              @csrf
+              <button type="submit" class="border-dark btn btn-block btn-outline-gray">Eliminar</button>
+            </form>
           </div>
         </div>
+        @endif
+
+        @endforeach
       </div>
 
 

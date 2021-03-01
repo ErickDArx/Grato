@@ -39,8 +39,10 @@ class PerfilController extends Controller
         // return $request->all();
         $agregar = new t_usuario;
         $agregar->nombre_usuario = $request->nombre_usuario;
+        $agregar->apellido_usuario = $request->apellido_usuario;
         $agregar->correo = $request->correo;
-        $agregar->contraseña = $request->contraseña;
+        $agregar->password = bcrypt('password');
+        $agregar->roll = 0;
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
@@ -58,37 +60,43 @@ class PerfilController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function editar($id_usuario)
     {
-        //
+        $edit = t_usuario::findOrFail($id_usuario);
+        return view('Perfil', compact('edit'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, $id_usuario)
     {
-        //
+        $edit = t_usuario::findOrFail($id_usuario);
+        $edit->nombre_usuario = $request->nombre_usuario;
+        $edit->apellido_usuario = $request->apellido_usuario;
+        $edit->save();
+        return back()->with('Perfil','Todo salio bien');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update_correo(Request $request, $id_usuario)
     {
-        //
+        $edit = t_usuario::findOrFail($id_usuario);
+        $edit->correo = $request->correo;
+        $edit->save();
+        return back()->with('Perfil','Todo salio bien');
     }
+
+    public function delete_asistente( $id_usuario)
+    {
+        $eliminar = t_usuario::findOrFail($id_usuario);
+        $eliminar -> delete();
+        return back()->with('eliminar','El asistente fue eliminado exitosamente');
+    
+    }
+
+    public function destroy($id_usuario)
+    {
+
+    }
+
+
 }
