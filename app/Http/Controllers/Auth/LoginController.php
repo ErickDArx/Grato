@@ -17,13 +17,10 @@ class LoginController extends Controller
         
         $t_usuario = t_usuario::where('nombre_usuario'
         ,$request->nombre_usuario)->where('password',
-        $request->password)->first();
-
-        // $nombre_usuario = $request->input('nombre_usuario');
-        // $password = $request->input('password');
+        $request->password = bcrypt($request->password))->first();
 
         if ($t_usuario) {
-            Auth::loginUsingId($t_usuario->id_usuario);
+            Auth::loginUsingId($t_usuario->nombre_usuario);
             return view('Principal');
          }else{
             return redirect('login')->with('status', 'Datos Incorrectos!');

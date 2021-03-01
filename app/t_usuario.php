@@ -19,9 +19,7 @@ class t_usuario extends AuthenticatableContract
         'created_at',
         'updated_at'
     ];
-    protected $hidden = [
-        'password',
-    ];
+
     protected $guarded = ['id_usuario'];
 }
 

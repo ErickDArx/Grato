@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\t_usuario;
+use Carbon\Carbon;
+
 class PerfilController extends Controller
 {
 
@@ -14,6 +16,8 @@ class PerfilController extends Controller
      */
     public function index()
     {
+        date_default_timezone_set('America/Costa_Rica');
+        $date = Carbon::now()->locale('es_ES');
         return view('Perfil');
     }
 
@@ -41,7 +45,7 @@ class PerfilController extends Controller
         $agregar->nombre_usuario = $request->nombre_usuario;
         $agregar->apellido_usuario = $request->apellido_usuario;
         $agregar->correo = $request->correo;
-        $agregar->password = bcrypt('password');
+        $agregar->password = bcrypt($request->password);
         $agregar->roll = 0;
         // Insertar en la base de datos
         $agregar->save();

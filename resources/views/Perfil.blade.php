@@ -288,8 +288,7 @@
                         </div>
                         <div class="col-sm-6 mt-3">
                             <div class="">
-                                <input name="password" id="password" type="password" class="form-control">
-
+                                <input name="password" id="password" type="password" class="form-control" required>
                             </div>
                         </div>
 

@@ -12,12 +12,13 @@ class usuario extends Seeder
     public function run()
     {
         DB::table('t_usuario')->insert([
-            'nombre_usuario'=>'Erick',
+            'nombre_usuario'=>'Super',
             'apellido_usuario'=>'Matamoros',
             'puesto'=>'Administrador',
-            'roll'=>1,
-            'correo'=>'alonso@gmail.com',
-            'password'=> bcrypt('12345678'),
+            'roll'=>0,
+            'correo'=>'super@gmail.com',
+            'password'=> bcrypt('estoesunaprueba'),
         ]);
+        
     }
 }
