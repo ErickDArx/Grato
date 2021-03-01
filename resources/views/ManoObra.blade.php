@@ -9,57 +9,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acceso</title>
   {!! htmlScriptTagJsApi([
-      'action' => 'homepage',
-      'callback_then' => 'callbackThen',
-      'callback_catch' => 'callbackCatch'
+  'action' => 'homepage',
+  'callback_then' => 'callbackThen',
+  'callback_catch' => 'callbackCatch'
   ]) !!}
-      {{-- Favicon --}}
-      <link rel="icon" type="image/png" href="././css/acceso.jpg" />
-      {{-- Meta-SEO --}}
-      <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
-      <meta name="robots" value="Noindex">
-      <meta name="keywords" content="Acceso">
-      <meta name="theme-color" content="#E23636">
-      {{-- Fuente de iconos --}}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-      crossorigin="anonymous" />
-  
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-      <!-- Jquery -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-      <!-- Libreria Menú -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-  
-      {{-- Estilos --}}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css" integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg==" crossorigin="anonymous" />
-  
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-      <link rel="stylesheet" href="././css/app.css">  
-      {{-- Javascript --}}
-  
-    <!-- jquery & iScroll -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-    <!-- drawer.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
-    <script>
-      
-      $(document).ready(function () {
+  {{-- Favicon --}}
+  <link rel="icon" type="image/png" href="././css/acceso.jpg" />
+  {{-- Meta-SEO --}}
+  <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
+  <meta name="robots" value="Noindex">
+  <meta name="keywords" content="Acceso">
+  <meta name="theme-color" content="#E23636">
+  {{-- Fuente de iconos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Libreria Menú -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+
+  {{-- Estilos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css"
+    integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg=="
+    crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+  <link rel="stylesheet" href="././css/app.css">
+  {{-- Javascript --}}
+
+  <!-- jquery & iScroll -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+  <!-- drawer.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+  <script>
+    $(document).ready(function () {
         $('.drawer').drawer();
         $('.js-tilt').tilt({
           option: value,
           option: value,
         });
       });
-    </script>
+  </script>
 </head>
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
-@extends('menu')
+  @extends('menu')
 
   <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
     <nav class="navbar navbar-dark bg-white nav">
@@ -73,73 +74,113 @@
     <div class="row mr-2 ml-2 mt-3">
 
       <div class="col-md-8 mb-2">
-        <div class="card shadow" style="border-radius: 0.5rem;">
-          <div class="card-body">
 
+        {{-- Mano de obra --}}
 
-            <div class="container">
-              <div class="row">
-                <h4 class="col-sm-6">Mano de obra</h4>
-                <div class="justify-content-end row">
-                  <a href="" class="col-sm-12 btn btn-dark">Ingresar operario</a>
-                </div>
-
-              </div>
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <div class="col-sm-6">
+              <h4 class="font-weight-bold">Mano de obra</h4>
               <h6>Desglose de operarios</h6>
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <h5 class="card-title">Nombre del colaborador</h5>
-                  <h6 class="card-subtitle mb-2 ">Graciela Ortega Vega</h6>
-                  <div class="row">
-                    <div class="col-sm-5 ">
-                      <h5 class="card-title">Tiempo Trabajado</h5>
-                      <h6 class="">180 minutos</h6>
-                    </div>
-                    <div class="col-sm-4">
-                      <h5 class="card-title">Costo por minuto</h5>
-                      <h6>₡20.56</h6>
-                    </div>
-                    <div class="col-sm-3">
-                      <h5 class="card-title">Total</h5>
-                      <h6>₡3706.70</h6>
-                    </div>
-                  </div>
-                  <a href="" class="btn btn-block btn-outline-dark">Actualizar informacion</a>
-                </div>
-              </div>
-              <div class="row mt-5">
-                <h4 class="col-sm-6">Horas extras</h4>
-                <div class="justify-content-end row">
-                  <a href="" class="col-sm-12 btn btn-dark">Ingresar operario</a>
-                </div>
+            </div>
+            <div class="col-sm-6">
+              <a href="" class="btn btn-block btn-dark">Ingresar operario</a>
+            </div>
+          </div>
+        </div>
 
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <h4 class="col-12 font-weight-bold">Configuración</h4>
+            <h6 class="col-12">Costo por minuto</h6>
+            <div class="col-sm-6">
+              <input class="form-control m-1" name="" id="" value="₡20.59">
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-block btn-outline-gray m-1" href="">Cambiar el costo por minuto</a>
+            </div>
+          </div>
+        </div>
+
+        {{-- Lista de operarios --}}
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="">
+            <div class="m-0 d-flex align-items-center row">
+              <div class="col-sm-6">
+                <h5 class="card-title m-0">Colaborador(a)</h5>
               </div>
-              <h6>Desglose de operarios</h6>
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <h5 class="card-title">Nombre del colaborador</h5>
-                  <h6 class="card-subtitle mb-2 ">Graciela Ortega Vega</h6>
-                  <div class="row">
-                    <div class="col-sm-5 ">
-                      <h5 class="card-title">Tiempo Trabajado</h5>
-                      <h6 class="">180 minutos</h6>
-                    </div>
-                    <div class="col-sm-4">
-                      <h5 class="card-title">Costo por minuto</h5>
-                      <h6>₡20.56</h6>
-                    </div>
-                    <div class="col-sm-3">
-                      <h5 class="card-title">Total</h5>
-                      <h6>₡3706.70</h6>
-                    </div>
-                  </div>
-                  <a href="" class="btn btn-block btn-outline-dark">Actualizar informacion</a>
-                </div>
+              <div class="col-sm-6">
+                <h6 class="mt-1">Graciela Ortega Vega</h6>
               </div>
             </div>
 
+            <div class=" m-0 mt-2 row d-flex align-items-center">
+              <div class="col-sm-6">
+                <h6 class="card-title">Tiempo Trabajado</h6>
+                <h6 class="">180 minutos</h6>
+              </div>
+              <div class="col-sm-6 card-footer border-0 rounded-pill">
+                <div class="m-1">
+                  <h6 class="">Total</h6>
+                  <h6 class="">₡3706.70</h6>
+                </div>
+              </div>
+            </div>
+            <a href="" class="btn btn-block btn-outline-dark mt-1">Actualizar informacion</a>
           </div>
+        </div>
 
+        {{-- Horas extras --}}
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <div class="col-sm-6">
+              <h4 class="m-1 font-weight-bold">Horas extras</h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="" class="m-1 btn btn-block btn-dark">Ingresar operario</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <h4 class="col-12 font-weight-bold">Configuración</h4>
+            <h6 class="col-12">Costo por horas extras</h6>
+            <div class="col-sm-6">
+              <input class="form-control m-1" name="" id="" value="₡20.59">
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-block btn-outline-gray m-1" href="">Cambiar el costo por horas extras</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="">
+            <div class="m-0 d-flex align-items-center row">
+              <div class="col-sm-6">
+                <h5 class="card-title m-0">Colaborador(a)</h5>
+              </div>
+              <div class="col-sm-6">
+                <h6 class="mt-1">Graciela Ortega Vega</h6>
+              </div>
+            </div>
+
+            <div class=" m-0 mt-2 row d-flex align-items-center">
+              <div class="col-sm-6">
+                <h6 class="card-title">Horas extras trabajadas</h6>
+                <h6 class="">180 minutos</h6>
+              </div>
+              <div class="col-sm-6 card-footer border-0 rounded-pill">
+                <div class="m-1">
+                  <h6 class="">Total</h6>
+                  <h6 class="">₡3706.70</h6>
+                </div>
+              </div>
+            </div>
+            <a href="" class="btn btn-block btn-outline-dark mt-1">Actualizar informacion</a>
+          </div>
         </div>
       </div>
 
