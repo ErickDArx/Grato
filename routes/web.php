@@ -15,10 +15,14 @@ Auth::routes();
 // Este grupo de rutas, evita que se accedan a otros rutas sin antes logearse, de lo contrario redirecciona a la pagina de acceso
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/ManoObra', function () {
-        return view('ManoObra');
-    });
+    // Vista Index
+    Route::get('/ManoObra', 'ManoObraController@index');
+    // Crear operarios
+    Route::post('/Total', 'ManoObraController@store')->name('total');
+    // Eliminar operarios
+    Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('eliminar_operario');
 
+    
     Route::get('/Principal', 'UsuarioController@principal');
 
     Route::get('/Perfil', 'PerfilController@index')->name('Perfil');

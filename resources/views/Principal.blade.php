@@ -147,8 +147,6 @@
         </div>
       </div>
 
-
-
       <div class="col-md-12 mt-2 mb-3">
         <div class="card shadow" style="border-radius: 0.5rem;">
           <div class="card-body text-center text-oscuro">
