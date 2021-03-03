@@ -159,212 +159,202 @@
           </div>
         </div>
 
-
-        <!-- notificacion de grabado -->
-<div id="notificacion" class="alert alert-success alert-dismissable"  role="alert" 
-style="">
-   <strong>Se ha Agregado un Registro</strong>
-</div>
-
-{{--  Historico de Cursos registrados --}}
-<div id='historico' style="display: none;">
-    <h3>Historico de Creaciones</h3>
-    <ul>
-    </ul>
-</div>
         {{-- Listado Operarios --}}
+
+        {{-- <div class="card-body bg-gray m-2" id="Lista">
+          <p class="bg-primary" id="Apellido"></p>
+        </div> --}}
+        <div id="Lista">
+        </div>
         @foreach ($t_mano_de_obra as $item)
-        <div class="shadow m-2 card-body bg-white" id="Lista" style="border-radius: 0.5rem;">
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="m-0 d-flex align-items-center row">
+            <div class="col-sm-6">
+              <h5 class="card-title m-0 font-weight-bold">Colaborador(a)</h5>
+            </div>
+            <div class="col-sm-6" id="nombre">
+              <h6 class="mt-1">{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h6>
+            </div>
+          </div>
+          <div class=" m-0 mt-2 row d-flex align-items-center">
+            <div class="col-sm-6">
+              <h6 class="card-title">Tiempo Trabajado</h6>
+              <h6 class="">{{$item->minutos_trabajados}}</h6>
+            </div>
+            <div class="col-sm-6 border mt-1 rounded">
+              <div class="mt-1">
+                <h6 class="m-0">Total</h6>
+                <h6 class="m-1">₡ {{$item->total_mano_obra}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class=" justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
+
+            <div class="col-sm-6">
+              <a href="" class="text-dark btn btn-block">Actualizar informacion</a>
+            </div>
+
+            <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+              <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                  <header class="modal__header">
+                    <div class="">
+                      <div class="">
+                        <p class="h4 font-weight-bold mb-2" id="">
+                          Ingreso de operario
+                        </p>
+                      </div>
+                    </div>
+                    <div class="">
+                      <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                    </div>
+                  </header>
+                  <main class="modal__content" id="modal-1-content">
+                    <form class="form-group" method="POST"
+                      action="{{route('eliminar_operario', $item->id_mano_de_obra)}}">
+                      @method('DELETE')
+                      @csrf
+
+                      <button type="submit" class="modal__btn modal__btn-primary col-12">Aceptar</button>
+                      <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
+                        aria-label="Close this dialog window">Cerrar</button>
+
+                    </form>
+
+                  </main>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <form action="{{route('eliminar_operario',$item->id_mano_de_obra)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="Eliminar text-danger btn btn-block bg-white">
+                  Eliminar información
+                </button>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+        @endforeach
+
+        {{-- Horas extras --}}
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <div class="col-sm-6">
+              <h4 class="m-1 font-weight-bold">Horas extras</h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="" class="m-1 btn btn-block btn-dark">Ingresar operario</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="d-flex justify-content-center row align-items-center">
+            <h4 class="col-12 font-weight-bold">Configuración</h4>
+            <h6 class="col-12">Costo por horas extras</h6>
+            <div class="col-sm-6">
+              <input class="form-control m-1" name="" id="" value="₡20.59">
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-block btn-outline-gray m-1 border-dark" href="">Cambiar el costo por horas extras</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="">
             <div class="m-0 d-flex align-items-center row">
               <div class="col-sm-6">
-                <h5 class="card-title m-0 font-weight-bold">Colaborador(a)</h5>
+                <h5 class="card-title m-0">Colaborador(a)</h5>
               </div>
               <div class="col-sm-6">
-                <h6 class="mt-1">{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h6>
+                <h6 class="mt-1">Graciela Ortega Vega</h6>
               </div>
             </div>
 
             <div class=" m-0 mt-2 row d-flex align-items-center">
               <div class="col-sm-6">
-                <h6 class="card-title">Tiempo Trabajado</h6>
-                <h6 class="">{{$item->minutos_trabajados}}</h6>
+                <h6 class="card-title">Horas extras trabajadas</h6>
+                <h6 class="">180 minutos</h6>
               </div>
-              <div class="col-sm-6 border mt-1 rounded">
-                <div class="mt-1">
-                  <h6 class="m-0">Total</h6>
-                  <h6 class="m-1">₡ {{$item->total_mano_obra}}</h6>
+              <div class="col-sm-6 card-footer border-0 rounded-pill">
+                <div class="m-1">
+                  <h6 class="">Total</h6>
+                  <h6 class="">₡3706.70</h6>
                 </div>
               </div>
             </div>
-            <div class=" justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
-
-              <div class="col-sm-6">
-                <a href="" class="text-dark btn btn-block">Actualizar informacion</a>
-              </div>
-
-              {{-- <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
-                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                  <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                    <header class="modal__header">
-                      <div class="">
-                        <div class="">
-                          <p class="h4 font-weight-bold mb-2" id="">
-                            Ingreso de operario
-                          </p>
-                        </div>
-                      </div>
-                      <div class="">
-                        <button class="modal__close shadow-sm" aria-label="Close modal"
-                          data-micromodal-close></button>
-                      </div>
-                    </header>
-                    <main class="modal__content" id="modal-1-content">
-                      <form class="form-group" method="POST"
-                        action="{{route('eliminar_operario', $item->id_mano_de_obra)}}">
-              @method('DELETE')
-              @csrf
-
-              <button type="submit" class="modal__btn modal__btn-primary col-12">Aceptar</button>
-              <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
-                aria-label="Close this dialog window">Cerrar</button>
-
-              </form>
-  </main>
-  </form>
-  </div>
-  </div>
-  </div> --}}
-
-  <div class="col-sm-6">
-    <form action="{{route('eliminar_operario',$item->id_mano_de_obra)}}" method="POST">
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="Eliminar text-danger btn btn-block bg-white">
-        Eliminar información
-      </button>
-    </form>
-
-  </div>
-
-  </div>
-
-  </div>
-  </div>
-  @endforeach
-
-  {{-- Horas extras --}}
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex justify-content-center row align-items-center">
-      <div class="col-sm-6">
-        <h4 class="m-1 font-weight-bold">Horas extras</h4>
-      </div>
-      <div class="col-sm-6">
-        <a href="" class="m-1 btn btn-block btn-dark">Ingresar operario</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex justify-content-center row align-items-center">
-      <h4 class="col-12 font-weight-bold">Configuración</h4>
-      <h6 class="col-12">Costo por horas extras</h6>
-      <div class="col-sm-6">
-        <input class="form-control m-1" name="" id="" value="₡20.59">
-      </div>
-      <div class="col-sm-6">
-        <a class="btn btn-block btn-outline-gray m-1 border-dark" href="">Cambiar el costo por horas extras</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="">
-      <div class="m-0 d-flex align-items-center row">
-        <div class="col-sm-6">
-          <h5 class="card-title m-0">Colaborador(a)</h5>
-        </div>
-        <div class="col-sm-6">
-          <h6 class="mt-1">Graciela Ortega Vega</h6>
-        </div>
-      </div>
-
-      <div class=" m-0 mt-2 row d-flex align-items-center">
-        <div class="col-sm-6">
-          <h6 class="card-title">Horas extras trabajadas</h6>
-          <h6 class="">180 minutos</h6>
-        </div>
-        <div class="col-sm-6 card-footer border-0 rounded-pill">
-          <div class="m-1">
-            <h6 class="">Total</h6>
-            <h6 class="">₡3706.70</h6>
+            <a href="" class="btn btn-block btn-outline-dark mt-1">Actualizar informacion</a>
           </div>
         </div>
       </div>
-      <a href="" class="btn btn-block btn-outline-dark mt-1">Actualizar informacion</a>
-    </div>
-  </div>
-  </div>
 
-  <div class="col-md-4">
-    <div class="card shadow" style="border-radius: 0.5rem;">
-      <div class="card-body text-center">
-        <h4>12:45 p.m.</h4>
-        <p class="text-gray">Lunes 1 de Febrero del 2021</p>
+      <div class="col-md-4">
+        <div class="card shadow" style="border-radius: 0.5rem;">
+          <div class="card-body text-center">
+            <h4>12:45 p.m.</h4>
+            <p class="text-gray">Lunes 1 de Febrero del 2021</p>
 
-        <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
-        <div class=" mt-2">
-          <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
-            <div class="row ">
-              <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
-              <p class="m-0 col-4 text-right text-danger material-icons">
-                navigate_next
-              </p>
+            <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
+            <div class=" mt-2">
+              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
+                <div class="row ">
+                  <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
+                  <p class="m-0 col-4 text-right text-danger material-icons">
+                    navigate_next
+                  </p>
+                </div>
+              </a>
             </div>
-          </a>
+            <div class=" mt-2">
+              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
+                <div class="row ">
+                  <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos</p>
+                  <p class="m-0 col-4 text-right text-danger material-icons">
+                    navigate_next
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div class=" mt-2">
+              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
+                <div class="row">
+                  <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar materia prima</p>
+                  <p class="m-0 col-4 text-right text-danger material-icons">
+                    navigate_next
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div class=" mt-2">
+              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
+                <div class="row ">
+                  <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo</p>
+                  <p class="m-0 col-4 text-right text-danger material-icons">
+                    navigate_next
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class=" mt-2">
-          <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
-            <div class="row ">
-              <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos</p>
-              <p class="m-0 col-4 text-right text-danger material-icons">
-                navigate_next
-              </p>
-            </div>
-          </a>
-        </div>
-        <div class=" mt-2">
-          <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
-            <div class="row">
-              <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar materia prima</p>
-              <p class="m-0 col-4 text-right text-danger material-icons">
-                navigate_next
-              </p>
-            </div>
-          </a>
-        </div>
-        <div class=" mt-2">
-          <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
-            <div class="row ">
-              <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo</p>
-              <p class="m-0 col-4 text-right text-danger material-icons">
-                navigate_next
-              </p>
-            </div>
-          </a>
+      </div>
+
+      <div class="col-md-12 mt-2">
+        <div class="card shadow" style="border-radius: 0.5rem;">
+          <div class="card-body text-center">
+            Grato Pastas Artesanales 2021
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-12 mt-2">
-    <div class="card shadow" style="border-radius: 0.5rem;">
-      <div class="card-body text-center">
-        Grato Pastas Artesanales 2021
-      </div>
-    </div>
-  </div>
-  </div>
 
   </main>
 
@@ -396,8 +386,7 @@ style="">
   </script>
 
   <script type="text/javascript">
-
-$.ajaxSetup({
+    $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
@@ -405,37 +394,60 @@ $.ajaxSetup({
 
     $("#EnviarDatos").click(function(e){
       e.preventDefault(); //Evitar recargar la pagina
-      // var nombre_trabajador = $("input[name=nombre_trabajador]").val();
-      // var apellido_trabajador = $("input[name=apellido_trabajador]").val();
-      // var minutos_trabajados = $("input[name=minutos_trabajados]").val();
+
       var dataString = $('#Crear').serialize();
       $.ajax({
         type:"POST",
         url:'{{url('/Total')}}',
         data: dataString,
-        success:function(data){
-          $('#Lista').fadeIn(); // mostrar historico
-          $('#notificacion').fadeIn(); // mostrar notificacion
-          setTimeout(function(){ $('#notificacion').fadeOut(); }, 1000); // ocultar mensaje 1s
-          $('#formulario')[0].reset(); // limpiar form
-          $(data).each(function(key,value) {
-          $("ul").append("<li>  "+ value.nombre_trabajador + " fecha: "+ value.apellido_trabajador + " ID:" + value.minutos_trabajados + " </li>");
-          });
+        success:function(response){
+
+          if(response){
+
+            $("#Lista").append(
+              '@foreach ($t_mano_de_obra as $item)'+
+              '<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">'+
+              '<div class="m-0 d-flex align-items-center row">'+
+                '<div class="col-sm-6">'+
+              '<h5 class="card-title m-0 font-weight-bold">Colaborador(a)</h5>'+
+            '</div>'+
+            '<div class="col-sm-6" id="nombre">'+
+              '<h6 class="mt-1">'+response.nombre_trabajador+' '+response.apellido_trabajador+'</h6>'+
+            '</div>'+
+                '</div>'+
+                '<div class=" m-0 mt-2 row d-flex align-items-center">'+
+           '<div class="col-sm-6">'+
+              '<h6 class="card-title">Tiempo Trabajado</h6>'+
+              '<h6 class="">'+response.minutos_trabajados+'</h6>'+
+            '</div>'+
+            '<div class="col-sm-6 border mt-1 rounded">'+
+              '<div class="mt-1">'+
+                '<h6 class="m-0">Total</h6>'+
+                '<h6 class="m-1">₡ '+response.total_mano_obra+'</h6>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+          '<div class=" justify-content-centerborder m-0 mt-2 row d-flex align-items-center">'+
+            '<div class="col-sm-6">'+
+              '<a href="" class="text-dark btn btn-block">Actualizar informacion</a>'+
+              '</div>'+
+              '<div class="col-sm-6">'+
+                '<form action="{{route('eliminar_operario', '$item->id_mano_de_obra')}}" method="POST">'+
+                  '@csrf'+
+                  '@method('DELETE')'+
+                  '<button type="submit" class="Eliminar text-danger btn btn-block bg-white">'+
+                  'Eliminar información'+
+                  '</button>'+
+                  '</form>'+
+                  '</div>'+
+                  '</div>'+
+              '</div>'+
+              '@endforeach');
+          }
         }
       });
     });
-    // {nombre_trabajador:nombre_trabajador,
-    //       apellido_trabajador:apellido_trabajador,
-    //       minutos_trabajados:minutos_trabajados},
-    // $(document).ready(function(){
-    //   $.ajax({
-    //     url: 'ManoObra/',
-    //     method: 'POST',
-    //     data:$("#eliminar").serialize()
-    //   }).done(function(res){
-    //     alert(res);
-    //   });
-    // });
+
   </script>
 </body>
 

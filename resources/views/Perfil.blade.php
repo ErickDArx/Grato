@@ -105,7 +105,7 @@
                                 <div class="col-6 ">
                                     <div class="form-group m-0">
 
-                                        <input type="text" class="form-control" value="{{auth()->user()->puesto }}" />
+                                        <input type="text" name="puesto" id="puesto" class="form-control" value="{{auth()->user()->puesto }}" />
 
                                     </div>
                                 </div>

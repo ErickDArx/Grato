@@ -51,16 +51,15 @@ class ManoObraController extends Controller
             $agregar->apellido_trabajador = $request->apellido_trabajador;
             $agregar->minutos_trabajados = $request->minutos_trabajados;
             $agregar->costo_minuto = $request->costo_minuto;
-            $agregar->total_mano_obra = $request->minutos_trabajados * $agregar->costo_minuto;
+            $agregar->total_mano_obra = $request->minutos_trabajados * 20.59;
 
             // Insertar en la base de datos
             $agregar->save();
             // Redirigir a la vista original 
             // return back()->with('agregar', 'El usuario se ha agregado');
 
-            return response()->json(
-                $agregar->toArray()
-            );
+            return response()->json($agregar->toArray());
+
         }
     }
 
