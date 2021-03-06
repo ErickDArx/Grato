@@ -12,63 +12,70 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 // Almacena codigo fuente de Laravel para la generacion de excepciones
 Auth::routes();
 
+
+
 // Este grupo de rutas, evita que se accedan a otros rutas sin antes logearse, de lo contrario redirecciona a la pagina de acceso
 Route::middleware(['auth'])->group(function () {
 
-    // Vista Index
+    // Crud para la vista principal
+    Route::get('/Principal', 'UsuarioController@principal');
+    
+    // Crud para la vista ManoObra
     Route::get('/ManoObra', 'ManoObraController@index');
-    // Crear operarios
     Route::post('/Total', 'ManoObraController@store')->name('total');
-    // Eliminar operarios
     Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('eliminar_operario');
 
-    
-    Route::get('/Principal', 'UsuarioController@principal');
 
+    // Crud para la vista de Perfil
     Route::get('/Perfil', 'PerfilController@index')->name('Perfil');
     Route::post('/Perfil', 'PerfilController@store')->name('store');
-
-    Route::get('/CIF', function () {
-        return view('CIF');
-    });
-
-    Route::get('/Viaticos', function () {
-        return view('Viaticos');
-    });
-
-    Route::get('/Equipo', function () {
-        return view('Equipo');
-    });
-
-    Route::get('/MateriaPrima', function () {
-        return view('MateriaPrima');
-    });
-
-    Route::get('/Recetario', function () {
-        return view('Recetario');
-    });
-
-    Route::get('/Pedidos', function () {
-        return view('Pedidos');
-    });
-    Route::get('/Reportes', function () {
-        return view('Reportes');
-    });
-
+    Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
+    Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
+    Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
     Route::get('/Asistentes', function () {
         $users = DB::table('t_usuario')->get();
 
         return view('Asistentes', ['t_usuario' => $users]);
     });
 
-    Route::get('/home',function(){
-        return view('home');
+    // Crud para la vista Equipo ----------------------------------
+    Route::get('/Equipo', 'EquiposController@index');
+    Route::post('/Agregando', 'EquiposController@store')->name('AgregarEquipo');
+    Route::put('/Actualizando/{id_equipo}', 'EquiposController@update')->name('ActualizarEquipo');
+    Route::delete('/Eliminando/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
+
+
+    // Crud para la vista CIF
+    Route::get('/CIF', 'CifController@index');
+    Route::post('/Agregando', 'CifController@index')->name('AgregarCIF');
+    Route::put('/Actualizando', 'CifController@index')->name('ActualizarCIF');
+    Route::delete('/Eliminando', 'CifController@index')->name('EliminarCIF');
+
+
+    // Crud para la vista Viaticos
+    Route::get('/Viaticos', function () {
+        return view('Viaticos');
     });
-    // Route::get('/Perfil/{id_usuario}', 'PerfilController@editar')->name('editar');
 
-    Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
+    // Crud para la vista Materia prima
+    Route::get('/MateriaPrima', function () {
+        return view('MateriaPrima');
+    });
 
-    Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
+    // Crud para la vista Recetario
+    Route::get('/Recetario', function () {
+        return view('Recetario');
+    });
+    
+    // Crud para la vista Pedidos
+    Route::get('/Pedidos', function () {
+        return view('Pedidos');
+    });
 
-    Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
+    // Crud para la vista Reportes
+    Route::get('/Reportes', function () {
+        return view('Reportes');
+    });
+
+
 });
