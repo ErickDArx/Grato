@@ -66,7 +66,7 @@
       <div class="col-12 text-center">
         <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid justify-content-center" style="width: 6rem;">
         <div style="right: 0;top: 1.3rem;" class="d-flex btn position-absolute shadow-">
-        <a href="{{route('Perfil')}}" class="text-dark">{{ auth()->user()->nombre_usuario }}</a>
+        <a href="{{route('Perfil')}}" class="text-dark">{{ auth()->user()->nombre_usuario }} <span class="badge badge-dark">1</span></a>
         </div>
       </div>
     </nav>

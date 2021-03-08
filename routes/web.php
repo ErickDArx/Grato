@@ -40,16 +40,16 @@ Route::middleware(['auth'])->group(function () {
 
     // Crud para la vista Equipo ----------------------------------
     Route::get('/Equipo', 'EquiposController@index');
-    Route::post('/Agregando', 'EquiposController@store')->name('AgregarEquipo');
+    Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
     Route::put('/Actualizando/{id_equipo}', 'EquiposController@update')->name('ActualizarEquipo');
-    Route::delete('/Eliminando/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
+    Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
 
     // Crud para la vista CIF
     Route::get('/CIF', 'CifController@index');
-    Route::post('/Agregando', 'CifController@index')->name('AgregarCIF');
-    Route::put('/Actualizando', 'CifController@index')->name('ActualizarCIF');
-    Route::delete('/Eliminando', 'CifController@index')->name('EliminarCIF');
+    Route::post('/CIF', 'CifController@store')->name('AgregarCIF');
+    Route::put('/CIF/{id_cif}', 'CifController@update')->name('ActualizarCIF');
+    Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
 
     // Crud para la vista Viaticos
@@ -58,9 +58,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Crud para la vista Materia prima
-    Route::get('/MateriaPrima', function () {
-        return view('MateriaPrima');
-    });
+    Route::get('/MateriaPrima' , 'MateriaPrimaController@index');
+    Route::post('/MateriaPrima' , 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
+    Route::put('/MateriaPrima/{id_materiaprima}' , 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
+    Route::delete('/MateriaPrima/{id_materiaprima}' , 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
+
 
     // Crud para la vista Recetario
     Route::get('/Recetario', function () {
