@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\t_materia_prima;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class MateriaPrimaController extends Controller
 {
@@ -13,7 +16,11 @@ class MateriaPrimaController extends Controller
      */
     public function index()
     {
-        return view('MateriaPrima');
+        date_default_timezone_set('America/Costa_Rica');
+        $date = Carbon::now()->locale('es_ES');
+        $materia = DB::table('t_materia_prima')->get();
+
+        return view('MateriaPrima', ['t_materia_prima' => $materia]);
     }
 
     /**
@@ -34,7 +41,20 @@ class MateriaPrimaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+            $agregar = new t_materia_prima();
+            $agregar->producto = $request->producto;
+            $agregar->unidad_medida= $request->unidad_medida;
+            $agregar->presentacion = $request->presentacion;
+            $agregar->cantidad = $request->cantidad;
+            $agregar->costo = $request->costo;
+            $agregar->precio_um = $agregar->costo * $agregar->unidad_medida;
+
+            // Insertar en la base de datos
+            $agregar->save();
+            // Redirigir a la vista original 
+            return back()->with('agregar', 'El usuario se ha agregado');
+
     }
 
     /**
