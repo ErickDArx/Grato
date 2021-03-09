@@ -65,19 +65,22 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Crud para la vista Recetario
-    Route::get('/Recetario', function () {
-        return view('Recetario');
-    });
+    Route::get('/Recetario' , 'RecetarioController@index');
+    Route::post('/Recetario' , 'RecetarioController@store')->name('AgregarRecetario');
+    Route::put('/Recetario/{id_recetario}' , 'RecetarioController@update')->name('ActualizarRecetario');
+    Route::delete('/Recetario/{id_recetario}' , 'RecetarioController@destroy')->name('EliminarRecetario');
     
     // Crud para la vista Pedidos
-    Route::get('/Pedidos', function () {
-        return view('Pedidos');
-    });
+    Route::get('/Pedidos' , 'PedidosController@index');
+    Route::post('/Pedidos' , 'PedidosController@store')->name('AgregarPedidos');
+    Route::put('/Pedidos/{id_Pedido}' , 'PedidosController@update')->name('ActualizarPedidos');
+    Route::delete('/Pedidos/{id_Pedido}' , 'PedidosController@destroy')->name('EliminarPedidos');
 
     // Crud para la vista Reportes
-    Route::get('/Reportes', function () {
-        return view('Reportes');
-    });
+    Route::get('/Reportes' , 'ReportesController@index');
+    Route::post('/Reportes' , 'ReportesController@store')->name('AgregarReportes');
+    Route::put('/Reportes/{id_reporte}' , 'ReportesController@update')->name('ActualizarReportes');
+    Route::delete('/Reportes/{id_reporte}' , 'ReportesController@destroy')->name('EliminarReportes');
 
 
 });
