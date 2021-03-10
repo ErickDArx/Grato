@@ -9,23 +9,14 @@ use Carbon\Carbon;
 class PerfilController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
+        $date->diffForHumans();
         return view('Perfil');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         

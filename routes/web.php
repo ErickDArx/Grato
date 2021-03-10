@@ -32,11 +32,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
     Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
     Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
-    Route::get('/Asistentes', function () {
-        $users = DB::table('t_usuario')->get();
+    
+    Route::get('/Asistentes', 'AsistenteController@index');
+    Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
+    Route::put('/Asistentes', 'AsistenteController@update')->name('ActualizarAsistente');
+    Route::delete('/Asistentes/{id_usuario}', 'AsistenteController@destroy')->name('EliminarAsistente');
 
-        return view('Asistentes', ['t_usuario' => $users]);
-    });
 
     // Crud para la vista Equipo ----------------------------------
     Route::get('/Equipo', 'EquiposController@index');

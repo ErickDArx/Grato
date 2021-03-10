@@ -5,14 +5,14 @@
       <span class="drawer-hamburger-icon"></span>
     </button>
     <nav class="drawer-nav " role="navigation" style="background-color:#343838;">
-      <ul class="drawer-menu ">
+      <ul class="drawer-menu">
         <li class="card bg-white border-0 rounded-0"></li>
-        <div class="d-flex align-items-center mt-3 mr-1 ml-1">
+        <div class="d-flex align-items-center m-4 justify-content-center">
           <li><img src="/Grato/resources/media/Logo-negativo.png" class="img-fluid" alt=""></li>
         </div>
         <div class="ml-4" style="padding-top: 1.5rem;">
 
-          <li><a class="drawer-menu-item text-white btn  bg-gray m-1" href="{{('Principal') }}"><i
+          <li><a class="drawer-menu-item text-white btn m-1 btn-outline-gray" href="{{('Principal') }}"><i
                 class="fa fa-home mr-2 "></i>Menú Principal</a></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Perfil') }}"><i
                 class="fa fa-user mr-2"></i>Mi perfil</a></li>

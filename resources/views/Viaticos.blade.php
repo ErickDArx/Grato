@@ -1,66 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso</title>
-  {!! htmlScriptTagJsApi([
-  'action' => 'homepage',
-  'callback_then' => 'callbackThen',
-  'callback_catch' => 'callbackCatch'
-  ]) !!}
-  {{-- Favicon --}}
-  <link rel="icon" type="image/png" href="././css/acceso.jpg" />
-  {{-- Meta-SEO --}}
-  <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
-  <meta name="robots" value="Noindex">
-  <meta name="keywords" content="Acceso">
-  <meta name="theme-color" content="#E23636">
-
-  <script src="/Grato/resources/js/micromodal.js"></script>
-  <script src="/Grato/resources/js/jquery.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
-  {{-- Fuente de iconos --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-    crossorigin="anonymous" />
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <!-- Libreria Menú -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-
-  {{-- Estilos --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css"
-    integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg=="
-    crossorigin="anonymous" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-  <!-- jquery & iScroll -->
-  {{-- <script
-    src="https://code.jquery.com/jquery-1.12.4.js"
-    integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-    crossorigin="anonymous"></script> --}}
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-  <!-- drawer.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
-  <script>
-    $(document).ready(function () {
-          $('.drawer').drawer();
-          $('.js-tilt').tilt({
-            option: value,
-            option: value,
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materia Prima</title>
+  
+    {!! htmlScriptTagJsApi([
+    'action' => 'homepage',
+    'callback_then' => 'callbackThen',
+    'callback_catch' => 'callbackCatch'
+    ]) !!}
+  
+    {{-- Micromodal / Jquery / Bootstrap.JS --}}
+    <script src="/Grato/resources/js/micromodal.js"></script>
+    <script src="/Grato/resources/js/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  
+    {{-- Fuente de iconos --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous" />
+  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+    <!-- Libreria Menú -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    {{-- hoja de estilos para el menu / bootstrap / modal --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+    <!-- drawer.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+    <script>
+      $(document).ready(function () {
+            $('.drawer').drawer();
+            $('.js-tilt').tilt({
+              option: value,
+              option: value,
+            });
           });
-        });
-  </script>
-</head>
+    </script>
+  </head>
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
   @extends('menu')
@@ -68,9 +52,8 @@
   <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
     <nav class="navbar navbar-dark bg-white nav">
       <div class="col-12 text-center">
-        <img src="../media/Grupo 1.png" alt="" class="img-fluid" style="width: 6rem;">
-
-      </div>
+        <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid" style="width: 6rem;">
+    </div>
 
     </nav>
 
@@ -136,7 +119,7 @@
             </div>
           </div>
         </div>
-        <div class="m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        {{-- <div class="m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="row d-flex align-items-center">
             <div class="col-sm-6">
               <h5 class="m-0">Seleccione el mes y año</h5>
@@ -151,7 +134,7 @@
               </select>
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -221,6 +204,8 @@
                 <button type="submit" class="text-dark bg-white btn btn-block">Actualizar informacion</button>
           </form>
         </div>
+
+
         {{-- </div> --}}
 
         <div class="col-sm-6 mt-1">
@@ -256,108 +241,14 @@
             </div>
           </form>
         </div>
-      </div>
-    </div>
-    
-    </div>
-
-
-    <div class="card shadow" style="border-radius: 0.5rem;">
-      <div class="card-body">
-
-
-        <div class="container">
-          <div class="row">
-            <h4 class="col-sm-9">Viaticos</h4>
-            <div class="justify-content-end row">
-              <a href="" class="col-sm-12 btn btn-dark">Ingresar Viatico</a>
-            </div>
-
-          </div>
-          <h6>Desglose de costos asociados a los viaticos</h6>
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h4 class="font-weight-bold">Vehiculo</h4>
-              <div class="row">
-
-                <div class="col-sm-6">
-                  <h5 class="card-title">Antiguedad del vehiculo</h5>
-                  <h6 class="card-subtitle mb-2 ">3 años</h6>
-                </div>
-                <div class="col-sm-6">
-                  <h5 class="card-title">Distancia en kilometros</h5>
-                  <h6 class="">27 km</h6>
-                </div>
-
-
-
-              </div>
-              <div class="dropdown-divider">
-
-              </div>
-              <h4 class="font-weight-bold ">Alimentacion</h4>
-              <div class="row">
-
-                <div class="col-sm-6">
-                  <h5 class="card-title">Desayuno</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-                <div class="col-sm-6">
-                  <h5 class="card-title">Almuerzo</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-                <div class="col-sm-6 mt-2">
-                  <h5 class="card-title">Cena</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-
-              </div>
-              <div class="dropdown-divider">
-
-              </div>
-              <h4 class="font-weight-bold ">Hospedaje</h4>
-              <div class="row">
-
-                <div class="col-sm-6">
-                  <h5 class="card-title">Provincia</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-                <div class="col-sm-6">
-                  <h5 class="card-title">Canton</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-                <div class="col-sm-6 mt-2">
-                  <h5 class="card-title">Localidad</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-                <div class="col-sm-6 mt-2">
-                  <h5 class="card-title">Costo del hospedaje</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-              </div>
-              <div class="dropdown-divider">
-
-              </div>
-              <h4 class="font-weight-bold ">Costos</h4>
-              <div class="row">
-                <div class="col-sm-6 mt-2">
-                  <h5 class="card-title">Costo total</h5>
-                  <h6>₡3400.00</h6>
-                </div>
-              </div>
-
-              <a href="" class="btn btn-block btn-outline-dark">Actualizar informacion</a>
-            </div>
-
-          </div>
-        </div>
 
       </div>
 
     </div>
+
     </div>
 
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
       <div class="card shadow" style="border-radius: 0.5rem;">
         <div class="card-body text-center">
           <h4>12:45 p.m.</h4>
@@ -406,7 +297,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <div class="col-md-12 mt-2">
       <div class="card shadow" style="border-radius: 0.5rem;">
@@ -418,6 +309,30 @@
     </div>
 
   </main>
+  <script>
+    MicroModal.init({
+        onShow: modal => console.info(`${modal.id} is shown`), // [1]
+        onClose: modal => console.info(`${modal.id} is hidden`), // [2]
+        openTrigger: 'data-custom-open', // [3]
+        closeTrigger: 'data-custom-close', // [4]
+        openClass: 'is-open', // [5]
+        disableScroll: true, // [6]
+        disableFocus: false, // [7]
+        awaitOpenAnimation: false, // [8]
+        awaitCloseAnimation: false, // [9]
+        debugMode: false // [10]
+    });
+
+    var button = document.querySelector('.Correo');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-1');
+    });
+
+    var button = document.querySelector('.Personal');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-2');
+    });
+</script>
 </body>
 
 </html>

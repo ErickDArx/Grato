@@ -68,9 +68,8 @@
   <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
     <nav class="navbar navbar-dark bg-white nav">
       <div class="col-12 text-center">
-        <img src="../media/Grupo 1.png" alt="" class="img-fluid" style="width: 6rem;">
-
-      </div>
+        <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid" style="width: 6rem;">
+    </div>
 
     </nav>
 
@@ -269,7 +268,7 @@
 
     </div>
 
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
       <div class="card shadow" style="border-radius: 0.5rem;">
         <div class="card-body text-center">
           <h4>12:45 p.m.</h4>
@@ -318,7 +317,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <div class="col-md-12 mt-2">
       <div class="card shadow" style="border-radius: 0.5rem;">

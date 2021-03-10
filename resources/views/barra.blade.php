@@ -6,7 +6,7 @@
 
       <p class="text-gray">{{date('d')}} de {{date('M')}} del {{date('Y')}}</p>
 
-      <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
+      {{-- <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
       <div class=" mt-2">
         <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
           <div class="row ">
@@ -46,7 +46,7 @@
             </p>
           </div>
         </a>
-      </div>
+      </div> --}}
     </div>
   </div>
 </div>

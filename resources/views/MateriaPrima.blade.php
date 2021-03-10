@@ -59,7 +59,7 @@
     {{-- Llamar al nav con la imagen --}}
     <nav class="navbar navbar-dark bg-white nav">
       <div class="col-12 text-center">
-        <img src="" alt="" class="img-fluid" style="width: 6rem;">
+        <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid" style="width: 6rem;">
       </div>
     </nav>
 
@@ -99,19 +99,29 @@
                         @csrf
                         <div class="m-0 mb-2">
                           <label for="">1.Nombre de la materia prima</label>
-                          <input type="text" name="producto" class="form-control" value="">
+                          <input type="text" placeholder="Ejemplo: Harina" name="producto" class="form-control"
+                            value="">
                         </div>
                         <div class="m-0 mb-2">
                           <label for="">2.Unidad de medida</label>
-                          <input type="text" name="unidad_medida" class="form-control" value="">
+                          {{-- <input type="text" name="unidad_medida" class="form-control" value=""> --}}
+                          <select name="unidad_medida" id="" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option value="Tonelada">Tonelada</option>
+                            <option value="Kilogramo">Kilogramo</option>
+                            <option value="Kilo">Kilo</option>
+                            <option value="Gramo">Gramo</option>
+                            <option value="Unidad">Unidad</option>
+                          </select>
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">3.Costo de la materia prima</label>
+                          <label for="">3.Costo de la materia prima (Colones)</label>
                           <input type="text" name="costo" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
                           <label for="">4.Presentacion</label>
-                          <input type="text" name="presentacion" class="form-control" value="">
+                          <input type="text" placeholder="Ejemplo: 12 unidades" name="presentacion" class="form-control"
+                            value="">
                         </div>
                         {{-- <div class="m-0 mb-2">
                           <label for="">5.Cantidad</label>
@@ -135,24 +145,37 @@
             </div>
 
             <div class="col-sm-6 mt-2">
-              <h6 class="m-0 font-weight-bold">Total</h6>
+              <h6 class="m-0 font-weight-bold">Total en colones</h6>
             </div>
             <div class="col-sm-6">
-              <input type="text" value="" class="form-control" readonly>
-            </div>
+              @php
+              $total=0;
+              @endphp
 
+              @foreach ($t_materia_prima as $item)
+              @php
+              $total=$item->precio_um + $total
+              @endphp
+
+              @endforeach
+              <input type="text" value="{{$total}}" class="form-control" readonly>
+            </div>
           </div>
         </div>
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-        <div class="row m-1 d-flex align-items-center">
-        <div class="col-sm-6">
-          <h5 class="m-0 card-title font-weight-bold">Nombre del producto</h5>
+          <div class="row m-1 d-flex align-items-center">
+            <div class="col-sm-6">
+              <h5 class="m-0 card-title font-weight-bold">Nombre del producto a realizar</h5>
+            </div>
+            <div class="col-sm-6">
+              <form action=""></form>
+              <input type="text" class="form-control" value="Pasta Larga">
+            </div>
+            <div class="col-sm-12 mt-2">
+              <button class="m-0 btn btn-outline-dark btn-block">Cambiar nombre</button>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <input type="text" readonly class="form-control" value="Pasta Larga">
-        </div>
-        </div>
-      </div>
         {{-- Listado de materia prima --}}
         @foreach ($t_materia_prima as $item)
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -179,45 +202,85 @@
 
             <div class="collapse" id="collapseExample{{$item->id_materia_prima}}">
 
-                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                  <div class="col-sm-6 mb-2">
-                    <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
-                    <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
-                  </div>
-                  <div class="col-sm-6 mb-2">
-                    <div class="">
-                      <h6 class="card-title font-weight-bold mt-1">Cantidad</h6>
-                      <input name="cantidad" class="form-control" type="number" value="{{$item->cantidad}}">
-                    </div>
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
+                  <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <div class="">
+                    <h6 class="card-title font-weight-bold mt-1">Cantidad</h6>
+                    <input name="cantidad" class="form-control" type="number" value="{{$item->cantidad}}">
                   </div>
                 </div>
+              </div>
 
-                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                  <div class="col-sm-6 mb-2">
-                    <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
-                    <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
-                  </div>
-                  <div class="col-sm-6 mb-2">
-                    <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
-                    <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
-                  </div>
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
+                  <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
                 </div>
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
+                  <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
+                </div>
+              </div>
 
-                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                  <div class="col-sm-6 mb-2">
-                    <h6 class="font-weight-bold">Precio por unidad de medida</h6>
-                    <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="font-weight-bold">Precio por unidad de medida</h6>
+                  <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+                </div>
+              </div>
+
+              <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                  <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <header class="modal__header">
+                      <div class="">
+                        <div class="">
+                          <p class="h4 font-weight-bold mb-2" id="">
+                            Editar Recurso
+                          </p>
+                        </div>
+                      </div>
+                      <div class="">
+                        <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                      </div>
+                    </header>
+                    <main class="modal__content" id="modal-1-content">
+                      <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar los
+                        datos anteriores</h6>
+                      <button type="submit" class="btn btn-block">
+                        Aceptar
+                      </button>
+                    </main>
                   </div>
                 </div>
-                
-                <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
+              </div>
+          </form>
+          <div class="row d-flex align-items-center">
+
+            <div class="col-sm-6">
+              <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
+                class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
+            </div>
+
+            <div class="col-sm-6">
+              <form action="{{route('EliminarMateriaPrima', $item->id_materia_prima)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="button" class="Eliminar text-danger btn btn-block bg-white"
+                  data-micromodal-trigger="modal-2{{$item->id_materia_prima}}">Eliminar información</button>
+                <!-- Modal -->
+                <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
                   <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                     <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                       <header class="modal__header">
                         <div class="">
                           <div class="">
                             <p class="h4 font-weight-bold mb-2" id="">
-                              Editar Recurso
+                              Eliminar Recurso
                             </p>
                           </div>
                         </div>
@@ -227,7 +290,7 @@
                         </div>
                       </header>
                       <main class="modal__content" id="modal-1-content">
-                        <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar los datos anteriores</h6>
+                        <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
                         <button type="submit" class="btn btn-block">
                           Aceptar
                         </button>
@@ -236,115 +299,75 @@
                   </div>
                 </div>
               </form>
-              <div class="row d-flex align-items-center">
+            </div>
 
-                <div class="col-sm-6">
-                  <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}" 
-                    class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
-                </div>
+          </div>
 
-                <div class="col-sm-6">
-                  <form action="{{route('EliminarMateriaPrima', $item->id_materia_prima)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-                      data-micromodal-trigger="modal-2{{$item->id_materia_prima}}">Eliminar información</button>
-                    <!-- Modal -->
-                    <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
-                      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                          <header class="modal__header">
-                            <div class="">
-                              <div class="">
-                                <p class="h4 font-weight-bold mb-2" id="">
-                                  Eliminar Recurso
-                                </p>
-                              </div>
-                            </div>
-                            <div class="">
-                              <button class="modal__close shadow-sm" aria-label="Close modal"
-                                data-micromodal-close></button>
-                            </div>
-                          </header>
-                          <main class="modal__content" id="modal-1-content">
-                            <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
-                            <button type="submit" class="btn btn-block">
-                              Aceptar
-                            </button>
-                          </main>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+        </div>
 
+      </div>
+      @endforeach
+
+    </div>
+
+    {{-- <div class="col-md-4">
+      <div class="card shadow" style="border-radius: 0.5rem;">
+        <div class="card-body text-center">
+          <h4>12:45 p.m.</h4>
+          <p class="text-gray">Lunes 1 de Febrero del 2021</p>
+
+          <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
+          <div class=" mt-2">
+            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
+              <div class="row ">
+                <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
+                <p class="m-0 col-4 text-right text-danger material-icons">
+                  navigate_next
+                </p>
               </div>
-
-            </div>
-
-        </div>
-        @endforeach
-
-      </div>
-
-      <div class="col-md-4">
-        <div class="card shadow" style="border-radius: 0.5rem;">
-          <div class="card-body text-center">
-            <h4>12:45 p.m.</h4>
-            <p class="text-gray">Lunes 1 de Febrero del 2021</p>
-
-            <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
-            <div class=" mt-2">
-              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
-                <div class="row ">
-                  <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
-                  <p class="m-0 col-4 text-right text-danger material-icons">
-                    navigate_next
-                  </p>
-                </div>
-              </a>
-            </div>
-            <div class=" mt-2">
-              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
-                <div class="row ">
-                  <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos</p>
-                  <p class="m-0 col-4 text-right text-danger material-icons">
-                    navigate_next
-                  </p>
-                </div>
-              </a>
-            </div>
-            <div class=" mt-2">
-              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
-                <div class="row">
-                  <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar materia prima</p>
-                  <p class="m-0 col-4 text-right text-danger material-icons">
-                    navigate_next
-                  </p>
-                </div>
-              </a>
-            </div>
-            <div class=" mt-2">
-              <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
-                <div class="row ">
-                  <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo</p>
-                  <p class="m-0 col-4 text-right text-danger material-icons">
-                    navigate_next
-                  </p>
-                </div>
-              </a>
-            </div>
+            </a>
+          </div>
+          <div class=" mt-2">
+            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
+              <div class="row ">
+                <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos</p>
+                <p class="m-0 col-4 text-right text-danger material-icons">
+                  navigate_next
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class=" mt-2">
+            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
+              <div class="row">
+                <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar materia prima</p>
+                <p class="m-0 col-4 text-right text-danger material-icons">
+                  navigate_next
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class=" mt-2">
+            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
+              <div class="row ">
+                <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo</p>
+                <p class="m-0 col-4 text-right text-danger material-icons">
+                  navigate_next
+                </p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
+    </div> --}}
 
-      <div class="col-md-12 mt-2">
-        <div class="card shadow" style="border-radius: 0.5rem;">
-          <div class="card-body text-center">
-            Grato Pastas Artesanales 2021
-          </div>
+    <div class="col-md-12 mt-2">
+      <div class="card shadow" style="border-radius: 0.5rem;">
+        <div class="card-body text-center">
+          Grato Pastas Artesanales 2021
         </div>
       </div>
+    </div>
     </div>
 
   </main>

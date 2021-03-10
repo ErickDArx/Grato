@@ -85,11 +85,11 @@
           <div class=" d-flex align-items-center col-sm-6">
             <h5 class="m-0 font-weight-normal">{{$item->nombre_usuario}} {{$item->apellido_usuario}}</h5>
           </div>
-          <div class="col-sm-3">
+          {{-- <div class="col-sm-3">
             <button class="border-dark btn btn-block btn-outline-gray">Editar</button>
-          </div>
-          <div class="col-sm-3">
-            <form action="{{route('eliminar_asistente', $item->id_usuario)}}" method="POST">
+          </div> --}}
+          <div class="col-sm-6">
+            <form action="{{route('EliminarAsistente', $item->id_usuario)}}" method="POST">
               @method('DELETE')
               @csrf
               <button type="submit" class="border-dark btn btn-block btn-outline-gray">Eliminar</button>
