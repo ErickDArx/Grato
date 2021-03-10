@@ -60,8 +60,8 @@ Route::middleware(['auth'])->group(function () {
     // Crud para la vista Materia prima
     Route::get('/MateriaPrima' , 'MateriaPrimaController@index');
     Route::post('/MateriaPrima' , 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
-    Route::put('/MateriaPrima/{id_materiaprima}' , 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
-    Route::delete('/MateriaPrima/{id_materiaprima}' , 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
+    Route::put('/MateriaPrima/{id_materia_prima}' , 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
+    Route::delete('/MateriaPrima/{id_materia_prima}' , 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
 
 
     // Crud para la vista Recetario

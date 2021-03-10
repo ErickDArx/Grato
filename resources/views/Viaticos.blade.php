@@ -181,60 +181,36 @@
               </div>
 
               <div class="col-sm-6 mb-2">
-                <h6 class="">Antiguedad del vehiculo</h6>
+                <h6 class="">Tipo de vehiculo</h6>
                 <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
               </div>
               <div class="col-sm-6 mb-2">
-                <div class="">
-                  <h6 class="">Distancia en kilometros</h6>
-                  <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
-                </div>
+                <h6 class="">Antiguedad del vehiculo (años)</h6>
+                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
               </div>
+
             </div>
 
             <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-              <div class="col-sm-12">
-                <h6 class="card-title font-weight-bold mt-1">Rubro de alimentacion</h6>
-              </div>
 
               <div class="col-sm-6 mb-2">
-                <h6 class="">Desayuno</h6>
+                <h6 class="">Tarifa por kilometro recorrido</h6>
                 <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
               </div>
               <div class="col-sm-6 mb-2">
                 <div class="">
-                  <h6 class="">Almuerzo</h6>
+                  <h6 class="">Kilometros recorridos (ida y vuelta)</h6>
                   <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
                 </div>
               </div>
               <div class="col-sm-6 mb-2">
                 <div class="">
-                  <h6 class="">Cena</h6>
-                  <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
+                  <h6 class="">Costo total de kilometros</h6>
+                  <input readonly name="porcentaje_utilizacion" class="form-control" type="text" value="">
                 </div>
               </div>
             </div>
 
-            <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-              <div class="col-sm-12">
-                <h6 class="card-title font-weight-bold mt-1">Rubro de hospedaje</h6>
-              </div>
-
-              <div class="col-sm-6 mb-2">
-                <h6 class="">Costo del hospedaje</h6>
-                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
-              </div>
-
-            </div>
-
-            <div class="border-0 m-1 row d-flex align-items-center">
-              <div class="col-sm-6">
-                <h6 class="font-weight-bold">Total</h6>
-              </div>
-              <div class="col-sm-6">
-                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
-              </div>
-            </div>
 
             <div class="justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
 

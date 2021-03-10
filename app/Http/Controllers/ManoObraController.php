@@ -105,13 +105,10 @@ class ManoObraController extends Controller
      */
     public function delete(Request $request, $id_mano_de_obra)
     {
-        // if ($request->ajax()) {
+
             $eliminar = t_mano_de_obra::findOrFail($id_mano_de_obra);
             $eliminar->delete();
             return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
-        //     return response()->json([
-        //         'message' => $eliminar->nombre_trabajador . 'Se eli|mino XD'
-        //     ]);
-        // }
+
     }
 }

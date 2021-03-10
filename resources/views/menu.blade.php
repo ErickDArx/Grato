@@ -19,6 +19,8 @@
 
           <li style="border-top: 1px solid #707070;margin-left: -100%;background: #707070;" class="mt-1 mb-1"></li>
 
+          <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('MateriaPrima') }}"><i
+            class="fa fa-clipboard mr-2"></i>Materia Prima</a></li>
           <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1" href="{{('ManoObra') }}"><i
                 class="fa fa-users mr-2"></i>Mano de obra</a></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Equipo') }}"><i
@@ -27,10 +29,7 @@
                 class="fas fa-coins mr-2"></i>Costos Indirectos (CIF)</a></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Viaticos') }}"><i
                 class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
-          <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('MateriaPrima') }}"><i
-                class="fa fa-clipboard mr-2"></i>Materia Prima</a></li>
-          <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Recetario') }}"><i
-                class="fa fa-utensil-spoon mr-2"></i>Recetario</a></li>
+
           <li style="border-top: 1px solid #707070;margin-left: -100%;background: #707070;" class="mt-1 mb-1"></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Pedidos') }}"><i
                 class="fa fa-pencil-alt mr-2"></i>Pedidos</a></li>

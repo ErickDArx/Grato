@@ -42,19 +42,18 @@ class MateriaPrimaController extends Controller
     public function store(Request $request)
     {
 
-            $agregar = new t_materia_prima();
-            $agregar->producto = $request->producto;
-            $agregar->unidad_medida= $request->unidad_medida;
-            $agregar->presentacion = $request->presentacion;
-            $agregar->cantidad = $request->cantidad;
-            $agregar->costo = $request->costo;
-            $agregar->precio_um = $agregar->costo * $agregar->unidad_medida;
+        $agregar = new t_materia_prima();
+        $agregar->producto = $request->producto;
+        $agregar->unidad_medida = $request->unidad_medida;
+        $agregar->presentacion = $request->presentacion;
+        $agregar->cantidad = 12;
+        $agregar->costo = $request->costo;
+        $agregar->precio_um =  ($request->costo/$request->presentacion);
 
-            // Insertar en la base de datos
-            $agregar->save();
-            // Redirigir a la vista original 
-            return back()->with('agregar', 'El usuario se ha agregado');
-
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'se agrego sin problemas');
     }
 
     /**
@@ -86,9 +85,19 @@ class MateriaPrimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_materia_prima)
     {
-        //
+        $edit = t_materia_prima::findOrFail($id_materia_prima);
+        $edit->producto = $request->producto;
+        $edit->unidad_medida = $request->unidad_medida;
+        $edit->presentacion = $request->presentacion;
+        $edit->cantidad = $request->cantidad;
+        $edit->costo = $request->costo;
+        $edit->precio_um = ($request->costo/$request->presentacion);
+        // Insertar en la base de datos
+        $edit->save();
+        // Redirigir a la vista original 
+        return back()->with('edit', 'se agrego sin problemas');
     }
 
     /**
@@ -97,8 +106,10 @@ class MateriaPrimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_materia_prima)
     {
-        //
+        $eliminar = t_materia_prima::findOrFail($id_materia_prima);
+        $eliminar->delete();
+        return back()->with('eliminar', 'fue eliminado exitosamente');
     }
 }

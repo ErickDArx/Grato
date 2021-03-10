@@ -1,27 +1,24 @@
 <!DOCTYPE html>
+{{-- Idioma --}}
 <html lang="es">
+
+{{-- Cabecera --}}
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso</title>
+  <title>Materia Prima</title>
+
   {!! htmlScriptTagJsApi([
   'action' => 'homepage',
   'callback_then' => 'callbackThen',
   'callback_catch' => 'callbackCatch'
   ]) !!}
-  {{-- Favicon --}}
-  <link rel="icon" type="image/png" href="././css/acceso.jpg" />
-  {{-- Meta-SEO --}}
-  <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
-  <meta name="robots" value="Noindex">
-  <meta name="keywords" content="Acceso">
-  <meta name="theme-color" content="#E23636">
 
+  {{-- Micromodal / Jquery / Bootstrap.JS --}}
   <script src="/Grato/resources/js/micromodal.js"></script>
   <script src="/Grato/resources/js/jquery.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
 
   {{-- Fuente de iconos --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
@@ -32,20 +29,10 @@
 
   <!-- Libreria Menú -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-
-  {{-- Estilos --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css"
-    integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg=="
-    crossorigin="anonymous" />
-
+  {{-- hoja de estilos para el menu / bootstrap / modal --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-  <!-- jquery & iScroll -->
-  {{-- <script
-    src="https://code.jquery.com/jquery-1.12.4.js"
-    integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-    crossorigin="anonymous"></script> --}}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
   <!-- drawer.js -->
@@ -80,13 +67,15 @@
 
       <div class="col-md-8 mb-2">
 
+        {{-- Agregar la materia prima --}}
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="d-flex justify-content-center row align-items-center">
             {{-- Presentacion  --}}
             <div class="col-sm-6">
               <h4 class="font-weight-bold">Materia Prima</h4>
-              <h6>Desglose de insumos necesarios para la elaboracion de recetas</h6>
+              <h6>Desglose de insumos necesarios para la elaboracion de una receta</h6>
             </div>
+
             <div class="col-sm-6">
 
               {{-- Modal MateriaPrima--}}
@@ -106,10 +95,10 @@
                       </div>
                     </header>
                     <main class="modal__content" id="modal-1-content">
-                      <form id="Crear" class="form-group" method="POST" action="">
+                      <form id="Crear" class="form-group" method="POST" action="{{route('AgregarMateriaPrima')}}">
                         @csrf
                         <div class="m-0 mb-2">
-                          <label for="">1.Nombre del insumo</label>
+                          <label for="">1.Nombre de la materia prima</label>
                           <input type="text" name="producto" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
@@ -117,22 +106,24 @@
                           <input type="text" name="unidad_medida" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">3.Presentacion</label>
-                          <input type="text" name="presentacion" class="form-control" value="">
-                        </div>
-                        <div class="m-0 mb-2">
-                          <label for="">4.Cantidad</label>
-                          <input type="text" name="cantidad" class="form-control" value="">
-                        </div>
-                        <div class="m-0 mb-2">
-                          <label for="">5.Costo</label>
+                          <label for="">3.Costo de la materia prima</label>
                           <input type="text" name="costo" class="form-control" value="">
                         </div>
+                        <div class="m-0 mb-2">
+                          <label for="">4.Presentacion</label>
+                          <input type="text" name="presentacion" class="form-control" value="">
+                        </div>
+                        {{-- <div class="m-0 mb-2">
+                          <label for="">5.Cantidad</label>
+                          <input type="text" name="cantidad" class="form-control" value="">
+                        </div> --}}
+
 
                         <button type="submit" class="modal__btn modal__btn-primary col-12"
                           id="EnviarDatos">Aceptar</button>
                         <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
                           aria-label="Close this dialog window">Cerrar</button>
+
                       </form>
                     </main>
                   </div>
@@ -142,17 +133,35 @@
               <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
 
             </div>
+
+            <div class="col-sm-6 mt-2">
+              <h6 class="m-0 font-weight-bold">Total</h6>
+            </div>
+            <div class="col-sm-6">
+              <input type="text" value="" class="form-control" readonly>
+            </div>
+
           </div>
         </div>
-
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        <div class="row m-1 d-flex align-items-center">
+        <div class="col-sm-6">
+          <h5 class="m-0 card-title font-weight-bold">Nombre del producto</h5>
+        </div>
+        <div class="col-sm-6">
+          <input type="text" readonly class="form-control" value="Pasta Larga">
+        </div>
+        </div>
+      </div>
         {{-- Listado de materia prima --}}
         @foreach ($t_materia_prima as $item)
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <form action="" method="POST">
+          <form action="{{route('ActualizarMateriaPrima',$item->id_materia_prima)}}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="m-1 d-flex align-items-center row border-bottom">
+
               <div class="col-sm-6 mb-2">
                 <h5 class="m-0 card-title font-weight-bold">Nombre del insumo</h5>
               </div>
@@ -163,64 +172,92 @@
             </div>
 
             <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
-              data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false" aria-controls="collapseExample">
+              data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false"
+              aria-controls="collapseExample">
               Ver mas informacion
             </button>
 
             <div class="collapse" id="collapseExample{{$item->id_materia_prima}}">
-              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                <div class="col-sm-6 mb-2">
-                  <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
-                  <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
-                </div>
-                <div class="col-sm-6 mb-2">
-                  <div class="">
-                    <h6 class="card-title font-weight-bold mt-1">Cantidad</h6>
-                    <input name="cantidad" class="form-control" type="number" value="{{$item->cantidad}}">
+
+                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
+                    <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
+                  </div>
+                  <div class="col-sm-6 mb-2">
+                    <div class="">
+                      <h6 class="card-title font-weight-bold mt-1">Cantidad</h6>
+                      <input name="cantidad" class="form-control" type="number" value="{{$item->cantidad}}">
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                <div class="col-sm-6 mb-2">
-                  <h6 class="card-title font-weight-bold mt-1">Costo</h6>
-                  <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
+                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
+                    <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
+                  </div>
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
+                    <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
+                  </div>
                 </div>
-                <div class="col-sm-6 mb-2">
-                  <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
-                  <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
-                </div>
-              </div>
 
-              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-                <div class="col-sm-6 mb-2">
-                  <h6 class="font-weight-bold">Precio por unidad de medida</h6>
-                  <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+                <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="font-weight-bold">Precio por unidad de medida</h6>
+                    <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+                  </div>
                 </div>
-              </div>
-
+                
+                <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
+                  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                      <header class="modal__header">
+                        <div class="">
+                          <div class="">
+                            <p class="h4 font-weight-bold mb-2" id="">
+                              Editar Recurso
+                            </p>
+                          </div>
+                        </div>
+                        <div class="">
+                          <button class="modal__close shadow-sm" aria-label="Close modal"
+                            data-micromodal-close></button>
+                        </div>
+                      </header>
+                      <main class="modal__content" id="modal-1-content">
+                        <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar los datos anteriores</h6>
+                        <button type="submit" class="btn btn-block">
+                          Aceptar
+                        </button>
+                      </main>
+                    </div>
+                  </div>
+                </div>
+              </form>
               <div class="row d-flex align-items-center">
-                <div class="col-sm-6">
-                  @csrf
-                  @method('PUT')
-                  <button type="submit" class="text-dark bg-white btn btn-block">Actualizar informacion</button>
 
-                </div>
                 <div class="col-sm-6">
-                  <form action="" method="POST">
+                  <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}" 
+                    class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
+                </div>
+
+                <div class="col-sm-6">
+                  <form action="{{route('EliminarMateriaPrima', $item->id_materia_prima)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-                      data-micromodal-trigger="modal-2">Eliminar información</button>
+                      data-micromodal-trigger="modal-2{{$item->id_materia_prima}}">Eliminar información</button>
                     <!-- Modal -->
-                    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+                    <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
                       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                           <header class="modal__header">
                             <div class="">
                               <div class="">
                                 <p class="h4 font-weight-bold mb-2" id="">
-                                  Ingreso de equipo
+                                  Eliminar Recurso
                                 </p>
                               </div>
                             </div>
@@ -230,6 +267,7 @@
                             </div>
                           </header>
                           <main class="modal__content" id="modal-1-content">
+                            <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
                             <button type="submit" class="btn btn-block">
                               Aceptar
                             </button>
@@ -239,11 +277,13 @@
                     </div>
                   </form>
                 </div>
+
               </div>
+
             </div>
+
         </div>
         @endforeach
-
 
       </div>
 
@@ -313,14 +353,6 @@
     MicroModal.init({
         onShow: modal => console.info(`${modal.id} is shown`), // [1]
         onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-        openTrigger: 'data-custom-open', // [3]
-        closeTrigger: 'data-custom-close', // [4]
-        openClass: 'is-open', // [5]
-        disableScroll: true, // [6]
-        disableFocus: false, // [7]
-        awaitOpenAnimation: false, // [8]
-        awaitCloseAnimation: false, // [9]
-        debugMode: false // [10]
     });
 
     var button = document.querySelector('.MateriaPrima');
@@ -333,7 +365,10 @@
         MicroModal.show('modal-2');
     });
 
-    
+    var button = document.querySelector('.Actualizar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-3');
+    });
   </script>
 </body>
 
