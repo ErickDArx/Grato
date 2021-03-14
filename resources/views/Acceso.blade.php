@@ -67,12 +67,11 @@
                             alt="Logo Sistema Informático Grato Pastas Artesanales"
                             style="width: 10rem;margin-bottom: 2rem;margin-top: 2rem;"
                             class="img-fluid position-relative">
-
                     </div>
 
 
                     <div>
-                        <form class="col-10 container card-body shadow bg-light "
+                        <form class="col-10 container card-body shadow bg-light"
                             style="width: 26rem;margin-bottom: 3rem;border-radius: 1rem;" method="POST"
                             action="{{ route('login') }}">
                             @csrf

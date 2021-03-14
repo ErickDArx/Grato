@@ -66,7 +66,7 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="col-sm-auto row rounded mt-2 d-flex align-items-center">
+                            <div class="row rounded mt-2 m-0 d-flex align-items-center">
                                 <div class="p-3 font-weight-bold col-6">
                                     Nombre del operario(a)
                                 </div>
@@ -75,7 +75,14 @@
                                         value="{{ auth()->user()->nombre_usuario }}" />
                                 </div>
                                 <div class="p-3 font-weight-bold col-6">
-                                    Apellido
+                                    Primer apellido
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" name="apellido_usuario" id="nombre_usuario"
+                                        value="{{auth()->user()->apellido_usuario }}" />
+                                </div>
+                                <div class="p-3 font-weight-bold col-6">
+                                    Segundo apellido (Opcional)
                                 </div>
                                 <div class="col-6">
                                     <input type="text" class="form-control" name="apellido_usuario" id="nombre_usuario"

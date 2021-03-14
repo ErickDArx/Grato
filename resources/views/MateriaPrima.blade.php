@@ -9,21 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Materia Prima</title>
 
-  {!! htmlScriptTagJsApi([
-  'action' => 'homepage',
-  'callback_then' => 'callbackThen',
-  'callback_catch' => 'callbackCatch'
-  ]) !!}
-
   {{-- Micromodal / Jquery / Bootstrap.JS --}}
   <script src="/Grato/resources/js/micromodal.js"></script>
   <script src="/Grato/resources/js/jquery.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-  {{-- Fuente de iconos --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-    crossorigin="anonymous" />
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -33,7 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-
+  <script src="/Grato/resources/ManoObra.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
   <!-- drawer.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
@@ -69,11 +58,11 @@
 
         {{-- Agregar la materia prima --}}
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <div class="d-flex justify-content-center row align-items-center">
+          <div class="d-flex justify-content-center m-1 row align-items-center">
             {{-- Presentacion  --}}
             <div class="col-sm-6">
               <h4 class="font-weight-bold">Materia Prima</h4>
-              <h6>Desglose de insumos necesarios para la elaboracion de una receta</h6>
+              <h6 class="text-gray">Desglose de insumos necesarios para la elaboracion de una receta</h6>
             </div>
 
             <div class="col-sm-6">
@@ -158,10 +147,11 @@
               @endphp
 
               @endforeach
-              <input type="text" value="{{$total}}" class="form-control" readonly>
+              <input name type="text" value="{{$total}}" class="form-control" readonly>
             </div>
           </div>
         </div>
+
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="row m-1 d-flex align-items-center">
             <div class="col-sm-6">
@@ -171,11 +161,10 @@
               <form action=""></form>
               <input type="text" class="form-control" value="Pasta Larga">
             </div>
-            <div class="col-sm-12 mt-2">
-              <button class="m-0 btn btn-outline-dark btn-block">Cambiar nombre</button>
-            </div>
+
           </div>
         </div>
+
         {{-- Listado de materia prima --}}
         @foreach ($t_materia_prima as $item)
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -258,9 +247,10 @@
                   </div>
                 </div>
               </div>
+            </div>
           </form>
-          <div class="row d-flex align-items-center">
 
+          <div class="row d-flex align-items-center">
             <div class="col-sm-6">
               <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
                 class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
