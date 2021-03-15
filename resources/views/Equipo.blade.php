@@ -69,7 +69,7 @@
     <nav class="navbar navbar-dark bg-white nav">
       <div class="col-12 text-center">
         <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid" style="width: 6rem;">
-    </div>
+      </div>
     </nav>
 
     <div class="row mr-2 ml-2 mt-3">
@@ -99,14 +99,33 @@
                     <main class="modal__content" id="modal-1-content">
                       <form id="Crear" class="form-group" method="POST" action="{{route('AgregarEquipo')}}">
                         @csrf
+                        @foreach ($t_labores as $item)
+                        @php
+                        $dias = $item->dias_laborales_semana;
+                        $horas = $item->horas_laborales_dia;
+                        @endphp
+                        <input type="number" name="dias_laborales_semana" hidden class="form-control"
+                          value="{{$item->dias_laborales_semana}}">
+                        <input type="number" name="horas_laborales_dia" hidden class="form-control"
+                          value="{{$item->horas_laborales_dia}}">
+                        @endforeach
                         <div class="m-0 mb-2">
                           <label for="">1.Nombre del equipo</label>
                           <input type="text" name="nombre_equipo" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">2.Tiempo de uso (minutos)</label>
-                          <input type="text" name="tiempo_uso" class="form-control" value="">
+                          <label for="">2.Precio</label>
+                          <input type="number" name="precio" class="form-control" value="">
                         </div>
+                        <div class="m-0 mb-2">
+                          <label for="">3.Vida util</label>
+                          <input type="number" name="vida_util" class="form-control" value="">
+                        </div>
+                        <div class="m-0 mb-2">
+                          <label for="">4.Porcentaje de utilizacion</label>
+                          <input type="number" name="porcentaje_utilizacion" class="form-control" value="">
+                        </div>
+
                         <button type="submit" class="modal__btn modal__btn-primary col-12"
                           id="EnviarDatos">Aceptar</button>
                         <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
@@ -121,83 +140,235 @@
           </div>
         </div>
 
-        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <div class="d-flex justify-content-center row align-items-center">
-            <h4 class="col-12 font-weight-bold">Configuración</h4>
-            <h6 class="col-12">Costo por minuto</h6>
-            <div class="col-sm-6 input-group has-validation">
+        @foreach ($t_equipos as $item)
 
-              <div class="input-group-prepend">
-                <span class="input-group-text">₡</span>
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+
+          <form action="{{route('ActualizarEquipo',$item->id_equipo)}}" method="POST">
+            @csrf
+            @method('PUT')
+            <input type="number" name="dias_laborales_semana" hidden class="form-control" value="{{$dias}}">
+            <input type="number" name="horas_laborales_dia" hidden class="form-control" value="{{$horas}}">
+            <div class="m-1 d-flex align-items-center row border-bottom">
+
+              <div class="col-sm-6 mb-2">
+                <h5 class="m-0 card-title font-weight-bold">Nombre del equipo</h5>
               </div>
-              <input type="text" class="form-control" name="costo_minuto" id="costo_minuto">
+
+              <div class="col-sm-6 mb-2 m-0" id="">
+                <input class="form-control" type="text" name="nombre_equipo" readonly value="{{$item->nombre_equipo}}">
+              </div>
+
+            </div>
+
+            <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+              data-target="#collapseExample{{$item->id_equipo}}" aria-expanded="false" aria-controls="collapseExample">
+              Ver mas informacion
+            </button>
+
+            <div class="collapse" id="collapseExample{{$item->id_equipo}}">
+
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Precio</h6>
+                  <input name="precio" class="form-control" type="text" value="{{$item->precio}}">
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <div class="">
+                    <h6 class="card-title font-weight-bold mt-1">Vida util</h6>
+                    <input name="vida_util" class="form-control" type="number" value="{{$item->vida_util}}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Depreciacion anual</h6>
+                  <input name="depreciacion_anual" class="form-control" readonly type="text"
+                    value="{{$item->depreciacion_anual}}">
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <h6 class="card-title font-weight-bold mt-1">Porcentaje utilizacion</h6>
+                  <input name="porcentaje_utilizacion" class="form-control" type="number"
+                    value="{{$item->porcentaje_utilizacion}}">
+                </div>
+              </div>
+
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="font-weight-bold">Depreciacion anual real</h6>
+                  <input name="depreciacion_anual_real" class="form-control" readonly type="text"
+                    value="{{$item->depreciacion_anual_real}}">
+                </div>
+
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="font-weight-bold">Depreciacion mensual</h6>
+                    <input name="depreciacion_mensual" class="form-control" readonly type="text"
+                      value="{{$item->depreciacion_mensual}}">
+                  </div>
+
+              </div>
+
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="font-weight-bold">Depreciacion semanal</h6>
+                  <input name="depreciacion_semanal" class="form-control" readonly type="text"
+                    value="{{$item->depreciacion_semanal}}">
+                </div>
+
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="font-weight-bold">Depreciacion diaria</h6>
+                    <input name="depreciacion_diaria" class="form-control" readonly type="text"
+                      value="{{$item->depreciacion_diaria}}">
+                  </div>
+
+              </div>
+
+              <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+                <div class="col-sm-6 mb-2">
+                  <h6 class="font-weight-bold">Depreciacion en horas</h6>
+                  <input name="depreciacion_diaria" class="form-control" readonly type="text"
+                    value="{{$item->depreciacion_hora}}">
+                </div>
+
+                  <div class="col-sm-6 mb-2">
+                    <h6 class="font-weight-bold">Depreciacion en minutos</h6>
+                    <input name="depreciacion_anual_real" class="form-control" readonly type="text"
+                      value="{{$item->depreciacion_minuto}}">
+                  </div>
+
+              </div>
+
+            </div>
+            <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_equipo}}" aria-hidden="true">
+              <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                  <header class="modal__header">
+                    <div class="">
+                      <div class="">
+                        <p class="h4 font-weight-bold mb-2" id="">
+                          Editar Recurso
+                        </p>
+                      </div>
+                    </div>
+                    <div class="">
+                      <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                    </div>
+                  </header>
+                  <main class="modal__content" id="modal-1-content">
+                    <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar
+                      los
+                      datos anteriores</h6>
+                    <button type="submit" class="btn btn-block">
+                      Aceptar
+                    </button>
+                  </main>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="row d-flex align-items-center">
+            <div class="col-sm-6">
+
+              <button type="button" data-micromodal-trigger="modal-3{{$item->id_equipo}}"
+                class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
 
             </div>
             <div class="col-sm-6">
-              <a class="btn btn-block btn-outline-gray m-1 border-dark" href="">Cambiar el costo por minuto</a>
+              <form action="{{route('EliminarEquipo', $item->id_equipo)}}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="button" class="Eliminar text-danger btn btn-block bg-white"
+                  data-micromodal-trigger="modal-2{{$item->id_equipo}}">Eliminar información</button>
+                <!-- Modal -->
+                <div class="modal micromodal-slide" id="modal-2{{$item->id_equipo}}" aria-hidden="true">
+                  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                      <header class="modal__header">
+                        <div class="">
+                          <div class="">
+                            <p class="h4 font-weight-bold mb-2" id="">
+                              Eliminar Recurso
+                            </p>
+                          </div>
+                        </div>
+                        <div class="">
+                          <button class="modal__close shadow-sm" aria-label="Close modal"
+                            data-micromodal-close></button>
+                        </div>
+                      </header>
+                      <main class="modal__content" id="modal-1-content">
+                        <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
+                        <button type="submit" class="btn btn-block">
+                          Aceptar
+                        </button>
+                      </main>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
+
           </div>
         </div>
-
-
-        @foreach ($t_equipos as $item)
-        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        {{-- <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="m-0 d-flex align-items-center row border-bottom">
             <div class="col-sm-6">
               <h5 class="card-title font-weight-bold">Recurso</h5>
             </div>
             <div class="col-sm-6" id="nombre">
               <h6 class="">{{$item->nombre_equipo}}</h6>
-            </div>
-          </div>
+      </div>
+    </div>
 
-          <div class="mr-0 ml-0 border-bottom mb-2 container mt-2 row d-flex align-items-center">
-            <div class="col-sm-6 mb-2">
-              <h6 class="card-title mb-4">Tiempo de uso</h6>
-              <h6 class="">{{$item->tiempo_uso}} minutos</h6>
-            </div>
-            <div class="shadow-sm mb-2 col-sm-6 card-footer rounded border-top-0">
-              <div class="">
-                <h6 class="mb-4">Total</h6>
-                <h6>{{$item->total}} colones</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
-
-            <div class="col-sm-6 mb-1">
-              <form action="{{route('ActualizarEquipo',$item->id_equipo)}}" method="POST">
-              @csrf
-              @method('PUT')
-               <button type="submit" class="text-dark btn btn-block">Actualizar informacion</button>
-              </form>
-            </div>
-
-            <div class="col-sm-6 mt-1">
-
-              <form action="{{route('EliminarEquipo',$item->id_equipo)}}" method="POST">
-                @csrf
-                @method('DELETE')
-              <button type="submit" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
-                data-target="#EliminarEquipo">Eliminar información</button>
-              <!-- Modal -->
-
-              </form>
-
-
-            </div>
-
-          </div>
-
+    <div class="mr-0 ml-0 border-bottom mb-2 container mt-2 row d-flex align-items-center">
+      <div class="col-sm-6 mb-2">
+        <h6 class="card-title mb-4">Tiempo de uso</h6>
+        <h6 class="">{{$item->tiempo_uso}} minutos</h6>
+      </div>
+      <div class="shadow-sm mb-2 col-sm-6 card-footer rounded border-top-0">
+        <div class="">
+          <h6 class="mb-4">Total</h6>
+          <h6>{{$item->total}} colones</h6>
         </div>
+      </div>
+    </div>
 
-        @endforeach
+    <div class="justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
+
+      <div class="col-sm-6 mb-1">
+        <form action="{{route('ActualizarEquipo',$item->id_equipo)}}" method="POST">
+          @csrf
+          @method('PUT')
+          <button type="submit" class="text-dark btn btn-block">Actualizar informacion</button>
+        </form>
+      </div>
+
+      <div class="col-sm-6 mt-1">
+
+        <form action="{{route('EliminarEquipo',$item->id_equipo)}}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
+            data-target="#EliminarEquipo">Eliminar información</button>
+          <!-- Modal -->
+
+        </form>
 
 
       </div>
 
-      {{-- <div class="col-md-4">
+    </div>
+
+    </div> --}}
+
+    @endforeach
+
+
+    </div>
+
+    {{-- <div class="col-md-4">
         <div class="card shadow" style="border-radius: 0.5rem;">
           <div class="card-body text-center">
             <h4>12:45 p.m.</h4>
@@ -248,13 +419,13 @@
         </div>
       </div> --}}
 
-      <div class="col-md-12 mt-2">
-        <div class="card shadow" style="border-radius: 0.5rem;">
-          <div class="card-body text-center">
-            Grato Pastas Artesanales 2021
-          </div>
+    <div class="col-md-12 mt-2">
+      <div class="card shadow" style="border-radius: 0.5rem;">
+        <div class="card-body text-center">
+          Grato Pastas Artesanales 2021
         </div>
       </div>
+    </div>
     </div>
 
   </main>

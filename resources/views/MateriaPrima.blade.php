@@ -7,37 +7,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materia Prima</title>
-
-  {{-- Micromodal / Jquery / Bootstrap.JS --}}
-  <script src="/Grato/resources/js/micromodal.js"></script>
+  <title>Mano de Obra</title>
+  {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
   <script src="/Grato/resources/js/jquery.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <script src="/Grato/resources/js/micromodal.js"></script>
+  <script src="/Grato/resources/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  {{-- Fuente de iconos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
   <!-- Libreria Menú -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-  {{-- hoja de estilos para el menu / bootstrap / modal --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-  <script src="/Grato/resources/ManoObra.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-  <!-- drawer.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
-  <script>
-    $(document).ready(function () {
-          $('.drawer').drawer();
-          $('.js-tilt').tilt({
-            option: value,
-            option: value,
-          });
-        });
-  </script>
-</head>
 
+</head>
 {{-- Cuerpo del HTML --}}
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
@@ -363,6 +349,7 @@
   </main>
 
   <script>
+    $(document).ready(function () {$('.drawer').drawer();});
     MicroModal.init({
         onShow: modal => console.info(`${modal.id} is shown`), // [1]
         onClose: modal => console.info(`${modal.id} is hidden`), // [2]

@@ -168,7 +168,6 @@
 
         {{-- Listado Operarios --}}
         <div id="Lista">
-
           @foreach ($t_mano_de_obra as $item)
 
           <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -184,19 +183,19 @@
                   <h5 class="m-0 card-title font-weight-bold">Nombre del Colaborador(a)</h5>
                 </div>
 
-                  <div class="col-sm-6 mb-2 m-0" id="">
-                    <input class="form-control" type="text" name="" readonly
-                      value="{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}">
-                  </div>
+                <div class="col-sm-6 mb-2 m-0" id="">
+                  <input class="form-control" type="text" name="" readonly
+                    value="{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}">
+                </div>
 
-                  <div class="col-sm-6 mb-2 m-0" id="nombre_trabajador" hidden>
-                    <input class="form-control" type="text" name="nombre_trabajador" readonly
-                      value="{{$item->nombre_trabajador}}">
-                  </div>
-                  <div class="col-sm-3 mb-2" id="apellido_trabajador" hidden>
-                    <input class="form-control" type="text" name="apellido_trabajador" readonly
-                      value="{{$item->apellido_trabajador}} ">
-                  </div>
+                <div class="col-sm-6 mb-2 m-0" id="nombre_trabajador" hidden>
+                  <input class="form-control" type="text" name="nombre_trabajador" readonly
+                    value="{{$item->nombre_trabajador}}">
+                </div>
+                <div class="col-sm-3 mb-2" id="apellido_trabajador" hidden>
+                  <input class="form-control" type="text" name="apellido_trabajador" readonly
+                    value="{{$item->apellido_trabajador}} ">
+                </div>
 
               </div>
 
@@ -225,7 +224,8 @@
                 <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
                   <div class="col-sm-6 mb-2">
                     <h6 class="card-title font-weight-bold mt-1">Salario diario</h6>
-                    <input name="salario_diario" class="form-control" readonly type="text" value="{{$item->salario_diario}}">
+                    <input name="salario_diario" class="form-control" readonly type="text"
+                      value="{{$item->salario_diario}}">
                   </div>
                   <div class="col-sm-6 mb-2">
                     <h6 class="card-title font-weight-bold mt-1">Salario por hora</h6>
@@ -237,7 +237,8 @@
                 <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
                   <div class="col-sm-6 mb-2">
                     <h6 class="font-weight-bold">Salario por minuto</h6>
-                    <input name="salario_minuto" class="form-control" readonly type="text" value="{{$item->salario_minuto}}">
+                    <input name="salario_minuto" class="form-control" readonly type="text"
+                      value="{{$item->salario_minuto}}">
                   </div>
                 </div>
 
@@ -280,10 +281,44 @@
                 <form action="{{route('EliminarManoDeObra', $item->id_mano_de_obra)}}" method="POST">
                   @csrf
                   @method('DELETE')
-
-                  <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-                    data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">Eliminar información</button>
+                  <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
+                    data-target="#exampleModal{{$item->id_mano_de_obra}}">
+                    Eliminar informacion
+                  </button>
                   <!-- Modal -->
+                  <div class="modal fade" id="exampleModal{{$item->id_mano_de_obra}}" aria-hidden="true" style="transition: 0s all ease;">
+                    <div class="modal-dialog">
+                      <div class="modal__container modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                        <header class="modal__header">
+                          <div class="row">
+                          <div class="col-sm-12">
+                              <p class="h4 font-weight-bold mb-2" id="">
+                                Eliminar Colaborador(a)
+                              </p>
+                          </div>
+                          <div class="col-sm-12">
+                            <h4>{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h4>
+                          </div>
+                          </div>
+
+                          <div class="">
+                            <button class="modal__close shadow-sm" aria-label="Close modal" class="close" data-dismiss="modal" aria-label="Close"
+                              data-micromodal-close></button>
+                          </div>
+                        </header>
+                        <main class="modal__content" id="modal-1-content">
+                          <h6 class="mb-4 mt-2">Si usted da aceptar, el colaborador se elimina permanentemente</h6>
+                          <button type="submit" class="btn btn-block btn-primary">
+                            Aceptar
+                          </button>
+                          <button type="button" class="btn btn-block btn-outline-dark" data-dismiss="modal">Cerrar</button>
+                        </main>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- <button type="button" class="Eliminar text-danger btn btn-block bg-white"
+                    data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">Eliminar información</button>
+
                   <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
                     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                       <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
@@ -308,7 +343,7 @@
                         </main>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </form>
               </div>
 

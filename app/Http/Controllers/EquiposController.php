@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\t_equipos;
 use App\t_usuario;
+use App\t_labores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -20,7 +21,8 @@ class EquiposController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $equipos = DB::table('t_equipos')->get();
-        return view('Equipo' , ['t_equipos' => $equipos]);
+        $laborales = DB::table('t_labores')->get();
+        return view('Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
 
     /**
@@ -43,9 +45,19 @@ class EquiposController extends Controller
     {
             $agregar = new t_equipos();
             $agregar->nombre_equipo = $request->nombre_equipo;
-            $agregar->tiempo_uso = $request->tiempo_uso;
-            $agregar->costo_minuto = 20.59;
-            $agregar->total = $request-> tiempo_uso * 20.59;
+            $agregar->precio = $request->precio;
+            $agregar->vida_util = $request->vida_util;
+            $agregar->porcentaje_utilizacion = $request-> porcentaje_utilizacion;
+
+
+            $agregar->depreciacion_anual = $agregar->precio / $agregar->vida_util;
+            $agregar->depreciacion_anual_real = ($agregar->depreciacion_anual * $agregar->porcentaje_utilizacion)/100;
+            $agregar->depreciacion_mensual = $agregar->depreciacion_anual_real / 12;
+            $agregar->depreciacion_semanal = $agregar->depreciacion_mensual / 4.33;
+            $agregar->depreciacion_diaria = $agregar->depreciacion_semanal / $request->dias_laborales_semana;
+            $agregar->depreciacion_hora = $agregar->depreciacion_diaria / $request->horas_laborales_dia; 
+            $agregar->depreciacion_minuto = $agregar->depreciacion_hora / 60;
+
             // Insertar en la base de datos
             $agregar->save();
             // Redirigir a la vista original 
@@ -85,7 +97,9 @@ class EquiposController extends Controller
     {
         $edit = t_equipos::findOrFail($id_equipo);
         $edit->nombre_equipo = $request->nombre_equipo;
-        $edit->minutos_trabajados = $request->minutos_trabajados;
+        $edit->precio = $request->precio;
+        $edit->vida_util = $request->vida_util;
+        $edit->porcentaje_utilizacion = $request-> porcentaje_utilizacion;
         $edit->save();
         return back()->with('Perfil','Todo salio bien');
     }
