@@ -22,3 +22,14 @@ if(!0!==o.debugMode||!1!==c(i,a))for(var s in a){var l=a[s]
 o.targetModal=s,o.triggers=[].concat(t(l)),new n(o)}},show:function(e,o){var t=o||{}
 t.targetModal=e,!0===t.debugMode&&!1===s(e)||(a=new n(t),a.showModal())},close:function(){a.closeModal()}}}()})
 
+
+var button = document.querySelector('.Eliminar');
+button.addEventListener('click', function () {
+    MicroModal.show('modal-2');
+});
+
+
+var button = document.querySelector('.ActualizarLabores');
+button.addEventListener('click', function () {
+    MicroModal.show('modal-4');
+});

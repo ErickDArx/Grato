@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="/Grato/resources/js/micromodal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/micromodal/dist/micromodal.min.js"></script>
+    <script src="{{ asset('js/ManoObra.js') }}"></script>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -67,29 +68,12 @@
             </div>
         </div>
     </div>
-    
+
 </body>
-<script>
-    MicroModal.init({
-        onShow: modal => console.info(`${modal.id} is shown`), // [1]
-        onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-        openTrigger: 'data-custom-open', // [3]
-        closeTrigger: 'data-custom-close', // [4]
-        openClass: 'is-open', // [5]
-        disableScroll: true, // [6]
-        disableFocus: false, // [7]
-        awaitOpenAnimation: false, // [8]
-        awaitCloseAnimation: false, // [9]
-        debugMode: false // [10]
-    });
-
-    var button = document.querySelector('.myButton');
-    button.addEventListener('click', function () {
-        MicroModal.show('modal-1');
-    });
-</script>
+    <script>
+        var button = document.querySelector('.myButton');
+button.addEventListener('click', function () {
+    MicroModal.show('modal-1');
+});
+    </script>
 </html>
-
-
-
-

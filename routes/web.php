@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ManoObra', 'ManoObraController@index');
     Route::post('/Total', 'ManoObraController@store')->name('total');
     Route::put('/Labores/{id_labor}', 'ManoObraController@labor')->name('ActualizarLabores');
-    Route::put('/ManoObra/{id_mano_de_obra}', 'ManoObraController@store')->name('ActualizarManoDeObra');
+    Route::put('/Actualizar/{id_mano_de_obra}', 'ManoObraController@update')->name('ActualizarManoDeObra');
     Route::delete('/ManoObra/{id_mano_de_obra}', 'ManoObraController@delete')->name('EliminarManoDeObra');
 
 
