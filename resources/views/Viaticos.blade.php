@@ -67,14 +67,14 @@
               <h6></h6>
             </div>
             <div class="col-sm-6">
-              <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+              <div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
                 <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                   <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                     <header class="modal__header">
                       <div class="">
                         <div class="">
                           <p class="h4 font-weight-bold mb-2" id="">
-                            Ingreso de equipo
+                            Ingreso de Viaticos
                           </p>
                         </div>
                       </div>
@@ -83,28 +83,25 @@
                       </div>
                     </header>
                     <main class="modal__content" id="modal-1-content">
-                      <form id="Crear" class="form-group" method="POST" action="{{route('AgregarCIF')}}">
+                      <form id="Crear" class="form-group" method="POST" action="{{route('AgregarViaticos')}}">
                         @csrf
                         <div class="m-0 mb-2">
-                          <label for="">1.Titulo del CIF</label>
-                          <input type="text" name="nombre_cif" class="form-control" value="">
+                          <label for="">1.Tipo de Vehículo</label>
+                          <input type="text" name="tipo_de_vehiculo" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">2.Total a pagar (Colones)</label>
-                          <input type="text" name="recibo_pagar" class="form-control" value="">
+                          <label for="">2.Antiguedad Vehículo (años)</label>
+                          <input type="text" name="antiguedad_vehiculo_años" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">3.Porcentaje de utilizacion en la empresa</label>
-                          <input type="text" name="porcentaje_utilizacion" class="form-control" value="">
+                          <label for="">3.Tarifa por kilometro recorrido</label>
+                          <input type="text" name="tarifa_km_recorrido" class="form-control" value="">
                         </div>
                         <div class="m-0 mb-2">
-                          <label for="">4.Porcentaje de produccion del producto</label>
-                          <input type="text" name="porcentaje_produccion" class="form-control" value="">
+                          <label for="">4.kilometros recorridos</label>
+                          <input type="text" name="km_recorridos" class="form-control" value="">
                         </div>
-                        <div class="m-0 mb-2">
-                          <label for="">5.Produccion promedio mensual</label>
-                          <input type="text" name="produccion_mensual" class="form-control" value="">
-                        </div>
+                       
 
                         <button type="submit" class="modal__btn modal__btn-primary col-12"
                           id="EnviarDatos">Aceptar</button>
@@ -115,40 +112,26 @@
                   </div>
                 </div>
               </div>
-              <a href="#" class="Operario btn btn-block btn-dark">Ingresar viatico</a>
+
+              {{-- Aqui llamamos al modal --}}
+              <a href="#" class="Viaticos btn btn-block btn-dark">Ingresar viatico</a>
             </div>
           </div>
           {{-- hola --}}
         </div>
-        {{-- <div class="m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <div class="row d-flex align-items-center">
-            <div class="col-sm-6">
-              <h5 class="m-0">Seleccione el mes y año</h5>
-            </div>
-            <div class="col-sm-6 row m-0">hola
-              <select name="" id="" class="col-sm-6 form-control">
-                <option value="Enero">Marzo</option>
-              </select>
-              <div class="m-1"></div>
-              <select name="" id="" class="col-sm-5 form-control">
-                <option value="Enero">2021</option>
-              </select>
-            </div>
-          </div>
-        </div> --}}
+         @foreach ($t_viaticos as $item)
 
-
-        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+          <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <form action="" method="POST">
             @csrf
             @method('PUT')
             <div class="m-1 d-flex align-items-center row border-bottom">
               <div class="col-sm-6 mb-2">
-                <h5 class="m-0 card-title font-weight-bold">Fecha</h5>
+                <h5 class="m-0 card-title font-weight-bold">Tipo de Vehículo</h5>
               </div>
 
               <div class="col-sm-6 mb-2" id="nombre">
-                <input class="form-control" readonly type="text" name="nombre_cif" value="28/6/2021">
+                <input class="form-control" readonly type="text" name="tipo_de_vehiculo" value="{{$item->tipo_de_vehiculo}}">
               </div>
             </div>
 
@@ -165,32 +148,28 @@
               </div>
 
               <div class="col-sm-6 mb-2">
-                <h6 class="">Tipo de vehiculo</h6>
-                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
+                <h6 class="">Antiguedad del vehiculo (años)</h6>
+                <input name="antiguedad_vehiculo_años" class="form-control" type="text" value="{{$item->antiguedad_vehiculo_años}}">
               </div>
               <div class="col-sm-6 mb-2">
-                <h6 class="">Antiguedad del vehiculo (años)</h6>
-                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
+                <h6 class="">Tarifa por kilometro recorrido</h6>
+                <input name="tarifa_km_recorrido" class="form-control" type="text" value="{{$item->tarifa_km_recorrido}}">
               </div>
-
             </div>
 
             <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
 
-              <div class="col-sm-6 mb-2">
-                <h6 class="">Tarifa por kilometro recorrido</h6>
-                <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
-              </div>
+
               <div class="col-sm-6 mb-2">
                 <div class="">
                   <h6 class="">Kilometros recorridos (ida y vuelta)</h6>
-                  <input name="porcentaje_utilizacion" class="form-control" type="text" value="">
+                  <input name="km_recorridos" class="form-control" type="text" value="{{$item->km_recorridos}}">
                 </div>
               </div>
               <div class="col-sm-6 mb-2">
                 <div class="">
                   <h6 class="">Costo total de kilometros</h6>
-                  <input readonly name="porcentaje_utilizacion" class="form-control" type="text" value="">
+                  <input readonly name="total_km" class="form-control" type="text" value="{{$item->total_km}}">
                 </div>
               </div>
             </div>
@@ -204,7 +183,9 @@
                 @method('PUT')
                 <button type="submit" class="text-dark bg-white btn btn-block">Actualizar informacion</button>
           </form>
-        </div>
+        </div>   
+         @endforeach
+        
 
 
         {{-- </div> --}}
@@ -249,56 +230,6 @@
 
     </div>
 
-    {{-- <div class="col-md-4">
-      <div class="card shadow" style="border-radius: 0.5rem;">
-        <div class="card-body text-center">
-          <h4>12:45 p.m.</h4>
-          <p class="text-gray">Lunes 1 de Febrero del 2021</p>
-
-          <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
-          <div class=" mt-2">
-            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
-              <div class="row ">
-                <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
-                <p class="m-0 col-4 text-right text-danger material-icons">
-                  navigate_next
-                </p>
-              </div>
-            </a>
-          </div>
-          <div class=" mt-2">
-            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
-              <div class="row ">
-                <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos</p>
-                <p class="m-0 col-4 text-right text-danger material-icons">
-                  navigate_next
-                </p>
-              </div>
-            </a>
-          </div>
-          <div class=" mt-2">
-            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
-              <div class="row">
-                <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar materia prima</p>
-                <p class="m-0 col-4 text-right text-danger material-icons">
-                  navigate_next
-                </p>
-              </div>
-            </a>
-          </div>
-          <div class=" mt-2">
-            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
-              <div class="row ">
-                <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo</p>
-                <p class="m-0 col-4 text-right text-danger material-icons">
-                  navigate_next
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div> --}}
 
     <div class="col-md-12 mt-2">
       <div class="card shadow" style="border-radius: 0.5rem;">
@@ -324,9 +255,9 @@
         debugMode: false // [10]
     });
 
-    var button = document.querySelector('.Correo');
+    var button = document.querySelector('.Viaticos');
     button.addEventListener('click', function () {
-        MicroModal.show('modal-1');
+        MicroModal.show('modal-4');
     });
 
     var button = document.querySelector('.Personal');
