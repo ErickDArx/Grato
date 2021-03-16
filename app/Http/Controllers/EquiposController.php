@@ -100,6 +100,13 @@ class EquiposController extends Controller
         $edit->precio = $request->precio;
         $edit->vida_util = $request->vida_util;
         $edit->porcentaje_utilizacion = $request-> porcentaje_utilizacion;
+        $edit->depreciacion_anual =  $edit->precio /  $edit->vida_util;
+        $edit->depreciacion_anual_real = ( $edit->depreciacion_anual *  $edit->porcentaje_utilizacion)/100;
+        $edit->depreciacion_mensual =  $edit->depreciacion_anual_real / 12;
+        $edit->depreciacion_semanal =  $edit->depreciacion_mensual / 4.33;
+        $edit->depreciacion_diaria =  $edit->depreciacion_semanal / $request->dias_laborales_semana;
+        $edit->depreciacion_hora =  $edit->depreciacion_diaria / $request->horas_laborales_dia; 
+        $edit->depreciacion_minuto =  $edit->depreciacion_hora / 60;
         $edit->save();
         return back()->with('Perfil','Todo salio bien');
     }

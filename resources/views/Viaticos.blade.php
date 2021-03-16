@@ -118,13 +118,14 @@
               <a href="#" class="Operario btn btn-block btn-dark">Ingresar viatico</a>
             </div>
           </div>
+          {{-- hola --}}
         </div>
         {{-- <div class="m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="row d-flex align-items-center">
             <div class="col-sm-6">
               <h5 class="m-0">Seleccione el mes y año</h5>
             </div>
-            <div class="col-sm-6 row m-0">
+            <div class="col-sm-6 row m-0">hola
               <select name="" id="" class="col-sm-6 form-control">
                 <option value="Enero">Marzo</option>
               </select>
