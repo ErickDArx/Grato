@@ -44,13 +44,14 @@
             <div class="container">
               <div class="row d-flex align-items-center">
                 <div class="col-sm-6 mt-1 mb-1">
-                  <h4 class="font-weight-bold m-0">Costo unitario</h4>
+                  <h4 class="font-weight-bold m-0">Seleccione el producto a realizar</h4>
                 </div>
                 <div class="col-sm-6 mt-1 mb-1">
-                  <select name="" class="form-control m-0" id="">
-                    <option value="">Seleccione el producto a realizar</option>
-                    <option value="">Pasta larga</option>
-                  </select>
+                  <select name="id_producto" class="form-control m-0" id="">
+                  @foreach ($t_producto as $item)
+                    <option value="">{{$item->nombre_producto}}</option>
+                  @endforeach
+                </select>
                 </div>
               </div>
             </div>

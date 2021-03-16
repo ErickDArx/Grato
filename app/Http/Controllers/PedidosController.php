@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\t_producto;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PedidosController extends Controller
 {
@@ -13,7 +16,11 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        return view('Pedidos');
+        date_default_timezone_set('America/Costa_Rica');
+        $date = Carbon::now()->locale('es_ES');
+        $materia = DB::table('t_producto')->get();
+        
+        return view('Pedidos', ['t_producto' => $materia]);
     }
 
     /**
