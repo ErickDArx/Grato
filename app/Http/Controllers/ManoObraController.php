@@ -130,6 +130,9 @@ class ManoObraController extends Controller
 
         $eliminar = t_mano_de_obra::findOrFail($id_mano_de_obra);
         $eliminar->delete();
-        return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+        // return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
     }
 }

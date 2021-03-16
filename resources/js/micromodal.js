@@ -28,8 +28,14 @@ button.addEventListener('click', function () {
     MicroModal.show('modal-2');
 });
 
-
 var button = document.querySelector('.ActualizarLabores');
 button.addEventListener('click', function () {
     MicroModal.show('modal-4');
+});
+
+
+$(document).ready(function () { $('.drawer').drawer(); });
+var button = document.querySelector('.Actualizar');
+button.addEventListener('click', function () {
+    MicroModal.show('modal-3');
 });

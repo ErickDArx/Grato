@@ -8,6 +8,7 @@
   {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
   <script src="/Grato/resources/js/jquery.js"></script>
   <script src="/Grato/resources/js/micromodal.js"></script>
+  <script src="/Grato/resources/js/ajax.js"></script>
   <script src="/Grato/resources/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
@@ -278,40 +279,44 @@
 
               </div>
               <div class="col-sm-6">
-                <form action="{{route('EliminarManoDeObra', $item->id_mano_de_obra)}}" method="POST">
+                <form action="{{route('EliminarManoDeObra', $item->id_mano_de_obra)}}" method="POST" id="Eliminar">
                   @csrf
                   @method('DELETE')
                   <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
                     data-target="#exampleModal{{$item->id_mano_de_obra}}">
                     Eliminar informacion
                   </button>
+                  <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
                   <!-- Modal -->
-                  <div class="modal fade" id="exampleModal{{$item->id_mano_de_obra}}" aria-hidden="true" style="transition: 0s all ease;">
+                  <div class="modal fade" id="exampleModal{{$item->id_mano_de_obra}}" aria-hidden="true"
+                    style="transition: 0s all ease;">
                     <div class="modal-dialog">
-                      <div class="modal__container modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                      <div class="modal__container modal-content" role="dialog" aria-modal="true"
+                        aria-labelledby="modal-1-title">
                         <header class="modal__header">
                           <div class="row">
-                          <div class="col-sm-12">
+                            <div class="col-sm-12">
                               <p class="h4 font-weight-bold mb-2" id="">
                                 Eliminar Colaborador(a)
                               </p>
-                          </div>
-                          <div class="col-sm-12">
-                            <h4>{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h4>
-                          </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <h4>{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h4>
+                            </div>
                           </div>
 
                           <div class="">
-                            <button class="modal__close shadow-sm" aria-label="Close modal" class="close" data-dismiss="modal" aria-label="Close"
-                              data-micromodal-close></button>
+                            <button class="modal__close shadow-sm" aria-label="Close modal" class="close"
+                              data-dismiss="modal" aria-label="Close" data-micromodal-close></button>
                           </div>
                         </header>
                         <main class="modal__content" id="modal-1-content">
                           <h6 class="mb-4 mt-2">Si usted da aceptar, el colaborador se elimina permanentemente</h6>
-                          <button type="submit" class="btn btn-block btn-primary">
+                          <button type="submit" class="btn btn-block btn-primary" id="EliminarDatos">
                             Aceptar
                           </button>
-                          <button type="button" class="btn btn-block btn-outline-dark" data-dismiss="modal">Cerrar</button>
+                          <button type="button" class="btn btn-block btn-outline-dark"
+                            data-dismiss="modal">Cerrar</button>
                         </main>
                       </div>
                     </div>
@@ -365,44 +370,12 @@
   </main>
 
   <script type="text/javascript">
-    $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }});
-    $("#EnviarDatos").click(function(e){
-      e.preventDefault(); //Evitar recargar la pagina
-      var dataString = $('#Crear').serialize();
-      $.ajax({
-        type:"POST",
-        url:'{{url('/Total')}}',
-        data: dataString,
-        cache: false,
-      processData: false,
-        success:function(response){
-          if(response){
-            $("#Lista").load(" #Lista");
-            }
-          }
-      });
-    });
-  
-  </script>
-
-  <script>
-    MicroModal.init();
-    var button = document.querySelector('.Actualizar');
-  button.addEventListener('click', function () {
-  MicroModal.show('modal-3');});
-  </script>
-
-  <script>
     MicroModal.init();
   var button = document.querySelector('.Operario');
-  button.addEventListener('click', function () {
-  MicroModal.show('modal-1');});
-  $(document).ready(function () {$('.drawer').drawer();});
+button.addEventListener('click', function () {
+    MicroModal.show('modal-1');
+});
   </script>
-
 </body>
 
 </html>
