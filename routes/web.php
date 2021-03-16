@@ -62,9 +62,10 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Crud para la vista Viaticos
-    Route::get('/Viaticos', function () {
-        return view('Viaticos');
-    });
+    Route::get('/Viaticos' , 'ViaticosController@index');
+    Route::post('/Viaticos' , 'ViaticosController@store')->name('AgregarViaticos');
+    Route::put('/Viaticos/{id_viatico}' , 'ViaticosController@update')->name('ActualizarViaticos');
+    Route::delete('/Viaticos/{id_viatico}' , 'ViaticosController@destroy')->name('EliminarViaticos');
 
     // Crud para la vista Materia prima
     Route::get('/MateriaPrima' , 'MateriaPrimaController@index');

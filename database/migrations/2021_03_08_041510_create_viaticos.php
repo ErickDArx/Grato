@@ -15,14 +15,12 @@ class CreateViaticos extends Migration
     {
         Schema::create('t_viaticos', function (Blueprint $table) {
             $table->bigIncrements('id_viatico');
-            $table->integer('antiguedad_vehiculo')->nullable();
-            $table->decimal('kilometros',4,2)->nullable();
-            $table->decimal('desayuno',8,2)->nullable();
-            $table->decimal('almuerzo',8,2)->nullable();
-            $table->decimal('cena',8,2)->nullable();
-            $table->decimal('costo_hospedaje',8,2)->nullable();
-            $table->decimal('total',8,2);
-            $table->decimal('cobro_general',8,2)->nullable();
+            $table->string('tipo_de_vehiculo');
+            $table->integer('antiguedad_vehiculo_años');
+            $table->decimal('tarifa_km_recorrido',8,2);
+            $table->decimal('km_recorridos',8,2);
+            $table->decimal('total_km',8,2);
+      
         });
     }
 
