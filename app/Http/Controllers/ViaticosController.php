@@ -9,18 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class ViaticosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $Viaticos = DB::table('t_viaticos')->get();
-        return view('Viaticos' , ['t_viaticos' => $Viaticos]);
-
+        return view('Viaticos', ['t_viaticos' => $Viaticos]);
     }
 
     /**
@@ -46,19 +41,13 @@ class ViaticosController extends Controller
         $agregar->antiguedad_vehiculo_años = $request->antiguedad_vehiculo_años;
         $agregar->tarifa_km_recorrido = $request->tarifa_km_recorrido;
         $agregar->km_recorridos = $request->km_recorridos;
-        $agregar->total_km = $agregar->tarifa_km_recorrido*$agregar->km_recorridos;
+        $agregar->total_km = $agregar->tarifa_km_recorrido * $agregar->km_recorridos;
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
-         return back()->with('agregar', 'Viatico se ha agregado');
+        return back()->with('agregar', 'Viatico se ha agregado');
     }
-// holllaaaa
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
