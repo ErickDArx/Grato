@@ -22,8 +22,7 @@ class CreateTMateriaPrima extends Migration
             $table->decimal('costo', 8, 2);
             $table->decimal('precio_um', 8, 2);
             $table->integer('id_producto');
-
-            $table->foreign('id_producto')->references('id_producto')->on('t_materia_prima');
+            // $table->foreign('id_producto')->references('id_producto')->on('t_producto');
         });
     }
 

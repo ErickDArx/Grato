@@ -25,11 +25,6 @@ class CreateTManoDeObra extends Migration
             // $table->unsignedDecimal('costo_minuto');
             // $table->unsignedDecimal('total_mano_obra');
 
-            // $table->integer('id_usuario');
-            $table->integer('id_labor');
-            // $table->foreign('id_usuario')->references('id_usuario')->on('t_usuario');
-            $table->foreign('id_labor')->references('id_labor')->on('t_labores');
-
         });
     }
 
