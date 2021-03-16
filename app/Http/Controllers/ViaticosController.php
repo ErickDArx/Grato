@@ -52,7 +52,7 @@ class ViaticosController extends Controller
         // Redirigir a la vista original 
          return back()->with('agregar', 'Viatico se ha agregado');
     }
-
+// holllaaaa
     /**
      * Display the specified resource.
      *
