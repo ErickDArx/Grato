@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTReportes extends Migration
+class CreateTProducto extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTReportes extends Migration
      */
     public function up()
     {
-        Schema::create('t_reportes', function (Blueprint $table) {
-            $table->bigIncrements('id_reporte');
-            $table->integer('id_pedido');
-            $table->integer('id_cif');
-            $table->integer('id_equipo');
+        Schema::create('t_producto', function (Blueprint $table) {
+            $table->bigIncrements('id_producto');
+            $table->string('nombre_producto');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateTReportes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_reportes');
+        Schema::dropIfExists('t_producto');
     }
 }

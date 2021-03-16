@@ -98,6 +98,15 @@
                           <input type="text" placeholder="Ejemplo: 12 unidades" name="presentacion" class="form-control"
                             value="">
                         </div>
+                        <div class="m-0 mb-2">
+                          <label for="">5.Producto</label>
+                          <select name="id_producto" id="" class="form-control">
+
+                            @foreach ($t_producto as $item)
+                            <option value="{{$item->id_producto}}"> {{$item->nombre_producto}} </option>
+                            @endforeach
+                          </select>
+                        </div>
                         {{-- <div class="m-0 mb-2">
                           <label for="">5.Cantidad</label>
                           <input type="text" name="cantidad" class="form-control" value="">
@@ -135,19 +144,6 @@
               @endforeach
               <input name type="text" value="{{$total}}" class="form-control" readonly>
             </div>
-          </div>
-        </div>
-
-        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-          <div class="row m-1 d-flex align-items-center">
-            <div class="col-sm-6">
-              <h5 class="m-0 card-title font-weight-bold">Nombre del producto a realizar</h5>
-            </div>
-            <div class="col-sm-6">
-              <form action=""></form>
-              <input type="text" class="form-control" value="Pasta Larga">
-            </div>
-
           </div>
         </div>
 
@@ -280,8 +276,6 @@
           </div>
 
         </div>
-
-      </div>
       @endforeach
 
     </div>

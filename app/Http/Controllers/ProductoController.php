@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\t_materia_prima;
 use Illuminate\Http\Request;
+use App\t_producto;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class MateriaPrimaController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class MateriaPrimaController extends Controller
     {
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $materia = DB::table('t_materia_prima')->get();
-        $producto = DB::table('t_producto')->get();
-        return view('MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
+        $materia = DB::table('t_producto')->get();
+
+        return view('Productos', ['t_producto' => $materia]);
     }
 
     /**
@@ -41,16 +41,9 @@ class MateriaPrimaController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
-        $agregar = new t_materia_prima();
-        $agregar->producto = $request->producto;
-        $agregar->unidad_medida = $request->unidad_medida;
-        $agregar->presentacion = $request->presentacion;
-        $agregar->cantidad = 12;
-        $agregar->costo = $request->costo;
-        $agregar->precio_um =  ($request->costo/$request->presentacion);
-        $agregar->id_producto = $request->id_producto;
-
+        $agregar = new t_producto();
+        $agregar->nombre_producto = $request->nombre_producto;
+        
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
@@ -65,7 +58,7 @@ class MateriaPrimaController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -86,19 +79,9 @@ class MateriaPrimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_materia_prima)
+    public function update(Request $request, $id)
     {
-        $edit = t_materia_prima::findOrFail($id_materia_prima);
-        $edit->producto = $request->producto;
-        $edit->unidad_medida = $request->unidad_medida;
-        $edit->presentacion = $request->presentacion;
-        $edit->cantidad = $request->cantidad;
-        $edit->costo = $request->costo;
-        $edit->precio_um = ($request->costo/$request->presentacion);
-        // Insertar en la base de datos
-        $edit->save();
-        // Redirigir a la vista original 
-        return back()->with('edit', 'se agrego sin problemas');
+        //
     }
 
     /**
@@ -107,10 +90,8 @@ class MateriaPrimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_materia_prima)
+    public function destroy($id)
     {
-        $eliminar = t_materia_prima::findOrFail($id_materia_prima);
-        $eliminar->delete();
-        return back()->with('eliminar', 'fue eliminado exitosamente');
+        //
     }
 }
