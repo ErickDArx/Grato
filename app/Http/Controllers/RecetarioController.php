@@ -13,7 +13,7 @@ class RecetarioController extends Controller
      */
     public function index()
     {
-        return view('Recetario');
+        return view('modulos/Recetario');
     }
 
     /**

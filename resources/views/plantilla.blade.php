@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -10,18 +9,17 @@
     <meta property="og:description" content="Plataforma oficial para la pyme GratoCR" />
     <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales" />
     <meta property="og:url" content="sistema.gratocr.com" />
+    <meta property="og:site_name" content="GratoCR">
     <meta name="robots" content="noindex" />
     <meta name="robots" content="nofollow" />
-    <meta http-equiv="cache-control" content="no-cache" />
     <meta property="og:image" content="/Grato/resources/media/Logo.png" />
+    <link rel="apple-touch-startup-image" href="/Grato/resources/media/Logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="/Grato/resources/media/Logo.png" />
     <title> @yield('titulo') - GratoCR </title>
-    {!! htmlScriptTagJsApi([
-        'action' => 'homepage',
-        'callback_then' => 'callbackThen',
-        'callback_catch' => 'callbackCatch'
-    ]) !!}
+
     {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
     <script src="/Grato/resources/js/jquery.js"></script>
     <script src="/Grato/resources/js/micromodal.js"></script>
@@ -82,10 +80,16 @@
                         @yield('contenido-4')
                     </div>
                 </div>
+
+                <div class="mt-3" style="border-radius: 0.5rem;">
+                    <div class="">
+                        @yield('contenido-5')
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-4">
-                <div class="card shadow" style="border-radius: 0.5rem;">
+                <div class="card shadow mt-0" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
 
                         <h4>{{date('h:i a')}}</h4>
@@ -93,15 +97,15 @@
                         <p class="text-gray">{{date('d')}} de {{date('M')}} del {{date('Y')}}</p>
 
                         <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
-                        <div class=" mt-2">
+                        {{-- <div class=" mt-2">
                             <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
 
                                 </div>
                             </a>
-                        </div>
-                        <div class=" mt-2">
+                        </div> --}}
+                        {{-- <div class=" mt-2">
                             <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos
@@ -109,9 +113,9 @@
 
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
+                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{('MateriaPrima') }}">
                                 <div class="row">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar
                                         materia prima
@@ -121,7 +125,7 @@
                             </a>
                         </div>
                         <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Equipo.html">
+                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{('Equipo') }}">
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo
                                     </p>

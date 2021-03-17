@@ -22,7 +22,7 @@ class ManoObraController extends Controller
         $users = DB::table('t_usuario')->get();
         $operarios = DB::table('t_mano_de_obra')->get();
         $laborales = DB::table('t_labores')->get();
-        return view('modulos\ManoObra', ['t_usuario' => $users, 't_mano_de_obra' => $operarios, 't_labores' => $laborales]);
+        return view('modulos/ManoObra', ['t_usuario' => $users, 't_mano_de_obra' => $operarios, 't_labores' => $laborales]);
     }
 
     /**
@@ -106,7 +106,6 @@ class ManoObraController extends Controller
             $agregar->salario_minuto = $agregar->salario_hora / 60;
             $agregar->salario_costo_extra = 100;
             $agregar->salario_costo_hora_doble = 100;
-            $agregar->id_labor = 1;
             // Insertar en la base de datos
             $agregar->save();
             // Redirigir a la vista original 

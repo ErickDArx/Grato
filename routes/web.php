@@ -22,9 +22,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Crud para la vista principal
     Route::get('/Principal', 'UsuarioController@principal');
-    Route::get('/home', function () {
-        return view('home');
-    });
 
     // Crud para la vista ManoObra
     Route::get('/ManoObra', 'ManoObraController@index');

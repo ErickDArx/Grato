@@ -20,7 +20,7 @@ class PedidosController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $materia = DB::table('t_producto')->get();
         
-        return view('Pedidos', ['t_producto' => $materia]);
+        return view('modulos/Pedidos', ['t_producto' => $materia]);
     }
 
     /**

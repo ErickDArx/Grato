@@ -20,7 +20,7 @@ class ProductoController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $materia = DB::table('t_producto')->get();
 
-        return view('modulos\Productos', ['t_producto' => $materia]);
+        return view('modulos/Productos', ['t_producto' => $materia]);
     }
 
     /**

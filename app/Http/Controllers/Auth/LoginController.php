@@ -28,7 +28,7 @@ class LoginController extends Controller
             Auth::loginUsingId($t_usuario->nombre_usuario);
             return view('Principal');
         } else {
-            return redirect('/')->with('status', 'Datos Incorrectos!');
+            return redirect('usuarios/Acceso')->with('status', 'Datos Incorrectos!');
         }
     }
     protected $redirectTo = '/Principal';
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('usuarios\Acceso');
+        return view('usuarios/Acceso');
     }
 
 

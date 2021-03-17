@@ -15,7 +15,7 @@ class ViaticosController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $Viaticos = DB::table('t_viaticos')->get();
-        return view('modulos\Viaticos', ['t_viaticos' => $Viaticos]);
+        return view('modulos/Viaticos', ['t_viaticos' => $Viaticos]);
     }
 
     /**

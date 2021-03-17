@@ -14,7 +14,7 @@ class PerfilController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $date->diffForHumans();
-        return view('usuarios\Perfil');
+        return view('usuarios/Perfil');
     }
 
     public function create()

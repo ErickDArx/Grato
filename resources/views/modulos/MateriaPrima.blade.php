@@ -105,6 +105,22 @@
       @endforeach
       <input name type="text" value="{{$total}}" class="form-control" readonly>
     </div>
+
+    <div class="col-sm-6 mt-3">
+      <h6 class="m-0 font-weight-bold">Seleccione el producto a realizar</h6>
+    </div>
+
+    <div class="col-sm-6 mt-3">
+
+      <select class="form-control m-0" name="id_producto" id="">
+        <option value="">Seleccione</option>
+        @foreach ($t_producto as $item)
+        <option value="">{{$item->nombre_producto}}</option>
+        @endforeach
+      </select>
+    </div>
+
+
   </div>
 </div>
 @stop
@@ -263,5 +279,3 @@
     });
 </script>
 @stop
-
-

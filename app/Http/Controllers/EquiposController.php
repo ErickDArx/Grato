@@ -22,7 +22,7 @@ class EquiposController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $equipos = DB::table('t_equipos')->get();
         $laborales = DB::table('t_labores')->get();
-        return view('modulos\Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
+        return view('modulos/Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
 
     /**
