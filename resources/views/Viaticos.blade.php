@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materia Prima</title>
-  
-    {!! htmlScriptTagJsApi([
-    'action' => 'homepage',
-    'callback_then' => 'callbackThen',
-    'callback_catch' => 'callbackCatch'
-    ]) !!}
-  
-    {{-- Micromodal / Jquery / Bootstrap.JS --}}
-    <script src="/Grato/resources/js/micromodal.js"></script>
-    <script src="/Grato/resources/js/jquery.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  
-    {{-- Fuente de iconos --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-      crossorigin="anonymous" />
-  
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-    <!-- Libreria Menú -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    {{-- hoja de estilos para el menu / bootstrap / modal --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-    <!-- drawer.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
-    <script>
-      $(document).ready(function () {
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materia Prima</title>
+
+  {!! htmlScriptTagJsApi([
+  'action' => 'homepage',
+  'callback_then' => 'callbackThen',
+  'callback_catch' => 'callbackCatch'
+  ]) !!}
+
+  {{-- Micromodal / Jquery / Bootstrap.JS --}}
+  <script src="/Grato/resources/js/micromodal.js"></script>
+  <script src="/Grato/resources/js/jquery.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  {{-- Fuente de iconos --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Libreria Menú -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+  {{-- hoja de estilos para el menu / bootstrap / modal --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+  <!-- drawer.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+  <script>
+    $(document).ready(function () {
             $('.drawer').drawer();
             $('.js-tilt').tilt({
               option: value,
               option: value,
             });
           });
-    </script>
-  </head>
+  </script>
+</head>
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
   @extends('menu')
@@ -53,13 +53,15 @@
     <nav class="navbar navbar-dark bg-white nav">
       <div class="col-12 text-center">
         <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid" style="width: 6rem;">
-    </div>
+      </div>
 
     </nav>
 
     <div class="row mr-2 ml-2 mt-3">
 
       <div class="col-md-8 mb-2">
+
+        {{-- Presentacion / Boton / Modal --}}
         <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <div class="d-flex justify-content-center row align-items-center">
             <div class="col-sm-6">
@@ -101,7 +103,7 @@
                           <label for="">4.kilometros recorridos</label>
                           <input type="text" name="km_recorridos" class="form-control" value="">
                         </div>
-                       
+
 
                         <button type="submit" class="modal__btn modal__btn-primary col-12"
                           id="EnviarDatos">Aceptar</button>
@@ -117,11 +119,12 @@
               <a href="#" class="Viaticos btn btn-block btn-dark">Ingresar viatico</a>
             </div>
           </div>
-          {{-- hola --}}
         </div>
-         @foreach ($t_viaticos as $item)
 
-          <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        {{-- Listado de viaticos / Actualizar / Eliminar --}}
+        @foreach ($t_viaticos as $item)
+
+        <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
           <form action="" method="POST">
             @csrf
             @method('PUT')
@@ -131,16 +134,17 @@
               </div>
 
               <div class="col-sm-6 mb-2" id="nombre">
-                <input class="form-control" readonly type="text" name="tipo_de_vehiculo" value="{{$item->tipo_de_vehiculo}}">
+                <input class="form-control" readonly type="text" name="tipo_de_vehiculo"
+                  value="{{$item->tipo_de_vehiculo}}">
               </div>
             </div>
 
-            {{-- <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+            <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
               data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
               Ver mas informacion
-            </button> --}}
+            </button>
 
-            {{-- <div class="collapse" id="collapseExample"> --}}
+            <div class="collapse" id="collapseExample">
 
             <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
               <div class="col-sm-12">
@@ -149,11 +153,13 @@
 
               <div class="col-sm-6 mb-2">
                 <h6 class="">Antiguedad del vehiculo (años)</h6>
-                <input name="antiguedad_vehiculo_años" class="form-control" type="text" value="{{$item->antiguedad_vehiculo_años}}">
+                <input name="antiguedad_vehiculo_años" class="form-control" type="text"
+                  value="{{$item->antiguedad_vehiculo_años}}">
               </div>
               <div class="col-sm-6 mb-2">
                 <h6 class="">Tarifa por kilometro recorrido</h6>
-                <input name="tarifa_km_recorrido" class="form-control" type="text" value="{{$item->tarifa_km_recorrido}}">
+                <input name="tarifa_km_recorrido" class="form-control" type="text"
+                  value="{{$item->tarifa_km_recorrido}}">
               </div>
             </div>
 
@@ -183,9 +189,9 @@
                 @method('PUT')
                 <button type="submit" class="text-dark bg-white btn btn-block">Actualizar informacion</button>
           </form>
-        </div>   
-         @endforeach
-        
+        </div>
+        @endforeach
+
 
 
         {{-- </div> --}}
@@ -264,7 +270,7 @@
     button.addEventListener('click', function () {
         MicroModal.show('modal-2');
     });
-</script>
+  </script>
 </body>
 
 </html>

@@ -10,7 +10,7 @@
         <div class="d-flex align-items-center m-4 justify-content-center">
           <li><img src="/Grato/resources/media/Logo-negativo.png" class="img-fluid" alt=""></li>
         </div>
-        <div class="ml-4" style="padding-top: 1.5rem;">
+        <div class="ml-4 mr-4" style="padding-top: 1.5rem;padding-right: 20px;">
 
           <li><a class="drawer-menu-item text-white btn m-1 btn-outline-gray" href="{{('Principal') }}"><i
                 class="fa fa-home mr-2 "></i>Menú Principal</a></li>
@@ -18,7 +18,8 @@
                 class="fa fa-user mr-2"></i>Mi perfil</a></li>
 
           <li style="border-top: 1px solid #707070;margin-left: -100%;background: #707070;" class="mt-1 mb-1"></li>
-
+          <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Productos') }}"><i
+            class="fa fa-check-square mr-2"></i>Productos</a></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('MateriaPrima') }}"><i
             class="fa fa-clipboard mr-2"></i>Materia Prima</a></li>
           <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1" href="{{('ManoObra') }}"><i
@@ -32,7 +33,7 @@
 
           <li style="border-top: 1px solid #707070;margin-left: -100%;background: #707070;" class="mt-1 mb-1"></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Pedidos') }}"><i
-                class="fa fa-pencil-alt mr-2"></i>Pedidos</a></li>
+                class="fa fa-pencil-alt mr-2"></i>Costo Unitario</a></li>
           <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Reportes') }}"><i
                 class="fa fa-copy mr-2"></i>Reportes</a></li>
 
