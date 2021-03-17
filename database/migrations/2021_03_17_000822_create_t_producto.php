@@ -14,6 +14,7 @@ class CreateTProducto extends Migration
     public function up()
     {
         Schema::create('t_producto', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->bigIncrements('id_producto');
             $table->string('nombre_producto');
         });
