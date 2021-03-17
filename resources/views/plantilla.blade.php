@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Sistema GratoCR" />
+    <meta name="theme-color" content="#E23636">
     <meta name="description" content="Plataforma oficial para la pyme GratoCR" />
     <meta property="og:description" content="Plataforma oficial para la pyme GratoCR" />
     <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales" />
@@ -14,7 +15,13 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta property="og:image" content="/Grato/resources/media/Logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/Grato/resources/media/Logo.png" />
     <title> @yield('titulo') - GratoCR </title>
+    {!! htmlScriptTagJsApi([
+        'action' => 'homepage',
+        'callback_then' => 'callbackThen',
+        'callback_catch' => 'callbackCatch'
+    ]) !!}
     {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
     <script src="/Grato/resources/js/jquery.js"></script>
     <script src="/Grato/resources/js/micromodal.js"></script>
