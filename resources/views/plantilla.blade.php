@@ -3,82 +3,80 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Sistema GratoCR" />
+    <meta name="description" content="Plataforma oficial para la pyme GratoCR" />
+    <meta property="og:description" content="Plataforma oficial para la pyme GratoCR" />
+    <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales" />
+    <meta property="og:url" content="sistema.gratocr.com" />
+    <meta name="robots" content="noindex" />
+    <meta name="robots" content="nofollow" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta property="og:image" content="/Grato/resources/media/Logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Sistema Grato Pastas Artesanales</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso</title>
-    {!! htmlScriptTagJsApi([
-    'action' => 'homepage',
-    'callback_then' => 'callbackThen',
-    'callback_catch' => 'callbackCatch'
-    ]) !!}
-    {{-- Favicon --}}
-    <link rel="icon" type="image/png" href="././css/acceso.jpg" />
-    {{-- Meta-SEO --}}
-    <meta name="description" content="Acceso al Sistema Informático Grato Pastas Artesanales">
-    <meta name="robots" value="Noindex">
-    <meta name="keywords" content="Acceso">
-    <meta name="theme-color" content="#E23636">
+    <title> @yield('titulo') - GratoCR </title>
+    {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
+    <script src="/Grato/resources/js/jquery.js"></script>
+    <script src="/Grato/resources/js/micromodal.js"></script>
+    <script src="/Grato/resources/js/ajax.js"></script>
+    <script src="/Grato/resources/js/bootstrap.bundle.min.js"></script>
+    <script src="/Grato/resources/js/chartist.min.js"></script>
+    <script src="/Grato/resources/js/iscroll.min.js"></script>
+    <script src="/Grato/resources/js/drawer.min.js"></script>
     {{-- Fuente de iconos --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
         crossorigin="anonymous" />
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Libreria Menú -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
 
-    {{-- Estilos --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css"
-        integrity="sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg=="
-        crossorigin="anonymous" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-    <link rel="stylesheet" href="././css/app.css">
-    {{-- Javascript --}}
-
-    <!-- jquery & iScroll -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-    <!-- drawer.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
-    <script>
-        $(document).ready(function () {
-        $('.drawer').drawer();
-        $('.js-tilt').tilt({
-          option: value,
-          option: value,
-        });
-      });
-    </script>
 </head>
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
-    @extends('menu')
+    @extends('layouts/menu')
     <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
-
         <nav class="navbar navbar-dark bg-white nav">
             <div class="col-12 text-center">
                 <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid justify-content-center"
                     style="width: 6rem;">
                 <div style="right: 0;top: 1.3rem;" class="d-flex btn position-absolute shadow-">
-                    <a href="{{route('Perfil')}}" class="text-dark">{{ auth()->user()->nombre_usuario }} <span
-                            class="badge badge-dark">1</span></a>
+
                 </div>
             </div>
         </nav>
-
         <div class="row mr-2 ml-2 mt-3">
-            @section('content')
-            <!-- Contenido de la sección -->
-            @endsection
-        </div>
+            <div class="col-md-8 mb-2">
+
+                <div class="" style="border-radius: 0.5rem;">
+                    <div class="">
+                        @yield('contenido')
+                    </div>
+                </div>
+
+                <div class="" style="border-radius: 0.5rem;">
+                    <div class="">
+                        @yield('contenido-2')
+                    </div>
+
+                </div>
+
+                <div class="mt-3" style="border-radius: 0.5rem;">
+                    <div class="">
+                        @yield('contenido-3')
+                    </div>
+
+                </div>
+
+                <div class="mt-3" style="border-radius: 0.5rem;">
+                    <div class="">
+                        @yield('contenido-4')
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-4">
                 <div class="card shadow" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
@@ -92,9 +90,7 @@
                             <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
-                                    <p class="m-0 col-4 text-right text-danger material-icons">
-                                        navigate_next
-                                    </p>
+
                                 </div>
                             </a>
                         </div>
@@ -103,9 +99,7 @@
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos
                                     </p>
-                                    <p class="m-0 col-4 text-right text-danger material-icons">
-                                        navigate_next
-                                    </p>
+
                                 </div>
                             </a>
                         </div>
@@ -113,11 +107,9 @@
                             <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="MateriaPrima.html">
                                 <div class="row">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar
-                                        materia
-                                        prima</p>
-                                    <p class="m-0 col-4 text-right text-danger material-icons">
-                                        navigate_next
+                                        materia prima
                                     </p>
+
                                 </div>
                             </a>
                         </div>
@@ -126,9 +118,7 @@
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo
                                     </p>
-                                    <p class="m-0 col-4 text-right text-danger material-icons">
-                                        navigate_next
-                                    </p>
+
                                 </div>
                             </a>
                         </div>
@@ -144,7 +134,35 @@
                 </div>
             </div>
 
+        </div>
+
     </main>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
+    
+        $("#EnviarDatos").click(function(e){
+          e.preventDefault(); //Evitar recargar la pagina
+          var dataString = $('#Crear').serialize();
+          $.ajax({
+            type:'POST',
+            url:'Total',
+            data: dataString,
+            cache: false,
+          processData: false,
+            success:function(response){
+      
+              if(response){
+                $("#Lista").load(" #Lista");
+    
+                }
+              }
+            });
+        });
+      
+    </script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@ class AsistenteController extends Controller
         $date->diffForHumans();
         $materia = DB::table('t_usuario')->get();
 
-        return view('Asistentes', ['t_usuario' => $materia]);
+        return view('usuarios\Asistentes', ['t_usuario' => $materia]);
     }
 
     public function destroy($id_usuario)

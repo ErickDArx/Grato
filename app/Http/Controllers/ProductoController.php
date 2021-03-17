@@ -20,7 +20,7 @@ class ProductoController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $materia = DB::table('t_producto')->get();
 
-        return view('Productos', ['t_producto' => $materia]);
+        return view('modulos\Productos', ['t_producto' => $materia]);
     }
 
     /**
@@ -79,9 +79,12 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_producto)
     {
-        //
+        $edit = t_producto::findOrFail($id_producto);
+        $edit->nombre_producto = $request->nombre_producto;
+        $edit->save();
+        return back()->with('edit','Todo salio bien');
     }
 
     /**
@@ -90,8 +93,10 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_producto)
     {
-        //
+        $eliminar = t_producto::findOrFail($id_producto);
+        $eliminar -> delete();
+        return back()->with('eliminar','fue eliminado exitosamente');
     }
 }

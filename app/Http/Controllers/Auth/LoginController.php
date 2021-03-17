@@ -13,18 +13,23 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    public function authenticate(Request $request) {
-        
-        $t_usuario = t_usuario::where('nombre_usuario'
-        ,$request->nombre_usuario)->where('password',
-        $request->password = bcrypt($request->password))->first();
+    public function authenticate(Request $request)
+    {
+
+        $t_usuario = t_usuario::where(
+            'nombre_usuario',
+            $request->nombre_usuario
+        )->where(
+            'password',
+            $request->password = bcrypt($request->password)
+        )->first();
 
         if ($t_usuario) {
             Auth::loginUsingId($t_usuario->nombre_usuario);
             return view('Principal');
-         }else{
-            return redirect('login')->with('status', 'Datos Incorrectos!');
-         }
+        } else {
+            return redirect('/')->with('status', 'Datos Incorrectos!');
+        }
     }
     protected $redirectTo = '/Principal';
 
@@ -35,7 +40,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('Acceso');
+        return view('usuarios\Acceso');
     }
 
 
@@ -44,7 +49,7 @@ class LoginController extends Controller
         $this->guard()->logout();
 
         $request->session()->invalidate();
-    
-        return $this->loggedOut($request) ?: redirect('/login');
+
+        return $this->loggedOut($request) ?: redirect('/');
     }
 }

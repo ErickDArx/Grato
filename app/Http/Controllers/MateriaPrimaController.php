@@ -20,7 +20,7 @@ class MateriaPrimaController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $materia = DB::table('t_materia_prima')->get();
         $producto = DB::table('t_producto')->get();
-        return view('MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
+        return view('modulos\MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
 
     /**

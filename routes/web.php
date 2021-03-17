@@ -5,7 +5,7 @@
 // Este recibe los datos del login
 Route::get('/', 'Auth\LoginController@index')->name('login');
 // // Por medio del post, recolecta los datos y los envia al servidor, en este caso, al metodo login del controlador LoginController
-Route::post('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/', 'Auth\LoginController@login')->name('login');
 // Para salir de una sesion ya iniciada, se accede a esta ruta
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -36,8 +36,8 @@ Route::middleware(['auth'])->group(function () {
     // Crud para la vista Productos
     Route::get('/Productos', 'ProductoController@index');
     Route::post('/Productos', 'ProductoController@store')->name('AgregarProducto');
-    Route::put('/Productos/{id_producto}', 'ProductoController@labor')->name('ActualizarProducto');
-    Route::delete('/Productos/{id_producto}', 'ProductoController@delete')->name('EliminarProducto');
+    Route::put('/Productos/{id_producto}', 'ProductoController@update')->name('ActualizarProducto');
+    Route::delete('/Productos/{id_producto}', 'ProductoController@destroy')->name('EliminarProducto');
 
     // Crud para la vista de Perfil
     Route::get('/Perfil', 'PerfilController@index')->name('Perfil');

@@ -18,8 +18,7 @@ class CifController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $cif = DB::table('t_cif')->get();
-        return view('CIF' , ['t_cif' => $cif]);
-        return view('CIF');
+        return view('modulos\CIF' , ['t_cif' => $cif]);
     }
 
     /**
