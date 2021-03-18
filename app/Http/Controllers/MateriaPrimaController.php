@@ -20,7 +20,7 @@ class MateriaPrimaController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $materia = DB::table('t_materia_prima')->get();
         $producto = DB::table('t_producto')->get();
-        return view('MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
+        return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
 
     /**
@@ -46,7 +46,7 @@ class MateriaPrimaController extends Controller
         $agregar->producto = $request->producto;
         $agregar->unidad_medida = $request->unidad_medida;
         $agregar->presentacion = $request->presentacion;
-        $agregar->cantidad = 12;
+        $agregar->cantidad = 0;
         $agregar->costo = $request->costo;
         $agregar->precio_um =  ($request->costo/$request->presentacion);
         $agregar->id_producto = $request->id_producto;
