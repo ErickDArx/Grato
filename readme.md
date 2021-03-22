@@ -1,4 +1,4 @@
-<p align="center"><img style="width:50px; height:50px;" src="https://sistema.gratocr.com/css/Logo.png"></p>
+<p align="center"><img style="width:50px; height:50px;" src=""></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
