@@ -18,8 +18,7 @@ class CifController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $cif = DB::table('t_cif')->get();
-        return view('CIF' , ['t_cif' => $cif]);
-        return view('CIF');
+        return view('modulos/CIF' , ['t_cif' => $cif]);
     }
 
     /**
@@ -92,7 +91,7 @@ class CifController extends Controller
         $edit->porcentaje_produccion = $request->porcentaje_produccion;
         $edit->produccion_mensual = $request->produccion_mensual;
         $edit->fecha = Carbon::now();
-        $edit->total = 20.59;
+        $edit->total = $request-> tiempo_uso * 20.59;
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 
