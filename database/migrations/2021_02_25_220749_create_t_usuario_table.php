@@ -18,7 +18,7 @@ class CreateTUsuarioTable extends Migration
             $table->string('nombre_usuario')->nullable();
             $table->string('apellido_usuario')->nullable();
             $table->string('puesto')->nullable();
-            $table->string('correo')->nullable();
+            $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->boolean('roll')->nullable();
             $table->timestamps();

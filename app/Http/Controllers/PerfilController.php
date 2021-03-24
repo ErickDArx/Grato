@@ -35,7 +35,7 @@ class PerfilController extends Controller
         $agregar = new t_usuario;
         $agregar->nombre_usuario = $request->nombre_usuario;
         $agregar->apellido_usuario = $request->apellido_usuario;
-        $agregar->correo = $request->correo;
+        $agregar->email = $request->correo;
         $agregar->password = bcrypt($request->password);
         $agregar->roll = 0;
         // Insertar en la base de datos
@@ -75,7 +75,7 @@ class PerfilController extends Controller
     public function update_correo(Request $request, $id_usuario)
     {
         $edit = t_usuario::findOrFail($id_usuario);
-        $edit->correo = $request->correo;
+        $edit->email = $request->correo;
         $edit->save();
         return back()->with('Perfil','Todo salio bien');
     }

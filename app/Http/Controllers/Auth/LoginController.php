@@ -12,6 +12,8 @@ class LoginController extends Controller
 {
 
     use AuthenticatesUsers;
+    protected $maxAttempts = 3; // De manera predeterminada sería 5
+    protected $decayMinutes = 5; // De manera predeterminada sería 1
 
     public function authenticate(Request $request)
     {
@@ -43,6 +45,14 @@ class LoginController extends Controller
         return view('usuarios/Acceso');
     }
 
+    public function sendFailedLoginResponse(Request $request)
+    {
+        $attempts = session()->get('login.attempts', 0); // obtener intentos, default: 0
+        if ($attempts <= 2) {
+            session()->put('login.attempts', $attempts + 1); // incrementrar intentos
+            return redirect()->back()->with('status', 'intento :' . $attempts);
+        }
+    }
 
     public function logout(Request $request)
     {

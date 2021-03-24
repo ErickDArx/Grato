@@ -15,7 +15,7 @@ class usuario extends Seeder
             'nombre_usuario'=>'Alonso',
             'apellido_usuario'=>'Matamoros',
             'puesto'=>'Administrador',
-            'correo'=>'super@gmail.com',
+            'email'=>'super@gmail.com',
             'password'=> bcrypt('estoesunaprueba'),
             'roll'=>0,
         ]);

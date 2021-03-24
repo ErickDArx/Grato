@@ -2,9 +2,12 @@
 
 namespace App;
 use Illuminate\Foundation\Auth\User as AuthenticatableContract;
+use Illuminate\Notifications\Notifiable;
+
 
 class t_usuario extends AuthenticatableContract
 {
+    use Notifiable;
     protected $primaryKey = "id_usuario";
     protected $remember_token = false;
     protected $table = "t_usuario";
@@ -17,7 +20,8 @@ class t_usuario extends AuthenticatableContract
         'puesto',
         'roll',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'remember_token',
     ];
 
     protected $guarded = ['id_usuario'];

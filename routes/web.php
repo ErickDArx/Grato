@@ -12,8 +12,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 // Almacena codigo fuente de Laravel para la generacion de excepciones
 Auth::routes();
 
-
-
 // Este grupo de rutas, evita que se accedan a otros rutas sin antes logearse, de lo contrario redirecciona a la pagina de acceso
 Route::middleware(['auth'])->group(function () {
 
@@ -94,3 +92,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
     Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
 });
+
