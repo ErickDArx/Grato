@@ -8,7 +8,7 @@
     <ul class="drawer-menu">
       <li class="card bg-white border-0 rounded-0"></li>
       <div class="d-flex align-items-center m-4 justify-content-center">
-        <li><img src="/Grato/resources/media/Logo-negativo.png" class="img-fluid" alt=""></li>
+        <li><img src="{{ asset('media/Logo-negativo.png')}}" class="img-fluid" alt=""></li>
       </div>
       <div class="ml-4 mr-4" style="padding-top: 1.5rem;padding-right: 20px;">
 

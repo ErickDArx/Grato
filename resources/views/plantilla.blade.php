@@ -2,32 +2,19 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Sistema GratoCR" />
-    <meta name="theme-color" content="#E23636">
-    <meta name="description" content="Plataforma oficial para la pyme GratoCR" />
-    <meta property="og:description" content="Plataforma oficial para la pyme GratoCR" />
-    <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales" />
-    <meta property="og:url" content="sistema.gratocr.com" />
-    <meta property="og:site_name" content="GratoCR">
-    <meta name="robots" content="noindex" />
-    <meta name="robots" content="nofollow" />
-    <meta property="og:image" content="/Grato/resources/media/Logo.png" />
-    <link rel="apple-touch-startup-image" href="/Grato/resources/media/Logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="/Grato/resources/media/Logo.png" />
     <title> @yield('titulo') - GratoCR </title>
 
     {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
-    <script src="/Grato/resources/js/jquery.js"></script>
-    <script src="/Grato/resources/js/micromodal.js"></script>
-    <script src="/Grato/resources/js/ajax.js"></script>
-    <script src="/Grato/resources/js/bootstrap.bundle.min.js"></script>
-    <script src="/Grato/resources/js/chartist.min.js"></script>
-    <script src="/Grato/resources/js/iscroll.min.js"></script>
-    <script src="/Grato/resources/js/drawer.min.js"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/micromodal.js') }}"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/chartist.min.js') }}"></script>
+    <script src="{{ asset('js/iscroll.min.js') }}"></script>
+    <script src="{{ asset('js/drawer.min.js') }}"></script>
     {{-- Fuente de iconos --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
@@ -45,7 +32,7 @@
     <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
         <nav class="navbar navbar-dark bg-white nav">
             <div class="col-12 text-center">
-                <img src="/Grato/resources/media/Logo.png" alt="" class="img-fluid justify-content-center"
+                <img src="{{ asset('media/Logo.png') }}" alt="" class="img-fluid justify-content-center"
                     style="width: 6rem;">
                 <div style="right: 0;top: 1.3rem;" class="d-flex btn position-absolute shadow-">
 

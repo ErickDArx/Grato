@@ -16,7 +16,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
     //Pruebas para el correo
-    Route::post('/Principal', 'UsuarioController@contact')->name('contact');
+    Route::post('/Principal', 'UsuarioController@contact');
 
     // Crud para la vista principal
     Route::get('/Principal', 'UsuarioController@principal');
