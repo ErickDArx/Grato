@@ -21,7 +21,7 @@ class CreateTUsuarioTable extends Migration
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->boolean('roll')->nullable();
-            $table->text('session_id');
+            $table->text('session_id')->nullable();
             $table->timestamps();
         });
     }
