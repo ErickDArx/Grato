@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="mt-2">
-                            <a href="{{ route('acceso') }}" class="form-control btn btn-block btn-dark">
+                            <a href="{{ route('acceso') }}" class="btn btn-block btn-outline-dark border-0">
                                 Regresar al acceso
                             </a>
                         </div>
@@ -54,6 +54,5 @@
 
 
         </form>
-
     </div>
 @endsection
