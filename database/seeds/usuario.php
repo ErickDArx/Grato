@@ -18,7 +18,8 @@ class usuario extends Seeder
             'email'=>'super@gmail.com',
             'password'=> bcrypt('estoesunaprueba'),
             'roll'=>0,
+            'session_id'=> 'holamundo',
         ]);
-        
+
     }
 }

@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-sm-6">
                     <input name="correo" id="correo" type="text" class="form-control m-0"
-                        value="{{auth()->user()->correo}}" />
+                        value="{{auth()->user()->email}}" />
                 </div>
             </div>
 
@@ -160,7 +160,7 @@
 </div>
 <script>
     MicroModal.init();
-    
+
         var button = document.querySelector('.Correo');
         button.addEventListener('click', function () {
             MicroModal.show('modal-1');

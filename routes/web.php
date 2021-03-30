@@ -3,7 +3,7 @@
 // Estas rutas son para el acceso al sistema
 
 // Este recibe los datos del login
-Route::get('/', 'Auth\LoginController@index')->name('login');
+Route::get('/', 'Auth\LoginController@index')->name('acceso');
 // // Por medio del post, recolecta los datos y los envia al servidor, en este caso, al metodo login del controlador LoginController
 Route::post('/', 'Auth\LoginController@login')->name('login');
 // Para salir de una sesion ya iniciada, se accede a esta ruta

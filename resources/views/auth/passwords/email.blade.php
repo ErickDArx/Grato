@@ -39,6 +39,12 @@
                                 Enviar enlace al correo
                             </button>
                         </div>
+
+                        <div class="mt-2">
+                            <a href="{{ route('acceso') }}" class="form-control btn btn-block btn-dark">
+                                Regresar al acceso
+                            </a>
+                        </div>
                     </div>
 
                 </div>

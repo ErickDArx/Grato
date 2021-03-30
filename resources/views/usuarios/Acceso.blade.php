@@ -25,11 +25,11 @@
         <img src="{{ asset('media/Logo.png') }}" alt="Logo Sistema Informático Grato Pastas Artesanales"
             style="width: 8rem;margin-bottom: 0.5rem;margin-top: 1rem;" class="img-fluid position-relative">
     </div>
-    <div>
-        <form class="col-md-8 container card-body shadow tarjeta"
+    <div id="">
+        <form id="Crear" class="col-md-8 container card-body shadow tarjeta"
             style="width: 20rem;margin-bottom:0;border-radius: 20px;" method="POST" action="{{ route('login') }}">
             @csrf
-            <div>
+            <div id="Lista">
                 <div class="form-group text-center">
                     <h4 class="font-weight-bold">Ingreso al sistema</h4>
                 </div>
@@ -76,8 +76,10 @@
                             </span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-red shadow btn-block border-0">Acceder</button>
-                    <a type="button" class="btn btn-block btn-outline-dark border-0" href="{{ route('password.request') }}">Olvide la contraseña</a>
+                    <button type="submit" class="btn btn-red shadow btn-block border-0"
+                        id="EnviarDatos">Acceder</button>
+                    <a type="button" class="btn btn-block btn-outline-dark border-0"
+                        href="{{ route('password.request') }}">Olvide la contraseña</a>
 
                 </div>
             </div>

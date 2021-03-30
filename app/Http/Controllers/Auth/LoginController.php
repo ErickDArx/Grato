@@ -7,14 +7,17 @@ use App\t_usuario;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
 
     use AuthenticatesUsers;
     protected $maxAttempts = 3; // De manera predeterminada sería 5
     protected $decayMinutes = 5; // De manera predeterminada sería 1
-
+    public function showLoginForm()
+    {
+        return view('usuarios/Acceso');
+    }
     public function authenticate(Request $request)
     {
 
@@ -31,8 +34,26 @@ class LoginController extends Controller
             return view('Principal');
         } else {
             return redirect('usuarios/Acceso')->with('status', 'Datos Incorrectos!');
+            return response()->json('success');
         }
     }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+        $previous_session = Auth::User()->session_id;
+        if ($previous_session) {
+            Session::getHandler()->destroy($previous_session);
+        }
+
+        Auth::user()->session_id = Session::getId();
+        Auth::user()->save();
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
+    }
+
     protected $redirectTo = '/Principal';
 
     public function username()

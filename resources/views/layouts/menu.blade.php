@@ -4,7 +4,7 @@
     <span class="sr-only">toggle navigation</span>
     <span class="drawer-hamburger-icon"></span>
   </button>
-  <nav class="drawer-nav " role="navigation" style="background-color:#343838;">
+  <nav class="drawer-nav" role="navigation" style="background-color:#343838;">
     <ul class="drawer-menu">
       <li class="card bg-white border-0 rounded-0"></li>
       <div class="d-flex align-items-center m-4 justify-content-center">
