@@ -4,6 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sistema GratoCR" />
+    <meta name="theme-color" content="#E23636">
+    <meta name="description" content="Plataforma oficial para la pyme GratoCR"/>
+    <meta property="og:description" content="Plataforma oficial para la pyme GratoCR"/>
+    <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales"/>
+    <meta property="og:url" content="sistema.gratocr.com" />
+    <meta property="og:site_name" content="GratoCR">
+    <meta property="og:image" content="/Grato/resources/media/Logo.png" />
+    <link rel="apple-touch-startup-image" href="/Grato/resources/media/Logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('css/ravioles.svg') }}" />
     <title> @yield('titulo')Acceso - GratoCR </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! htmlScriptTagJsApi([
