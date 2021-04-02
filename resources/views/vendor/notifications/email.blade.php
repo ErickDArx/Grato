@@ -25,7 +25,7 @@
             $color = $level;
             break;
         default:
-            $color = 'primary';
+            $color = 'dark';
     }
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])

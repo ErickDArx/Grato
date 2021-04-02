@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('titulo') - GratoCR </title>
 
-    {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer--}}
+    {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer --}}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/micromodal.js') }}"></script>
     <script src="{{ asset('js/ajax.js') }}"></script>
@@ -29,6 +30,8 @@
 
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
     @extends('layouts/menu')
+    <div class="loading"></div>
+    <div class="loader"></div>
     <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
         <nav class="navbar navbar-dark bg-white nav">
             <div class="col-12 text-center">
@@ -79,9 +82,9 @@
                 <div class="card shadow mt-0" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
 
-                        <h4>{{date('h:i a')}}</h4>
+                        <h4>{{ date('h:i a') }}</h4>
 
-                        <p class="text-gray">{{date('d')}} de {{date('M')}} del {{date('Y')}}</p>
+                        <p class="text-gray">{{ date('d') }} de {{ date('M') }} del {{ date('Y') }}</p>
 
                         <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
                         {{-- <div class=" mt-2">
@@ -102,7 +105,8 @@
                             </a>
                         </div> --}}
                         <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{('MateriaPrima') }}">
+                            <a class="shadow-sm btn btn-block btn-outline-dark border-0"
+                                href="{{ 'MateriaPrima' }}">
                                 <div class="row">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar
                                         materia prima
@@ -112,7 +116,7 @@
                             </a>
                         </div>
                         <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{('Equipo') }}">
+                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{ 'Equipo' }}">
                                 <div class="row ">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-cog mr-2"></i>Ingresar nuevo equipo
                                     </p>
@@ -137,29 +141,36 @@
     </main>
 
     <script type="text/javascript">
+        $(window).on("load", function() {
+            $('.loader').delay(100).fadeOut('slow');
+            $('.loading').delay(100).fadeOut('slow');
+
+        });
         $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
-    
-        $("#EnviarDatos").click(function(e){
-          e.preventDefault(); //Evitar recargar la pagina
-          var dataString = $('#Crear').serialize();
-          $.ajax({
-            type:'POST',
-            url:'Total',
-            data: dataString,
-            cache: false,
-          processData: false,
-            success:function(response){
-      
-              if(response){
-                $("#Lista").load(" #Lista");
-    
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $("#EnviarDatos").click(function(e) {
+            e.preventDefault(); //Evitar recargar la pagina
+            var dataString = $('#Crear').serialize();
+            $.ajax({
+                type: 'POST',
+                url: 'Total',
+                data: dataString,
+                cache: false,
+                processData: false,
+                success: function(response) {
+
+                    if (response) {
+                        $("#Lista").load(" #Lista");
+
+                    }
                 }
-              }
             });
         });
-      
+
     </script>
 </body>
 

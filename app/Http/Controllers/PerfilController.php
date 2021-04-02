@@ -19,7 +19,7 @@ class PerfilController extends Controller
 
     public function create()
     {
-        
+
     }
 
     /**
@@ -34,13 +34,15 @@ class PerfilController extends Controller
         // return $request->all();
         $agregar = new t_usuario;
         $agregar->nombre_usuario = $request->nombre_usuario;
+        $agregar->nombre_operario = $request->nombre_operario;
         $agregar->apellido_usuario = $request->apellido_usuario;
+        $agregar->segundo_apellido_usuario = $request->segundo_apellido_usuario;
         $agregar->email = $request->correo;
         $agregar->password = bcrypt($request->password);
-        $agregar->roll = 0;
+        $agregar->rol = 0;
         // Insertar en la base de datos
         $agregar->save();
-        // Redirigir a la vista original 
+        // Redirigir a la vista original
         return back()->with('agregar', 'El usuario se ha agregado');
     }
 
@@ -67,7 +69,9 @@ class PerfilController extends Controller
     {
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->nombre_usuario = $request->nombre_usuario;
+        $edit->nombre_operario = $request->nombre_operario;
         $edit->apellido_usuario = $request->apellido_usuario;
+        $edit->segundo_apellido_usuario = $request->segundo_apellido_usuario;
         $edit->save();
         return back()->with('Perfil','Todo salio bien');
     }
@@ -85,7 +89,7 @@ class PerfilController extends Controller
         $eliminar = t_usuario::findOrFail($id_usuario);
         $eliminar -> delete();
         return back()->with('eliminar','El asistente fue eliminado exitosamente');
-    
+
     }
 
     public function destroy($id_usuario)

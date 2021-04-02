@@ -21,7 +21,7 @@
                 @endif
 
                 <div class="form-group m-1">
-                    <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                    <label for="email" class="font-weight-bold col-form-label text-md-right"><i class="fa fa-envelope mr-2 "></i>{{ __('E-Mail Address') }}</label>
 
                     <div class="">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"

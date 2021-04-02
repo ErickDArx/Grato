@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Mail; //Importante incluir la clase Mail, que será la encargada del envío
 
 class UsuarioController extends Controller
 {

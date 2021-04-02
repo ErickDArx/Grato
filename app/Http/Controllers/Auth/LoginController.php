@@ -14,10 +14,12 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     protected $maxAttempts = 3; // De manera predeterminada sería 5
     protected $decayMinutes = 5; // De manera predeterminada sería 1
+
     public function showLoginForm()
     {
         return view('usuarios/Acceso');
     }
+
     public function authenticate(Request $request)
     {
 
@@ -33,8 +35,7 @@ class LoginController extends Controller
             Auth::loginUsingId($t_usuario->nombre_usuario);
             return view('Principal');
         } else {
-            return redirect('usuarios/Acceso')->with('status', 'Datos Incorrectos!');
-            return response()->json('success');
+            return redirect('/')->with('status', 'Datos Incorrectos!');
         }
     }
 
@@ -64,15 +65,6 @@ class LoginController extends Controller
     public function index()
     {
         return view('usuarios/Acceso');
-    }
-
-    public function sendFailedLoginResponse(Request $request)
-    {
-        $attempts = session()->get('login.attempts', 0); // obtener intentos, default: 0
-        if ($attempts <= 2) {
-            session()->put('login.attempts', $attempts + 1); // incrementrar intentos
-            return redirect()->back()->with('status', 'intento :' . $attempts);
-        }
     }
 
     public function logout(Request $request)
