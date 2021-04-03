@@ -27,11 +27,10 @@
     <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
 
 </head>
-
 <body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
-    @extends('layouts/menu')
     <div class="loading"></div>
     <div class="loader"></div>
+    @extends('layouts/menu')
     <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
         <nav class="navbar navbar-dark bg-white nav">
             <div class="col-12 text-center">

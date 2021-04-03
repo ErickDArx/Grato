@@ -1,9 +1,8 @@
 <header role="banner">
-  <button type="button" style="opacity: 0.8;"
-    class="drawer-toggle drawer-hamburger rounded-circle shadow-sm bg-white ml-3 mt-3">
-    <span class="sr-only">toggle navigation</span>
-    <span class="drawer-hamburger-icon"></span>
-  </button>
+  <button type="button" style=""
+    class="drawer-toggle drawer-hamburger border">
+    <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
+</button>
   <nav class="drawer-nav" role="navigation" style="background-color:#343838;">
     <ul class="drawer-menu">
       <li class="card bg-white border-0 rounded-0"></li>
