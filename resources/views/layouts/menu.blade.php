@@ -1,15 +1,15 @@
 <header role="banner">
   <button type="button" style=""
-    class="drawer-toggle drawer-hamburger border">
+    class="drawer-toggle drawer-hamburger shadow">
     <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
 </button>
   <nav class="drawer-nav" role="navigation" style="background-color:#343838;">
     <ul class="drawer-menu">
-      <li class="card bg-white border-0 rounded-0"></li>
       <div class="d-flex align-items-center m-4 justify-content-center">
         <li><img src="{{ asset('media/Logo-negativo.png')}}" class="img-fluid" alt=""></li>
       </div>
-      <div class="ml-4 mr-4" style="padding-top: 1.5rem;padding-right: 20px;">
+
+      <div class="m-5" style="">
 
         <li><a class="drawer-menu-item text-white btn m-1 btn-outline-gray" href="{{('Principal') }}"><i
               class="fa fa-home mr-2 "></i>Menú Principal</a></li>
@@ -18,7 +18,7 @@
         <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Asistentes') }}"><i
               class="fa fa-users mr-2"></i>Asistentes</a></li>
 
-        <li style="border-top: 1px solid #707070;margin-left: -100%;background: #707070;" class="mt-1 mb-1"></li>
+        <li><a class="drawer-menu-item m-0 border-bottom"></a></li>
         <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Productos') }}"><i
               class="fa fa-check-square mr-2"></i>Productos</a></li>
         <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('MateriaPrima') }}"><i
