@@ -55,7 +55,7 @@
 @parent
 @foreach ($t_cif as $item)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <form action="{{route('ActualizarCIF', $item->id_cif)}}" method="POST">
+  <form action="{{route('ActualizarNombre', $item->id_cif)}}" method="POST">
     @csrf
     @method('PUT')
     <div class="m0 d-flex align-items-center row">
@@ -69,10 +69,7 @@
   </form>
   <div class="justify-content-center m-0 mt-2 row d-flex align-items-center">
     <div class="col-sm-6 mb-1">
-      <form action="{{route('ActualizarCIF', $item->id_cif)}}" method="POST">
-        @csrf
-        <button type="submit" class="text-dark bg-white btn btn-block">Agregar informacion</button>
-      </form>
+        <a type="submit" href="{{route('ActualizarCIF',Crypt::encrypt($item->id_cif))}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
     </div>
   </div>
 </div>

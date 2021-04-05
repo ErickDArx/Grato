@@ -7,7 +7,7 @@ use App\t_mes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Crypt;
 
 class MesController extends Controller
 {
@@ -18,9 +18,10 @@ class MesController extends Controller
      */
     public function index($id_cif)
     {
+        $id = Crypt::decrypt($id_cif);
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $cif = t_cif::findOrFail($id_cif);
+        $cif = t_cif::findOrFail($id);
         $mes = DB::table('t_mes')->get();
         return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
     }
@@ -77,10 +78,10 @@ class MesController extends Controller
      */
     public function edit($id_cif)
     {
-        
+        $id = Crypt::decrypt($id_cif);
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $cif = t_cif::findOrFail($id_cif);
+        $cif = t_cif::findOrFail($id);
         $mes = DB::table('t_mes')->get();
         return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
     }

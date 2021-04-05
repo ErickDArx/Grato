@@ -57,11 +57,15 @@ Route::middleware(['auth'])->group(function () {
     // Crud para la vista principal CIF
     Route::get('/CIF', 'CifController@index');
     Route::post('/CIF', 'CifController@store')->name('AgregarCIF');
+    Route::put('/CIF', 'CifController@update')->name('ActualizarNombre');
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
     // Crud para la vista de cada CIF
-    Route::get('/{id_cif}', 'MesController@index');
-    Route::post('/{id_cif}', 'MesController@edit')->name('ActualizarCIF');
+    Route::get('/{id_cif}', 'MesController@edit',[
+        'uses'=>'MesController@edit',
+        'name'=>'ActualizarCIF',
+        'as'=>'Actualizacion del CIF',
+    ])->name('ActualizarCIF');
     Route::post('/{id_cif}', 'MesController@store')->name('AgregarMes');
 
 
