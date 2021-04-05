@@ -24,14 +24,14 @@
             <h5 class="mt-2 font-weight-bold">Creación de asistentes</h5>
         </div>
         <div class="col-sm-6 text-center">
-            <a class="btn btn-outline-dark btn-block" data-toggle="collapse" href="#collapseExample" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-outline-dark btn-block" data-toggle="collapse" href="#asistentes" role="button"
+                aria-expanded="false" aria-controls="asistentes">
                 Abrir formulario
             </a>
         </div>
 
         {{-- Creacion de asistentes --}}
-        <form class="collapse" id="collapseExample" method="POST" action="{{ route('store') }}">
+        <form class="collapse" id="asistentes" method="POST" action="{{ route('store') }}">
             @csrf
             <div>
                 <div class="">

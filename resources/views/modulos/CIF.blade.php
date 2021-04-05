@@ -69,7 +69,7 @@
   </form>
   <div class="justify-content-center m-0 mt-2 row d-flex align-items-center">
     <div class="col-sm-6 mb-1">
-        <a type="submit" href="{{route('ActualizarCIF',Crypt::encrypt($item->id_cif))}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
+        <a type="submit" href="{{route('IndexCIF' , $item->id_cif)}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
     </div>
   </div>
 </div>

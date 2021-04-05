@@ -1,4 +1,4 @@
-@extends('plantilla')
+WWW@extends('plantilla')
 
 @section('titulo','Productos')
 

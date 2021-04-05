@@ -101,8 +101,8 @@
     {{-- Correo Electronico --}}
     <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
         <div class="">
-            <div class="col-12 mb-3">
-            <h4 class="font-weight-bold"><i class="fa fa-envelope mr-2"></i>Mi correo electronico</h6>
+            <div class="col-12">
+            <h5 class="font-weight-bold"><i class="fa fa-envelope mr-2"></i>Mi correo electronico</h5>
             </div>
             <div class="">
                 <form action="{{ route('actualizar_correo', auth()->user()->id_usuario) }}" method="POST">
@@ -162,32 +162,7 @@
 
 @section('contenido-3')
     @parent
-    <div class="m-2 bg-white">
-        {{-- Contraseña --}}
-        {{-- <div>
-        <h6 class="mt-3 text-gray">Seguridad</h6>
-        <div class="">
-            <div class="col-sm-auto row mt-2 d-flex align-items-center">
-                <div class="font-weight-bold col-6">
-                    Contraseña
-                </div>
-                <div class="col-sm-6">
-                    <div class="">
-                        <input type="password" id="inputPassword5" class="form-control"
-                            aria-describedby="passwordHelpBlock" value="{{auth()->user()->password}}">
-                        <small id="passwordHelpBlock" class="form-text text-muted">
-                            Tu contraseña debe tener al menos 6 a 12 carateres
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="#" class="Pass-Modal col-sm-12 btn btn-dark rounded mt-2">Actualizar mi
-                    contraseña</a>
-            </div>
-        </div>
-    </div> --}}
-    </div>
+
     <script>
         MicroModal.init();
 

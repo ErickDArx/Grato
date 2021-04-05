@@ -55,19 +55,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Crud para la vista principal CIF
-    Route::get('/CIF', 'CifController@index');
-    Route::post('/CIF', 'CifController@store')->name('AgregarCIF');
-    Route::put('/CIF', 'CifController@update')->name('ActualizarNombre');
+    Route::get('/CIF', 'CifController@index')->name('Index');
+    Route::post('Agregando/CIF', 'CifController@store')->name('AgregarCIF');
+    Route::put('Actualizando/CIF', 'CifController@update')->name('ActualizarNombre');
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
     // Crud para la vista de cada CIF
-    Route::get('/{id_cif}', 'MesController@edit',[
-        'uses'=>'MesController@edit',
-        'name'=>'ActualizarCIF',
-        'as'=>'Actualizacion del CIF',
-    ])->name('ActualizarCIF');
-    Route::post('/{id_cif}', 'MesController@store')->name('AgregarMes');
-
+    Route::get('Actualizando/{id_cif}', 'MesController@edit')->name('IndexCIF');
+    Route::post('Actualizando/{id_cif}', 'MesController@store')->name('AgregarMes');
 
     // Crud para la vista Viaticos
     Route::get('/Viaticos', 'ViaticosController@index');
@@ -100,4 +95,3 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
     Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
 });
-
