@@ -3,16 +3,12 @@
 Estilos personalizados
 */
 
+.slider-menu{
+    background: #343838;
+}
+
 .slider-hero {
-    background: url("./acesso-min.jpg") no-repeat center center fixed;
-    /* nos aseguramos que el elemento ocupe toda la ventana del navegador */
-    min-height: 100%;
-    /* Propiedad a utilizar para la imagen */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    min-width: 100%;
+    background: url("./acesso-min.jpg");
 }
 
 .slider-hero:before {
@@ -5490,6 +5486,10 @@ button.close {
     text-align: center;
 }
 
+.bordeado{
+    border-radius: 20px !important;
+}
+
 .align-baseline {
     vertical-align: baseline !important;
 }
@@ -5516,6 +5516,10 @@ button.close {
 
 .bg-gray {
     background-color: #606060 !important;
+}
+
+.bg-blanco {
+    background-color:#E6E6E6 !important;
 }
 
 .bg-gray:hover {

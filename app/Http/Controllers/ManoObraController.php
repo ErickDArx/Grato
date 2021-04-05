@@ -45,7 +45,7 @@ class ManoObraController extends Controller
     {
         // Ver aquello que se envia a la base de datos
         // return $request->all();
-        if($request->ajax()){
+        // if($request->ajax()){
         $agregar = new t_mano_de_obra();
         $agregar->nombre_trabajador = $request->nombre_trabajador;
         $agregar->apellido_trabajador = $request->apellido_trabajador;
@@ -56,12 +56,11 @@ class ManoObraController extends Controller
         $agregar->salario_minuto = $agregar->salario_hora / 60;
         $agregar->salario_costo_extra = 100;
         $agregar->salario_costo_hora_doble = 100;
-
         $agregar->save();
         // Redirigir a la vista original 
-        // return back()->with('agregar', 'El usuario se ha agregado');
-        return response()->json($agregar->toArray());
-        }
+        return back()->with('agregar', 'El usuario se ha agregado');
+        // return response()->json($agregar->toArray());
+        // }
     }
 
     /**

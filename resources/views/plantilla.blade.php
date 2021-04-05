@@ -27,18 +27,28 @@
     <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
 
 </head>
-<body class="drawer drawer--left drawer--sidebar" style="background-color:#E6E6E6 ;">
+
+<body class="drawer drawer--left drawer--sidebar blanco" style="background-color:#E6E6E6 ;">
     <div class="loading"></div>
     <div class="loader"></div>
     @extends('layouts/menu')
-    <main role="main" class="drawer-contents" style="background-color:#E6E6E6 ;">
-        <nav class="navbar navbar-dark bg-white nav">
-            <div class="col-12 text-center">
-                <img src="{{ asset('media/Logo.png') }}" alt="" class="img-fluid justify-content-center"
-                    style="width: 6rem;">
-                <div style="right: 0;top: 1.3rem;" class="d-flex btn position-absolute shadow-">
+    
+    <main role="main" class="drawer-contents bg-blanco">
+        <nav class="border-0 shadow navbar navbar-dark bg-white nav p-4">
+            <div class="col-12 text-right">
+                @unless (Auth::check())
+                <p class="alert text-danger">
+                    Usted no ha iniciado sesión aun!
+                </p>
+                @endunless
 
-                </div>
+                @auth
+                <a href="{{'Perfil'}}" class="rounded text-gray">
+                    {{ auth()->user()->nombre_operario }}
+                    {{ auth()->user()->apellido_usuario }}
+
+                </a>
+                @endauth
             </div>
         </nav>
         <div class="row mr-2 ml-2 mt-3">
@@ -104,8 +114,7 @@
                             </a>
                         </div> --}}
                         <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0"
-                                href="{{ 'MateriaPrima' }}">
+                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{ 'MateriaPrima' }}">
                                 <div class="row">
                                     <p class="m-0 col-8 text-left"><i class="fa fa-clipboard-list mr-2"></i>Ingresar
                                         materia prima
@@ -138,19 +147,12 @@
         </div>
 
     </main>
-
-    <script type="text/javascript">
-        $(window).on("load", function() {
-            $('.loader').delay(100).fadeOut('slow');
-            $('.loading').delay(100).fadeOut('slow');
-
-        });
-        $.ajaxSetup({
+</body>
+{{--$.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $("#EnviarDatos").click(function(e) {
             e.preventDefault(); //Evitar recargar la pagina
             var dataString = $('#Crear').serialize();
@@ -168,9 +170,5 @@
                     }
                 }
             });
-        });
-
-    </script>
-</body>
-
+        }); --}}
 </html>
