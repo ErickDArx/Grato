@@ -53,17 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Actualizando/{id_equipo}', 'EquiposController@update')->name('ActualizarEquipo');
     Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
-
-    // Crud para la vista principal CIF
-    Route::get('/CIF', 'CifController@index')->name('Index');
-    Route::post('Agregando/CIF', 'CifController@store')->name('AgregarCIF');
-    Route::put('Actualizando/CIF', 'CifController@update')->name('ActualizarNombre');
-    Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
-
-    // Crud para la vista de cada CIF
-    Route::get('Actualizando/{id_cif}', 'MesController@edit')->name('IndexCIF');
-    Route::post('Actualizando/{id_cif}', 'MesController@store')->name('AgregarMes');
-
     // Crud para la vista Viaticos
     Route::get('/Viaticos', 'ViaticosController@index');
     Route::post('/Viaticos', 'ViaticosController@store')->name('AgregarViaticos');
@@ -75,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/MateriaPrima', 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
     Route::put('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
     Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
-
+    Route::get('/Filtrar', 'MateriaPrimaController@filtro')->name('filtro');
 
     // Crud para la vista Recetario
     Route::get('/Recetario', 'RecetarioController@index');
@@ -94,4 +83,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Reportes', 'ReportesController@store')->name('AgregarReportes');
     Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
     Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
+
+    // Crud para la vista principal CIF
+    Route::get('/CIF', 'CifController@index');
+    Route::post('Agregando/CIF', 'CifController@store')->name('AgregarCIF');
+    Route::put('Actualizando/CIF', 'CifController@update')->name('ActualizarNombre');
+    Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
+
+    // Crud para la vista de cada CIF
+    Route::get('/{id_cif}', 'MesController@edit')->name('IndexCIF');
+    Route::post('/{id_cif}', 'MesController@store')->name('AgregarMes');
+
+
 });

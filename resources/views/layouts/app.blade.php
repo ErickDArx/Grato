@@ -18,7 +18,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('css/ravioles.svg') }}" />
     <title> @yield('titulo')Acceso - GratoCR </title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! htmlScriptTagJsApi([
         'action' => 'homepage',
         'custom_validation' => 'myCustomValidation'

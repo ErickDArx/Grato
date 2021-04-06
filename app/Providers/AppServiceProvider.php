@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Carbon::setlocale('es');
         setlocale(LC_TIME, 'es_ES');
+        
     }
 }

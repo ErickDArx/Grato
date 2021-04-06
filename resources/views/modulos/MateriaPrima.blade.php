@@ -11,7 +11,7 @@
     {{-- Presentacion  --}}
     <div class="col-sm-6">
       <h4 class="font-weight-bold">Materia Prima</h4>
-      <h6 class="text-gray">Desglose de insumos necesarios para la elaboracion de una receta</h6>
+      <h6 class="text-gray">Desglose de insumos necesarios para la elaboracion de un producto</h6>
     </div>
 
     <div class="col-sm-6">
@@ -69,11 +69,6 @@
                     @endforeach
                   </select>
                 </div>
-                {{-- <div class="m-0 mb-2">
-                          <label for="">5.Cantidad</label>
-                          <input type="text" name="cantidad" class="form-control" value="">
-                        </div> --}}
-
 
                 <button type="submit" class="modal__btn modal__btn-primary col-12">Aceptar</button>
                 <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
@@ -86,40 +81,23 @@
       </div>
       {{-- Boton que abre el modal --}}
       <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
-
     </div>
-
-    <div class="col-sm-6 mt-2">
-      <h6 class="m-0 font-weight-bold">Total en colones</h6>
-    </div>
-    <div class="col-sm-6">
-      @php
-      $total=0;
-      @endphp
-
-      @foreach ($t_materia_prima as $item)
-      @php
-      $total=$item->precio_um + $total
-      @endphp
-
-      @endforeach
-      <input name type="text" value="{{$total}}" class="form-control" readonly>
-    </div>
-
     <div class="col-sm-6 mt-3">
-      <h6 class="m-0 font-weight-bold">Seleccione el producto a realizar</h6>
+      <h6 class="m-0 font-weight-bold">Busqueda</h6>
     </div>
 
-    <div class="col-sm-6 mt-3">
+    <form action="{{route('filtro')}}" method="POST">
+      @csrf
+      <div class="row">
+        <div class="col-sm-12 mt-3 input-group">
+          <input placeholder="Ejemplo: Pasta larga" name="busqueda" type="text" value="" class="rounded form-control">
+          <div class="input-group-append">
+            <a type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></a>
+          </div>
+        </div>
+      </div>
 
-      <select class="form-control m-0" name="id_producto" id="">
-        <option value="">Seleccione</option>
-        @foreach ($t_producto as $item)
-        <option value="">{{$item->nombre_producto}}</option>
-        @endforeach
-      </select>
-    </div>
-
+    </form>
 
   </div>
 </div>
@@ -255,6 +233,12 @@
 
 </div>
 @endforeach
+<div class="shadow m-2 bg-white d-flex align-items-center justify-content-center" style="border-radius: 0.5rem;">
+  <div class="mt-3">
+    {{ $t_materia_prima->render() }}
+  </div>
+
+</div>
 
 <script>
   $(document).ready(function () {$('.drawer').drawer();});
