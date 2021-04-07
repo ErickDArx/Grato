@@ -14,15 +14,18 @@ class MateriaPrimaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $materia = DB::table('t_materia_prima')->get();
+        
+        $busqueda = $request->get('busqueda');
+        $materia = t_materia_prima::orderBy('id_materia_prima','DESC')
+        ->busqueda($busqueda)
+        ->paginate(4);
         $producto = DB::table('t_producto')->get();
         return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

@@ -108,15 +108,16 @@
     display: block;
     box-sizing: content-box;
     width: 2rem;
-    padding: 0;
-    padding: 18px 0.75rem 30px;
+    padding: 10px;
+    margin-top: 1.8%;
+    margin-left: 5.0%;
+    border-radius: 10px;
     -webkit-transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     border: 0;
-    outline: 0;
-    background-color: transparent;
+    opacity: 0.8;
 }
 .drawer-hamburger:hover {
     cursor: pointer;
