@@ -51,11 +51,11 @@
                 @endauth
             </div>
         </nav>
-        <div class="row mr-2 ml-2 mt-3">
+        <div class="row mr-2 ml-2">
             <div class="col-md-8 mb-2">
 
                 <div class="" style="border-radius: 0.5rem;">
-                    <div class="">
+                    <div class="mt-4">
                         @yield('contenido')
                     </div>
                 </div>
@@ -67,28 +67,28 @@
 
                 </div>
 
-                <div class="mt-3" style="border-radius: 0.5rem;">
+                <div class="" style="border-radius: 0.5rem;">
                     <div class="">
                         @yield('contenido-3')
                     </div>
 
                 </div>
 
-                <div class="mt-3" style="border-radius: 0.5rem;">
+                <div class="" style="border-radius: 0.5rem;">
                     <div class="">
                         @yield('contenido-4')
                     </div>
                 </div>
 
-                <div class="mt-3" style="border-radius: 0.5rem;">
+                <div class="" style="border-radius: 0.5rem;">
                     <div class="">
                         @yield('contenido-5')
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card shadow mt-0" style="border-radius: 0.5rem;">
+            <div class="col-md-4 mt-4">
+                <div class="card shadow" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
 
                         <h4>{{ date('h:i a') }}</h4>
@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 mt-2 mb-3">
+            <div class="col-md-12 m-2">
                 <div class="card shadow" style="border-radius: 0.5rem;">
                     <div class="card-body text-center text-oscuro">
                         Copyright © {{ date('Y') }} Grato Pastas Artesanales

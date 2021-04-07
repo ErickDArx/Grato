@@ -60,11 +60,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/Viaticos/{id_viatico}', 'ViaticosController@destroy')->name('EliminarViaticos');
 
     // Crud para la vista Materia prima
-    Route::get('/MateriaPrima', 'MateriaPrimaController@index');
+    Route::get('/MateriaPrima', 'MateriaPrimaController@index')->name('materia');
     Route::post('/MateriaPrima', 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
     Route::put('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
     Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
-    Route::get('/Filtrar', 'MateriaPrimaController@filtro')->name('filtro');
 
     // Crud para la vista Recetario
     Route::get('/Recetario', 'RecetarioController@index');
@@ -73,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/Recetario/{id_recetario}', 'RecetarioController@destroy')->name('EliminarRecetario');
 
     // Crud para la vista Pedidos
-    Route::get('/Pedidos', 'PedidosController@index');
+    Route::get('/Pedidos', 'PedidosController@index')->name('Buscar');
     Route::post('/Pedidos', 'PedidosController@store')->name('AgregarPedidos');
     Route::put('/Pedidos/{id_Pedido}', 'PedidosController@update')->name('ActualizarPedidos');
     Route::delete('/Pedidos/{id_Pedido}', 'PedidosController@destroy')->name('EliminarPedidos');
@@ -83,6 +82,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Reportes', 'ReportesController@store')->name('AgregarReportes');
     Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
     Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
+
+    Route::get('/{id_producto}', 'PedidosController@indexCU')->name('IndexCU');
+    Route::post('/{id_producto}', 'PedidosController@storeCU')->name('StoreCU');
 
     // Crud para la vista principal CIF
     Route::get('/CIF', 'CifController@index');

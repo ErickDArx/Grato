@@ -19,12 +19,7 @@ class t_materia_prima extends Model
         'producto'
     ];
 
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
-    }
-
-    public function scopeActive($query, $busqueda)
+    public function scopeBusqueda($query, $busqueda)
     {
         if ($busqueda) {
             return $query->where('producto', 'LIKE', "%$busqueda%");

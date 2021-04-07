@@ -15,13 +15,15 @@ class CreateTMes extends Migration
     {
         Schema::create('t_mes', function (Blueprint $table) {
             $table->bigIncrements('id_mes');
-            $table->string('nombre_mes');
+            $table->date('fecha');
             $table->decimal('recibo_pagar',8,2);
+            $table->decimal('promedio',8,2);
             $table->decimal('porcentaje_utilizacion',8,2);
+            $table->decimal('consumo_empresa',8,2);
             $table->decimal('porcentaje_produccion',8,2);
+            $table->decimal('consumo_produccion',8,2);
             $table->decimal('produccion_mensual',8,2);
             $table->decimal('total',8,2);
-            $table->date('fecha');
         });
 
         Schema::table('t_mes', function($table) {

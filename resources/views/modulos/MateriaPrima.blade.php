@@ -82,20 +82,19 @@
       {{-- Boton que abre el modal --}}
       <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
     </div>
-    <div class="col-sm-6 mt-3">
+    <div class="col-sm-6 p-0">
       <h6 class="m-0 font-weight-bold">Busqueda</h6>
     </div>
 
-    <form action="{{route('filtro')}}" method="POST">
+    <form action="{{route('materia')}}" method="GET" class="row">
       @csrf
-      <div class="row">
-        <div class="col-sm-12 mt-3 input-group">
+
+        <div class="input-group">
           <input placeholder="Ejemplo: Pasta larga" name="busqueda" type="text" value="" class="rounded form-control">
           <div class="input-group-append">
-            <a type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></a>
+            <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
           </div>
         </div>
-      </div>
 
     </form>
 
@@ -121,6 +120,20 @@
       <div class="col-sm-6 mb-2" id="nombre">
         <input class="form-control" type="text" name="producto" value="{{$item->producto}}">
       </div>
+
+      <div class="col-sm-6 mb-2">
+        <h5 class="m-0 card-title font-weight-bold">Para el producto</h5>
+      </div>
+
+      <div class="col-sm-6 mb-2" id="nombre">
+        @foreach ($t_producto as $producto)
+        @if ($item->id_producto == $producto->id_producto)
+            <input class="form-control" type="text" name="producto" value="{{$producto->nombre_producto}}">
+        @endif
+        
+        @endforeach
+        
+      </div>
     </div>
 
     <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
@@ -135,31 +148,28 @@
           <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
           <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
         </div>
-        <div class="col-sm-6 mb-2">
-          <div class="">
-            <h6 class="card-title font-weight-bold mt-1">Cantidad</h6>
-            <input name="cantidad" class="form-control" type="number" value="{{$item->cantidad}}">
-          </div>
-        </div>
-      </div>
 
-      <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
           <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
         </div>
+
+      </div>
+
+      <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
+
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
           <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
         </div>
+      <div class="col-sm-6 mb-2">
+        <h6 class="font-weight-bold">Precio por unidad de medida</h6>
+        <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
       </div>
 
-      <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
-        <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Precio por unidad de medida</h6>
-          <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
-        </div>
       </div>
+
+
 
       <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -233,11 +243,12 @@
 
 </div>
 @endforeach
+
 <div class="shadow m-2 bg-white d-flex align-items-center justify-content-center" style="border-radius: 0.5rem;">
   <div class="mt-3">
+    <p>Has llegado al final de la lista</p>
     {{ $t_materia_prima->render() }}
   </div>
-
 </div>
 
 <script>

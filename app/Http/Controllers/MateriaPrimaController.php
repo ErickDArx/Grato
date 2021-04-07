@@ -21,20 +21,11 @@ class MateriaPrimaController extends Controller
         
         $busqueda = $request->get('busqueda');
         $materia = t_materia_prima::orderBy('id_materia_prima','DESC')
-        ->paginate(4);
+        ->busqueda($busqueda)
+        ->paginate(5);
         $producto = DB::table('t_producto')->get();
         return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
-
-    public function filtro(Request $request)
-    {
-        $busqueda = $request->get('busqueda');
-        $materia = t_materia_prima::orderBy('id_materia_prima','DESC')
-        ->paginate(4);
-        $producto = DB::table('t_producto')->get();
-        return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

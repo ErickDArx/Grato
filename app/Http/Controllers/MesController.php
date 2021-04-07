@@ -18,7 +18,7 @@ class MesController extends Controller
     public function index($id_cif)
     {
         date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
+        setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
         $mes = DB::table('t_mes')->get();
         return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
@@ -41,16 +41,35 @@ class MesController extends Controller
      */
     public function store(Request $request, $id_cif)
     {
+
         $edit = new t_mes();
+        $mes = DB::table('t_mes')->get();
         $cif = t_cif::findOrFail($id_cif);
-        $edit->nombre_mes = $request->nombre_mes;
+
+        $suma = 0;
+        $cantidad = 0;
+        $promedio = 0;
+
+        foreach ($mes as $item) {
+            if ($cif->id_cif == $item->id_cif) {
+                if ($item->recibo_pagar >= 0) {
+                    $cantidad++;
+                }
+                $suma = ($item->recibo_pagar + $suma);
+                $promedio = ($suma) / $cantidad;
+            }
+        }
+
+        $edit->fecha = $request->fecha;
         $edit->recibo_pagar = $request->recibo_pagar;
+        $edit->promedio = $promedio;
         $edit->porcentaje_utilizacion = $request->porcentaje_utilizacion;
+        $edit->consumo_empresa = ($edit->porcentaje_utilizacion * $promedio) / 100;
         $edit->porcentaje_produccion = $request->porcentaje_produccion;
+        $edit->consumo_produccion = ($edit->consumo_empresa * $edit->porcentaje_produccion) / 100;
         $edit->produccion_mensual = $request->produccion_mensual;
-        $edit->fecha = Carbon::now();
+        $edit->total = $edit->consumo_produccion / $edit->produccion_mensual;
         $edit->id_cif = $cif->id_cif;
-        $edit->total = 20.00;
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 
@@ -99,7 +118,7 @@ class MesController extends Controller
         $edit->porcentaje_produccion = $request->porcentaje_produccion;
         $edit->produccion_mensual = $request->produccion_mensual;
         $edit->fecha = Carbon::now();
-        $edit->total = $request-> tiempo_uso * 20.59;
+        $edit->total = $request->tiempo_uso * 20.59;
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 

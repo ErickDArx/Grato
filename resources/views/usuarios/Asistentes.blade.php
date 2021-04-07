@@ -4,15 +4,7 @@
 
 @section('contenido')
 @parent
-<div class="card-body bg-white m-2 shadow row d-flex justify-content-center border" style="border-radius: 0.5rem;">
-    <div class="col-sm-6 mt-2">
-        <h4 class="font-weight-normal"><i class="fa fa-users mr-2 "></i>Asistentes</h4>
-        <h6 class="text-gray">· Desglose del personal autorizado en el sistema</h6>
-    </div>
-    <div class="col-sm-6 text-center">
-        <img class="img-fluid m-2" src="{{ asset('media/logo.png') }}" alt="" style="width: 6rem">
-    </div>
-</div>
+
 @stop
 
 @section('contenido-3')
@@ -124,6 +116,14 @@
         </form>
     </div>
 </div>
+
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+    <div class="d-flex m-1 row align-items-center">
+        <div class="col-sm-6">
+            <h5 class="mt-2 font-weight-bold">Lista de asistentes</h5>
+        </div>
+    </div>
+</div>
 @stop
 
 @foreach ($t_usuario as $item)
@@ -133,14 +133,12 @@
 
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex m-1 row align-items-center">
-        <div class="col-sm-6">
-            <h5 class="mt-2 font-weight-bold">Lista de asistentes</h5>
-        </div>
-        <div class="col-sm-12">
-            <h5 class="m-0 font-weight-normal">{{ $item->nombre_usuario }} {{ $item->apellido_usuario }}</h5>
+
+        <div class="col-sm-8">
+            <h5 class="m-0 font-weight-normal">{{ $item->nombre_operario }} {{ $item->apellido_usuario }}</h5>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <form action="{{ route('EliminarAsistente', $item->id_usuario) }}" method="POST">
                 @method('DELETE')
                 @csrf
