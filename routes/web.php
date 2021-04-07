@@ -15,21 +15,18 @@ Auth::routes();
 // Este grupo de rutas, evita que se accedan a otros rutas sin antes logearse, de lo contrario redirecciona a la pagina de acceso
 Route::middleware(['auth'])->group(function () {
 
-    //Pruebas para el correo
-    Route::post('/Principal', 'UsuarioController@contact');
-
     // Crud para la vista principal
-    Route::get('/Principal', 'UsuarioController@principal');
+    Route::get('/Principal', 'UsuarioController@principal')->name('Principal');
 
     // Crud para la vista ManoObra
-    Route::get('/ManoObra', 'ManoObraController@index');
+    Route::get('/ManoObra', 'ManoObraController@index')->name('ManoObra');
     Route::post('/Total', 'ManoObraController@store')->name('total');
     Route::put('/Labores/{id_labor}', 'ManoObraController@labor')->name('ActualizarLabores');
     Route::put('/Actualizar/{id_mano_de_obra}', 'ManoObraController@update')->name('ActualizarManoDeObra');
     Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('EliminarManoDeObra');
 
     // Crud para la vista Productos
-    Route::get('/Productos', 'ProductoController@index');
+    Route::get('/Productos', 'ProductoController@index')->name('Productos');
     Route::post('/Productos', 'ProductoController@store')->name('AgregarProducto');
     Route::put('/Productos/{id_producto}', 'ProductoController@update')->name('ActualizarProducto');
     Route::delete('/Productos/{id_producto}', 'ProductoController@destroy')->name('EliminarProducto');
@@ -41,20 +38,20 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
     Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 
-    Route::get('/Asistentes', 'AsistenteController@index');
+    Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');
     Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
     Route::put('/Asistentes', 'AsistenteController@update')->name('ActualizarAsistente');
     Route::delete('/Asistentes/{id_usuario}', 'AsistenteController@destroy')->name('EliminarAsistente');
 
 
     // Crud para la vista Equipo ----------------------------------
-    Route::get('/Equipo', 'EquiposController@index');
+    Route::get('/Equipo', 'EquiposController@index')->name('Equipo');
     Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
     Route::put('/Actualizando/{id_equipo}', 'EquiposController@update')->name('ActualizarEquipo');
     Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
     // Crud para la vista Viaticos
-    Route::get('/Viaticos', 'ViaticosController@index');
+    Route::get('/Viaticos', 'ViaticosController@index')->name('Viaticos');
     Route::post('/Viaticos', 'ViaticosController@store')->name('AgregarViaticos');
     Route::put('/Viaticos/{id_viatico}', 'ViaticosController@update')->name('ActualizarViaticos');
     Route::delete('/Viaticos/{id_viatico}', 'ViaticosController@destroy')->name('EliminarViaticos');
@@ -73,21 +70,18 @@ Route::middleware(['auth'])->group(function () {
 
     // Crud para la vista Pedidos
     Route::get('/Pedidos', 'PedidosController@index')->name('Buscar');
-    Route::post('/Pedidos', 'PedidosController@store')->name('AgregarPedidos');
+    Route::post('/Pedidos', 'PedidosController@store')->name('Agregar');
     Route::put('/Pedidos/{id_Pedido}', 'PedidosController@update')->name('ActualizarPedidos');
     Route::delete('/Pedidos/{id_Pedido}', 'PedidosController@destroy')->name('EliminarPedidos');
 
     // Crud para la vista Reportes
-    Route::get('/Reportes', 'ReportesController@index');
+    Route::get('/Reportes', 'ReportesController@index')->name('Reportes');
     Route::post('/Reportes', 'ReportesController@store')->name('AgregarReportes');
     Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
     Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
 
-    Route::get('/{id_producto}', 'PedidosController@indexCU')->name('IndexCU');
-    Route::post('/{id_producto}', 'PedidosController@storeCU')->name('StoreCU');
-
     // Crud para la vista principal CIF
-    Route::get('/CIF', 'CifController@index');
+    Route::get('/CIF', 'CifController@index')->name('CIF');
     Route::post('Agregando/CIF', 'CifController@store')->name('AgregarCIF');
     Route::put('Actualizando/CIF', 'CifController@update')->name('ActualizarNombre');
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
@@ -96,5 +90,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/{id_cif}', 'MesController@edit')->name('IndexCIF');
     Route::post('/{id_cif}', 'MesController@store')->name('AgregarMes');
 
-
+    Route::get('/Pedidos/{id_producto}', 'PedidosController@indexCU')->name('IndexCU');
+    Route::post('/Pedidos/{id_producto}', 'PedidosController@storeCU')->name('StoreCU');
 });

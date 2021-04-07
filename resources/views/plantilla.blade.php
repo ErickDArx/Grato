@@ -43,7 +43,7 @@
                 @endunless
 
                 @auth
-                <a href="{{'Perfil'}}" class="rounded text-gray">
+                <a href="{{route('Perfil')}}" class="rounded text-gray">
                     {{ auth()->user()->nombre_operario }}
                     {{ auth()->user()->apellido_usuario }}
 

@@ -24,35 +24,37 @@
 @foreach ($t_materia_prima as $item)
 @if ($item->id_producto == $producto->id_producto)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <form action="" method="POST">
+    <form action="{{ route('ActualizarMateriaPrima', $item->id_materia_prima) }}" method="POST">
+        @method('PUT')
         @csrf
         <div class="d-flex row align-items-center">
             <div class="col-sm-3">
                 <label for="">Recurso</label>
-                <input readonly type="text" value="{{$item->producto}}" class="form-control">
-
+                <input readonly type="text" name="producto" value="{{$item->producto}}" class="form-control">
             </div>
 
             <div class="col-sm-3">
                 <label for="">Cantidad</label>
-                <input type="text" class="form-control">
+                <input type="number" name="cantidad" class="form-control" value="{{$item->cantidad}}">
             </div>
-
-
 
             <div class="col-sm-3">
                 <label for="">Costo</label>
-                <input readonly type="number" class="form-control" value="{{$item->precio_um}}">
+                <input readonly name="costo" type="number" class="form-control" value="{{$item->precio_um}}">
             </div>
 
             <div class="col-sm-3">
                 <label for="">Precio</label>
-                <input readonly type="text" class="form-control">
+                <input readonly name="precio_um" type="text" class="form-control">
             </div>
 
             <div class="col-sm-12">
-                <a href="" class="mt-3 btn btn-block btn-outline-dark">Actualizar</a>
+                <button href="" type="submit" class="mt-3 btn btn-block btn-outline-dark">Actualizar</button>
             </div>
+
+            <input type="hidden" value="{{$item->unidad_medida}}" name="unidad_medida">
+            <input type="hidden" value="{{$item->presentacion}}" name="presentacion">
+
     </form>
 </div>
 </div>
@@ -71,19 +73,49 @@
     </div>
 </div>
 
-@foreach ($t_mano_de_obra as $item)
+<form action="{{route('Agregar')}}" method="POST">
+    @csrf
+    <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        <div class="col-sm-6">
 
-<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="col-sm-6">
-        <label for="">Seleccione el operario</label>
-    <select class="m-0 form-control" name="" id="">
-        <option value="NULO">...</option>
-        <option value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
-    </select>
+            <select class="m-0 form-control" name="id_mano_de_obra" id="">
+                <option value="0">...</option>
+                @foreach ($t_mano_de_obra as $item)
+                <option value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
+                @endforeach
+            </select>
+
+        </div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn-block btn btn-outline-dark">Agregar</button>
+        </div>
+
     </div>
 
+</form>
+
+@foreach ($t_mano_de_obra as $item)
+@if ($item->id_mano_de_obra == $costo->id_mano_de_obra)
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+    <div class="col-sm-3">
+        <label for="">Operario</label>
+        <input type="text" class="form-control" value="{{$item->nombre_trabajador}}" readonly>
+    </div>
+    <div class="col-sm-3">
+        <label for="">Tiempo trabajado</label>
+        <input type="text" class="form-control" value="">
+    </div>
+    <div class="col-sm-3">
+        <label for="">Costo por minuto</label>
+        <input type="text" class="form-control" value="{{$item->salario_minuto}}" readonly>
+    </div>
+    <div class="col-sm-3">
+        <label for="">Total</label>
+        <input type="text" class="form-control" value="" readonly>
+    </div>
 </div>
 
+@endif
 @endforeach
 
 @stop
