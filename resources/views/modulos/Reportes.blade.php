@@ -10,7 +10,7 @@
       <div class="row">
         <h4 class="col-sm-9">Reportes</h4>
         <div class="justify-content-end row">
-          <a href="" class="col-sm-12 btn btn-dark">Ingresar Pedido</a>
+          <a href="{{route('Reportes.pdf')}}" class="col-sm-12 btn btn-dark">Ingresar Pedido</a>
         </div>
       </div>
       <h6>Listado de pedidos</h6>

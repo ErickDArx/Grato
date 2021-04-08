@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\t_materia_prima;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller
@@ -13,7 +15,17 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        return view('modulos/Reportes');
+        $recursos = t_materia_prima::all();
+        return view('modulos/Reportes', compact($recursos));
+    }
+
+    public function pdf()
+    {
+        $recursos = t_materia_prima::all();
+
+        $pdf = PDF::loadView('pdf/recursos', compact('recursos'));
+
+        return $pdf->download('listado.pdf');
     }
 
     /**

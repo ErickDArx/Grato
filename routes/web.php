@@ -76,9 +76,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Crud para la vista Reportes
     Route::get('/Reportes', 'ReportesController@index')->name('Reportes');
-    Route::post('/Reportes', 'ReportesController@store')->name('AgregarReportes');
-    Route::put('/Reportes/{id_reporte}', 'ReportesController@update')->name('ActualizarReportes');
-    Route::delete('/Reportes/{id_reporte}', 'ReportesController@destroy')->name('EliminarReportes');
+    Route::get('/Reportes/Descarga', 'ReportesController@pdf')->name('Reportes.pdf');
 
     // Crud para la vista principal CIF
     Route::get('/CIF', 'CifController@index')->name('CIF');
@@ -87,9 +85,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
     // Crud para la vista de cada CIF
-    Route::get('/{id_cif}', 'MesController@edit')->name('IndexCIF');
-    Route::post('/{id_cif}', 'MesController@store')->name('AgregarMes');
+    Route::get('/mes', 'MesController@edit');
+    Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
+    Route::post('/mes/{id_cif}', 'MesController@store')->name('AgregarMes');
 
-    Route::get('/Pedidos/{id_producto}', 'PedidosController@indexCU')->name('IndexCU');
-    Route::post('/Pedidos/{id_producto}', 'PedidosController@storeCU')->name('StoreCU');
+    Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
+    Route::post('/{id_producto}', 'CostoUnitarioController@store')->name('StoreCU');
+
 });
