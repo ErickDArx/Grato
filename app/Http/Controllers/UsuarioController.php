@@ -16,7 +16,8 @@ class UsuarioController extends Controller
     public function index()
     {
         $users = DB::table('users')->get();
-
+        date_default_timezone_set('America/Costa_Rica');
+        $date = Carbon::now()->locale('es_ES');
         return view('usuarios\Asistentes', ['users' => $users]);
     }
 
