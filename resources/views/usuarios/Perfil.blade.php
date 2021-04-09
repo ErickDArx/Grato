@@ -15,7 +15,12 @@
                 <form action="{{ route('actualizar', auth()->user()->id_usuario) }}" method="post">
                     @csrf
                     @method('PUT')
-
+                    @if(Session::has('message'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      {{Session::get('message')}}
+                    </div>
+                    @endif
                     <div class="row rounded mt-2 m-0 d-flex align-items-center">
                         <div class="p-3 font-weight-bold col-6">
                             Nombre del operario(a)
@@ -24,6 +29,14 @@
                             <input type="text" class="form-control" name="nombre_operario"
                                 value="{{ auth()->user()->nombre_operario }}" />
                         </div>
+                        @error('nombre_operario')
+                        <div class="col-12 fade show" role="alert">
+                            <div class="text-danger">
+                                <span>{{  $errors->first('nombre_operario')}}</span>
+                            </div>
+                        </div>
+                        @enderror
+                        
                         <div class="p-3 font-weight-bold col-6">
                             Primer apellido
                         </div>
@@ -31,6 +44,14 @@
                             <input type="text" class="form-control" name="apellido_usuario"
                                 value="{{ auth()->user()->apellido_usuario }}" />
                         </div>
+                        @error('apellido_usuario')
+                        <div class="col-12 fade show" role="alert">
+                            <div class="text-danger">
+                                <span>{{  $errors->first('apellido_usuario')}}</span>
+                            </div>
+                        </div>
+                        @enderror
+
                         <div class="p-3 font-weight-bold col-6">
                             Segundo apellido (opcional)
                         </div>
@@ -38,6 +59,13 @@
                             <input type="text" class="form-control" name="segundo_apellido_usuario"
                                 value="{{ auth()->user()->segundo_apellido_usuario }}" />
                         </div>
+                        @error('segundo_apellido_usuario')
+                        <div class="col-12 fade show" role="alert">
+                            <div class="text-danger">
+                                <span>{{  $errors->first('segundo_apellido_usuario')}}</span>
+                            </div>
+                        </div>
+                        @enderror
                         <div class="p-3 font-weight-bold col-6">
                             Nombre de usuario
                         </div>
@@ -45,6 +73,13 @@
                             <input type="text" class="form-control" name="nombre_usuario"
                                 value="{{ auth()->user()->nombre_usuario }}" />
                         </div>
+                        @error('nombre_usuario')
+                        <div class="col-12 fade show" role="alert">
+                            <div class="text-danger">
+                                <span>{{  $errors->first('nombre_usuario')}}</span>
+                            </div>
+                        </div>
+                        @enderror
                         <div class="p-3 font-weight-bold col-6">
                             Modo acceso
                         </div>

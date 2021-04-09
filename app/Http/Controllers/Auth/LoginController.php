@@ -8,37 +8,42 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
 class LoginController extends Controller
 {
-
+    //Aqui se encuentran los metodos y funciones respectivos para el acceso de usuarios
     use AuthenticatesUsers;
+
+    //Intentos maximos y minutos de espera para los usuarios bloqueados
     protected $maxAttempts = 3; // De manera predeterminada sería 5
     protected $decayMinutes = 5; // De manera predeterminada sería 1
 
+    //Mostrar la vista que posee el formulario de acceso
     public function showLoginForm()
     {
         return view('usuarios/Acceso');
     }
 
+    //funcion para autenticar aquellos usuarios existentes en el sistema
     public function authenticate(Request $request)
     {
-
         $t_usuario = t_usuario::where(
             'nombre_usuario',
             $request->nombre_usuario
         )->where(
             'password',
-            $request->password = bcrypt($request->password)
+            $request->password = bcrypt($request->password) // aqui se descifra la contraseña
         )->first();
-
+        //Si el nombre de usuario y la contraseña son correctas, entonces te permite el acceso
         if ($t_usuario) {
             Auth::loginUsingId($t_usuario->nombre_usuario);
             return view('Principal');
+            //De lo contrario, te redirige a la vista de acceso
         } else {
             return redirect('/')->with('status', 'Datos Incorrectos!');
         }
     }
-
+    //Guardar la sesion del usuario
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
@@ -52,7 +57,7 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath());
+            ?: redirect()->intended($this->redirectPath());
     }
 
     protected $redirectTo = '/Principal';
@@ -64,7 +69,11 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('usuarios/Acceso');
+        if (Auth::check()) {
+            return view('Principal');
+        } else {
+            return view('usuarios/Acceso');
+        }
     }
 
     public function logout(Request $request)

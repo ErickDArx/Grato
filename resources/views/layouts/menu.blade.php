@@ -7,8 +7,9 @@
             <div class="d-flex align-items-end m-4">
                 <li><img src="{{ asset('media/Logo-negativo.png')}}" class="img-fluid" alt=""></li>
             </div>
+
             <div class="ml-4 mr-4" style="">
-                <li>
+                <li class="">
                     <a class="drawer-menu-item text-white btn m-1 btn-outline-gray" href="{{route('Principal') }}"><i
                             class="fa fa-home mr-2 "></i>Menú Principal</a>
                 </li>
@@ -26,22 +27,22 @@
                 </li>
 
                 <div class="drawer-menu-item collapse" id="collapseExample">
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Productos') }}"><i
-                                class="fa fa-check-square mr-2"></i>Productos</a>
+                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                            href="{{route('Productos') }}"><i class="fa fa-check-square mr-2"></i>Productos</a>
                     </li>
                     <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('materia') }}"><i
                                 class="fa fa-clipboard mr-2"></i>Materia
                             Prima</a>
                     </li>
-                    <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1" href="{{route('ManoObra') }}"><i
-                                class="fa fa-users mr-2"></i>Mano de obra</a></li>
+                    <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1"
+                            href="{{route('ManoObra') }}"><i class="fa fa-users mr-2"></i>Mano de obra</a></li>
                     <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Equipo') }}"><i
                                 class="fa fa-cogs mr-2"></i>Equipo</a></li>
                     <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('CIF') }}"><i
                                 class="fas fa-coins mr-2 text-break"></i>Costos
                             Indirectos (CIF)</a></li>
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Viaticos') }}"><i
-                                class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
+                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                            href="{{route('Viaticos') }}"><i class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
                 </div>
 
 

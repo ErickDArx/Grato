@@ -67,6 +67,15 @@ class PerfilController extends Controller
 
     public function update(Request $request, $id_usuario)
     {
+        request()->validate([
+            'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'segundo_apellido_usuario' => 'regex:/^[a-zA-Z\s]+$/u',
+            'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
+        ],[
+            'nombre_operario.required' => 'El campo no puede estar vacio',
+
+        ]);
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->nombre_usuario = $request->nombre_usuario;
         $edit->nombre_operario = $request->nombre_operario;
