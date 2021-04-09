@@ -40,6 +40,17 @@
     </div>
   </div>
 
+  <div class="row card-body m-2 shadow bg-white p-0 bordes">
+    <div class="col-2 border-0 m-0 bg-success p-2 d-flex justify-content-center align-items-center m-0 borde-derecha">
+      <i class="p-0 fa-2x fa fa-users text-white"></i>
+    </div>
+    <div class="col-7 p-7 d-flex justify-content-center align-items-center">
+      <h6 class="text-oscuro m-0 font-weight-bold">Ventas de {{ date('M ')}}</h6>
+    </div>
+    <div class="col-3 d-flex align-items-center">
+      <h6 class="text-oscuro m-0 font-weight-bold">4</h6>
+    </div>
+  </div>
 
   <div class="row d-flex justify-content-center align-items-center m-1 card-body shadow bg-white"
     style="border-radius: 0.5rem;">
