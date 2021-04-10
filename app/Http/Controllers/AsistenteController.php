@@ -11,14 +11,17 @@ use Illuminate\Support\Facades\DB;
 class AsistenteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $busqueda = $request->get('busqueda');
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $date->diffForHumans();
-        $materia = DB::table('t_usuario')->get();
-
-        return view('usuarios/Asistentes', ['t_usuario' => $materia]);
+        $usuarios = t_usuario::orderBy('id_usuario','DESC')
+        ->Busqueda2($busqueda)
+        ->Busqueda($busqueda)
+        ->paginate(4);
+        return view('usuarios/Asistentes', ['t_usuario' => $usuarios]);
     }
 
     public function destroy($id_usuario)

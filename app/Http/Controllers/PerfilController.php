@@ -30,6 +30,15 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'segundo_apellido_usuario' => 'regex:/^[a-zA-Z\s]+$/u',
+            'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
+        ],[
+            'nombre_operario.required' => 'El campo no puede estar vacio',
+
+        ]);
         // Ver aquello que se envia a la base de datos
         // return $request->all();
         $agregar = new t_usuario;
@@ -87,6 +96,9 @@ class PerfilController extends Controller
 
     public function update_correo(Request $request, $id_usuario)
     {
+        request()->validate([
+            'correo' => 'required|email|unique:t_usuario,email'
+        ]);
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->email = $request->correo;
         $edit->save();

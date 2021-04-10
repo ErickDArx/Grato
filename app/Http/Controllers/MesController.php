@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\t_cif;
 use App\t_mes;
+use App\t_valores;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,8 @@ class MesController extends Controller
         setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
         $mes = DB::table('t_mes')->get();
+        // $valor = DB::table('t_valores')->get();
+
         return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
     }
 
@@ -63,13 +66,63 @@ class MesController extends Controller
         $edit->fecha = $request->fecha;
         $edit->recibo_pagar = $request->recibo_pagar;
         $edit->promedio = $promedio;
+        $edit->total = 1;
+        // $edit->porcentaje_utilizacion = $request->porcentaje_utilizacion;
+        // $edit->consumo_empresa = ($edit->porcentaje_utilizacion * $promedio) / 100;
+        // $edit->porcentaje_produccion = $request->porcentaje_produccion;
+        // $edit->consumo_produccion = ($edit->consumo_empresa * $edit->porcentaje_produccion) / 100;
+        // $edit->produccion_mensual = $request->produccion_mensual;
+        $edit->id_cif = $cif->id_cif;
+
+        $valor = new t_valores();
+        $valores = DB::table('t_valores')->get();
+        foreach ($valores as $item) {
+            if ($cif->id_cif == $item->id_cif) {
+                $valor = t_valores::findOrFail($id_cif);
+                $valor->porcentaje_utilizacion = $item->porcentaje_utilizacion;
+                $valor->consumo_empresa = $item->porcentaje_utilizacion * $promedio / 100;
+                $valor->porcentaje_produccion = $item->porcentaje_produccion;
+                $valor->consumo_produccion = $item->consumo_empresa * $item->porcentaje_produccion / 100;
+                $valor->produccion_mensual = $item->produccion_mensual;
+                $valor->id_cif = $cif->id_cif;
+            }
+        }
+
+        // Insertar en la base de datos
+        $edit->save();
+        $valor->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
+    }
+
+    public function valores(Request $request, $id_cif)
+    {
+
+        $edit = new t_valores();
+        $mes = DB::table('t_mes')->get();
+        $cif = t_cif::findOrFail($id_cif);
+
+        $suma = 0;
+        $cantidad = 0;
+        $promedio = 0;
+
+        foreach ($mes as $item) {
+            if ($cif->id_cif == $item->id_cif) {
+                if ($item->recibo_pagar >= 0) {
+                    $cantidad++;
+                }
+                $suma = ($item->recibo_pagar + $suma);
+                $promedio = ($suma) / $cantidad;
+            }
+        }
+
         $edit->porcentaje_utilizacion = $request->porcentaje_utilizacion;
         $edit->consumo_empresa = ($edit->porcentaje_utilizacion * $promedio) / 100;
         $edit->porcentaje_produccion = $request->porcentaje_produccion;
         $edit->consumo_produccion = ($edit->consumo_empresa * $edit->porcentaje_produccion) / 100;
         $edit->produccion_mensual = $request->produccion_mensual;
-        $edit->total = $edit->consumo_produccion / $edit->produccion_mensual;
         $edit->id_cif = $cif->id_cif;
+
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 
@@ -96,9 +149,12 @@ class MesController extends Controller
     public function edit($id_cif)
     {
         date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
+        setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
+        // $valor = t_valores::findOrFail($id_cif);
         $mes = DB::table('t_mes')->get();
+        // $valor = DB::table('t_valores')->get();
+
         return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
     }
 
@@ -131,8 +187,10 @@ class MesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_mes)
     {
-        //
+        $eliminar = t_mes::findOrFail($id_mes);
+        $eliminar->delete();
+        return back()->with('eliminar', 'fue eliminado exitosamente');
     }
 }

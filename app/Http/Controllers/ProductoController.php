@@ -41,6 +41,11 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre_producto' => 'required|string|min:6',
+        ],[
+            'nombre_producto.required'=> 'El formato del campo: Nombre del producto es invalido.'
+        ]);
         $agregar = new t_producto();
         $agregar->nombre_producto = $request->nombre_producto;
         
@@ -81,6 +86,11 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id_producto)
     {
+        request()->validate([
+            'nombre_producto' => 'required|string|min:6',
+        ],[
+            'nombre_producto.required'=> 'El formato del campo: Nombre del producto es invalido.'
+        ]);
         $edit = t_producto::findOrFail($id_producto);
         $edit->nombre_producto = $request->nombre_producto;
         $edit->save();

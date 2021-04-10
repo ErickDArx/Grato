@@ -28,17 +28,10 @@
                             </div>
                         </header>
                         <main class="modal__content" id="modal-1-content">
-                            <form class="form-group" method="POST" action="{{route('AgregarMes',$cif->id_cif)}}">
+                            <form class="form-group" method="POST" action="{{route('AgregarValores',$cif->id_cif)}}">
                                 @csrf
                                 <input type="hidden" name="id_cif" id="" value="{{$cif->id_cif}}">
-                                <div class="m-0 mb-2">
-                                    <label for="">1.Fecha</label>
-                                    <input type="date" class="form-control" name="fecha">
-                                </div>
-                                <div class="m-0 mb-2">
-                                    <label for="">2. Recibo a pagar</label>
-                                    <input type="text" name="recibo_pagar" class="form-control" value="">
-                                </div>
+
                                 <div class="m-0 mb-2">
                                     <label for="">2. Porcentaje de utilizacion en la empresa</label>
                                     <input type="text" name="porcentaje_utilizacion" class="form-control" value="">
@@ -60,18 +53,48 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="Operario btn btn-block btn-dark">Ingresar nuevo recibo</a>
+            <a href="#" class="Operario btn btn-block btn-dark">Ingresar valores porcentuales</a>
+
         </div>
-        <div class="col-sm-6 mt-2 mb-1">
-            <a class="text-dark btn btn-link btn-block" href="{{('CIF')}}">Volver atras</a>
-        </div>
-    </div>
+        {{-- <div class="col-sm-6 mt-2 mb-1">
+            <a class="text-dark btn btn-link btn-block" href="{{route('CIF')}}">Volver atras</a>
+    </div> --}}
+</div>
 </div>
 
-<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center m-0">
+
+<form class="form-group" method="POST" action="{{route('AgregarMes',$cif->id_cif)}}">
+
+    @csrf
+    <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+        <div class="d-flex justify-content-center row align-items-center">
+            <div class="col-sm-4">
+                <input type="hidden" name="id_cif" id="" value="{{$cif->id_cif}}">
+                <div class="m-0 mb-2">
+                    <label for="">1.Fecha</label>
+                    <input type="date" class="form-control" name="fecha">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="m-0 mb-2">
+                    <label for="">2. Recibo a pagar</label>
+                    <input type="text" name="recibo_pagar" class="form-control" value="">
+                </div>
+            </div>
+
+            <div class="col-sm-4 d-flex mt-sm-4">
+                <button class="btn btn-block" type="submit">Enviar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+    <div class="col-sm-6 d-flex row align-items-center m-0">
         <h6 class="m-0 font-weight-bolder"><i class="fa fa-calendar mr-2 "></i>Listado de recibos</h6>
     </div>
+
 </div>
 
 <script>
@@ -129,11 +152,16 @@ $promedio=0;
             </a>
 
         </div>
-        <div class="col-sm-3 text-danger d-flex justify-content-center">
-            <a href="" class="btn btn-block border-0 text-danger">
-                <i class="fa fa-trash mr-2 "></i>Borrar
-            </a>
-        </div>
+        <form action="{{route('EliminarMes',$item->id_mes)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="col-sm-3 text-danger d-flex justify-content-center">
+                <button type="submit" class="bg-white btn btn-link btn-block border-0 text-danger">
+                    <i class="fa fa-trash mr-2 "></i>Borrar
+                </button>
+            </div>
+        </form>
+
 
     </div>
 </div>
@@ -176,12 +204,12 @@ $promedio=0;
                 <h6 class="m-0">Porcentaje de utilizacion en la empresa</h6>
             </div>
             <div class="col-sm-6">
+                {{-- {{$valor->porcentaje_utilizacion}} --}}
+                {{-- @if ($item->id_cif == $cif->id_cif)
+                {{$item->porcentaje_utilizacion}}
+                @else
 
-                    @if ($item->id_cif == $cif->id_cif)
-                        {{$item->porcentaje_utilizacion}}
-                    @else
-                    
-                    @endif
+                @endif --}}
 
             </div>
         </div>
@@ -193,11 +221,11 @@ $promedio=0;
                 <p class="m-0">Consumo de la empresa</p>
             </div>
             <div class="col-sm-6">
-                @if ($item->id_cif == $cif->id_cif)
+                {{-- @if ($item->id_cif == $cif->id_cif)
                 {{$item->consumo_empresa}}
-            @else
-            
-            @endif
+                @else
+
+                @endif --}}
             </div>
         </div>
     </div>
@@ -208,11 +236,11 @@ $promedio=0;
                 <p class="m-0">Porcentaje de produccion del producto por mes</p>
             </div>
             <div class="col-sm-6">
-                @if ($item->id_cif == $cif->id_cif)
+                {{-- @if ($item->id_cif == $cif->id_cif)
                 {{$item->porcentaje_produccion}}
-            @else
-            
-            @endif
+                @else
+
+                @endif --}}
             </div>
         </div>
     </div>
@@ -223,11 +251,11 @@ $promedio=0;
                 <p class="m-0">Consumo de la produccion</p>
             </div>
             <div class="col-sm-6">
-                @if ($item->id_cif == $cif->id_cif)
+                {{-- @if ($item->id_cif == $cif->id_cif)
                 {{$item->consumo_produccion}}
-            @else
-            
-            @endif
+                @else
+
+                @endif --}}
             </div>
         </div>
     </div>
@@ -238,11 +266,11 @@ $promedio=0;
                 <p class="m-0">Produccion promedio mensual</p>
             </div>
             <div class="col-sm-6">
-                @if ($item->id_cif == $cif->id_cif)
+                {{-- @if ($item->id_cif == $cif->id_cif)
                 {{$item->produccion_mensual}}
-            @else
-            
-            @endif
+                @else
+
+                @endif --}}
             </div>
         </div>
     </div>
@@ -253,11 +281,11 @@ $promedio=0;
                 <p class="m-0">Total</p>
             </div>
             <div class="col-sm-6">
-                @if ($item->id_cif == $cif->id_cif)
+                {{-- @if ($item->id_cif == $cif->id_cif)
                 {{$item->total}}
-            @else
-            
-            @endif
+                @else
+
+                @endif --}}
             </div>
         </div>
     </div>

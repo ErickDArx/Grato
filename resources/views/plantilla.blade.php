@@ -51,7 +51,7 @@
                 @endauth
             </div>
         </nav>
-        <div class="row mr-2 ml-2">
+        <div class="row mr-1 ml-1">
             <div class="col-md-8 mb-2">
 
                 <div class="" style="border-radius: 0.5rem;">
@@ -87,8 +87,8 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mt-4">
-                <div class="card shadow" style="border-radius: 0.5rem;">
+            <div class="col-md-4 mb-2 mt-3">
+                <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
 
                         <h4>{{ date('h:i a') }}</h4>
@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 m-2">
+            <div class="col-md-12 mr-1 ml-1 mb-3">
                 <div class="card shadow" style="border-radius: 0.5rem;">
                     <div class="card-body text-center text-oscuro">
                         Copyright © {{ date('Y') }} Grato Pastas Artesanales

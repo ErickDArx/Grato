@@ -53,9 +53,7 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function () {$('.drawer').drawer();});
-</script>
+
 <script>
   MicroModal.init();
         var button = document.querySelector('.Producto');
@@ -63,6 +61,21 @@
             MicroModal.show('modal-5');
         });
 </script>
+
+
+    @error('nombre_producto')
+    <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+      <div class="col-sm-12">
+    <div class="col-12 fade show" role="alert">
+        <div class="text-danger">
+            <span>{{  $errors->first('nombre_producto')}}</span>
+        </div>
+    </div>
+  </div>
+</div>
+    @enderror
+
+
 @stop
 
 @section('contenido-2')

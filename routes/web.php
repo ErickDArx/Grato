@@ -90,7 +90,9 @@ Route::middleware(['auth'])->group(function () {
     // Crud para la vista de cada CIF
     Route::get('/mes', 'MesController@edit');
     Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
-    Route::post('/mes/{id_cif}', 'MesController@store')->name('AgregarMes');
+    Route::post('/mes/{id_cif}/valores', 'MesController@valores')->name('AgregarValores');
+    Route::post('/mes/{id_cif}/agregar', 'MesController@store')->name('AgregarMes');
+    Route::delete('/mes/{id_cif}/borrando', 'MesController@destroy')->name('EliminarMes');
 
     Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
     Route::post('/{id_producto}', 'CostoUnitarioController@store')->name('StoreCU');
