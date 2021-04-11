@@ -17,8 +17,6 @@ class CreateTCostoUnitario extends Migration
             $table->bigIncrements('id_costo_unitario');
             $table->bigInteger('id_producto')->unsigned()->index(); // this is working
             $table->foreign('id_producto')->references('id_producto')->on('t_producto')->onDelete('cascade');
-            $table->bigInteger('id_materia_prima')->unsigned()->index(); // this is working
-            $table->foreign('id_materia_prima')->references('id_materia_prima')->on('t_materia_prima')->onDelete('cascade');
             $table->bigInteger('id_mano_de_obra')->unsigned()->index(); // this is working
             $table->foreign('id_mano_de_obra')->references('id_mano_de_obra')->on('t_mano_de_obra')->onDelete('cascade');
             $table->bigInteger('id_equipo')->unsigned()->index(); // this is working

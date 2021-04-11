@@ -3,6 +3,9 @@
 // Estas rutas son para el acceso al sistema
 
 // Este recibe los datos del login
+
+use App\Http\Controllers\MesController;
+
 Route::get('/', 'Auth\LoginController@index' , ['middleware' => 'auth', function (){
 
 }])->name('acceso');
@@ -63,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/MateriaPrima', 'MateriaPrimaController@index')->name('materia');
     Route::post('/MateriaPrima', 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
     Route::put('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
+    Route::put('/MateriaPrima/{id_materia_prima}/calculando', 'MateriaPrimaController@edit')->name('EditarMateriaPrima');
     Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
 
     // Crud para la vista Recetario
@@ -92,8 +96,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
     Route::post('/mes/{id_cif}/valores', 'MesController@valores')->name('AgregarValores');
     Route::post('/mes/{id_cif}/agregar', 'MesController@store')->name('AgregarMes');
-    Route::delete('/mes/{id_cif}/borrando', 'MesController@destroy')->name('EliminarMes');
+    Route::delete('/mes/{id_cif}/{id_mes}', 'MesController@destroy')->name('EliminarMes');
 
+    //Route::get('agendarVehiculo/{idvehiculo}/{idcita}',
+    //array('as' => 'agendarVehiculo', 'uses' => 
+    //'AgendamientosController@addAgendaCitaVehiculo'));
+    
     Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
     Route::post('/{id_producto}', 'CostoUnitarioController@store')->name('StoreCU');
 

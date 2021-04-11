@@ -128,7 +128,7 @@
       <div class="col-sm-6 mb-2" id="nombre">
         @foreach ($t_producto as $producto)
         @if ($item->id_producto == $producto->id_producto)
-            <input class="form-control" type="text" name="producto" value="{{$producto->nombre_producto}}">
+            <input class="form-control" type="text" name="" value="{{$producto->nombre_producto}}">
         @endif
         
         @endforeach
@@ -246,7 +246,6 @@
 
 <div class="shadow m-2 bg-white d-flex align-items-center justify-content-center" style="border-radius: 0.5rem;">
   <div class="mt-3">
-    <p>Has llegado al final de la lista</p>
     {{ $t_materia_prima->render() }}
   </div>
 </div>

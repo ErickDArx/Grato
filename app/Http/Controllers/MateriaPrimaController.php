@@ -9,86 +9,57 @@ use Illuminate\Support\Facades\DB;
 
 class MateriaPrimaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        
+
         $busqueda = $request->get('busqueda');
-        $materia = t_materia_prima::orderBy('id_materia_prima','DESC')
-        ->busqueda($busqueda)
-        ->paginate(4);
+        $materia = t_materia_prima::orderBy('id_materia_prima', 'DESC')
+            ->busqueda($busqueda)
+            ->paginate(4);
         $producto = DB::table('t_producto')->get();
         return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // return $request->all();
         $agregar = new t_materia_prima();
         $agregar->producto = $request->producto;
         $agregar->unidad_medida = $request->unidad_medida;
         $agregar->presentacion = $request->presentacion;
-        $agregar->cantidad = 0;
         $agregar->costo = $request->costo;
-        $agregar->precio_um =  ($request->costo/$request->presentacion);
+        $agregar->precio_um =  ($request->costo / $request->presentacion);
         $agregar->id_producto = $request->id_producto;
-
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
         return back()->with('agregar', 'se agrego sin problemas');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Request $request, $id_materia_prima)
     {
-        //
+        $edit = t_materia_prima::findOrFail($id_materia_prima);
+        $edit->cantidad = $request->cantidad;
+        $edit->precio_um = ($edit->costo / $edit->presentacion);
+        $edit->precio = $request->cantidad * $edit->precio_um;
+        // Insertar en la base de datos
+        $edit->save();
+        // Redirigir a la vista original 
+        return back()->with('edit', 'se agrego sin problemas');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id_materia_prima)
     {
         $edit = t_materia_prima::findOrFail($id_materia_prima);
@@ -97,19 +68,14 @@ class MateriaPrimaController extends Controller
         $edit->presentacion = $request->presentacion;
         $edit->cantidad = $request->cantidad;
         $edit->costo = $request->costo;
-        $edit->precio_um = ($request->costo/$request->presentacion);
+        $edit->precio_um = ($request->costo / $request->presentacion);
+        $edit->precio = $request->cantidad * $edit->precio_um;
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 
         return back()->with('edit', 'se agrego sin problemas');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id_materia_prima)
     {
         $eliminar = t_materia_prima::findOrFail($id_materia_prima);

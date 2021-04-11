@@ -18,7 +18,7 @@
                             <div class="">
                                 <div class="">
                                     <p class="h4 font-weight-bold mb-2" id="">
-                                        Nuevo recibo
+                                        Valores porcentuales
                                     </p>
                                 </div>
                             </div>
@@ -33,15 +33,15 @@
                                 <input type="hidden" name="id_cif" id="" value="{{$cif->id_cif}}">
 
                                 <div class="m-0 mb-2">
-                                    <label for="">2. Porcentaje de utilizacion en la empresa</label>
+                                    <label for="">1. Porcentaje de utilizacion en la empresa</label>
                                     <input type="text" name="porcentaje_utilizacion" class="form-control" value="">
                                 </div>
                                 <div class="m-0 mb-2">
-                                    <label for="">3.Porcentaje de produccion del producto</label>
+                                    <label for="">2.Porcentaje de produccion del producto</label>
                                     <input type="text" name="porcentaje_produccion" class="form-control" value="">
                                 </div>
                                 <div class="m-0 mb-2">
-                                    <label for="">4.Produccion promedio mensual</label>
+                                    <label for="">3.Produccion promedio mensual</label>
                                     <input type="text" name="produccion_mensual" class="form-control" value="">
                                 </div>
 
@@ -126,41 +126,36 @@ $promedio=0;
 @if ($cif->id_cif == $item->id_cif && $item->fecha > date('Y') )
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex row align-items-center">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>
-            {{ \Carbon\Carbon::parse(strtotime($item->fecha))->formatLocalized('%d %B %Y') }}
-        </div>
-        <div class="col-sm-3 mt-1 mb-1">
-            @if ($item->recibo_pagar >= 0)
-            @php
-            $cantidad++
-            @endphp
-            @endif
-            <h6 class="m-0 mt-1 mb-1"><i class="fa fa-money-bill mr-2 "></i>Total a pagar</h6>
-            ₡{{$item->recibo_pagar}}
-            @php
-            $suma = ($item->recibo_pagar + $suma);
-            $promedio = ($suma)/$cantidad;
-            @endphp
+            <input type="" readonly class="form-control"
+                value="{{ \Carbon\Carbon::parse(strtotime($item->fecha))->formatLocalized('%d %B %Y') }}">
 
-            <input type="hidden" name="promedio" value="{{$promedio}}">
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+
+            <h6 class="m-0 mt-1 mb-1"><i class="fa fa-money-bill mr-2 "></i>Total a pagar (Colones)</h6>
+            <input class="form-control" type="text" value="{{$item->recibo_pagar}}">
+
         </div>
 
-        <div class="col-sm-3 d-flex justify-content-center">
+        <div class="col-sm-6 d-flex justify-content-center mt-2">
             <a href="" class="btn btn-block border-0 ">
-                <i class="fa fa-edit mr-2 "></i>Editar
+                <i class="fa fa-edit mr-2 "></i>Editar informacion
             </a>
 
         </div>
-        <form action="{{route('EliminarMes',$item->id_mes)}}" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="col-sm-3 text-danger d-flex justify-content-center">
-                <button type="submit" class="bg-white btn btn-link btn-block border-0 text-danger">
-                    <i class="fa fa-trash mr-2 "></i>Borrar
+
+        <div class="col-sm-6 d-flex justify-content-center mt-2">
+            <form action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-white btn btn-block border text-danger">
+                    <i class="fa fa-trash mr-2 "></i>Borrar informacion
                 </button>
-            </div>
-        </form>
+            </form>
+        </div>
+
 
 
     </div>
@@ -175,7 +170,9 @@ $promedio=0;
             <p class="m-0">Promedio</p>
         </div>
         <div class="col-sm-6">
+
             ₡{{$promedio}}
+
         </div>
     </div>
 </div>

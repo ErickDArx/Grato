@@ -20,6 +20,8 @@ class CreateTValores extends Migration
             $table->decimal('porcentaje_produccion',8,2);
             $table->decimal('consumo_produccion',8,2);
             $table->decimal('produccion_mensual',8,2);
+            $table->decimal('promedio',8,2);
+            $table->decimal('total',8,2);
         });
 
         Schema::table('t_valores', function($table) {

@@ -17,8 +17,6 @@ class CreateTMes extends Migration
             $table->bigIncrements('id_mes');
             $table->date('fecha');
             $table->decimal('recibo_pagar',8,2);
-            $table->decimal('promedio',8,2);
-            $table->decimal('total',8,2);
         });
 
         Schema::table('t_mes', function($table) {

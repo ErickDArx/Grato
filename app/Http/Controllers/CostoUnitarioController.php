@@ -12,20 +12,16 @@ use Illuminate\Support\Facades\DB;
 
 class CostoUnitarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($id_producto)
     {
-        // date_default_timezone_set('America/Costa_Rica');
+        date_default_timezone_set('America/Costa_Rica');
         $producto = t_producto::findOrFail($id_producto);
-        // $recursos = DB::table('t_materia_prima')->get();
-        // $operario = DB::table('t_mano_de_obra')->get();
+        $recursos = DB::table('t_materia_prima')->get();
+        $operario = DB::table('t_mano_de_obra')->get();
         // $costo = t_costo_unitario::findOrFail($id_producto);
         // return view('modulos/CostoUnitario', compact('producto'));
-        return view('modulos/CostoUnitario', compact('producto'));
+        return view('modulos/CostoUnitario', compact('producto'),['t_materia_prima'=>$recursos,'t_mano_de_obra'=>$operario]);
     }
 
     /**

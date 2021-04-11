@@ -21,10 +21,10 @@
     </div>
 </div>
 
-{{-- @foreach ($t_materia_prima as $item)
+@foreach ($t_materia_prima as $item)
 @if ($item->id_producto == $producto->id_producto)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <form action="{{ route('ActualizarMateriaPrima', $item->id_materia_prima) }}" method="POST">
+    <form action="{{ route('EditarMateriaPrima', $item->id_materia_prima) }}" method="POST">
         @method('PUT')
         @csrf
         <div class="d-flex row align-items-center">
@@ -45,7 +45,7 @@
 
             <div class="col-sm-3">
                 <label for="">Precio</label>
-                <input readonly name="precio_um" type="text" class="form-control">
+                <input readonly name="precio_um" type="text" class="form-control" value="{{$item->precio}}">
             </div>
 
             <div class="col-sm-12">
@@ -59,7 +59,7 @@
 </div>
 </div>
 @endif
-@endforeach --}}
+@endforeach
 
 @stop
 
@@ -73,7 +73,7 @@
     </div>
 </div>
 
-{{-- <form action="{{route('Agregar')}}" method="POST">
+<form action="{{route('Agregar')}}" method="POST">
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
         <div class="col-sm-6">
@@ -92,30 +92,6 @@
 
     </div>
 
-</form> --}}
-
-{{-- @foreach ($t_mano_de_obra as $item)
-@if ($item->id_mano_de_obra == $costo->id_mano_de_obra)
-<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="col-sm-3">
-        <label for="">Operario</label>
-        <input type="text" class="form-control" value="{{$item->nombre_trabajador}}" readonly>
-    </div>
-    <div class="col-sm-3">
-        <label for="">Tiempo trabajado</label>
-        <input type="text" class="form-control" value="">
-    </div>
-    <div class="col-sm-3">
-        <label for="">Costo por minuto</label>
-        <input type="text" class="form-control" value="{{$item->salario_minuto}}" readonly>
-    </div>
-    <div class="col-sm-3">
-        <label for="">Total</label>
-        <input type="text" class="form-control" value="" readonly>
-    </div>
-</div>
-
-@endif
-@endforeach --}}
+</form>
 
 @stop
