@@ -69,12 +69,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/MateriaPrima/{id_materia_prima}/calculando', 'MateriaPrimaController@edit')->name('EditarMateriaPrima');
     Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
 
-    // Crud para la vista Recetario
-    Route::get('/Recetario', 'RecetarioController@index');
-    Route::post('/Recetario', 'RecetarioController@store')->name('AgregarRecetario');
-    Route::put('/Recetario/{id_recetario}', 'RecetarioController@update')->name('ActualizarRecetario');
-    Route::delete('/Recetario/{id_recetario}', 'RecetarioController@destroy')->name('EliminarRecetario');
-
     // Crud para la vista Pedidos
     Route::get('/Pedidos', 'PedidosController@index')->name('Buscar');
     Route::post('/Pedidos', 'PedidosController@store')->name('Agregar');
@@ -103,6 +97,8 @@ Route::middleware(['auth'])->group(function () {
     //'AgendamientosController@addAgendaCitaVehiculo'));
     
     Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
-    Route::post('/{id_producto}', 'CostoUnitarioController@store')->name('StoreCU');
+    Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
+    Route::post('{id_producto}/creando', 'CostoUnitarioController@operario')->name('AgregarOperario');
+
 
 });

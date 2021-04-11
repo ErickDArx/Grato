@@ -17,40 +17,35 @@ class CostoUnitarioController extends Controller
     {
         date_default_timezone_set('America/Costa_Rica');
         $producto = t_producto::findOrFail($id_producto);
+        $unitario = DB::table('t_costo_unitario')->get();
         $recursos = DB::table('t_materia_prima')->get();
         $operario = DB::table('t_mano_de_obra')->get();
         // $costo = t_costo_unitario::findOrFail($id_producto);
         // return view('modulos/CostoUnitario', compact('producto'));
-        return view('modulos/CostoUnitario', compact('producto'),['t_materia_prima'=>$recursos,'t_mano_de_obra'=>$operario]);
+        return view('modulos/CostoUnitario', compact('producto'), ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario'=>$unitario]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function operario(Request $request, $id_producto)
+    {
+        $agregar = new t_costo_unitario();
+        $agregar->id_producto = $id_producto;
+        $agregar->id_mano_de_obra = $request->id_mano_de_obra;
+        $agregar->fecha = Carbon::now();
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

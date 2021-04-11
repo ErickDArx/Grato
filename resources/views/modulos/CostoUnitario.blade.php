@@ -22,6 +22,7 @@
 </div>
 
 @foreach ($t_materia_prima as $item)
+
 @if ($item->id_producto == $producto->id_producto)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <form action="{{ route('EditarMateriaPrima', $item->id_materia_prima) }}" method="POST">
@@ -56,13 +57,12 @@
             <input type="hidden" value="{{$item->presentacion}}" name="presentacion">
 
     </form>
-</div>
-</div>
+</div>    
+
 @endif
 @endforeach
 
 @stop
-
 @section('contenido-2')
 @parent
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -72,14 +72,13 @@
         </div>
     </div>
 </div>
-
-<form action="{{route('Agregar')}}" method="POST">
+<form action="{{route('AgregarOperario', $producto->id_producto)}}" method="POST">
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
         <div class="col-sm-6">
 
             <select class="m-0 form-control" name="id_mano_de_obra" id="">
-                <option value="0">...</option>
+                <option value="0">Seleccionar</option>
                 @foreach ($t_mano_de_obra as $item)
                 <option value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
                 @endforeach
@@ -89,9 +88,23 @@
         <div class="col-sm-6">
             <button type="submit" class="btn-block btn btn-outline-dark">Agregar</button>
         </div>
-
-    </div>
-
 </form>
+
+</div>
+
+@foreach ($t_costo_unitario as $item)
+@foreach ($t_mano_de_obra as $mo)
+@if ($item->id_producto == $producto->id_producto && $mo->id_mano_de_obra == $item->id_mano_de_obra)
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+    <div class="d-flex row align-items-center">
+        <div class="col-sm-6 mt-1 mb-1">
+            {{$mo->nombre_trabajador}}
+        </div>
+    </div>
+</div>
+@endif
+@endforeach
+@endforeach
+
 
 @stop
