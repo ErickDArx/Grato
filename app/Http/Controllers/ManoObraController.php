@@ -45,21 +45,21 @@ class ManoObraController extends Controller
     {
         // Ver aquello que se envia a la base de datos
         // return $request->all();
-        if($request->ajax()){
-        $agregar = new t_mano_de_obra();
-        $agregar->nombre_trabajador = $request->nombre_trabajador;
-        $agregar->apellido_trabajador = $request->apellido_trabajador;
-        $agregar->salario_mensual = $request->salario_mensual;
-        $agregar->salario_semanal = $request->salario_mensual / 4.33;
-        $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
-        $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
-        $agregar->salario_minuto = $agregar->salario_hora / 60;
-        $agregar->salario_costo_extra = 100;
-        $agregar->salario_costo_hora_doble = 100;
-        $agregar->save();
-        // Redirigir a la vista original 
-        // return back()->with('agregar', 'El usuario se ha agregado');
-        return response()->json($agregar->toArray());
+        if ($request->ajax()) {
+            $agregar = new t_mano_de_obra();
+            $agregar->nombre_trabajador = $request->nombre_trabajador;
+            $agregar->apellido_trabajador = $request->apellido_trabajador;
+            $agregar->salario_mensual = $request->salario_mensual;
+            $agregar->salario_semanal = $request->salario_mensual / 4.33;
+            $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
+            $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
+            $agregar->salario_minuto = $agregar->salario_hora / 60;
+            $agregar->salario_costo_extra = 100;
+            $agregar->salario_costo_hora_doble = 100;
+            $agregar->save();
+            // Redirigir a la vista original 
+            // return back()->with('agregar', 'El usuario se ha agregado');
+            return response()->json($agregar->toArray());
         }
     }
 
@@ -96,21 +96,33 @@ class ManoObraController extends Controller
     {
         // if($request->ajax()){
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
-            $agregar->nombre_trabajador = $request->nombre_trabajador;
-            $agregar->apellido_trabajador = $request->apellido_trabajador;
-            $agregar->salario_mensual = $request->salario_mensual;
-            $agregar->salario_semanal = $request->salario_mensual / 4.33;
-            $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
-            $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
-            $agregar->salario_minuto = $agregar->salario_hora / 60;
-            $agregar->salario_costo_extra = 100;
-            $agregar->salario_costo_hora_doble = 100;
-            // Insertar en la base de datos
-            $agregar->save();
-            // Redirigir a la vista original 
-            return back()->with('agregar', 'El usuario se ha agregado');
+        $agregar->nombre_trabajador = $request->nombre_trabajador;
+        $agregar->apellido_trabajador = $request->apellido_trabajador;
+        $agregar->salario_mensual = $request->salario_mensual;
+        $agregar->salario_semanal = $request->salario_mensual / 4.33;
+        $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
+        $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
+        $agregar->salario_minuto = $agregar->salario_hora / 60;
+        $agregar->salario_costo_extra = 100;
+        $agregar->salario_costo_hora_doble = 100;
+        $agregar->costo_minuto = $request->minutos * $agregar->salario_minuto;
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
         //     return response()->json($agregar->toArray());
         // }
+    }
+
+    public function total(Request $request, $id_mano_de_obra)
+    {
+        $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
+        $agregar->tiempo_trabajado = $request->tiempo_trabajado;
+        $agregar->costo_minuto = $request->tiempo_trabajado * $agregar->salario_minuto;
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
     }
 
     public function labor(Request $request, $id_labor)

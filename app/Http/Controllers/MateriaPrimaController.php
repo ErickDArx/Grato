@@ -70,6 +70,8 @@ class MateriaPrimaController extends Controller
         $edit->costo = $request->costo;
         $edit->precio_um = ($request->costo / $request->presentacion);
         $edit->precio = $request->cantidad * $edit->precio_um;
+
+
         // Insertar en la base de datos
         $edit->save();
         // Redirigir a la vista original 

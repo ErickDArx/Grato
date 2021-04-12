@@ -17,9 +17,10 @@ class MesController extends Controller
         setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
         $mes = DB::table('t_mes')->get();
+        $valores = DB::table('t_valores')->get();
         // $valor = DB::table('t_valores')->get();
 
-        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
+        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes , 't_valores'=> $valores]);
     }
 
     public function create()
@@ -129,11 +130,11 @@ class MesController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
-        // $valor = t_valores::findOrFail($id_cif);
         $mes = DB::table('t_mes')->get();
+        $valores = DB::table('t_valores')->get();
         // $valor = DB::table('t_valores')->get();
 
-        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes]);
+        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes , 't_valores'=> $valores]);
     }
 
     public function update(Request $request, $id_cif)

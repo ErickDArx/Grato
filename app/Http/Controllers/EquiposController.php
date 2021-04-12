@@ -111,12 +111,15 @@ class EquiposController extends Controller
         return back()->with('Perfil','Todo salio bien');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function costo(Request $request, $id_equipo)
+    {
+        $edit = t_equipos::findOrFail($id_equipo);
+        $edit->tiempo_minutos = $request->tiempo_minutos;
+        $edit->costo = $request->tiempo_minutos * $edit->depreciacion_minuto;
+        $edit->save();
+        return back()->with('Perfil','Todo salio bien');
+    }
+
     public function destroy($id_equipo)
     {
         $eliminar = t_equipos::findOrFail($id_equipo);

@@ -31,19 +31,26 @@
                             <form class="form-group" method="POST" action="{{route('AgregarValores',$cif->id_cif)}}">
                                 @csrf
                                 <input type="hidden" name="id_cif" id="" value="{{$cif->id_cif}}">
-
+                                @foreach ($t_valores as $item)
+                                @if ($item->id_cif == $cif->id_cif)
                                 <div class="m-0 mb-2">
                                     <label for="">1. Porcentaje de utilizacion en la empresa</label>
-                                    <input type="text" name="porcentaje_utilizacion" class="form-control" value="">
+                                    <input type="text" name="porcentaje_utilizacion" class="form-control"
+                                        value="{{$item->porcentaje_utilizacion}}">
                                 </div>
                                 <div class="m-0 mb-2">
                                     <label for="">2.Porcentaje de produccion del producto</label>
-                                    <input type="text" name="porcentaje_produccion" class="form-control" value="">
+                                    <input type="text" name="porcentaje_produccion" class="form-control"
+                                        value="{{$item->porcentaje_produccion}}">
                                 </div>
                                 <div class="m-0 mb-2">
                                     <label for="">3.Produccion promedio mensual</label>
-                                    <input type="text" name="produccion_mensual" class="form-control" value="">
+                                    <input type="text" name="produccion_mensual" class="form-control"
+                                        value="{{$item->produccion_mensual}}">
                                 </div>
+                                @endif
+                                @endforeach
+
 
                                 <button type="submit" class="modal__btn modal__btn-primary col-12">Aceptar</button>
                                 <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
@@ -54,12 +61,8 @@
                 </div>
             </div>
             <a href="#" class="Operario btn btn-block btn-dark">Ingresar valores porcentuales</a>
-
         </div>
-        {{-- <div class="col-sm-6 mt-2 mb-1">
-            <a class="text-dark btn btn-link btn-block" href="{{route('CIF')}}">Volver atras</a>
-    </div> --}}
-</div>
+    </div>
 </div>
 
 
@@ -143,21 +146,18 @@ $promedio=0;
             <a href="" class="btn btn-block border-0 ">
                 <i class="fa fa-edit mr-2 "></i>Editar informacion
             </a>
-
         </div>
 
-        <div class="col-sm-6 d-flex justify-content-center mt-2">
-            <form action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+
+        <div class="col-6 d-flex justify-content-center mt-2">
+            <form class="" action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-white btn btn-block border text-danger">
+                <button type="submit" class="bg-white btn btn-block text-danger">
                     <i class="fa fa-trash mr-2 "></i>Borrar informacion
                 </button>
             </form>
         </div>
-
-
-
     </div>
 </div>
 @endif
@@ -169,10 +169,12 @@ $promedio=0;
         <div class="col-sm-6">
             <p class="m-0">Promedio</p>
         </div>
-        <div class="col-sm-6">
-
-            ₡{{$promedio}}
-
+        <div class="col-sm-6 text-center">
+            @foreach ($t_valores as $item)
+                @if ($item->id_cif == $cif->id_cif)
+                ₡{{$item->promedio}}
+                @endif
+            @endforeach
         </div>
     </div>
 </div>

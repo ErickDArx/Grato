@@ -20,16 +20,40 @@ class CostoUnitarioController extends Controller
         $unitario = DB::table('t_costo_unitario')->get();
         $recursos = DB::table('t_materia_prima')->get();
         $operario = DB::table('t_mano_de_obra')->get();
+        $equipo = DB::table('t_equipos')->get();
+        $cif = DB::table('t_valores')->get();
+        $viaticos = DB::table('t_viaticos')->get();
+
         // $costo = t_costo_unitario::findOrFail($id_producto);
-        // return view('modulos/CostoUnitario', compact('producto'));
-        return view('modulos/CostoUnitario', compact('producto'), ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario'=>$unitario]);
+        // return view('modulos/CostoUnitario', compact('producto'));}
+        return view('modulos/CostoUnitario', compact('producto'), ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario'=>$unitario, 't_equipos' =>$equipo, 't_valores'=>$cif, 't_viaticos'=>$viaticos]);
     }
 
     public function operario(Request $request, $id_producto)
     {
+        request()->validate([
+            'id_mano_de_obra' => 'required | unique:t_costo_unitario,id_mano_de_obra',
+        ]);
+
         $agregar = new t_costo_unitario();
         $agregar->id_producto = $id_producto;
         $agregar->id_mano_de_obra = $request->id_mano_de_obra;
+        $agregar->fecha = Carbon::now();
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
+    }
+
+    public function equipo(Request $request, $id_producto)
+    {
+        request()->validate([
+            'id_equipo' => 'required | unique:t_costo_unitario,id_equipo',
+        ]);
+
+        $agregar = new t_costo_unitario();
+        $agregar->id_producto = $id_producto;
+        $agregar->id_equipo = $request->id_equipo;
         $agregar->fecha = Carbon::now();
         // Insertar en la base de datos
         $agregar->save();
