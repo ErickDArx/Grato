@@ -16,7 +16,9 @@
     <script src="{{ asset('js/chartist.min.js') }}"></script>
     <script src="{{ asset('js/iscroll.min.js') }}"></script>
     <script src="{{ asset('js/drawer.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"
+        integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw=="
+        crossorigin="anonymous"></script>
     {{-- Fuente de iconos --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
@@ -33,7 +35,7 @@
     <div class="loading"></div>
     <div class="loader"></div>
     @extends('layouts/menu')
-    
+
     <main role="main" class="drawer-contents bg-blanco">
         <nav class="border-0 shadow navbar navbar-dark bg-white nav p-4">
             <div class="col-12 text-right">
@@ -54,9 +56,9 @@
         </nav>
         <div class="row mr-1 ml-1">
             <div class="col-md-8 mb-2">
-
+                
                 <div class="" style="border-radius: 0.5rem;">
-                    <div class="mt-4">
+                    <div class="">
                         @yield('contenido')
                     </div>
                 </div>
@@ -172,4 +174,5 @@
                 }
             });
         }); --}}
+
 </html>

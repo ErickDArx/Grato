@@ -244,7 +244,7 @@
 </div>
 @endforeach
 
-<div class="shadow m-2 bg-white d-flex align-items-center justify-content-center" style="border-radius: 0.5rem;">
+<div class="d-flex align-items-center justify-content-center">
   <div class="mt-3">
     {{ $t_materia_prima->render() }}
   </div>

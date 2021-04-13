@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Perfil', 'PerfilController@store')->name('store');
     Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
     Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
+    Route::put('/Usuario/{id_usuario}', 'PerfilController@update_usuario')->name('actualizar_usuario');
     Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 
     Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');

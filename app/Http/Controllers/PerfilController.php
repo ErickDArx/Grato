@@ -19,7 +19,6 @@ class PerfilController extends Controller
 
     public function create()
     {
-
     }
 
     /**
@@ -33,14 +32,13 @@ class PerfilController extends Controller
         request()->validate([
             'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
             'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'segundo_apellido_usuario' => 'regex:/^[a-zA-Z\s]+$/u',
             'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
-        ],[
+        ], [
             'nombre_operario.required' => 'El campo no puede estar vacio',
 
         ]);
         // Ver aquello que se envia a la base de datos
-        // return $request->all();
+        return $request->all();
         $agregar = new t_usuario;
         $agregar->nombre_usuario = $request->nombre_usuario;
         $agregar->nombre_operario = $request->nombre_operario;
@@ -79,19 +77,32 @@ class PerfilController extends Controller
         request()->validate([
             'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
             'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'segundo_apellido_usuario' => 'regex:/^[a-zA-Z\s]+$/u',
-            'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
+            'segundo_apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
         ],[
-            'nombre_operario.required' => 'El campo no puede estar vacio',
+            'nombre_operario.required' => 'El campo no puede quedar vacio',
+            'apellido_usuario' => 'El campo no puede quedar vacio',
+            'segundo_apellido_usuario' => 'El campo no puede quedar vacio',
 
         ]);
+
         $edit = t_usuario::findOrFail($id_usuario);
-        $edit->nombre_usuario = $request->nombre_usuario;
         $edit->nombre_operario = $request->nombre_operario;
         $edit->apellido_usuario = $request->apellido_usuario;
         $edit->segundo_apellido_usuario = $request->segundo_apellido_usuario;
         $edit->save();
-        return back()->with('Perfil','Todo salio bien');
+        return back()->with('agregar', 'El usuario se ha agregado');
+        // return $request->all();
+    }
+
+    public function update_usuario(Request $request, $id_usuario)
+    {
+        request()->validate([
+            'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
+        ]);
+        $editar = t_usuario::findOrFail($id_usuario);
+        $editar->nombre_usuario = $request->nombre_usuario;
+        $editar->save();
+        return back()->with('editar', '');
     }
 
     public function update_correo(Request $request, $id_usuario)
@@ -102,21 +113,17 @@ class PerfilController extends Controller
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->email = $request->correo;
         $edit->save();
-        return back()->with('Perfil','Todo salio bien');
+        return back()->with('Perfil', 'Todo salio bien');
     }
 
-    public function delete_asistente( $id_usuario)
+    public function delete_asistente($id_usuario)
     {
         $eliminar = t_usuario::findOrFail($id_usuario);
-        $eliminar -> delete();
-        return back()->with('eliminar','El asistente fue eliminado exitosamente');
-
+        $eliminar->delete();
+        return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
     }
 
     public function destroy($id_usuario)
     {
-
     }
-
-
 }

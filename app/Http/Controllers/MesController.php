@@ -76,7 +76,7 @@ class MesController extends Controller
         foreach ($consumo as $item) {
             if ($cif->id_cif == $item->id_cif) {
                 $calculo = t_valores::findOrFail($id_cif);
-                $calculo->consumo_produccion = ($item->consumo_empresa * $item->porcentaje_produccion)/100;
+                $calculo->consumo_produccion = ($item->consumo_empresa) * ($item->porcentaje_produccion)/100;
             }
         }
         // Insertar en la base de datos
