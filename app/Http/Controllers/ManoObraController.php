@@ -45,7 +45,13 @@ class ManoObraController extends Controller
     {
         // Ver aquello que se envia a la base de datos
         // return $request->all();
+            request()->validate([
+                'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            ]);
+
         if ($request->ajax()) {
+
+
             $agregar = new t_mano_de_obra();
             $agregar->nombre_trabajador = $request->nombre_trabajador;
             $agregar->apellido_trabajador = $request->apellido_trabajador;

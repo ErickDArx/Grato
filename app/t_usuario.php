@@ -26,13 +26,6 @@ class t_usuario extends AuthenticatableContract
     public function scopeBusqueda($query, $busqueda)
     {
         if ($busqueda) {
-            return $query->where('apellido_usuario', 'LIKE', "%$busqueda%");
-        }
-    }
-
-    public function scopeBusqueda2($query, $busqueda)
-    {
-        if ($busqueda) {
             return $query->where('nombre_operario', 'LIKE', "%$busqueda%");
         }
     }

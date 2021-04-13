@@ -18,7 +18,6 @@ class AsistenteController extends Controller
         $date = Carbon::now()->locale('es_ES');
         $date->diffForHumans();
         $usuarios = t_usuario::orderBy('id_usuario','DESC')
-        ->Busqueda2($busqueda)
         ->Busqueda($busqueda)
         ->paginate(4);
         return view('usuarios/Asistentes', ['t_usuario' => $usuarios]);

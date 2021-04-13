@@ -33,7 +33,13 @@
                   <label for="">1.Nombre del operario</label>
                   <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador" value="">
                 </div>
-
+                @error('nombre_trabajador')
+                <div class="col-sm-12 fade show" role="alert">
+                    <div class="text-danger">
+                        <span>{{  $errors->first('nombre_trabajador')}}</span>
+                    </div>
+                </div>
+                @enderror
                 <div class="m-1">
                   <label for="">2.Apellido del operario</label>
                   <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador" value="">
@@ -176,7 +182,7 @@
         <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
           <div class="col-sm-6 mb-2">
             <h6 class="card-title font-weight-bold mt-1">Salario mensual</h6>
-            <input name="salario_mensual" class="form-control" type="text" value="{{$item->salario_mensual}}">
+            <input name="salario_mensual" class="form-control" type="number" value="{{$item->salario_mensual}}">
           </div>
           <div class="col-sm-6 mb-2">
             <div class="">

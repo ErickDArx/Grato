@@ -20,13 +20,13 @@
                 <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Asistentes') }}"><i
                             class="fa fa-users mr-2"></i>Asistentes</a></li>
                 <li>
-                    <a class="drawer-menu-item btn btn-dark m-1" data-toggle="collapse" href="#collapseExample"
+                    <a class="drawer-menu-item btn btn-dark m-1" data-toggle="collapse" href="#menu"
                         role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-border-all mr-2"></i>Modulos
                     </a>
                 </li>
 
-                <div class="drawer-menu-item collapse" id="collapseExample">
+                <div class="drawer-menu-item collapse" id="menu">
                     <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
                             href="{{route('Productos') }}"><i class="fa fa-check-square mr-2"></i>Productos</a>
                     </li>

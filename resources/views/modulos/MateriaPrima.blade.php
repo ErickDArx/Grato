@@ -82,7 +82,7 @@
       {{-- Boton que abre el modal --}}
       <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
     </div>
-    <div class="col-sm-6 p-0">
+    {{-- <div class="col-sm-6 p-0">
       <h6 class="m-0 font-weight-bold">Busqueda</h6>
     </div>
 
@@ -96,7 +96,7 @@
           </div>
         </div>
 
-    </form>
+    </form> --}}
 
   </div>
 </div>
@@ -128,7 +128,7 @@
       <div class="col-sm-6 mb-2" id="nombre">
         @foreach ($t_producto as $producto)
         @if ($item->id_producto == $producto->id_producto)
-            <input class="form-control" type="text" name="" value="{{$producto->nombre_producto}}">
+            <input readonly class="form-control" type="text" name="" value="{{$producto->nombre_producto}}">
         @endif
         
         @endforeach
@@ -146,7 +146,7 @@
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
-          <input name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
+          <input readonly name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
         </div>
 
         <div class="col-sm-6 mb-2">
@@ -164,7 +164,7 @@
         </div>
       <div class="col-sm-6 mb-2">
         <h6 class="font-weight-bold">Precio por unidad de medida</h6>
-        <input name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+        <input readonly name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
       </div>
 
       </div>

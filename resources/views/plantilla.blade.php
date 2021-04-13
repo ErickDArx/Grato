@@ -7,8 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('titulo') - GratoCR </title>
-
+    <link rel="icon" type="image/png" href="{{ asset('css/ravioles.svg') }}" />
     {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer --}}
+
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/micromodal.js') }}"></script>
     <script src="{{ asset('js/ajax.js') }}"></script>
