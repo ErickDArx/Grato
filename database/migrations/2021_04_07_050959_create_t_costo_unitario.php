@@ -26,9 +26,10 @@ class CreateTCostoUnitario extends Migration
         });
 
         Schema::table('t_costo_unitario', function ($table) {
+            $table->engine = 'InnoDB';
             $table->foreign('id_producto')->references('id_producto')->on('t_producto')->onDelete('cascade');
             $table->foreign('id_mano_de_obra')->references('id_mano_de_obra')->on('t_mano_de_obra')->onDelete('cascade');
-            $table->foreign('id_equipo')->references('id_equipo')->on('t_equipo')->onDelete('cascade');
+            $table->foreign('id_equipo')->references('id_equipo')->on('t_equipos')->onDelete('cascade');
         });
     }
 

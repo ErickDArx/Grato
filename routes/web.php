@@ -89,16 +89,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
     // Crud para la vista de cada CIF
-    Route::get('/mes', 'MesController@edit');
     Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
     Route::post('/mes/{id_cif}/valores', 'MesController@valores')->name('AgregarValores');
     Route::post('/mes/{id_cif}/agregar', 'MesController@store')->name('AgregarMes');
     Route::delete('/mes/{id_cif}/{id_mes}', 'MesController@destroy')->name('EliminarMes');
+    Route::put('/mes/{id_cif}/Actualizar', 'MesController@update')->name('ActualizarValores');
 
-    //Route::get('agendarVehiculo/{idvehiculo}/{idcita}',
-    //array('as' => 'agendarVehiculo', 'uses' => 
-    //'AgendamientosController@addAgendaCitaVehiculo'));
-    
     Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
     Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
     Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');

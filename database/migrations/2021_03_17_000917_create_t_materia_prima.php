@@ -14,6 +14,7 @@ class CreateTMateriaPrima extends Migration
     public function up()
     {
         Schema::create('t_materia_prima', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id_materia_prima');
             $table->string('producto');
             $table->string('unidad_medida');
@@ -25,6 +26,7 @@ class CreateTMateriaPrima extends Migration
         });
 
         Schema::table('t_materia_prima', function($table) {
+            $table->engine = 'InnoDB';
             $table->bigInteger('id_producto')->unsigned()->index(); // this is working
             $table->foreign('id_producto')->references('id_producto')->on('t_producto')->onDelete('cascade');
         });

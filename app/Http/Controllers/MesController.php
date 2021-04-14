@@ -11,43 +11,80 @@ use Illuminate\Support\Facades\DB;
 
 class MesController extends Controller
 {
-    public function index($id_cif)
+    public function valores(Request $request, $id_cif)
     {
-        date_default_timezone_set('America/Costa_Rica');
-        setlocale(LC_ALL, 'es_ES');
-        $cif = t_cif::findOrFail($id_cif);
-        $mes = DB::table('t_mes')->get();
-        $valores = DB::table('t_valores')->get();
-        // $valor = DB::table('t_valores')->get();
+        $suma = 0;
+        $cantidad = 0;
+        $promedio = 0;
 
-        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes , 't_valores'=> $valores]);
-    }
+        $calculo = DB::table('t_mes')->get();
+        foreach ($calculo as $item) {
+            if ($id_cif == $item->id_cif) {
+                if ($item->recibo_pagar >= 0) {
+                    $cantidad++;
+                }
+                $suma = ($item->recibo_pagar + $suma);
+                $promedio = ($suma) / $cantidad;
+            }
+        }
 
-    public function create()
-    {
+        $campo = t_valores::where('id_cif', $id_cif)->first();
+
+        if (!$campo) {
+            $insertar = new t_valores();
+            $insertar->porcentaje_utilizacion = $request->porcentaje_utilizacion;
+            $insertar->consumo_empresa = ($insertar->porcentaje_utilizacion * $promedio) / 100;
+            $insertar->porcentaje_produccion = $request->porcentaje_produccion;
+            $insertar->consumo_produccion = ($insertar->consumo_empresa * $insertar->porcentaje_produccion) / 100;
+            $insertar->produccion_mensual = $request->produccion_mensual;
+            $insertar->promedio = $promedio;
+            $insertar->total = $insertar->consumo_produccion * $insertar->produccion_mensual;
+            $insertar->id_cif = $id_cif;
+            $insertar->save();
+        }
+
+        if ($campo) {
+            $insertar = t_valores::findOrFail($id_cif);
+            $insertar->porcentaje_utilizacion = $request->porcentaje_utilizacion;
+            $insertar->consumo_empresa = ($insertar->porcentaje_utilizacion * $promedio) / 100;
+            $insertar->porcentaje_produccion = $request->porcentaje_produccion;
+            $insertar->consumo_produccion = ($insertar->consumo_empresa * $insertar->porcentaje_produccion) / 100;
+            $insertar->produccion_mensual = $request->produccion_mensual;
+            $insertar->promedio = $promedio;
+            $insertar->total = $insertar->consumo_produccion * $insertar->produccion_mensual;
+            $insertar->id_cif = $id_cif;
+            $insertar->save();
+        }
+
+        // Redirigir a la vista original 
+        return back()->with('insertar', 'El usuario se ha agregado');
     }
 
     public function store(Request $request, $id_cif)
     {
+        request()->validate([
+            'fecha' => 'required|date',
+            'recibo_pagar' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+        ]);
+
+        // Inicializamos las variables para su calculo respectivo
         $suma = 0;
         $cantidad = 0;
         $promedio = 0;
 
-        $edit = new t_mes();
-        $mes = DB::table('t_mes')->get();
-        $cif = t_cif::findOrFail($id_cif);
+        // $cif = t_cif::findOrFail($id_cif);
 
-        $edit->fecha = $request->fecha;
-        $edit->recibo_pagar = $request->recibo_pagar;
-        $edit->id_cif = $cif->id_cif;
-        $edit->save();
+        // Agregamos el recibo
+        $agregar = new t_mes();
+        $agregar->fecha = $request->fecha;
+        $agregar->recibo_pagar = $request->recibo_pagar;
+        $agregar->id_cif = $id_cif;
+        $agregar->save();
 
-        $valor = new t_valores();
-        $valores = DB::table('t_valores')->get();
-
+        // Calculamos el promedio
         $calculo = DB::table('t_mes')->get();
         foreach ($calculo as $item) {
-            if ($cif->id_cif == $item->id_cif) {
+            if ($id_cif == $item->id_cif) {
                 if ($item->recibo_pagar >= 0) {
                     $cantidad++;
                 }
@@ -56,73 +93,29 @@ class MesController extends Controller
             }
         }
 
-        foreach ($valores as $item) {
-            if ($cif->id_cif == $item->id_cif) {
-                $valor = t_valores::findOrFail($id_cif);
-                $valor->porcentaje_utilizacion = $item->porcentaje_utilizacion;
-                $valor->consumo_empresa = ($item->porcentaje_utilizacion * $promedio) / 100;
-                $valor->porcentaje_produccion = $item->porcentaje_produccion;
-
-                $valor->produccion_mensual = $item->produccion_mensual;
-                $valor->id_cif = $cif->id_cif;
-                $valor->promedio = $promedio;
-                $valor->total = ($valor->consumo_produccion / $valor->produccion_mensual);
-            }
-        }
-        // Insertar en la base de datos
-        $valor->save();
+        // Actualizamos la tabla valores para los calculos
+        $insertar = t_valores::findOrFail($id_cif);
+        $insertar->porcentaje_utilizacion = $insertar->porcentaje_utilizacion;
+        $insertar->consumo_empresa = ($insertar->porcentaje_utilizacion * $promedio) / 100;
+        $insertar->porcentaje_produccion = $insertar->porcentaje_produccion;
+        $insertar->promedio = $promedio;
+        $insertar->id_cif = $id_cif;
+        $insertar->save();
 
         $consumo = DB::table('t_valores')->get();
         foreach ($consumo as $item) {
-            if ($cif->id_cif == $item->id_cif) {
+            if ($id_cif == $item->id_cif) {
                 $calculo = t_valores::findOrFail($id_cif);
-                $calculo->consumo_produccion = ($item->consumo_empresa) * ($item->porcentaje_produccion)/100;
+                $calculo->produccion_mensual = $item->produccion_mensual;
+                $calculo->consumo_produccion = ($item->consumo_empresa) * ($item->porcentaje_produccion) / 100;
+                $calculo->total = $calculo->consumo_produccion * $calculo->produccion_mensual;
             }
         }
+
         // Insertar en la base de datos
         $calculo->save();
         // Redirigir a la vista original 
-        return back()->with('agregar', 'El usuario se ha agregado');
-    }
-
-    public function valores(Request $request, $id_cif)
-    {
-
-        $edit = new t_valores();
-        $mes = DB::table('t_mes')->get();
-        $cif = t_cif::findOrFail($id_cif);
-
-        $suma = 0;
-        $cantidad = 0;
-        $promedio = 0;
-
-        foreach ($mes as $item) {
-            if ($cif->id_cif == $item->id_cif) {
-                if ($item->recibo_pagar >= 0) {
-                    $cantidad++;
-                }
-                $suma = ($item->recibo_pagar + $suma);
-                $promedio = ($suma) / $cantidad;
-            }
-        }
-
-        $edit->porcentaje_utilizacion = $request->porcentaje_utilizacion;
-        $edit->consumo_empresa = ($edit->porcentaje_utilizacion * $promedio) / 100;
-        $edit->porcentaje_produccion = $request->porcentaje_produccion;
-        $edit->consumo_produccion = ($edit->consumo_empresa * $edit->porcentaje_produccion) / 100;
-        $edit->produccion_mensual = $request->produccion_mensual;
-        $edit->promedio = $promedio;
-        $edit->total = $edit->consumo_produccion * $edit->produccion_mensual;
-        $edit->id_cif = $cif->id_cif;
-        // Insertar en la base de datos
-        $edit->save();
-        // Redirigir a la vista original 
-        return back()->with('agregar', 'El usuario se ha agregado');
-    }
-
-    public function show($id)
-    {
-        //
+        return back()->with('valor', 'El usuario se ha agregado');
     }
 
     public function edit($id_cif)
@@ -130,15 +123,42 @@ class MesController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         setlocale(LC_ALL, 'es_ES');
         $cif = t_cif::findOrFail($id_cif);
-        $mes = DB::table('t_mes')->get();
-        $valores = DB::table('t_valores')->get();
-        // $valor = DB::table('t_valores')->get();
 
-        return view('modulos/DetalleCIF', compact('cif'), ['t_mes' => $mes , 't_valores'=> $valores]);
+        $mes = t_mes::orderBy('id_mes','DESC')
+        ->paginate(4);
+        $valores = DB::table('t_valores')->get();
+        
+        return view('modulos/DetalleCIF', compact('cif', 'valores'), ['t_mes' => $mes, 't_valores' => $valores]);
     }
 
     public function update(Request $request, $id_cif)
     {
+        $suma = 0;
+        $cantidad = 0;
+        $promedio = 0;
+
+        $calculo = DB::table('t_mes')->get();
+        foreach ($calculo as $item) {
+            if ($id_cif == $item->id_cif) {
+                if ($item->recibo_pagar >= 0) {
+                    $cantidad++;
+                }
+                $suma = ($item->recibo_pagar + $suma);
+                $promedio = ($suma) / $cantidad;
+            }
+        }
+
+        $insertar = t_valores::findOrFail($id_cif);
+        $insertar->porcentaje_utilizacion = $request->porcentaje_utilizacion;
+        $insertar->consumo_empresa = ($insertar->porcentaje_utilizacion * $promedio) / 100;
+        $insertar->porcentaje_produccion = $request->porcentaje_produccion;
+        $insertar->consumo_produccion = ($insertar->consumo_empresa * $insertar->porcentaje_produccion) / 100;
+        $insertar->produccion_mensual = $request->produccion_mensual;
+        $insertar->promedio = $promedio;
+        $insertar->total = $insertar->consumo_produccion * $insertar->produccion_mensual;
+        $insertar->id_cif = $id_cif;
+        $insertar->save();
+        return back()->with('insertar', 'fue eliminado exitosamente');
     }
 
     public function destroy(Request $request, $id_cif, $id_mes)
@@ -160,22 +180,27 @@ class MesController extends Controller
                 $promedio = ($suma) / $cantidad;
             }
         }
-        $valores = DB::table('t_valores')->get();
-        foreach ($valores as $item) {
+
+        $insertar = t_valores::findOrFail($id_cif);
+        $insertar->porcentaje_utilizacion = $insertar->porcentaje_utilizacion;
+        $insertar->consumo_empresa = ($insertar->porcentaje_utilizacion * $promedio) / 100;
+        $insertar->porcentaje_produccion = $insertar->porcentaje_produccion;
+        $insertar->promedio = $promedio;
+        $insertar->save();
+        // Insertar en la base de datos
+
+        $consumo = DB::table('t_valores')->get();
+        foreach ($consumo as $item) {
             if ($id_cif == $item->id_cif) {
-                $valor = t_valores::findOrFail($id_cif);
-                $valor->porcentaje_utilizacion = $item->porcentaje_utilizacion;
-                $valor->consumo_empresa = ($item->porcentaje_utilizacion * $promedio) / 100;
-                $valor->porcentaje_produccion = $item->porcentaje_produccion;
-                $valor->consumo_produccion = ($item->consumo_empresa * $item->porcentaje_produccion);
-                $valor->produccion_mensual = $item->produccion_mensual;
-                $valor->id_cif = $id_cif;
-                $valor->promedio = $promedio;
-                $valor->total = ($valor->consumo_produccion) / $valor->produccion_mensual;
+                $calculo = t_valores::findOrFail($id_cif);
+                $calculo->produccion_mensual = $item->produccion_mensual;
+                $calculo->consumo_produccion = ($item->consumo_empresa) * ($item->porcentaje_produccion) / 100;
+                $calculo->total = ($calculo->consumo_produccion * $calculo->produccion_mensual);
             }
         }
+
         // Insertar en la base de datos
-        $valor->save();
+        $calculo->save();
 
         return back()->with('eliminar', 'fue eliminado exitosamente');
     }
