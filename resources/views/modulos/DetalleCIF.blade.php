@@ -11,7 +11,7 @@
 
     {{-- Titulo del CIF --}}
     <div class="col-sm-8 mt-1 mb-1">
-      <h4 class="font-weight-bold"><i class="fa fa-coins mr-2 "></i>CIF : {{$cif->nombre_cif}}</h4>
+      <h4 class="font-weight-bold m-0"><i class="fa fa-coins mr-2 "></i>CIF : {{$cif->nombre_cif}}</h4>
     </div>
 
     {{-- Modal para ingresar y actualizar los valores porcentuales --}}
@@ -96,25 +96,29 @@
         </div>
         @enderror
       </div>
+      @php
+      $campo = App\t_valores::where('id_cif', $cif->id_cif)->first();
+      @endphp
 
+      @if (!$campo)
+      <div class="col-sm-4 d-flex mt-4">
+        <button disabled class="disabled btn btn-block btn-outline-dark">Ingresar</button>
+      </div>
+      <div class="col-sm-12 m-1 text-primary">
+        <h6><i class="fa fa-clock mr-2 "></i>Recordatorio</h6>
+        <h6 class="text-dark">Primero debes ingresar los valores porcentuales para continuar</h6>
+      </div>
+      @endif
+
+      @if ($campo)
       <div class="col-sm-4 d-flex mt-4">
         <button class="btn btn-block btn-outline-dark" type="submit">Ingresar</button>
       </div>
+      @endif
 
     </div>
   </div>
 </form>
-
-@error('promedio')
-<div class="row shadow m-2 card-body bg-white"  style="border-radius: 0.5rem;">
-  <div class="fade show" role="alert">
-    <div class="text-danger">
-      <span>{{  $errors->first('promedio')}}</span>
-    </div>
-  </div>
-</div>
-@enderror
-
 
 {{-- Titulo para el listado de recibos / Boton volver atras --}}
 <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -150,50 +154,54 @@
 @section('contenido-2')
 @parent
 
+{{-- Lista de recibos --}}
 {{-- Buscamos los recibos que pertenezcan al mismo CIF y año --}}
-
 @foreach ($t_mes as $item)
 @if ($cif->id_cif == $item->id_cif && $item->fecha > date('Y') )
 {{-- Listar los recibos / Botones  --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="d-flex row align-items-center">
-    <div class="col-sm-6">
-      <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>
-      <input type="" readonly class="form-control"
-        value="{{ \Carbon\Carbon::parse(strtotime($item->fecha))->formatLocalized('%B %Y') }}">
+    <form class="row m-2" action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+      @csrf
+      @method('PUT')
 
-    </div>
-    <div class="col-sm-6 mt-1 mb-1">
+      <div class="col-sm-6">
+        <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>
+        <input type="" readonly class="form-control"
+          value="{{ \Carbon\Carbon::parse(strtotime($item->fecha))->formatLocalized('%B %Y') }}">
+      </div>
+      <div class="col-sm-6 mt-1 mb-1">
 
-      <h6 class="m-0 mt-1 mb-1"><i class="fa fa-money-bill mr-2 "></i>Total a pagar (Colones)</h6>
-      <input class="form-control" type="number" value="{{$item->recibo_pagar}}">
+        <h6 class="m-0 mt-1 mb-1"><i class="fa fa-money-bill mr-2 "></i>Total a pagar (Colones)</h6>
+        <input class="form-control" type="number" name="recibo_pagar" value="{{$item->recibo_pagar}}">
 
-    </div>
+      </div>
+      <div class="col-sm-12 d-flex justify-content-center mt-2">
+        <button type="submit" href="Editar" class="bg-white text-primary btn btn-block border-0 ">
+          <i class="fa fa-edit mr-2 "></i>Editar informacion
+        </button>
+      </div>
 
-    <div class="col-sm-6 d-flex justify-content-center mt-2">
-      <a href="" class="btn btn-block border-0 ">
-        <i class="fa fa-edit mr-2 "></i>Editar informacion
-      </a>
-    </div>
+    </form>
+  </div>
+  <form class="row border-top" action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+    @csrf
+    @method('DELETE')
 
-
-    <div class="col-6 d-flex justify-content-center mt-2">
-      <form class="" action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
-        @csrf
-        @method('DELETE')
+    <div class="col-sm-12 d-flex align-items-center">
         <button type="submit" class="bg-white btn btn-block text-danger">
           <i class="fa fa-trash mr-2 "></i>Borrar informacion
         </button>
-      </form>
     </div>
-  </div>
+
+  </form>
 </div>
 @endif
 
 @endforeach
 
 <div class="d-flex justify-content-center align-items-center">
-  {{$t_mes->render()}}
+
 </div>
 
 

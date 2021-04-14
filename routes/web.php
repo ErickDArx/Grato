@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
     Route::post('/mes/{id_cif}/valores', 'MesController@valores')->name('AgregarValores');
     Route::post('/mes/{id_cif}/agregar', 'MesController@store')->name('AgregarMes');
+    Route::put('/mes/{id_cif}/{id_mes}/Actualizar', 'MesController@mes')->name('ActualizarMes');
     Route::delete('/mes/{id_cif}/{id_mes}', 'MesController@destroy')->name('EliminarMes');
     Route::put('/mes/{id_cif}/Actualizar', 'MesController@update')->name('ActualizarValores');
 
