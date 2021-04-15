@@ -11,8 +11,10 @@ class t_producto extends Model
     public $timestamps = false;
     protected $guarded = ['id_producto'];
     protected $primaryKey = "id_producto";
-
-    public function scopeMateria($query, $buscador)
+    protected $fillable = [
+        'nombre_producto'
+    ];
+    public function scopebusqueda($query, $buscador)
     {
         if ($buscador) {
             return $query->where('nombre_producto', 'LIKE', "%$buscador%");

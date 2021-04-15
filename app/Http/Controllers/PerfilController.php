@@ -30,15 +30,23 @@ class PerfilController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'nombre_operario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundo_apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
+            'correo' => 'required | unique:t_usuario,email',
+            'password' => 'required | min:8',
         ], [
-            'nombre_operario.required' => 'El campo no puede estar vacio',
-
+            'nombre_operario.required' => 'El campo: Nombre del operario, no puede estar vacio',
+            'apellido_usuario.required' => 'El campo: Apellido del operario, no puede estar vacio',
+            'segundo_apellido_usuario.required' => 'El campo: Segundo apellido del operario, no puede estar vacio',
+            'nombre_usuario.required' => 'El campo: Nombre de usuario, no puede estar vacio',
+            'correo.required' => 'El campo: Correo electronico, no puede estar vacio',
+            'password.required' => 'El campo: Contraseña, no puede estar vacio',
+            'password.min' => 'La contraseña debe tener minimo 8 caracteres',
         ]);
         // Ver aquello que se envia a la base de datos
-        return $request->all();
+        // return $request->all();
         $agregar = new t_usuario;
         $agregar->nombre_usuario = $request->nombre_usuario;
         $agregar->nombre_operario = $request->nombre_operario;
@@ -75,9 +83,9 @@ class PerfilController extends Controller
     public function update(Request $request, $id_usuario)
     {
         request()->validate([
-            'nombre_operario' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'segundo_apellido_usuario' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'nombre_operario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundo_apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         ],[
             'nombre_operario.required' => 'El campo no puede quedar vacio',
             'apellido_usuario' => 'El campo no puede quedar vacio',

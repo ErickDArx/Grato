@@ -1,5 +1,11 @@
 @extends('plantilla')
 
+@section('Vista','Productos')
+
+@section('Ruta','Productos')
+
+@section('Icono','fa fa-check-square mr-2')
+
 @section('titulo','Productos')
 
 @section('contenido')
@@ -9,7 +15,7 @@
     <div class="container">
       <div class="row d-flex align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-          <h4 class="font-weight-bold m-0">Elaboracion de productos</h4>
+          <h4 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i>Elaboracion de productos</h4>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
           <button class="Producto btn btn-dark btn-block">Ingresar nuevo producto</button>
@@ -36,12 +42,7 @@
                     <label for="">1.Nombre del producto a fabricar</label>
                     <input type="text" name="nombre_producto" class="form-control mb-2 mt-2" value="">
                   </div>
-                  {{-- <div class="m-1">
-                                                        <label for="">2.Descripcion del producto</label>
-                                                        <input type="text" name="nombre_trabajador" class="form-control"
-                                                            id="nombre_trabajador" value="">
-                                                    </div> --}}
-                  <button type="submit" class="btn btn-dark col-12">Aceptar</button>
+                  <button type="submit" class="col-3 modal__btn modal__btn-primary col-12">Aceptar</button>
                   <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
                     aria-label="Close this dialog window">Cerrar</button>
                 </form>
@@ -62,18 +63,35 @@
         });
 </script>
 
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('Productos')}}" method="GET" class="row m-2 d-flex align-items-center">
+    @csrf
 
-    @error('nombre_producto')
-    <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-      <div class="col-sm-12">
-    <div class="col-12 fade show" role="alert">
-        <div class="text-danger">
-            <span>{{  $errors->first('nombre_producto')}}</span>
-        </div>
+    <div class="col-sm-6 p-0">
+      <h6 class="m-0 font-weight-bold">Listado de productos</h6>
+    </div>
+
+    <div class="input-group col-sm-6">
+      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+@error('nombre_producto')
+<div class="shadow m-2 card-body bg-white row" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('nombre_producto')}}</span>
+      </div>
     </div>
   </div>
 </div>
-    @enderror
+@enderror
 
 
 @stop
@@ -87,7 +105,8 @@
     @method('PUT')
     <div class="m-1 d-flex align-items-center row ">
       <div class="col-sm-6">
-        <h5 class="font-weight-bold mt-2 mb-2">Nombre del producto a fabricar</h5>
+        <h5 class="font-weight-bold mt-2 mb-2"><i class="fa fa-clipboard-check mr-1"></i> Nombre del producto a fabricar
+        </h5>
       </div>
       <div class="col-sm-6 mt-1 mb-1">
         <input class="form-control" type="text" name="nombre_producto" id="" value="{{$item->nombre_producto}}">
@@ -122,8 +141,9 @@
   </form>
   <div class="d-flex align-items-center justify-content-center row m-2 rounded">
     <div class="col-sm-6 mt-2">
-      <button type="button" class="Actualizar btn m-0 btn-block bg-white"
-        data-micromodal-trigger="modal-3{{$item->id_producto}}"><i class="fa fa-edit mr-2 "></i>Actualizar información</button>
+      <button type="button" class="Actualizar text-primary btn m-0 btn-block bg-white"
+        data-micromodal-trigger="modal-3{{$item->id_producto}}"><i class="fa fa-edit mr-2 "></i>Actualizar
+        información</button>
     </div>
     <div class="col-sm-6 mt-2">
       <form action="{{route('EliminarProducto',$item->id_producto)}}" method="POST">
@@ -162,6 +182,10 @@
   </div>
 </div>
 @endforeach
+
+<div class="d-flex justify-content-center">
+  {{$t_producto->render()}}
+</div>
 
 <script>
   MicroModal.init();

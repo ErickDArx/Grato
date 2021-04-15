@@ -1,8 +1,6 @@
 <header role="banner">
-    <button type="button" class="drawer-toggle drawer-hamburger bg-white rounded-circle shadow-lg">
-        <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
-    </button>
-    <nav class="drawer-nav slider-menu" role="navigation">
+
+    <nav class="drawer-nav slider-menu" role="navigation"  style="overflow: auto;">
         <ul class="drawer-menu">
             <div class="d-flex align-items-end m-4">
                 <li><img src="{{ asset('media/Logo-negativo.png')}}" class="img-fluid" alt=""></li>
@@ -20,29 +18,32 @@
                 <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Asistentes') }}"><i
                             class="fa fa-users mr-2"></i>Asistentes</a></li>
                 <li>
-                    <a class="drawer-menu-item btn btn-dark m-1" data-toggle="collapse" href="#menu"
+                    <a class="drawer-menu-item btn btn-outline-gray-2 m-1" data-toggle="collapse" href="#menu"
                         role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-border-all mr-2"></i>Modulos
                     </a>
                 </li>
 
                 <div class="drawer-menu-item collapse" id="menu">
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
-                            href="{{route('Productos') }}"><i class="fa fa-check-square mr-2"></i>Productos</a>
-                    </li>
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('materia') }}"><i
-                                class="fa fa-clipboard mr-2"></i>Materia
-                            Prima</a>
-                    </li>
-                    <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1"
-                            href="{{route('ManoObra') }}"><i class="fa fa-users mr-2"></i>Mano de obra</a></li>
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Equipo') }}"><i
-                                class="fa fa-cogs mr-2"></i>Equipo</a></li>
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('CIF') }}"><i
-                                class="fas fa-coins mr-2 text-break"></i>Costos
-                            Indirectos (CIF)</a></li>
-                    <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
-                            href="{{route('Viaticos') }}"><i class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
+                    <div>
+                        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                                href="{{route('Productos') }}"><i class="fa fa-check-square mr-2"></i>Productos</a>
+                        </li>
+                        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                                href="{{route('materia') }}"><i class="fa fa-clipboard mr-2"></i>Materia
+                                Prima</a>
+                        </li>
+                        <li><a class="drawer-menu-item text-white  btn-outline-gray btn m-1"
+                                href="{{route('ManoObra') }}"><i class="fa fa-users mr-2"></i>Mano de obra</a></li>
+                        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                                href="{{route('Equipo') }}"><i class="fa fa-cogs mr-2"></i>Equipo</a></li>
+                        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('CIF') }}"><i
+                                    class="fas fa-coins mr-2 text-break"></i>Costos
+                                Indirectos (CIF)</a></li>
+                        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1"
+                                href="{{route('Viaticos') }}"><i class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
+                    </div>
+
                 </div>
 
 

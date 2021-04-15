@@ -1,7 +1,7 @@
 {{-- Se llama a la plantilla creada --}}
 @extends('plantilla')
 {{-- Se llama a la variable titulo para otorgarle un valor --}}
-@section('titulo', 'Pefil')
+@section('titulo', 'Perfil')
 
 @section('paginacion')
 @parent
@@ -13,7 +13,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
    <div class="d-flex justify-content-center m-1 row align-items-center">
       <div class="col-sm-12">
-         <h4 class="font-weight-bold"><i class="fa fa-user mr-2 "></i>Perfil</h4>
+         <h4 class="font-weight-bold" style="letter-spacing: 1.5px"><i class="fa fa-user mr-2 "></i>Perfil</h4>
          <h6 class="m-0 text-gray">Mis datos personales</h6>
       </div>
       <div class="">
@@ -73,7 +73,7 @@
                </div>
                @enderror
 
-               <div class="p-3 font-weight-bold col-sm-6">
+               <div class="p-3 mb-2 font-weight-bold col-sm-6">
                   Modo acceso
                </div>
                <div class="col-sm-6">
@@ -83,7 +83,7 @@
                <div class="col-sm-6">
 
                </div>
-               <div class="col-sm-6">
+               <div class="col-sm-6 mt-2">
                   <a class="Personal mt-2 btn btn-dark btn-block rounded text-white">
                      Editar mis datos
                   </a>

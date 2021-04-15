@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Request $request)
     {
+
+        $busqueda = $request->get('busqueda');
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $materia = DB::table('t_producto')->get();
+        $materia = t_producto::orderBy('nombre_producto','ASC')
+        ->busqueda($busqueda)
+        ->paginate(6);
 
         return view('modulos/Productos', ['t_producto' => $materia]);
     }
@@ -42,9 +42,10 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'nombre_producto' => 'required|string|min:6',
+            'nombre_producto' => 'required|string|min:3',
         ],[
-            'nombre_producto.required'=> 'El formato del campo: Nombre del producto es invalido.'
+            'nombre_producto.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
+            'nombre_producto.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',
         ]);
         $agregar = new t_producto();
         $agregar->nombre_producto = $request->nombre_producto;
@@ -87,9 +88,10 @@ class ProductoController extends Controller
     public function update(Request $request, $id_producto)
     {
         request()->validate([
-            'nombre_producto' => 'required|string|min:6',
+            'nombre_producto' => 'required|string|min:3',
         ],[
-            'nombre_producto.required'=> 'El formato del campo: Nombre del producto es invalido.'
+            'nombre_producto.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
+            'nombre_producto.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',
         ]);
         $edit = t_producto::findOrFail($id_producto);
         $edit->nombre_producto = $request->nombre_producto;

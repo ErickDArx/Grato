@@ -82,7 +82,7 @@
       {{-- Boton que abre el modal --}}
       <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
     </div>
-    {{-- <div class="col-sm-6 p-0">
+    <div class="col-sm-6 p-0">
       <h6 class="m-0 font-weight-bold">Busqueda</h6>
     </div>
 
@@ -96,7 +96,7 @@
           </div>
         </div>
 
-    </form> --}}
+    </form>
 
   </div>
 </div>

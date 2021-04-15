@@ -35,29 +35,42 @@
 <body class="drawer drawer--left drawer--sidebar blanco" style="background-color:#E6E6E6 ;">
     <div class="loading"></div>
     <div class="loader"></div>
-    @extends('layouts/menu')
 
     <main role="main" class="drawer-contents bg-blanco">
-        <nav class="border-0 shadow navbar navbar-dark bg-white nav p-4">
-            <div class="col-12 text-right">
+        {{-- Informacion del usuario autenticado --}}
+        <nav class="row border-0 d-flex align-items-center shadow navbar navbar-dark bg-white nav p-4">
+            <div class="col-sm-4">
+                <button type="button" class="drawer-toggle drawer-hamburger bg-white rounded-circle shadow-lg">
+                    <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
+                </button>
+                @extends('layouts/menu')
+            </div>
+            <div class="col-sm-4 mb-2" style="">
+
+                <div class="text-center font-weight-bolder">
+                    <a class="h5 p-2 text-dark" href="@yield('Ruta')"> <i class="@yield('Icono')"></i> @yield('Vista')</a>
+                </div>
+
+            </div>
+            <div class="col-sm-4 text-sm-right text-center mb-2">
                 @unless (Auth::check())
                 <p class="alert text-danger">
                     Usted no ha iniciado sesión aun!
                 </p>
                 @endunless
-
                 @auth
-                <a href="{{route('Perfil')}}" class="rounded text-gray">
+                <a href="{{route('Perfil')}}" class="rounded text-gray ">
+                    <i class="fa fa-user-circle"></i>
                     {{ auth()->user()->nombre_operario }}
                     {{ auth()->user()->apellido_usuario }}
-
                 </a>
                 @endauth
             </div>
         </nav>
+
         <div class="row mr-1 ml-1">
             <div class="col-md-8 mb-2">
-                
+
                 <div class="" style="border-radius: 0.5rem;">
                     <div class="">
                         @yield('contenido')
@@ -91,32 +104,23 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-2 mt-3">
+            <div class="col-md-4 ">
+
                 <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
 
-                        <h4>{{ date('h:i a') }}</h4>
+                        <h5 class="">{{ date('h:i a') }}</h5>
 
-                        <p class="text-gray">{{ date('d') }} de {{ date('M') }} del {{ date('Y') }}</p>
+                        <p class="text-gray m-0">{{ date('d') }} de {{ date('M') }} del {{ date('Y') }}</p>
 
-                        <h5 class="text-center mb-3 text-oscuro">Acciones Rápidas</h5>
-                        {{-- <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Pedidos.html">
-                                <div class="row ">
-                                    <p class="m-0 col-8 text-left"><i class="fa fa-plus mr-2"></i> Alistar pedido</p>
 
-                                </div>
-                            </a>
-                        </div> --}}
-                        {{-- <div class=" mt-2">
-                            <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="Reportes.html">
-                                <div class="row ">
-                                    <p class="m-0 col-8 text-left"><i class="fa fa-eye mr-2"></i>Ver los pedidos hechos
-                                    </p>
+                    </div>
+                </div>
 
-                                </div>
-                            </a>
-                        </div> --}}
+                <div class="card shadow m-2" style="border-radius: 0.5rem;">
+                    <div class="card-body text-center">
+                        <h6 class="text-center mb-3 text-oscuro">Acciones Rápidas</h6>
+
                         <div class=" mt-2">
                             <a class="shadow-sm btn btn-block btn-outline-dark border-0" href="{{ 'MateriaPrima' }}">
                                 <div class="row">
@@ -138,6 +142,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="col-md-12 mr-1 ml-1 mb-3">
@@ -151,6 +156,7 @@
         </div>
 
     </main>
+
 </body>
 {{--$.ajaxSetup({
             headers: {
