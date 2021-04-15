@@ -15,9 +15,7 @@
                 <li>
                     <a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Perfil') }}"><i
                             class="fa fa-user mr-2"></i>Mi perfil</a></li>
-                @if (auth()->user()->rol == 0)
-                    <p>No hay nada que mostrar</p>
-                @endif
+
                 <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Asistentes') }}"><i
                             class="fa fa-users mr-2"></i>Asistentes</a></li>
                 <li>
