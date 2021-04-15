@@ -5,7 +5,7 @@
 @section('contenido')
 @parent
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex justify-content-center row align-items-center">
+  <div class="m-2 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
       <h4 class="font-weight-bold">Costos Indirectos de Fabricación</h4>
     </div>
@@ -58,20 +58,40 @@
   <form action="{{route('ActualizarNombre', $item->id_cif)}}" method="POST">
     @csrf
     @method('PUT')
-    <div class="m0 d-flex align-items-center row">
-      <div class="col-sm-6 mb-2">
+    <div class=" m-2 d-flex align-items-center row">
+      <div class="col-sm-6 mb-2 d-flex align-items-center">
         <h5 class="m-0 card-title font-weight-bold">Titulo del CIF</h5>
       </div>
-      <div class="col-sm-6 mb-2" id="nombre">
-        <input class="form-control" type="text" name="nombre_cif" value="{{$item->nombre_cif}}">
+      <div class="col-sm-6 mt-2" id="nombre">
+        <div class="input-group mb-3">
+          <input class="form-control" type="text" name="nombre_cif" value="{{$item->nombre_cif}}">
+          <div class="input-group-append">
+            <a type="submit" href="{{route('IndexCIF' , $item->id_cif)}}" class="btn-dark btn border btn-block">Ver
+              detalle</a>
+          </div>
+        </div>
       </div>
+      
     </div>
-  </form>
-  <div class="justify-content-center m-0 mt-2 row d-flex align-items-center">
-    <div class="col-sm-6 mb-1">
-        <a type="submit" href="{{route('IndexCIF' , $item->id_cif)}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
+
+    <div class="justify-content-center row d-flex align-items-center">
+      <div class="col-sm-12 mb-1">
+
+      </div>
+      <div class="col-sm-6 mb-1">
+        <a type="submit" href="{{route('IndexCIF' , $item->id_cif)}}" class="text-primary bg-white btn btn-block">Editar
+          informacion</a>
+      </div>
+      <div class="col-sm-6 mb-1">
+        <a type="submit" href="{{route('IndexCIF' , $item->id_cif)}}"
+          class="text-danger bg-white btn btn-block">Eliminar
+          informacion</a>
+      </div>
+
     </div>
-  </div>
+</div>
+</form>
+
 </div>
 @endforeach
 <script>

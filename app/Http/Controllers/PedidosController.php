@@ -25,7 +25,6 @@ class PedidosController extends Controller
         $buscador = $request->get('busqueda');
         $materia = t_materia_prima::orderBy('id_materia_prima','DESC')->get();
         $producto = t_producto::orderBy('nombre_producto','ASC')
-        ->materia($buscador)
         ->paginate(5);
         return view('modulos/Pedidos', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }

@@ -20,7 +20,8 @@ class ManoObraController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $users = DB::table('t_usuario')->get();
-        $operarios = DB::table('t_mano_de_obra')->get();
+        $operarios = t_mano_de_obra::orderBy('nombre_trabajador','DESC')
+        ->paginate(6);
         $laborales = DB::table('t_labores')->get();
         return view('modulos/ManoObra', ['t_usuario' => $users, 't_mano_de_obra' => $operarios, 't_labores' => $laborales]);
     }
@@ -47,10 +48,9 @@ class ManoObraController extends Controller
         // return $request->all();
             request()->validate([
                 'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+                'apellido_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+                'salario_mensual' => 'required|numeric',
             ]);
-
-        if ($request->ajax()) {
-
 
             $agregar = new t_mano_de_obra();
             $agregar->nombre_trabajador = $request->nombre_trabajador;
@@ -64,9 +64,8 @@ class ManoObraController extends Controller
             $agregar->salario_costo_hora_doble = 100;
             $agregar->save();
             // Redirigir a la vista original 
-            // return back()->with('agregar', 'El usuario se ha agregado');
-            return response()->json($agregar->toArray());
-        }
+            return back()->with('agregar', 'El usuario se ha agregado');
+
     }
 
     /**
@@ -100,7 +99,12 @@ class ManoObraController extends Controller
      */
     public function update(Request $request, $id_mano_de_obra)
     {
-        // if($request->ajax()){
+        request()->validate([
+            'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'apellido_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'salario_mensual' => 'required|numeric',
+        ]);
+
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
         $agregar->nombre_trabajador = $request->nombre_trabajador;
         $agregar->apellido_trabajador = $request->apellido_trabajador;
@@ -116,12 +120,12 @@ class ManoObraController extends Controller
         $agregar->save();
         // Redirigir a la vista original 
         return back()->with('agregar', 'El usuario se ha agregado');
-        //     return response()->json($agregar->toArray());
-        // }
+
     }
 
     public function total(Request $request, $id_mano_de_obra)
     {
+
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
         $agregar->tiempo_trabajado = $request->tiempo_trabajado;
         $agregar->costo_minuto = $request->tiempo_trabajado * $agregar->salario_minuto;
@@ -133,6 +137,10 @@ class ManoObraController extends Controller
 
     public function labor(Request $request, $id_labor)
     {
+        request()->validate([
+            'dias_laborales_semana' => 'required|numeric',
+            'horas_laborales_dia' => 'required|numeric',
+        ]);
         $editar = t_labores::findOrFail($id_labor);
         $editar->dias_laborales_semana = $request->dias_laborales_semana;
         $editar->horas_laborales_dia = $request->horas_laborales_dia;

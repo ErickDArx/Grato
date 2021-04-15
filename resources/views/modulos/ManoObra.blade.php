@@ -1,14 +1,18 @@
 @extends('plantilla')
+@section('Vista','Mano de Obra')
 
+@section('Ruta','ManoObra')
+
+@section('Icono','fa fa-users-cog mr-2')
 @section('titulo', 'Mano de obra')
 
 @section('contenido')
 @parent
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex justify-content-center row align-items-center">
+  <div class="m-1 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
-      <h4 class="font-weight-bold m-0">Mano de obra</h4>
-      <h6 class="text-gray">Desglose de operarios</h6>
+      <h4 class="font-weight-bold m-0"><i class="fa fa-user-cog mr-1"></i> Mano de obra</h4>
+      <h6 class="text-gray mt-2">Desglose de operarios</h6>
     </div>
     <div class="col-sm-6">
       <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
@@ -34,22 +38,34 @@
                   <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador" value="">
                 </div>
                 @error('nombre_trabajador')
-                <div class="col-sm-12 fade show" role="alert">
-                    <div class="text-danger">
-                        <span>{{  $errors->first('nombre_trabajador')}}</span>
-                    </div>
+                <div class="fade show" role="alert">
+                  <div class="text-danger">
+                    <span>{{  $errors->first('nombre_trabajador')}}</span>
+                  </div>
                 </div>
                 @enderror
                 <div class="m-1">
                   <label for="">2.Apellido del operario</label>
                   <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador" value="">
                 </div>
-
+                @error('apellido_trabajador')
+                <div class="fade show" role="alert">
+                  <div class="text-danger">
+                    <span>{{  $errors->first('apellido_trabajador')}}</span>
+                  </div>
+                </div>
+                @enderror
                 <div class="m-1">
                   <label for="">3.Salario mensual</label>
                   <input type="number" name="salario_mensual" class="form-control" id="salario_mensual" value="">
                 </div>
-
+                @error('salario_mensual')
+                <div class="fade show mb-2" role="alert">
+                  <div class="text-danger">
+                    <span>{{  $errors->first('salario_mensual')}}</span>
+                  </div>
+                </div>
+                @enderror
                 @foreach ($t_labores as $item)
                 @php
                 $dias = $item->dias_laborales_semana;
@@ -74,8 +90,20 @@
 
     </div>
   </div>
-
 </div>
+
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 @stop
 
 @section('contenido-2')
@@ -87,18 +115,33 @@
     @csrf
     @method('PUT')
 
-    <div class="m-1 d-flex align-items-center row mb-2">
-      <div class="col-sm-3">
-        <h6 class="font-weight-bold m-0">Dias laborales por semana</h6>
+    <div class="m-2 d-flex align-items-center row mb-2">
+      <div class="col-sm-6">
+        <h6 class="font-weight-bold m-0"><i class="fa fa-calendar-day mr-1"></i> Dias laborales por semana</h6>
       </div>
-      <div class="col-sm-3 mt-2">
+      <div class="col-sm-6 mt-2">
         <input type="number" name="dias_laborales_semana" class="form-control" value="{{$item->dias_laborales_semana}}">
+        @error('dias_laborales_semana')
+        <div class="fade show mb-2" role="alert">
+          <div class="text-danger">
+            <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('dias_laborales_semana')}}</span>
+          </div>
+        </div>
+        @enderror
       </div>
-      <div class="col-sm-3 mt-2">
-        <h6 class="font-weight-bold m-0">Horas laborales por dia</h6>
+
+      <div class="col-sm-6 mt-2">
+        <h6 class="font-weight-bold m-0"><i class="fa fa-hourglass-start mr-1"></i> Horas laborales por dia</h6>
       </div>
-      <div class="col-sm-3 mt-2">
+      <div class="col-sm-6 mt-2">
         <input type="number" name="horas_laborales_dia" class="form-control" value="{{$item->horas_laborales_dia}}">
+        @error('horas_laborales_dia')
+        <div class="fade show mb-2" role="alert">
+          <div class="text-danger">
+            <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('horas_laborales_dia')}}</span>
+          </div>
+        </div>
+        @enderror
       </div>
     </div>
     <div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
@@ -127,9 +170,12 @@
     </div>
   </form>
 
-  <div class="row d-flex align-items-center">
-    <div class="col-sm-12">
-      <button class="ActualizarLabores btn btn-outline-gray btn-block" data-micromodal-trigger="modal-4">Actualizar
+  <div class="m-2 row d-flex align-items-center">
+    <div class="col-sm-6">
+
+    </div>
+    <div class="col-sm-6">
+      <button class="ActualizarLabores btn btn-outline-dark btn-block" data-micromodal-trigger="modal-4">Actualizar
         los datos</button>
     </div>
   </div>
@@ -171,11 +217,14 @@
         </div>
 
       </div>
+      <div class="row m-3">
+        <button class=" btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+          data-target="#collapseExample{{$item->id_mano_de_obra}}" aria-expanded="false"
+          aria-controls="collapseExample">
+          Ver mas informacion
+        </button>
+      </div>
 
-      <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
-        data-target="#collapseExample{{$item->id_mano_de_obra}}" aria-expanded="false" aria-controls="collapseExample">
-        Ver mas informacion
-      </button>
 
       <div class="collapse" id="collapseExample{{$item->id_mano_de_obra}}">
 
@@ -243,7 +292,8 @@
       <div class="col-sm-6">
 
         <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
-          class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
+          class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
+          informacion</button>
 
       </div>
       <div class="col-sm-6">
@@ -251,46 +301,12 @@
           @csrf
           @method('DELETE')
           <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
-            data-target="#exampleModal{{$item->id_mano_de_obra}}">
-            Eliminar informacion
+            data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">
+            <i class="fa fa-trash mr-1"></i> Eliminar informacion
           </button>
           <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
+
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal{{$item->id_mano_de_obra}}" aria-hidden="true"
-            style="transition: 0s all ease;">
-            <div class="modal-dialog">
-              <div class="modal__container modal-content" role="dialog" aria-modal="true"
-                aria-labelledby="modal-1-title">
-                <header class="modal__header">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <p class="h4 font-weight-bold mb-2" id="">
-                        Eliminar Colaborador(a)
-                      </p>
-                    </div>
-                    <div class="col-sm-12">
-                      <h4>{{$item->nombre_trabajador}} {{$item->apellido_trabajador}}</h4>
-                    </div>
-                  </div>
-
-                  <div class="">
-                    <button class="modal__close shadow-sm" aria-label="Close modal" class="close" data-dismiss="modal"
-                      aria-label="Close" data-micromodal-close></button>
-                  </div>
-                </header>
-                <main class="modal__content" id="modal-1-content">
-                  <h6 class="mb-4 mt-2">Si usted da aceptar, el colaborador se elimina permanentemente</h6>
-                  <button type="submit" class="btn btn-block btn-primary" id="EliminarDatos">
-                    Aceptar
-                  </button>
-                  <button type="button" class="btn btn-block btn-outline-dark" data-dismiss="modal">Cerrar</button>
-                </main>
-              </div>
-            </div>
-          </div>
-          {{-- <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-                    data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">Eliminar información</button>
-
           <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1" data-micromodal-close>
               <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
@@ -314,7 +330,7 @@
                 </main>
               </div>
             </div>
-          </div> --}}
+          </div>
         </form>
       </div>
 
@@ -322,8 +338,12 @@
   </div>
   @endforeach
 </div>
-
-<script type="text/javascript">
+<div class="d-flex align-items-center justify-content-center">
+  <div class="mt-3">
+    {{ $t_mano_de_obra->render() }}
+  </div>
+</div>
+{{-- <script type="text/javascript">
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -347,12 +367,17 @@ $(document).ready(function () {
         });
     });
 });
-</script>
+</script> --}}
 <script>
-    MicroModal.init();
+  MicroModal.init();
   var button = document.querySelector('.Operario');
   button.addEventListener('click', function () {
     MicroModal.show('modal-1');
+    });
+
+    var button = document.querySelector('.Eliminar');
+  button.addEventListener('click', function () {
+    MicroModal.show('modal-2');
     });
 </script>
 

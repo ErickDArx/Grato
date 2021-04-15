@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
 
     // Crud para la vista Pedidos
-    Route::get('/Pedidos', 'PedidosController@index')->name('Buscar');
+    Route::get('/Pedidos', 'PedidosController@index')->name('Pedidos');
     Route::post('/Pedidos', 'PedidosController@store')->name('Agregar');
     Route::put('/Pedidos/{id_Pedido}', 'PedidosController@update')->name('ActualizarPedidos');
     Route::delete('/Pedidos/{id_Pedido}', 'PedidosController@destroy')->name('EliminarPedidos');

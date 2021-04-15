@@ -35,7 +35,11 @@
 
 </div>
 @endforeach
-
+<div class="d-flex align-items-center justify-content-center">
+  <div class="mt-3">
+    {{ $t_producto->render() }}
+  </div>
+</div>
 @stop
 
 @section('contenido-3')

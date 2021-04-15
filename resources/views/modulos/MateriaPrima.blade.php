@@ -1,7 +1,12 @@
 @extends('plantilla')
 
-@section('titulo', 'Materia Prima')
+@section('Vista','Materia Prima')
 
+@section('Ruta','MateriaPrima')
+
+@section('Icono','fa fa-clipboard mr-2')
+
+@section('titulo', 'Materia Prima')
 
 @section('contenido')
 @parent
@@ -10,7 +15,7 @@
   <div class="d-flex justify-content-center m-1 row align-items-center">
     {{-- Presentacion  --}}
     <div class="col-sm-6">
-      <h4 class="font-weight-bold">Materia Prima</h4>
+      <h4 class="font-weight-bold"><i class="fa fa-clipboard"></i> Materia Prima</h4>
       <h6 class="text-gray">Desglose de insumos necesarios para la elaboracion de un producto</h6>
     </div>
 
@@ -37,36 +42,64 @@
                 @csrf
                 <div class="m-0 mb-2">
                   <label for="">1.Nombre de la materia prima</label>
-                  <input type="text" placeholder="Ejemplo: Harina" name="producto" class="form-control" value="">
+                  <input type="text" placeholder="" name="producto" class="form-control" value="">
                 </div>
+                @error('producto')
+                <div class="fade show mb-2" role="alert">
+                  <div class="text-danger">
+                    <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('producto')}}</span>
+                  </div>
+                </div>
+                @enderror
                 <div class="m-0 mb-2">
-                  <label for="">2.Unidad de medida</label>
+                  <label for="">2.Unidad de medida (Seleccionar)</label>
                   {{-- <input type="text" name="unidad_medida" class="form-control" value=""> --}}
                   <select name="unidad_medida" id="" class="form-control">
-                    <option value="">Seleccione</option>
+                    <option value="Sin determinar">Sin determinar</option>
                     <option value="Tonelada">Tonelada</option>
                     <option value="Kilogramo">Kilogramo</option>
-                    <option value="Kilo">Kilo</option>
+                    <option value="Mililitros">Mililitros</option>
                     <option value="Gramo">Gramo</option>
                     <option value="Unidad">Unidad</option>
                   </select>
                 </div>
+                @error('unidad_medida')
+                <div class="fade show mb-2" role="alert">
+                  <div class="text-danger">
+                    <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('unidad_medida')}}</span>
+                  </div>
+                </div>
+                @enderror
                 <div class="m-0 mb-2">
                   <label for="">3.Costo de la materia prima (Colones)</label>
-                  <input type="text" name="costo" class="form-control" value="">
+                  <input type="number" name="costo" class="form-control" value="">
                 </div>
+                @error('costo')
+                <div class="fade show mb-2" role="alert">
+                  <div class="text-danger">
+                    <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('costo')}}</span>
+                  </div>
+                </div>
+                @enderror
                 <div class="m-0 mb-2">
-                  <label for="">4.Presentacion</label>
-                  <input type="text" placeholder="Ejemplo: 12 unidades" name="presentacion" class="form-control"
+                  <label for="">4.Presentacion (Cantidad)</label>
+                  <input type="number" placeholder="" name="presentacion" class="form-control"
                     value="">
                 </div>
+                @error('presentacion')
+                <div class="fade show mb-2" role="alert">
+                  <div class="text-danger">
+                    <span><i class="fa fa-exclamation mr-1"></i> {{$errors->first('presentacion')}}</span>
+                  </div>
+                </div>
+                @enderror
                 <div class="m-0 mb-2">
-                  <label for="">5.Producto</label>
+                  <label for="">5.Producto (Seleccionar)</label>
                   <select name="id_producto" id="" class="form-control">
-
                     @foreach ($t_producto as $item)
                     <option value="{{$item->id_producto}}"> {{$item->nombre_producto}} </option>
                     @endforeach
+
                   </select>
                 </div>
 
@@ -82,24 +115,41 @@
       {{-- Boton que abre el modal --}}
       <a href="#" class="MateriaPrima btn btn-block btn-dark">Ingresar materia prima</a>
     </div>
-    <div class="col-sm-6 p-0">
-      <h6 class="m-0 font-weight-bold">Busqueda</h6>
-    </div>
-
-    <form action="{{route('materia')}}" method="GET" class="row">
-      @csrf
-
-        <div class="input-group">
-          <input placeholder="Ejemplo: Pasta larga" name="busqueda" type="text" value="" class="rounded form-control">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
-          </div>
-        </div>
-
-    </form>
 
   </div>
 </div>
+ {{-- Buscador --}}
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('materia')}}" method="GET" class="row m-2 d-flex align-items-center">
+    @csrf
+
+    <div class="col-sm-6 p-0">
+      <h6 class="m-0 font-weight-bold">Listado de materia prima</h6>
+    </div>
+
+    <div class="input-group col-sm-6">
+      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
 @stop
 
 @section('contenido-2')
@@ -114,32 +164,41 @@
     <div class="m-1 d-flex align-items-center row border-bottom">
 
       <div class="col-sm-6 mb-2">
-        <h5 class="m-0 card-title font-weight-bold">Nombre del insumo</h5>
+        <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-clipboard-check mr-1"></i> Nombre del insumo</h5>
       </div>
 
       <div class="col-sm-6 mb-2" id="nombre">
         <input class="form-control" type="text" name="producto" value="{{$item->producto}}">
+      
       </div>
-
+      @error('producto')
+      <div class="fade show mb-2" role="alert">
+        <div class="text-danger">
+          <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('producto')}}</span>
+        </div>
+      </div>
+      @enderror
       <div class="col-sm-6 mb-2">
-        <h5 class="m-0 card-title font-weight-bold">Para el producto</h5>
+        <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-arrow-right"></i> Para el producto</h5>
       </div>
 
       <div class="col-sm-6 mb-2" id="nombre">
         @foreach ($t_producto as $producto)
         @if ($item->id_producto == $producto->id_producto)
-            <input readonly class="form-control" type="text" name="" value="{{$producto->nombre_producto}}">
+        <input readonly class="form-control" type="text" name="" value="{{$producto->nombre_producto}}">
         @endif
-        
+
         @endforeach
-        
+
       </div>
     </div>
+    <div class="row m-3">
+      <button class="col-sm-12 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+        data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false" aria-controls="collapseExample">
+        Ver mas informacion
+      </button>
+    </div>
 
-    <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
-      data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false" aria-controls="collapseExample">
-      Ver mas informacion
-    </button>
 
     <div class="collapse" id="collapseExample{{$item->id_materia_prima}}">
 
@@ -152,6 +211,13 @@
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
           <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
+          @error('costo')
+          <div class="fade show mb-2" role="alert">
+            <div class="text-danger">
+              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('costo')}}</span>
+            </div>
+          </div>
+          @enderror
         </div>
 
       </div>
@@ -161,15 +227,21 @@
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
           <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
+          @error('presentacion')
+          <div class="fade show mb-2" role="alert">
+            <div class="text-danger">
+              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('presentacion')}}</span>
+            </div>
+          </div>
+          @enderror
         </div>
-      <div class="col-sm-6 mb-2">
-        <h6 class="font-weight-bold">Precio por unidad de medida</h6>
-        <input readonly name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
-      </div>
+
+        <div class="col-sm-6 mb-2">
+          <h6 class="font-weight-bold">Precio por unidad de medida</h6>
+          <input readonly name="precio_um" class="form-control" type="text" value="{{$item->precio_um}}">
+        </div>
 
       </div>
-
-
 
       <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -196,13 +268,14 @@
           </div>
         </div>
       </div>
-    </div>
+
   </form>
 
   <div class="row d-flex align-items-center">
     <div class="col-sm-6">
       <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
-        class="Actualizar text-dark bg-white btn btn-block">Actualizar informacion</button>
+        class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
+        informacion</button>
     </div>
 
     <div class="col-sm-6">
@@ -210,7 +283,8 @@
         @csrf
         @method('DELETE')
         <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-          data-micromodal-trigger="modal-2{{$item->id_materia_prima}}">Eliminar información</button>
+          data-micromodal-trigger="modal-2{{$item->id_materia_prima}}"><i class="fa fa-trash mr-1"></i> Eliminar
+          información</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -240,7 +314,7 @@
     </div>
 
   </div>
-
+</div>
 </div>
 @endforeach
 

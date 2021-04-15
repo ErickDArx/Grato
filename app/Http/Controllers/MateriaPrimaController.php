@@ -30,6 +30,17 @@ class MateriaPrimaController extends Controller
 
     public function store(Request $request)
     {
+        request()->validate([
+            'producto' => 'required|string',
+            'unidad_medida' => 'required',
+            'presentacion' => 'required|numeric',
+            'costo' => 'required|numeric',            
+        ],[
+            'producto.required'=>'El campo: Nombre de la materia prima, no puede estar vacia',
+            'costo.required'=>'El campo: Costo de la materia prima, no puede estar vacia',
+            'presentacion.required'=>'El campo: Presentacion, no puede estar vacia',
+
+        ]);
         $agregar = new t_materia_prima();
         $agregar->producto = $request->producto;
         $agregar->unidad_medida = $request->unidad_medida;
@@ -43,25 +54,19 @@ class MateriaPrimaController extends Controller
         return back()->with('agregar', 'se agrego sin problemas');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit(Request $request, $id_materia_prima)
-    {
-        $edit = t_materia_prima::findOrFail($id_materia_prima);
-        $edit->cantidad = $request->cantidad;
-        $edit->precio_um = ($edit->costo / $edit->presentacion);
-        $edit->precio = $request->cantidad * $edit->precio_um;
-        // Insertar en la base de datos
-        $edit->save();
-        // Redirigir a la vista original 
-        return back()->with('edit', 'se agrego sin problemas');
-    }
-
     public function update(Request $request, $id_materia_prima)
     {
+        request()->validate([
+            'producto' => 'required|string',
+            'unidad_medida' => 'required',
+            'presentacion' => 'required|numeric|min:1',
+            'costo' => 'required|numeric',            
+        ],[
+            'producto.required'=>'El campo: Nombre del insumo, no puede estar vacia',
+            'costo.required'=>'El campo: Costo de la materia prima, no puede estar vacia',
+            'presentacion.required'=>'El campo: Presentacion, no puede estar vacia',
+        ]);
+
         $edit = t_materia_prima::findOrFail($id_materia_prima);
         $edit->producto = $request->producto;
         $edit->unidad_medida = $request->unidad_medida;
