@@ -20,6 +20,8 @@ class CreateTTotales extends Migration
             $table->decimal('total_equipos',8,2)->nullable();
             $table->decimal('total_cif',8,2)->nullable();
             $table->decimal('total_viaticos',8,2)->nullable();
+            $table->integer('cantidad_producir')->nullable();
+            $table->decimal('total',8,2)->nullable();
             $table->timestamps();
         });
 

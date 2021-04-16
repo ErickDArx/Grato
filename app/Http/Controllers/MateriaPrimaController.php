@@ -23,6 +23,18 @@ class MateriaPrimaController extends Controller
         return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
 
+    public function edit(Request $request, $id_materia_prima)
+    {
+        $edit = t_materia_prima::findOrFail($id_materia_prima);
+        $edit->cantidad = $request->cantidad;
+        $edit->precio_um = ($edit->costo / $edit->presentacion);
+        $edit->precio = $request->cantidad * $edit->precio_um;
+        // Insertar en la base de datos
+        $edit->save();
+        // Redirigir a la vista original 
+        return back()->with('edit', 'se agrego sin problemas');
+    }
+    
     public function create()
     {
         //
