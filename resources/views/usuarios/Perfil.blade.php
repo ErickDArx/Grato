@@ -2,6 +2,11 @@
 @extends('plantilla')
 {{-- Se llama a la variable titulo para otorgarle un valor --}}
 @section('titulo', 'Perfil')
+@section('Vista','Perfil')
+
+@section('Ruta','Perfil')
+
+@section('Icono','fa fa-user mr-2')
 
 @section('paginacion')
 @parent

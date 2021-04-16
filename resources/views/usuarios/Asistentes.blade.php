@@ -59,7 +59,7 @@
                 @error('apellido_usuario')
                 <div class="col-sm-12 fade show mb-2" role="alert">
                     <div class="text-danger">
-                        <span><i class="fa fa-exclamation "></i>{{  $errors->first('apellido_usuario')}}</span>
+                        <span><i class="fa fa-exclamation mr-2"></i>{{  $errors->first('apellido_usuario')}}</span>
                     </div>
                 </div>
                 @enderror

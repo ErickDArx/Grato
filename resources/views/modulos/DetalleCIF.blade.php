@@ -64,7 +64,7 @@
 </div>
 
 {{-- Formulario para ingresar los recibos --}}
-<form class="form-group mt-0 mb-0" method="POST" action="{{route('AgregarMes',$cif->id_cif)}}">
+<form class="form-group mt-0 mb-0" action="{{route('AgregarMes',$cif->id_cif)}}"  method="POST">
   @csrf
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex justify-content-center row align-items-center">

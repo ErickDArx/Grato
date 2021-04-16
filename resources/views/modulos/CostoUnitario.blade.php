@@ -143,14 +143,14 @@
 @foreach ($t_costo_unitario as $item)
 @foreach ($t_mano_de_obra as $mo)
 @if ($item->id_producto == $producto->id_producto && $mo->id_mano_de_obra == $item->id_mano_de_obra)
-<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+<div name="Operario" class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <form action="{{route('ActualizarTotal',$item->id_mano_de_obra)}}" method="POST">
         @csrf
         @method('PUT')
         <div class="d-flex row align-items-center">
             <div class="col-sm-6 mt-2 mb-2">
                 <label class="" for="">Operario</label>
-                <input readonly class="form-control" type="text" value="{{$mo->nombre_trabajador}}">
+                <input readonly class="form-control" type="text" value="{{$mo->nombre_trabajador}} {{$mo->apellido_trabajador}}">
             </div>
             <div class="col-sm-6">
                 <label class="" for="">Tiempo trabajado</label>
@@ -165,7 +165,7 @@
                 <input readonly class="form-control" type="text" value="{{$mo->costo_minuto}}">
             </div>
             <div class="col-sm-12">
-                <button class="mt-3 btn btn-block btn-outline-dark">
+                <button id="#Operario" class="mt-3 btn btn-block btn-outline-dark">
                     Actualizar informacion
                 </button>
             </div>
@@ -262,16 +262,11 @@
                     <h5 class="font-weight-bold m-0">Total</h5>
                 </div>
                 <div class="col-sm-6">
-                    @php
-                    $suma=0.00
-                    @endphp
-                    @foreach ($t_valores as $item)
-
-                    @php
-                    $suma = $suma + $item->total;
-                    @endphp
+                    @foreach ($t_totales as $item)
+                        @if ($item->id_producto == $producto->id_producto)
+                            {{$item->total_cif}}
+                        @endif
                     @endforeach
-                    {{$suma}}
                 </div>
             </div>
         </div>
@@ -304,4 +299,22 @@
         </div>
     </div>
 </div>
+
+<div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+    <div class="d-flex row align-items-center">
+        <div class="col-sm-6 mt-1 mb-1">
+            <h6 class="m-0 font-weight-bold">Costo total</h6>
+        </div>
+    </div>
+</div> 
+
+<script>
+    window.onload=function(){
+    var pos=window.name || 0;
+    window.scrollTo(0,pos);
+    }
+    window.onunload=function(){
+    window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+    }
+    </script>
 @stop

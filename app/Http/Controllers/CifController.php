@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class CifController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         date_default_timezone_set('America/Costa_Rica');
@@ -22,24 +18,22 @@ class CifController extends Controller
         return view('modulos/CIF' , ['t_cif' => $cif]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request, $id_cif)
     {
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre_cif' => 'required | alpha | unique:t_cif,nombre_cif',
+        ],[
+            'nombre_cif.required' => 'El campo: Titulo del CIF, no puede quedar vacio',
+            'nombre_cif.alpha' => 'El campo: Titulo del CIF, solo puede contener letras',
+            'nombre_cif.unique' => 'El valor del campo: Titulo del CIF ya se encuentra en uso',
+
+        ]);
+
         $agregar = new t_cif();
         $agregar->nombre_cif = $request->nombre_cif;
         // Insertar en la base de datos
@@ -47,23 +41,11 @@ class CifController extends Controller
         return back()->with('agregar', 'El nombre del CIF se ha agregado exitosamente!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id_cif)
     {
 
@@ -71,7 +53,20 @@ class CifController extends Controller
 
     public function update(Request $request, $id_cif)
     {
+        request()->validate([
+            'nombre_cif' => 'required | alpha | unique:t_cif,nombre_cif',
+        ],[
+            'nombre_cif.required' => 'El campo: Titulo del CIF, no puede quedar vacio',
+            'nombre_cif.alpha' => 'El campo: Titulo del CIF, solo puede contener letras',
+            'nombre_cif.unique' => 'El valor del campo: Titulo del CIF ya se encuentra en uso',
 
+        ]);
+
+        $agregar = t_cif::findOrFail($id_cif);
+        $agregar->nombre_cif = $request->nombre_cif;
+        // Insertar en la base de datos
+        $agregar->save();
+        return back()->with('agregar', 'El nombre del CIF se ha agregado exitosamente!');
     }
 
     /**

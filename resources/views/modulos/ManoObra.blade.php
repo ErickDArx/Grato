@@ -12,7 +12,7 @@
   <div class="m-1 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
       <h4 class="font-weight-bold m-0"><i class="fa fa-user-cog mr-1"></i> Mano de obra</h4>
-      <h6 class="text-gray mt-2">Desglose de operarios</h6>
+      <h6 class="text-gray mt-2">Desglose de operarios.</h6>
     </div>
     <div class="col-sm-6">
       <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
@@ -90,6 +90,25 @@
 
     </div>
   </div>
+</div>
+
+ {{-- Buscador --}}
+ <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('ManoObra')}}" method="GET" class="row m-2 d-flex align-items-center">
+    @csrf
+
+    <div class="col-sm-6 p-0">
+      <h6 class="m-0 font-weight-bold">Listado de operarios</h6>
+    </div>
+
+    <div class="input-group col-sm-6">
+      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
+      </div>
+    </div>
+
+  </form>
 </div>
 
 {{-- Detectar errores y avisar al usuario --}}
