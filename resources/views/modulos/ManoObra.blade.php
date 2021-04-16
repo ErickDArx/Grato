@@ -137,7 +137,6 @@
 {{-- Listado Operarios --}}
 <div id="Lista">
   @foreach ($t_mano_de_obra as $item)
-
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
 
     <form action="{{route('ActualizarManoDeObra',$item->id_mano_de_obra)}}" method="POST">
@@ -319,13 +318,36 @@
 </div>
 
 <script type="text/javascript">
-  MicroModal.init();
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $("#EnviarDatos").click(function (e) {
+        e.preventDefault(); //Evitar recargar la pagina
+        var dataString = $('#Crear').serialize();
+        $.ajax({
+            type: "POST",
+            url: 'Total',
+            data: dataString,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response) {
+                    $("#Lista").load(" #Lista");
+                }
+            }
+        });
+    });
+});
+</script>
+<script>
+    MicroModal.init();
   var button = document.querySelector('.Operario');
   button.addEventListener('click', function () {
     MicroModal.show('modal-1');
     });
 </script>
-
-
 
 @stop

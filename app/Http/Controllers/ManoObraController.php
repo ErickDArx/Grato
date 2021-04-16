@@ -56,7 +56,6 @@ class ManoObraController extends Controller
         $agregar->salario_minuto = $agregar->salario_hora / 60;
         $agregar->salario_costo_extra = 100;
         $agregar->salario_costo_hora_doble = 100;
-
         $agregar->save();
         // Redirigir a la vista original 
         // return back()->with('agregar', 'El usuario se ha agregado');

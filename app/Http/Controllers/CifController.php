@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\t_cif;
+use App\t_mes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,9 @@ class CifController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id_cif)
     {
-        //
+
     }
 
     /**
@@ -41,16 +42,9 @@ class CifController extends Controller
     {
         $agregar = new t_cif();
         $agregar->nombre_cif = $request->nombre_cif;
-        $agregar->recibo_pagar = $request->recibo_pagar;
-        $agregar->porcentaje_utilizacion = $request->porcentaje_utilizacion;
-        $agregar->porcentaje_produccion = $request->porcentaje_produccion;
-        $agregar->produccion_mensual = $request->produccion_mensual;
-        $agregar->fecha = Carbon::now();
-        $agregar->total = $request-> tiempo_uso * 20.59;
         // Insertar en la base de datos
         $agregar->save();
-        // Redirigir a la vista original 
-        return back()->with('agregar', 'El usuario se ha agregado');
+        return back()->with('agregar', 'El nombre del CIF se ha agregado exitosamente!');
     }
 
     /**
@@ -70,32 +64,14 @@ class CifController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_cif)
     {
-        //
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id_cif)
     {
-        $edit = t_cif::findOrFail($id_cif);
-        $edit->nombre_cif = $request->nombre_cif;
-        $edit->recibo_pagar = $request->recibo_pagar;
-        $edit->porcentaje_utilizacion = $request->porcentaje_utilizacion;
-        $edit->porcentaje_produccion = $request->porcentaje_produccion;
-        $edit->produccion_mensual = $request->produccion_mensual;
-        $edit->fecha = Carbon::now();
-        $edit->total = $request-> tiempo_uso * 20.59;
-        // Insertar en la base de datos
-        $edit->save();
-        // Redirigir a la vista original 
-        return back()->with('edit', 'Todo salio bien');
+
     }
 
     /**
