@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         Laraveles\Spanish\SpanishServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

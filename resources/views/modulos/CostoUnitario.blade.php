@@ -21,7 +21,7 @@
     </div>
 </div>
 
-@foreach ($t_materia_prima as $item)
+{{-- @foreach ($t_materia_prima as $item)
 @if ($item->id_producto == $producto->id_producto)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <form action="{{ route('ActualizarMateriaPrima', $item->id_materia_prima) }}" method="POST">
@@ -59,7 +59,7 @@
 </div>
 </div>
 @endif
-@endforeach
+@endforeach --}}
 
 @stop
 
@@ -73,7 +73,7 @@
     </div>
 </div>
 
-<form action="{{route('Agregar')}}" method="POST">
+{{-- <form action="{{route('Agregar')}}" method="POST">
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
         <div class="col-sm-6">
@@ -92,9 +92,9 @@
 
     </div>
 
-</form>
+</form> --}}
 
-@foreach ($t_mano_de_obra as $item)
+{{-- @foreach ($t_mano_de_obra as $item)
 @if ($item->id_mano_de_obra == $costo->id_mano_de_obra)
 <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="col-sm-3">
@@ -116,6 +116,6 @@
 </div>
 
 @endif
-@endforeach
+@endforeach --}}
 
 @stop
