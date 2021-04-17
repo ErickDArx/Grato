@@ -10,19 +10,16 @@ use App\t_materia_prima;
 use App\t_mano_de_obra;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\ModelNotFoundException;//find or fail error exception class.
 
 class CostoUnitarioController extends Controller
 {
 
     public function index($id_producto)
     {
-        $id = $id_producto;
 
         date_default_timezone_set('America/Costa_Rica');
 
         $producto = t_producto::findOrFail($id_producto);
-        $unitario = t_costo_unitario::findOrFail($id);
 
         $costos = DB::table('t_costo_unitario')->get();
         $productos = DB::table('t_producto')->get();
@@ -55,9 +52,11 @@ class CostoUnitarioController extends Controller
 
         $sumaMO = 0.00;
         $operario = DB::table('t_mano_de_obra')->get();
-        foreach ($operario as $item) {
-            if ($item->id_mano_de_obra == $unitario->id_mano_de_obra) {
-                $sumaMO = $sumaMO + $item->costo_minuto;
+        foreach ($operario as $mo) {
+            foreach ($costos as $cu) {
+                if ($cu->id_producto == $producto->id_producto && $mo->id_mano_de_obra == $cu->id_mano_de_obra) {
+                    $sumaMO = $sumaMO + $mo->costo_minuto;
+                }
             }
         }
 
@@ -72,9 +71,10 @@ class CostoUnitarioController extends Controller
             }
         }
 
-        $materia = DB::table('t_materia_prima')->get();
         $campo = t_totales::where('id_producto', $id_producto)->first();
         if (!$campo) {
+            $costo = new t_costo_unitario();
+            $costo->id_producto = $id_producto;
             $total = new t_totales();
             $total->id_producto = $id_producto;
             $total->total_cif = $sumaCIF;
@@ -87,18 +87,19 @@ class CostoUnitarioController extends Controller
         if ($campo) {
             $total = t_totales::findOrFail($id_producto);
             $total->id_producto = $id_producto;
-            $total->total_cif = $suma;
+            $total->total_cif = $sumaCIF;
             $total->total_materia_prima = $sumaMP;
             $total->total_mano_de_obra = $sumaMO;
             $total->total_equipos = $sumaEQ;
             $total->total_viaticos = $sumaVI;
             $total->save();
         }
-        // $costo = t_costo_unitario::findOrFail($id_producto);
-        // return view('modulos/CostoUnitario', compact('producto'));}
+
         return view(
             'modulos/CostoUnitario',
-            compact('producto','unitario') , ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario'=>$costos, 't_equipos' =>$equipo, 't_valores'=>$cif, 't_viaticos'=>$viaticos,'t_totales'=>$resultados]);
+            compact('producto'),
+            ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario' => $costos, 't_equipos' => $equipo, 't_valores' => $cif, 't_viaticos' => $viaticos, 't_totales' => $resultados, 't_materia_prima' => $recursos]
+        );
     }
 
     public function operario(Request $request, $id_producto)

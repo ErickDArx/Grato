@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\t_materia_prima;
+use App\t_totales;
+use App\t_producto;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +33,27 @@ class MateriaPrimaController extends Controller
         $edit->precio = $request->cantidad * $edit->precio_um;
         // Insertar en la base de datos
         $edit->save();
+
+        $producto = t_producto::findOrFail($edit->id_producto);
+
+        $sumaMP = 0.00;
+        $materia = DB::table('t_materia_prima')->get();
+        foreach ($materia as $item) {
+            if ($item->id_producto == $producto->id_producto) {
+                $sumaMP = $sumaMP + $item->precio;
+            }
+        }
+
+        $campo = t_totales::where('id_producto', $item->id_producto)->first();
+
+        if ($campo) {
+            $total = t_totales::findOrFail($edit->id_producto);
+            $total->id_producto = $edit->id_producto;
+            $total->total_materia_prima = $sumaMP;
+            $total->save();
+        }
+
+
         // Redirigir a la vista original 
         return back()->with('edit', 'se agrego sin problemas');
     }
