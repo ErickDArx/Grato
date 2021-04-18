@@ -42,7 +42,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'nombre_producto' => 'required|string|min:3',
+            'nombre_producto' => 'required|string|min:3|unique:t_producto,nombre_producto',
         ],[
             'nombre_producto.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
             'nombre_producto.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',

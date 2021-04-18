@@ -28,7 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ManoObra', 'ManoObraController@index')->name('ManoObra');
     Route::post('/Total', 'ManoObraController@store')->name('total');
     Route::put('/Labores/{id_labor}', 'ManoObraController@labor')->name('ActualizarLabores');
-    Route::put('/Actualizar/{id_labor}/calculando', 'ManoObraController@total')->name('ActualizarTotal');
     Route::put('/Actualizar/{id_mano_de_obra}', 'ManoObraController@update')->name('ActualizarManoDeObra');
     Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('EliminarManoDeObra');
 
@@ -56,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Equipo', 'EquiposController@index')->name('Equipo');
     Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
     Route::put('/Actualizando/{id_equipo}/Equipo', 'EquiposController@update')->name('ActualizarEquipo');
-    Route::put('/Actualizando/{id_equipo}', 'EquiposController@costo')->name('CostoEquipo');
+    Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
     Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
     // Crud para la vista Viaticos
@@ -101,5 +100,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
     Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
     Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
-
+    Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
 });

@@ -40,42 +40,50 @@
         {{-- Informacion del usuario autenticado --}}
         <nav class="row p-0 m-0 border-0 d-flex align-items-center shadow navbar navbar-dark bg-white nav p-4">
 
-                <div class="col-sm-4">
-                    <button type="button" class="drawer-toggle drawer-hamburger bg-white rounded-circle shadow-lg">
-                        <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
-                    </button>
-                    @extends('layouts/menu')
-                </div>
-                <div class=" col-sm-4 mb-2" style="">
+            <button type="button" class="drawer-toggle drawer-hamburger bg-white rounded-circle shadow-lg">
+                <img class="m-0 img-fluid" src="{{ asset('css/ravioles.svg') }}" alt="">
+            </button>
+            @extends('layouts/menu')
 
-                    <div class="text-center font-weight-bolder">
-                        <a class="h5 p-2 text-dark" href="@yield('Ruta')"> <i class="@yield('Icono')"></i>
-                            @yield('Vista')</a>
-                    </div>
+            <div class="col-sm-6 col-6 mb-2" style="">
 
+                <div class="text-center text-sm-right font-weight-bolder">
+                    <a class="h4 p-2 text-dark font-weight-bold" href="@yield('Ruta')"> <i class="@yield('Icono')"></i>
+                        @yield('Vista')</a>
                 </div>
-                <div class=" col-sm-4 text-sm-right text-center mb-2">
-                    @unless (Auth::check())
-                    <p class="alert text-danger">
-                        Usted no ha iniciado sesión aun!
-                    </p>
-                    @endunless
-                    @auth
-                    <div class="dropdown">
-                    <a href="{{route('Perfil')}}" class="rounded text-gray dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            </div>
+            <div class=" col-sm-6 col-6 text-sm-right text-center mb-2">
+                @unless (Auth::check())
+                <p class="alert text-danger">
+                    Usted no ha iniciado sesión aun!
+                </p>
+                @endunless
+                @auth
+                <div class="dropdown">
+                    <a href="{{route('Perfil')}}" class="rounded text-gray dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user-circle"></i>
                         {{ auth()->user()->nombre_operario }}
                         {{ auth()->user()->apellido_usuario }}
-                    </a>  
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{route('Perfil')}}"><i class="fa fa-user-circle mr-1"></i>Ir al perfil</a>
-                        <a class="dropdown-item" href="{{route('Principal')}}"><i class="fa fa-house-user mr-1"></i>ir al menu principal</a>
-                        <a class="dropdown-item btn-danger" href="{{route('login')}}"><i class="fa fa-sign-out-alt mr-1"></i> Cerrar sesion</a>
-                      </div>                      
+                        <a class="dropdown-item" href="{{route('Perfil')}}"><i class="fa fa-user-circle mr-2"></i>Ir al
+                            perfil</a>
+                        <a class="dropdown-item" href="{{route('Principal')}}"><i class="fa fa-house-user mr-2"></i>ir
+                            al menu principal</a>
+                        <a class="dropdown-item text-dark" href="#" style=""
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                    class="text-danger fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
+        
+                        <form hidden id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
-
-                    @endauth
                 </div>
+
+                @endauth
+            </div>
 
 
         </nav>

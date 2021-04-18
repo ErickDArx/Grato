@@ -1,6 +1,9 @@
 @extends('plantilla')
 
 @section('titulo', 'Costo Unitario')
+@section('Ruta','')
+@section('Vista','Costo Unitario')
+@section('Icono','fa fa-check mr-2')
 
 @section('contenido')
 @parent
@@ -12,9 +15,11 @@
             <h5 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i> Producto :
                 {{$producto->nombre_producto}}</h5>
         </div>
+
         <div class="col-sm-6 mt-2 mb-1 d-flex justify-content-center">
-            <a class="btn text-dark btn-block" href="{{route('Pedidos')}}"><i class="fa fa-arrow-left"></i> Regresar
-                atras</a>
+            <a class=" btn text-dark btn-block text-sm-right" href="{{route('Pedidos')}}"><i
+                    class="fa fa-arrow-left"></i> Regresar
+                atrás</a>
         </div>
     </div>
 
@@ -138,20 +143,32 @@
             <label for=""><i class="fa fa-file-signature mr-1"></i> Seleccion de operarios</label>
             <select class="m-0 form-control" name="id_mano_de_obra" id="">
                 <option value="Sin determinar">Seleccionar</option>
-                @foreach ($t_mano_de_obra as $mo)
-
-                @if ($mo->id_mano_de_obra)
-                <option class="" value="{{$mo->id_mano_de_obra}}">{{$mo->nombre_trabajador}}</option>                    
-                @endif
-
+                @foreach ($t_costo_unitario as $item)
+                {{$campo = $item->id_mano_de_obra}}
                 @endforeach
+                {{-- $producto->id_producto == $cu->id_producto --}}
+                @foreach ($t_mano_de_obra as $item)
+                {{-- @foreach ($t_costo_unitario as $cu) --}}
+                @if ($item->id_mano_de_obra)
+                <option 
+                @foreach ($t_costo_unitario as $cu)
+                @if ($cu->id_mano_de_obra == $item->id_mano_de_obra && $producto->id_producto == $cu->id_producto)
+                    disabled
+                @endif
+                @endforeach
+                class="form-control" value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
+                @endif
+                {{-- @endforeach --}}
+                @endforeach
+
             </select>
         </div>
+
         <div class="col-sm-6 mt-2">
             <label for=""></label>
             <button type="submit" class="btn-block btn btn-outline-dark">Agregar</button>
         </div>
-        
+
         @error('id_mano_de_obra')
         <div class="col-12 fade show" role="alert">
             <div class="text-danger">
@@ -160,7 +177,7 @@
         </div>
         @enderror
     </div>
-    
+
 </form>
 
 {{-- Listado de operarios --}}
@@ -172,6 +189,7 @@
     <form action="{{route('ActualizarTotal',$mo->id_mano_de_obra)}}" method="POST">
         @csrf
         @method('PUT')
+        <input hidden type="text" value="{{$producto->id_producto}}" name="id_producto">
         <div class="m-2 d-flex row align-items-center">
             <div class="col-sm-6 mt-2 mb-2">
                 <label class="" for="">Operario</label>
@@ -213,19 +231,29 @@
 
 @section('contenido-3')
 @parent
-<div class="shadow m-2 card-body bg-white borde-lineal" style="border-radius: 0.5rem;border-left: 8px solid #f58634;">
-    <div class="d-flex row align-items-center">
-        <div class="col-sm-6 mt-1 mb-1">
-            <h5 class="m-0 font-weight-bold m-0 p-0">Equipo</h5>
+
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #f58634;">
+    <div class="m-2 d-flex row align-items-center justify-content-center">
+
+        <div class=" col-sm-6 mt-1 mb-1 text-sm-left text-center">
+            <h5 class="font-weight-bold"><i class="fa fa-calculator mr-1"></i> Total de Equipos</h5>
         </div>
-        <div class="col-sm-6 mt-1 mb-1">
-            @foreach ($t_costo_unitario as $item)
-            @foreach ($t_equipos as $eq)
-            @if ($eq->id_equipo == $item->id_equipo)
-            {{$eq->costo}}
-            @endif
-            @endforeach
-            @endforeach
+
+        <div class="col-sm-6 col-12 mt-1 mb-1 d-flex justify-content-center align-items-center">
+            <div class="row d-flex">
+                <div class="col-sm-6 col-6 d-flex align-items-center">
+                    <h6 class="font-weight-light"> Total en Colones</h6>
+                </div>
+                <div class="col-sm-6 col-6">
+                    @foreach ($t_totales as $item)
+                    @if ($item->id_producto == $producto->id_producto)
+                    <input readonly class="form-control" type="text" value="₡{{$item->total_equipos}}">
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
@@ -290,7 +318,7 @@
 @endif
 @endforeach
 
-
+{{-- CIF --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #464f41;">
     <div class="d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
@@ -313,6 +341,7 @@
     </div>
 </div>
 
+{{-- Viaticos --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #5f939a;">
     <div class="d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
@@ -335,10 +364,18 @@
     </div>
 </div>
 
+{{-- Costo total --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
-    <div class="d-flex row align-items-center">
+    <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
             <h6 class="m-0 font-weight-bold">Costo total</h6>
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+            @foreach ($t_totales as $item)
+            @if ($item->id_producto == $producto->id_producto)
+            <input class="form-control" type="text" value="{{$item->total}}">
+            @endif
+            @endforeach
         </div>
     </div>
 </div>

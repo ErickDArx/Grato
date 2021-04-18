@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\t_equipos;
 use App\t_usuario;
+use App\t_producto;
+use App\t_totales;
 use App\t_labores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,11 +13,7 @@ use Carbon\Carbon;
 
 class EquiposController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         date_default_timezone_set('America/Costa_Rica');
@@ -25,22 +23,11 @@ class EquiposController extends Controller
         return view('modulos/Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
             $agregar = new t_equipos();
@@ -64,35 +51,6 @@ class EquiposController extends Controller
             return back()->with('agregar', 'El usuario se ha agregado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id_equipo)
     {
         $edit = t_equipos::findOrFail($id_equipo);
@@ -107,15 +65,6 @@ class EquiposController extends Controller
         $edit->depreciacion_diaria =  $edit->depreciacion_semanal / $request->dias_laborales_semana;
         $edit->depreciacion_hora =  $edit->depreciacion_diaria / $request->horas_laborales_dia; 
         $edit->depreciacion_minuto =  $edit->depreciacion_hora / 60;
-        $edit->save();
-        return back()->with('Perfil','Todo salio bien');
-    }
-
-    public function costo(Request $request, $id_equipo)
-    {
-        $edit = t_equipos::findOrFail($id_equipo);
-        $edit->tiempo_minutos = $request->tiempo_minutos;
-        $edit->costo = $request->tiempo_minutos * $edit->depreciacion_minuto;
         $edit->save();
         return back()->with('Perfil','Todo salio bien');
     }

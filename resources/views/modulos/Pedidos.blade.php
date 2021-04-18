@@ -29,7 +29,7 @@
       {{$item->nombre_producto}}
     </div>
     <div class="col-sm-6">
-      <a type="submit" href="{{route('IndexCU' , $item->id_producto)}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
+      <a type="submit" href="{{route('IndexCU' , encrypt($item->id_producto))}}" class="text-dark bg-white btn btn-block">Agregar informacion</a>
     </div>
   </div>
 

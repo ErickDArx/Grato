@@ -23,6 +23,7 @@ class UsuarioController extends Controller
 
     public function principal()
     {
+
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         return view('Principal');

@@ -1,18 +1,14 @@
 @extends('plantilla')
 
 @section('titulo', 'Página principal')
+@section('Vista','Menu Principal')
+
+@section('Ruta','Principal')
+
+@section('Icono','fa fa-chart-line mr-2')
 
 @section('contenido')
 @parent
-
-<div class="row card-body m-2 shadow bg-white p-0 bordes">
-  <div class="col-2 border-0 m-0 d-flex justify-content-center align-items-center">
-    <i class="fa-2x fa fa-chart-line text-dark"></i>
-  </div>
-  <div class="col-9 p-3">
-    <h5 class="font-weight-bold text-oscuro m-0">Menú Principal</h5>
-  </div>
-</div>
 
 <div class="row m-1 d-flex justify-content-center align-items-center">
 
@@ -23,11 +19,11 @@
       </div>
     </div>
     <div class="col-7  d-flex align-items-center">
-      <h6 class="text-oscuro m-0 font-weight-bold">Cantidad total de ventas</h6>
+      <h6 class="text-oscuro m-0 font-weight-bold">Cantidad total de productos</h6>
 
     </div>
     <div class="col-3 d-flex align-items-center">
-      <h6 class="text-oscuro m-0 font-weight-bold">4</h6>
+      <h6 class="text-oscuro m-0 font-weight-bold"></h6>
     </div>
   </div>
 
@@ -41,7 +37,7 @@
       <h6 class="text-oscuro m-0 font-weight-bold">Cantidad de operarios</h6>
     </div>
     <div class="col-3 d-flex align-items-center">
-      <h6 class="text-oscuro m-0 font-weight-bold">4</h6>
+      <h6 class="text-oscuro m-0 font-weight-bold"></h6>
     </div>
   </div>
 

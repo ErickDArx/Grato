@@ -94,17 +94,6 @@ class ManoObraController extends Controller
         return back()->with('agregar', 'El usuario se ha agregado');
     }
 
-    public function total(Request $request, $id_mano_de_obra)
-    {
-
-        $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
-        $agregar->tiempo_trabajado = $request->tiempo_trabajado;
-        $agregar->costo_minuto = $request->tiempo_trabajado * $agregar->salario_minuto;
-        // Insertar en la base de datos
-        $agregar->save();
-        // Redirigir a la vista original 
-        return back()->with('agregar', 'El usuario se ha agregado');
-    }
 
     public function labor(Request $request, $id_labor)
     {
