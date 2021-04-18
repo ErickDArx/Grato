@@ -23,9 +23,11 @@ class PedidosController extends Controller
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
         $buscador = $request->get('busqueda');
-        $materia = t_materia_prima::orderBy('id_materia_prima','DESC')->get();
-        $producto = t_producto::orderBy('nombre_producto','ASC')
-        ->paginate(5);
+        $costos = DB::table('t_costo_unitario')->get();
+        $materia = t_materia_prima::orderBy('id_materia_prima', 'DESC')->get();
+        $producto = t_producto::orderBy('nombre_producto', 'ASC')
+            ->paginate(5);
+
         return view('modulos/Pedidos', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
 

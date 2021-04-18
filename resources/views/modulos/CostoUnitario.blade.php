@@ -143,22 +143,16 @@
             <label for=""><i class="fa fa-file-signature mr-1"></i> Seleccion de operarios</label>
             <select class="m-0 form-control" name="id_mano_de_obra" id="">
                 <option value="Sin determinar">Seleccionar</option>
-                @foreach ($t_costo_unitario as $item)
-                {{$campo = $item->id_mano_de_obra}}
-                @endforeach
-                {{-- $producto->id_producto == $cu->id_producto --}}
+
                 @foreach ($t_mano_de_obra as $item)
-                {{-- @foreach ($t_costo_unitario as $cu) --}}
                 @if ($item->id_mano_de_obra)
-                <option 
-                @foreach ($t_costo_unitario as $cu)
-                @if ($cu->id_mano_de_obra == $item->id_mano_de_obra && $producto->id_producto == $cu->id_producto)
+                <option @foreach ($t_costo_unitario as $cu) @if ($cu->id_mano_de_obra == $item->id_mano_de_obra &&
+                    $producto->id_producto == $cu->id_producto)
                     disabled
+                    @endif
+                    @endforeach
+                    class="form-control" value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
                 @endif
-                @endforeach
-                class="form-control" value="{{$item->id_mano_de_obra}}">{{$item->nombre_trabajador}}</option>
-                @endif
-                {{-- @endforeach --}}
                 @endforeach
 
             </select>
@@ -231,7 +225,7 @@
 
 @section('contenido-3')
 @parent
-
+{{-- Titulo / Total / Equipos --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #f58634;">
     <div class="m-2 d-flex row align-items-center justify-content-center">
 
@@ -258,16 +252,24 @@
     </div>
 </div>
 
+{{-- Formulario Agregar Equipos / Select --}}
 <form action="{{route('IngresarEquipo', $producto->id_producto)}}" method="POST">
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #f58634;">
         <div class="col-sm-6">
-
             <select class="m-0 form-control" name="id_equipo" id="">
                 <option value="0">Seleccionar</option>
+
                 @foreach ($t_equipos as $item)
-                <option class="" value="{{$item->id_equipo}}">{{$item->nombre_equipo}}</option>
+                <option 
+                @foreach ($t_costo_unitario as $cu) 
+                @if ($cu->id_equipo == $item->id_equipo && $producto->id_producto == $cu->id_producto)
+                disabled
+                @endif
                 @endforeach
+                    class="form-control" value="{{$item->id_equipo}}">{{$item->nombre_equipo}}</option>
+                @endforeach
+
             </select>
 
         </div>
@@ -284,14 +286,15 @@
     </div>
 </form>
 
-
+{{-- Listado de Equipos --}}
 @foreach ($t_equipos as $mo)
-@if ($mo->id_equipo == $item->id_equipo)
+@foreach ($t_costo_unitario as $item)
+@if ($mo->id_equipo == $item->id_equipo && $producto->id_producto == $item->id_producto)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #f58634;">
     <form action="{{route('CostoEquipo',$mo->id_equipo)}}" method="POST">
         @csrf
         @method('PUT')
-        <div class="d-flex row align-items-center">
+        <div class="m-2 d-flex row align-items-center">
             <div class="col-sm-6 mt-1 mb-1">
                 <label for="">Nombre del equipo</label>
                 <input type="text" class="form-control" readonly value="{{$mo->nombre_equipo}}">
@@ -315,12 +318,13 @@
     </form>
 
 </div>
-@endif
+@endif    
+@endforeach
 @endforeach
 
 {{-- CIF --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #464f41;">
-    <div class="d-flex row align-items-center">
+    <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
             <h5 class="font-weight-bold m-0">Costos indirectos de fabricacion (CIF)</h5>
         </div>
@@ -330,11 +334,13 @@
                     <h5 class="font-weight-bold m-0">Total</h5>
                 </div>
                 <div class="col-sm-6">
-                    @foreach ($t_totales as $item)
-                    @if ($item->id_producto == $producto->id_producto)
-                    {{$item->total_cif}}
-                    @endif
-                    @endforeach
+                    @php
+                        $sumaCIF = 0.00;
+                        foreach($t_valores as $item){
+                            $sumaCIF = $sumaCIF + $item->total;
+                        }
+                    @endphp
+                    {{$sumaCIF}}
                 </div>
             </div>
         </div>
@@ -343,7 +349,7 @@
 
 {{-- Viaticos --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #5f939a;">
-    <div class="d-flex row align-items-center">
+    <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
             <h5 class="font-weight-bold m-0">Viaticos</h5>
         </div>
@@ -353,11 +359,13 @@
                     <h5 class="font-weight-bold m-0">Total</h5>
                 </div>
                 <div class="col-sm-6">
-                    @foreach ($t_totales as $item)
-                    @if ($item->id_producto == $producto->id_producto)
-                    {{$item->total_viaticos}}
-                    @endif
-                    @endforeach
+                    @php
+                        $sumaVI = 0.00;
+                        foreach($t_viaticos as $item){
+                            $sumaVI = $sumaVI + $item->total_km;
+                        }
+                    @endphp
+                    {{$sumaVI}}
                 </div>
             </div>
         </div>
@@ -368,7 +376,7 @@
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
     <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-            <h6 class="m-0 font-weight-bold">Costo total</h6>
+            <h5 class="m-0 font-weight-bold">Costo total</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
             @foreach ($t_totales as $item)

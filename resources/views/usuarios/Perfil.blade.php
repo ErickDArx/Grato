@@ -78,7 +78,7 @@
                </div>
                @enderror
 
-               <div class="p-3 mb-2 font-weight-bold col-sm-6">
+               <div class="p-3 font-weight-bold col-sm-6">
                   Modo acceso
                </div>
                <div class="col-sm-6">
@@ -155,7 +155,7 @@
             <input name="correo" id="correo" type="text" class="form-control m-0" value="{{ auth()->user()->email }}" />
          </div>
          <div class="col-sm-6 mt-2">
-            <a href="#" class="Correo col-sm-12 btn btn-dark btn-outline-dark"
+            <a  class="Correo col-sm-12 btn btn-dark btn-outline-dark"
                data-micromodal-trigger="modal-1">Actualizar informacion</a>
          </div>
          @error('correo')
@@ -202,7 +202,7 @@
 {{-- Ver y actualizar nombre de usuario--}}
 @section('contenido-3')
 @parent
-<div id="nombre_usuario" class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
    <form action="{{ route('actualizar_usuario', auth()->user()->id_usuario) }}" method="POST">
       @csrf
       @method('PUT')
@@ -278,5 +278,14 @@
       button.addEventListener('click', function () {
           MicroModal.show('modal-5');
       });
+</script>
+<script>
+   window.onload=function(){
+   var pos=window.name || 0;
+   window.scrollTo(0,pos);
+   }
+   window.onunload=function(){
+   window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+   }
 </script>
 @stop

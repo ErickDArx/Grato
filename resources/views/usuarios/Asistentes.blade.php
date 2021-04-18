@@ -19,7 +19,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex justify-content-center m-1 row align-items-center">
         <div class="col-sm-12">
-            <h5 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creación de asistentes</h5>
+            <h4 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creación de asistentes</h4>
         </div>
         <div class="col-sm-6 text-center">
 

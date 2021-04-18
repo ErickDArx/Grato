@@ -21,19 +21,19 @@ class CostoUnitarioController extends Controller
   {
 
     date_default_timezone_set('America/Costa_Rica');
-    $id_producto = Crypt::decrypt($id_producto);
     $producto = t_producto::findOrFail($id_producto);
 
     $costos = DB::table('t_costo_unitario')->get();
     $productos = DB::table('t_producto')->get();
     $recursos = DB::table('t_materia_prima')->get();
     $operario = DB::table('t_mano_de_obra')
-    ->get();
+      ->get();
     $equipo = DB::table('t_equipos')->get();
     $cif = DB::table('t_valores')->get();
     $viaticos = DB::table('t_viaticos')->get();
     $resultados = DB::table('t_totales')->get();
 
+    
     $sumaCIF = 0.00;
     $calculo = DB::table('t_valores')->get();
     foreach ($calculo as $item) {
@@ -86,7 +86,7 @@ class CostoUnitarioController extends Controller
       $total->total_mano_de_obra = $sumaMO;
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
-      $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
+      $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
       $total->save();
     }
     if ($campo) {
@@ -97,7 +97,7 @@ class CostoUnitarioController extends Controller
       $total->total_mano_de_obra = $sumaMO;
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
-      $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
+      $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
       $total->save();
     }
 
@@ -113,7 +113,7 @@ class CostoUnitarioController extends Controller
 
     request()->validate([
       'id_mano_de_obra' => 'required | numeric'
-    ],[
+    ], [
       'id_mano_de_obra.numeric' => 'Debes seleccionar un operario'
     ]);
 
@@ -145,43 +145,44 @@ class CostoUnitarioController extends Controller
     }
 
     // Redirigir a la vista original 
-    return redirect()->route('IndexCU', ['id_producto'=>$id_producto]);
+    return redirect()->route('IndexCU', ['id_producto' => $id_producto]);
   }
 
   public function total(Request $request, $id_mano_de_obra)
   {
-      $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
-      $agregar->tiempo_trabajado = $request->tiempo_trabajado;
-      $agregar->costo_minuto = $request->tiempo_trabajado * $agregar->salario_minuto;
-      // Insertar en la base de datos
-      $agregar->save();
 
-      $sumaMO = 0.00;
-      $calculo = DB::table('t_mano_de_obra')->get();
-      foreach ($calculo as $item) {
-        $sumaMO = $sumaMO + $item->costo_minuto;
-      }
+    $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
+    $agregar->tiempo_trabajado = $request->tiempo_trabajado;
+    $agregar->costo_minuto = $request->tiempo_trabajado * $agregar->salario_minuto;
+    // Insertar en la base de datos
+    $agregar->save();
 
-      $campo = t_totales::where('id_producto', $request->id_producto)->first();
-      if (!$campo) {
-        $costo = new t_costo_unitario();
-        $costo->id_producto = $request->id_producto;
-        $total = new t_totales();
-        $total->id_producto = $request->id_producto;
-        $total->total_mano_de_obra = $sumaMO;
-        $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
-        $total->save();
-      }
-      if ($campo) {
-        $total = t_totales::findOrFail($request->id_producto);
-        $total->id_producto = $request->id_producto;
-        $total->total_mano_de_obra = $sumaMO;
-        $total->total = $total->total_cif + $total->total_materia_prima + $sumaMO + $total->total_equipos + $total->total_viaticos;
-        $total->save();
-      }
+    $sumaMO = 0.00;
+    $calculo = DB::table('t_mano_de_obra')->get();
+    foreach ($calculo as $item) {
+      $sumaMO = $sumaMO + $item->costo_minuto;
+    }
 
-      // Redirigir a la vista original 
-      return back()->with('agregar', 'El usuario se ha agregado');
+    $campo = t_totales::where('id_producto', $request->id_producto)->first();
+    if (!$campo) {
+      $costo = new t_costo_unitario();
+      $costo->id_producto = $request->id_producto;
+      $total = new t_totales();
+      $total->id_producto = $request->id_producto;
+      $total->total_mano_de_obra = $sumaMO;
+      $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
+      $total->save();
+    }
+    if ($campo) {
+      $total = t_totales::findOrFail($request->id_producto);
+      $total->id_producto = $request->id_producto;
+      $total->total_mano_de_obra = $sumaMO;
+      $total->total = $total->total_cif + $total->total_materia_prima + $sumaMO + $total->total_equipos + $total->total_viaticos;
+      $total->save();
+    }
+
+    // Redirigir a la vista original 
+    return back()->with('agregar', 'El usuario se ha agregado');
   }
 
   public function equipo(Request $request, $id_producto)
@@ -193,6 +194,37 @@ class CostoUnitarioController extends Controller
     $agregar->fecha = Carbon::now();
     // Insertar en la base de datos
     $agregar->save();
+
+    $sumaEQ = 0.00;
+    $equipo = DB::table('t_equipos')->get();
+    $costo = DB::table('t_costo_unitario')->get();
+    foreach ($costo as $item) {
+      foreach ($equipo as $eq) {
+        if ($eq->id_equipo == $item->id_equipo) {
+          $sumaEQ = $sumaEQ + $eq->costo;
+        }
+      }
+    }
+
+    $campo = t_totales::where('id_producto', $request->id_producto)->first();
+    if (!$campo) {
+      $costo = new t_costo_unitario();
+      $costo->id_producto = $request->id_producto;
+      $total = new t_totales();
+      $total->id_producto = $request->id_producto;
+      $total->total_equipo = $sumaEQ;
+      $total->total = $total->sumaCIF + $total->sumaMP + $total->total_mano_de_obra + $total->sumaEQ + $total->sumaVI;
+      $total->save();
+    }
+    if ($campo) {
+      $total = t_totales::findOrFail($request->id_producto);
+      $total->id_producto = $request->id_producto;
+      $total->total_mano_de_obra = $sumaEQ;
+      $total->total = $total->sumaCIF + $total->sumaMP + $total->total_mano_de_obra + $total->sumaEQ + $total->sumaVI;
+      $total->save();
+    }
+
+
     // Redirigir a la vista original 
     return back()->with('agregar', 'El usuario se ha agregado');
   }

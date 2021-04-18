@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="es">
+{{-- CSS / JS / Iconografia / TOKEN / --}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('titulo') - GratoCR </title>
     <link rel="icon" type="image/png" href="{{ asset('css/ravioles.svg') }}" />
+    {{-- Fuente de iconos --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <!-- Libreria Menú -->
+    <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
     {{-- Micromodal / Jquery / Bootstrap.JS / iScroll / drawer --}}
-
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/micromodal.js') }}"></script>
     <script src="{{ asset('js/ajax.js') }}"></script>
@@ -20,16 +28,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"
         integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw=="
         crossorigin="anonymous"></script>
-    {{-- Fuente de iconos --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-        crossorigin="anonymous" />
-    <!-- Libreria Menú -->
-    <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
-
 </head>
 
 <body class="drawer drawer--left drawer--sidebar blanco" style="background-color:#E6E6E6 ;">
@@ -45,7 +43,7 @@
             </button>
             @extends('layouts/menu')
 
-            <div class="col-sm-6 col-6 mb-2" style="">
+            <div class="col-sm-6 col-6 " style="">
 
                 <div class="text-center text-sm-right font-weight-bolder">
                     <a class="h4 p-2 text-dark font-weight-bold" href="@yield('Ruta')"> <i class="@yield('Icono')"></i>
@@ -53,7 +51,7 @@
                 </div>
 
             </div>
-            <div class=" col-sm-6 col-6 text-sm-right text-center mb-2">
+            <div class=" col-sm-6 col-6 text-sm-right text-center">
                 @unless (Auth::check())
                 <p class="alert text-danger">
                     Usted no ha iniciado sesión aun!
@@ -178,28 +176,5 @@
     </main>
 
 </body>
-{{--$.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $("#EnviarDatos").click(function(e) {
-            e.preventDefault(); //Evitar recargar la pagina
-            var dataString = $('#Crear').serialize();
-            $.ajax({
-                type: 'POST',
-                url: 'Total',
-                data: dataString,
-                cache: false,
-                processData: false,
-                success: function(response) {
-
-                    if (response) {
-                        $("#Lista").load(" #Lista");
-
-                    }
-                }
-            });
-        }); --}}
 
 </html>

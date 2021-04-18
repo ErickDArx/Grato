@@ -34,7 +34,7 @@ class PerfilController extends Controller
             'apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'segundo_apellido_usuario' => 'required|alpha|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'nombre_usuario' => 'required | unique:t_usuario,nombre_usuario',
-            'correo' => 'required | unique:t_usuario,email',
+            'correo' => 'required | email | max:255 | unique:t_usuario,email',
             'password' => 'required | min:8',
         ], [
             'nombre_operario.required' => 'El campo: Nombre del operario, no puede estar vacio',
@@ -116,7 +116,7 @@ class PerfilController extends Controller
     public function update_correo(Request $request, $id_usuario)
     {
         request()->validate([
-            'correo' => 'required|email|unique:t_usuario,email'
+            'correo' => 'required|email|unique:t_usuario,email|max:255'
         ]);
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->email = $request->correo;
