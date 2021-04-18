@@ -9,6 +9,7 @@ use App\t_totales;
 use App\t_equipos;
 use App\t_materia_prima;
 use App\t_mano_de_obra;
+use App\t_precio_venta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +87,7 @@ class CostoUnitarioController extends Controller
       $total->total_mano_de_obra = $sumaMO;
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
-      $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
+      $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
       $total->save();
     }
     if ($campo) {
@@ -97,7 +98,7 @@ class CostoUnitarioController extends Controller
       $total->total_mano_de_obra = $sumaMO;
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
-      $total->total = $total->sumaCIF + $total->sumaMP + $sumaMO + $total->sumaEQ + $total->sumaVI;
+      $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
       $total->save();
     }
 
@@ -252,9 +253,20 @@ class CostoUnitarioController extends Controller
 
   public function precio(Request $request , $id_producto)
   {
-
-    
-    return request()->all();
+    $costos = DB::table('t_totales')->get();
+    $producto = t_producto::findOrFail($id_producto);
+    $campo = t_precio_venta::where('id_producto', $id_producto)->first();
+    if ($campo) {
+      $total = t_precio_venta::findOrFail($id_producto);
+      $total->id_producto = $id_producto;
+      $total->save();
+    }
+    if (!$campo) {
+      $total = new t_precio_venta();
+      $total->id_producto = $id_producto;
+      $total->save();
+    }
+    return view('modulos/PrecioVenta', compact('producto'),['t_totales' => $costos]);
   }
 
 }

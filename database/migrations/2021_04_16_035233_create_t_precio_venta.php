@@ -14,8 +14,15 @@ class CreateTPrecioVenta extends Migration
     public function up()
     {
         Schema::create('t_precio_venta', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigIncrements('id_precio_venta');
+            $table->decimal('margen_utilidad',8,2)->nullable();
+            $table->decimal('precio_venta',8,2)->nullable();
+            $table->decimal('ganancia_unidad',8,2)->nullable();
+        });
+
+        Schema::table('t_precio_venta', function($table) {
+            $table->bigInteger('id_producto')->unsigned()->index(); // this is working
+            $table->foreign('id_producto')->references('id_producto')->on('t_producto')->onDelete('cascade');
         });
     }
 
