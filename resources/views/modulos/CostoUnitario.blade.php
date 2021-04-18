@@ -295,24 +295,30 @@
         @csrf
         @method('PUT')
         <div class="m-2 d-flex row align-items-center">
-            <div class="col-sm-6 mt-1 mb-1">
-                <label for="">Nombre del equipo</label>
-                <input type="text" class="form-control" readonly value="{{$mo->nombre_equipo}}">
+            <div class="col-sm-12 mt-1 mb-1 border-bottom">
+
+                <h5>{{$mo->nombre_equipo}}</h5>
             </div>
             <div class="col-sm-6 mt-1 mb-1">
                 <label for="">Tiempo de uso del equipo</label>
                 <input type="number" class="form-control" value="{{$mo->tiempo_minutos}}" name="tiempo_minutos">
             </div>
-            <div class="col-sm-6 mt-1 mb-1">
+            <div class="col-sm-6 mt-1">
                 <label for="">Costo por minuto</label>
                 <input type="text" class="form-control" readonly value="{{$mo->depreciacion_minuto}}">
             </div>
-            <div class="col-sm-6 mt-1 mb-1">
+            <div class="col-sm-6 mt-1">
                 <label for="">Costo</label>
                 <input type="text" class="form-control" readonly value="{{$mo->costo}}">
             </div>
-            <div class="mt-3 col-sm-12">
-                <button type="submit" class="btn-block btn btn-outline-dark">Actualizar informacion</button>
+            <div class="col-sm-3">
+                <label class="" for=""></label>
+                <button type="submit" class="mt-2 btn-block btn btn-outline-primary"><i class="fa fa-edit mr-1"></i> Editar</button>
+                
+            </div>
+            <div class="col-sm-3">
+                <label for=""></label>
+                <button type="submit" class="mt-2 btn-block btn btn-outline-danger"><i class="fa fa-trash mr-1"></i> Eliminar</button>
             </div>
         </div>
     </form>
@@ -384,6 +390,24 @@
             <input class="form-control" type="text" value="{{$item->total}}">
             @endif
             @endforeach
+        </div>
+    </div>
+</div>
+
+{{-- Cantidad por fabricar --}}
+<div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #006d36;">
+    <div class="m-2 d-flex row align-items-center">
+        <div class="col-sm-12 mt-1 mb-1 border-bottom">
+            <h5 class="font-weight-bold">Costo Unitario Total</h5>
+        </div>
+        <div class="col-sm-12 mt-1">
+            <label for="">Cantidad a producir</label>
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+            <input type="number" name="cantidad" class="form-control" id="">
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+            <button class="btn btn-block btn-dark">Aceptar</button>
         </div>
     </div>
 </div>

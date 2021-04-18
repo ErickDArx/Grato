@@ -69,7 +69,7 @@ class CostoUnitarioController extends Controller
     $costo = DB::table('t_costo_unitario')->get();
     foreach ($costo as $item) {
       foreach ($equipo as $eq) {
-        if ($eq->id_equipo == $item->id_equipo) {
+        if ($eq->id_equipo == $item->id_equipo && $item->id_producto == $id_producto) {
           $sumaEQ = $sumaEQ + $eq->costo;
         }
       }
@@ -200,7 +200,7 @@ class CostoUnitarioController extends Controller
     $costo = DB::table('t_costo_unitario')->get();
     foreach ($costo as $item) {
       foreach ($equipo as $eq) {
-        if ($eq->id_equipo == $item->id_equipo) {
+        if ($eq->id_equipo == $item->id_equipo && $item->id_producto == $id_producto) {
           $sumaEQ = $sumaEQ + $eq->costo;
         }
       }
