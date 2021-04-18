@@ -249,27 +249,12 @@ class CostoUnitarioController extends Controller
 
     return back()->with('edit', 'Todo salio bien');
   }
-  public function store(Request $request)
+
+  public function precio(Request $request , $id_producto)
   {
+
+    
+    return request()->all();
   }
 
-  public function show($id)
-  {
-    //
-  }
-
-  public function edit($id)
-  {
-    //
-  }
-
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  public function destroy($id)
-  {
-    //
-  }
 }

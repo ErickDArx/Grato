@@ -100,5 +100,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
     Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
     Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
+    Route::post('{id_producto}/PrecioVenta/Agregar', 'CostoUnitarioController@precio')->name('PrecioVenta');
     Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
 });

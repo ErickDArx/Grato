@@ -396,6 +396,8 @@
 
 {{-- Cantidad por fabricar --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #006d36;">
+    <form action="{{route('PrecioVenta',$producto->id_producto)}}" method="POST">
+        @csrf
     <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-12 mt-1 mb-1 border-bottom">
             <h5 class="font-weight-bold">Costo Unitario Total</h5>
@@ -409,7 +411,9 @@
         <div class="col-sm-6 mt-1 mb-1">
             <button class="btn btn-block btn-dark">Aceptar</button>
         </div>
-    </div>
+    </div>        
+    </form>
+
 </div>
 
 <script>
