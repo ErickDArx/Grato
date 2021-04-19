@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Usuario/{id_usuario}', 'PerfilController@update_usuario')->name('actualizar_usuario');
     Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 
+    // Crud para la vista de Perfil
     Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');
     Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
     Route::put('/Asistentes{id_usuario}', 'AsistenteController@update')->name('ActualizarAsistente');

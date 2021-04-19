@@ -18,15 +18,16 @@
 
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="d-flex justify-content-center m-1 row align-items-center">
-    <div class="col-sm-12">
+    <div class="col-sm-6 d-flex align-items-center">
       <h4 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creación de asistentes</h4>
     </div>
-    <div class="col-sm-6 text-center">
-
-    </div>
+    <div class="col-sm-6 mb-2 d-flex align-items-center justify-content-center">
+      <a href="{{route('Principal')}}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i> Regresar al
+         menu</a>
+   </div>
 
     {{-- Creacion de asistentes --}}
-    <form style="letter-spacing: 0.4px" class="" id="asistentes" method="POST" action="{{ route('store') }}">
+    <form style="letter-spacing: 0.4px" class="" id="asistentes" method="POST" action="{{ route('AgregarAsistente') }}">
       @csrf
       <div class=" row m-2 d-flex align-items-center">
 
@@ -88,7 +89,7 @@
             <input name="nombre_usuario" type="text" class="form-control" value="{{old('nombre_usuario')}}">
           </div>
         </div>
-        @error('nombre_usuario')
+        @error('nombre_susuario')
         <div class="col-sm-12 fade show mb-2" role="alert">
           <div class="text-danger">
             <span><i class="fa fa-exclamation mr-2 "></i>{{  $errors->first('nombre_usuario')}}</span>
@@ -296,6 +297,15 @@
 <div class="m-2 d-flex justify-content-center text-dark">
   {{ $t_usuario->render() }}
 </div>
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
+</script>
 <script>
   function mostrarPassword(){
 		var cambio = document.getElementById("txtPassword");

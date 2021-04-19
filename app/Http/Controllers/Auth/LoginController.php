@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -72,7 +73,10 @@ class LoginController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return view('Principal');
+            $producto = DB::table('t_producto')->count();
+            $operarios = DB::table('t_mano_de_obra')->count();
+            $cif = DB::table('t_valores')->get();
+            return view('Principal', compact('producto', 'operarios', 'cif'));
         } else {
             return view('usuarios/Acceso');
         }

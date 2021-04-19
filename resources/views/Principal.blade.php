@@ -20,10 +20,9 @@
     </div>
     <div class="col-7  d-flex align-items-center">
       <h6 class="text-oscuro m-0 font-weight-bold">Cantidad total de productos</h6>
-
     </div>
     <div class="col-3 d-flex align-items-center">
-      {{-- <h6 class="text-oscuro m-0 font-weight-bold">{{$producto}}</h6> --}}
+      <h6 class="text-oscuro m-0 font-weight-bold">{{$producto}}</h6>
     </div>
   </div>
 
@@ -37,7 +36,7 @@
       <h6 class="text-oscuro m-0 font-weight-bold">Cantidad de operarios</h6>
     </div>
     <div class="col-3 d-flex align-items-center">
-      {{-- <h6 class="text-oscuro m-0 font-weight-bold">{{$operarios}}</h6> --}}
+      <h6 class="text-oscuro m-0 font-weight-bold">{{$operarios}}</h6>
     </div>
   </div>
 
@@ -68,33 +67,17 @@
 
 </div>
 
-<div class="card-body m-2 shadow bg-white" style="border-radius: 0.5rem;">
-  <div class="col-12 border rounded d-flex align-items-center">
-    <h6 class="text-dark"><i class="text-dark p-2 fa-2x fa fa-chart-area text-white"></i>Gráfico de pedidos del año
-      {{date('Y')}}</h5>
-
+<div class="card-body m-2 shadow bg-white bordes">
+  <div class="row m-2">
+    <div class="col-12 d-flex align-items-center border-bottom">
+      <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Kilometraje de viaticos </h5>
+    </div>
+    <div class="col-sm-12">
+      <div class="card-body">
+        <a class="btn btn-block btn-outline-dark" target="_blank" href="https://www.cgr.go.cr/02-consultas/consulta-zon-kilo-via.html">Ver Kilometraje</a>
+      </div>
+    </div>
   </div>
-  {{-- <script type="text/javascript">
-    const user = @json($cif);
-    // alert(user[0]["total"])
-    console.log(user);
-  </script> --}}
-  <div class="ct-chart ct-golden-section">
-
-    <script>
-      new Chartist.Line('.ct-chart', {
-        
-                    labels: ['Enero-Marzo','Abril-Junio', 'Julio-Septiembre', 'Octubre-Diciembre'],
-                    series: [
-                      [user[0]["total"]]
-                    ]
-                  }, );
-
-    </script>
-
-  </div>
-
-
 
 </div>
 
