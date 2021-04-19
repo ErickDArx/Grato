@@ -8,6 +8,7 @@
 
 @section('contenido')
 @parent
+{{-- Ingreso de operarios --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="m-1 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
@@ -35,7 +36,7 @@
                 @csrf
                 <div class="m-1">
                   <label for="">1.Nombre del operario</label>
-                  <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador" value="">
+                  <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador" value="{{old('nombre_trabajador')}}">
                 </div>
                 @error('nombre_trabajador')
                 <div class="fade show" role="alert">
@@ -46,7 +47,7 @@
                 @enderror
                 <div class="m-1">
                   <label for="">2.Apellido del operario</label>
-                  <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador" value="">
+                  <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador" value="{{old('apellido_trabajador')}}">
                 </div>
                 @error('apellido_trabajador')
                 <div class="fade show" role="alert">
@@ -57,7 +58,7 @@
                 @enderror
                 <div class="m-1">
                   <label for="">3.Salario mensual</label>
-                  <input type="number" name="salario_mensual" class="form-control" id="salario_mensual" value="">
+                  <input type="number" name="salario_mensual" class="form-control" id="salario_mensual" value="{{old('salario_mensual')}}">
                 </div>
                 @error('salario_mensual')
                 <div class="fade show mb-2" role="alert">
@@ -92,45 +93,10 @@
   </div>
 </div>
 
- {{-- Buscador --}}
- <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <form action="{{route('ManoObra')}}" method="GET" class="row m-2 d-flex align-items-center">
-    @csrf
-
-    <div class="col-sm-6 p-0">
-      <h6 class="m-0 font-weight-bold">Listado de operarios</h6>
-    </div>
-
-    <div class="input-group col-sm-6">
-      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
-      </div>
-    </div>
-
-  </form>
-</div>
-
-{{-- Detectar errores y avisar al usuario --}}
-@if ($errors->any())
-<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="col-sm-12">
-    <div class=" fade show" role="alert">
-      <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-@stop
-
-@section('contenido-2')
-@parent
-{{-- Lista de operarios --}}
+{{-- Lista de valores laborales --}}
 @foreach ($t_labores as $item)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-{{-- Actualizar operarios --}}
+{{-- Actualizar valores laborales --}}
   <form action="{{route('ActualizarLabores',$item->id_labor)}}" method="POST">
     @csrf
     @method('PUT')
@@ -164,14 +130,15 @@
         @enderror
       </div>
     </div>
-    <div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal micromodal-slide" id="modal-3{{$item->id_labor}}" aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
           <header class="modal__header">
             <div class="">
               <div class="">
-                <p class="h4 font-weight-bold mb-2" id="">
-                  Actualizacion de datos
+                <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                  <i class="fa fa-edit mr-2 "></i>Actualizar
                 </p>
               </div>
             </div>
@@ -179,12 +146,17 @@
               <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
             </div>
           </header>
-          <main class="modal__content m-0" id="modal-1-content">
-            <h6 class="mt-3 mb-3">¿Esta seguro de actualizar los datos?</h6>
-            <button type="submit" class="btn btn-block btn-dark">
+          <main class="modal__content" id="modal-1-content">
+            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+          </main>
+          <footer class="modal__footer">
+            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
               Aceptar
             </button>
-          </main>
+            <button class="modal__btn col-3" data-micromodal-close
+              aria-label="Close this dialog window ">Cerrar</button>
+          </footer>
+
         </div>
       </div>
     </div>
@@ -195,13 +167,51 @@
 
     </div>
     <div class="col-sm-6">
-      <button class="ActualizarLabores btn btn-outline-dark btn-block" data-micromodal-trigger="modal-4">Actualizar
+      <button class="ActualizarLabores btn btn-outline-dark btn-block" data-micromodal-trigger="modal-3{{$item->id_labor}}">Actualizar
         los datos</button>
     </div>
   </div>
 
 </div>
 @endforeach
+
+ {{-- Buscador --}}
+ <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('ManoObra')}}" method="GET" class="row m-2 d-flex align-items-center">
+    @csrf
+
+    <div class="col-sm-6 ">
+      <h6 class="font-weight-bold"><i class="fa fa-clipboard-list mr-1"></i> Listado de operarios</h6>
+    </div>
+
+    <div class="input-group col-sm-6">
+      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+@stop
+
+@section('contenido-2')
+@parent
+
+
 @stop
 
 @section('contenido-3')
@@ -281,32 +291,36 @@
         </div>
 
       </div>
-      <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_mano_de_obra}}" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-            <header class="modal__header">
+    <!-- Modal -->
+    <div class="modal micromodal-slide" id="modal-3{{$item->id_mano_de_obra}}" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <div class="">
               <div class="">
-                <div class="">
-                  <p class="h4 font-weight-bold mb-2" id="">
-                    Editar Recurso
-                  </p>
-                </div>
+                <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                  <i class="fa fa-edit mr-2 "></i>Actualizar
+                </p>
               </div>
-              <div class="">
-                <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-              </div>
-            </header>
-            <main class="modal__content" id="modal-1-content">
-              <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar
-                los
-                datos anteriores</h6>
-              <button type="submit" class="btn btn-block">
-                Aceptar
-              </button>
-            </main>
-          </div>
+            </div>
+            <div class="">
+              <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+            </div>
+          </header>
+          <main class="modal__content" id="modal-1-content">
+            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+          </main>
+          <footer class="modal__footer">
+            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+              Aceptar
+            </button>
+            <button class="modal__btn col-3" data-micromodal-close
+              aria-label="Close this dialog window ">Cerrar</button>
+          </footer>
+
         </div>
       </div>
+    </div>
     </form>
     <div class="row d-flex align-items-center">
       <div class="col-sm-6">
@@ -326,31 +340,36 @@
           </button>
           <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
 
-          <!-- Modal -->
-          <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
-            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-              <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                <header class="modal__header">
-                  <div class="">
-                    <div class="">
-                      <p class="h4 font-weight-bold mb-2" id="">
-                        Eliminar Recurso
-                      </p>
-                    </div>
-                  </div>
-                  <div class="">
-                    <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-                  </div>
-                </header>
-                <main class="modal__content" id="modal-1-content">
-                  <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
-                  <button type="submit" class="btn btn-block">
-                    Aceptar
-                  </button>
-                </main>
+      <!-- Modal -->
+      <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+              <div class="">
+                <div class="">
+                  <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                    <i class="fa fa-trash mr-2 "></i>Eliminar
+                  </p>
+                </div>
               </div>
-            </div>
+              <div class="">
+                <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+              </div>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+              <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            </main>
+            <footer class="modal__footer">
+              <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                Aceptar
+              </button>
+              <button class="modal__btn col-3" data-micromodal-close
+                aria-label="Close this dialog window ">Cerrar</button>
+            </footer>
+
           </div>
+        </div>
+      </div>
         </form>
       </div>
 
@@ -363,31 +382,8 @@
     {{ $t_mano_de_obra->render() }}
   </div>
 </div>
-{{-- <script type="text/javascript">
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $("#EnviarDatos").click(function (e) {
-        e.preventDefault(); //Evitar recargar la pagina
-        var dataString = $('#Crear').serialize();
-        $.ajax({
-            type: "POST",
-            url: 'Total',
-            data: dataString,
-            cache: false,
-            processData: false,
-            success: function (response) {
-                if (response) {
-                    $("#Lista").load(" #Lista");
-                }
-            }
-        });
-    });
-});
-</script> --}}
+
+
 <script>
   MicroModal.init();
   var button = document.querySelector('.Operario');
@@ -399,6 +395,16 @@ $(document).ready(function () {
   button.addEventListener('click', function () {
     MicroModal.show('modal-2');
     });
+</script>
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
 </script>
 
 @stop

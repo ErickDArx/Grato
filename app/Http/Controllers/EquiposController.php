@@ -23,13 +23,14 @@ class EquiposController extends Controller
         return view('modulos/Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
+            'precio' => 'required|numeric|min:6',
+            'vida_util' => 'required|numeric',
+            'porcentaje_utilizacion' => 'required|numeric',
+        ]);
             $agregar = new t_equipos();
             $agregar->nombre_equipo = $request->nombre_equipo;
             $agregar->precio = $request->precio;

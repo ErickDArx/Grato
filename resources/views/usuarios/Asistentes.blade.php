@@ -141,6 +141,7 @@
     </form>
   </div>
 </div>
+
 {{-- Buscador por medio del nombre del operario --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="d-flex m-1 row align-items-center">

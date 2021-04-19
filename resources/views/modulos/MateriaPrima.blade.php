@@ -298,8 +298,8 @@
             <header class="modal__header">
               <div class="">
                 <div class="">
-                  <p class="h4 font-weight-bold mb-2" id="">
-                    Eliminar Recurso
+                  <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                    <i class="fa fa-trash mr-2 "></i>Eliminar
                   </p>
                 </div>
               </div>
@@ -308,11 +308,16 @@
               </div>
             </header>
             <main class="modal__content" id="modal-1-content">
-              <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
-              <button type="submit" class="btn btn-block">
+              <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            </main>
+            <footer class="modal__footer">
+              <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
                 Aceptar
               </button>
-            </main>
+              <button class="modal__btn col-3" data-micromodal-close
+                aria-label="Close this dialog window ">Cerrar</button>
+            </footer>
+
           </div>
         </div>
       </div>

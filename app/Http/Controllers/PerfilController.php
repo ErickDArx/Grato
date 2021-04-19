@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\t_usuario;
+use App\t_producto;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class PerfilController extends Controller

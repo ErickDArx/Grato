@@ -128,10 +128,12 @@
 
                 <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
+                        @php
+                            $date = \Carbon\Carbon::now();
+                        @endphp
+                        <h5 class="">{{ date('h:i a')}}</h5>
 
-                        <h5 class="">{{ date('h:i a') }}</h5>
-
-                        <p class="text-gray m-0">{{ date('d') }} de {{ date('M') }} del {{ date('Y') }}</p>
+                        <p class="text-gray m-0">{{ date('d') }} de {{ $date->formatLocalized('%B') }} del {{ date('Y') }}</p>
 
 
                     </div>

@@ -23,7 +23,7 @@
 
     </div>
     <div class="col-3 d-flex align-items-center">
-      <h6 class="text-oscuro m-0 font-weight-bold"></h6>
+      <h6 class="text-oscuro m-0 font-weight-bold">{{$producto}}</h6>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
       <h6 class="text-oscuro m-0 font-weight-bold">Cantidad de operarios</h6>
     </div>
     <div class="col-3 d-flex align-items-center">
-      <h6 class="text-oscuro m-0 font-weight-bold"></h6>
+      <h6 class="text-oscuro m-0 font-weight-bold">{{$operarios}}</h6>
     </div>
   </div>
 
@@ -74,13 +74,19 @@
       {{date('Y')}}</h5>
 
   </div>
+  <script type="text/javascript">
+    const user = @json($cif);
+    // alert(user[0]["total"])
+    console.log(user);
+  </script>
   <div class="ct-chart ct-golden-section">
 
     <script>
       new Chartist.Line('.ct-chart', {
+        
                     labels: ['Enero-Marzo','Abril-Junio', 'Julio-Septiembre', 'Octubre-Diciembre'],
                     series: [
-                      [20,44,32,29]
+                      [user[0]["total"]]
                     ]
                   }, );
 

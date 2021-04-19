@@ -25,7 +25,7 @@ class ReportesController extends Controller
 
         $pdf = PDF::loadView('pdf/recursos', compact('recursos'));
 
-        return $pdf->download('listado.pdf');
+        return $pdf->stream('Precio de Venta.pdf');
     }
 
     /**
