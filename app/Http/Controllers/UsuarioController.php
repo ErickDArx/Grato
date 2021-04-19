@@ -28,6 +28,6 @@ class UsuarioController extends Controller
         $producto = DB::table('t_producto')->count();
         $operarios = DB::table('t_mano_de_obra')->count();
         $cif = DB::table('t_valores')->get();
-        return view('Principal', compact('date','producto', 'operarios', 'cif'));
+        return view('Principal', compact('producto', 'operarios', 'cif'));
     }
 }
