@@ -30,6 +30,13 @@ class AsistenteController extends Controller
         return view('usuarios/Asistentes', ['t_usuario' => $usuarios]);
     }
 
+    public function update(Request $request,$id_usuario){
+        $actualizar = t_usuario::findOrFail($id_usuario);
+        $actualizar->rol = $request->rol;
+        $actualizar->save();
+        return back();
+    }
+
     public function destroy($id_usuario)
     {
     //Buscar parametro dentro de la tabla, segun el id_usuario

@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        setlocale(LC_TIME, "");
+        date_default_timezone_set('America/Costa_Rica');
+        setlocale(LC_TIME, "es_ES");
         
     }
 }

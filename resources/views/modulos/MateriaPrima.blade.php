@@ -83,8 +83,7 @@
                 @enderror
                 <div class="m-0 mb-2">
                   <label for="">4.Presentacion (Cantidad)</label>
-                  <input type="number" placeholder="" name="presentacion" class="form-control"
-                    value="">
+                  <input type="number" placeholder="" name="presentacion" class="form-control" value="">
                 </div>
                 @error('presentacion')
                 <div class="fade show mb-2" role="alert">
@@ -118,7 +117,7 @@
 
   </div>
 </div>
- {{-- Buscador --}}
+{{-- Buscador --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('materia')}}" method="GET" class="row m-2 d-flex align-items-center">
     @csrf
@@ -169,7 +168,7 @@
 
       <div class="col-sm-6 mb-2" id="nombre">
         <input class="form-control" type="text" name="producto" value="{{$item->producto}}">
-      
+
       </div>
       @error('producto')
       <div class="fade show mb-2" role="alert">
@@ -193,11 +192,42 @@
       </div>
     </div>
     <div class="row m-3">
+      
       <button class="col-sm-12 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
         data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false" aria-controls="collapseExample">
         Ver mas informacion
       </button>
     </div>
+      <!-- Modal -->
+      <div class="modal micromodal-slide" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+              <div class="">
+                <div class="">
+                  <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                    <i class="fa fa-edit mr-2 "></i>Actualizar
+                  </p>
+                </div>
+              </div>
+              <div class="">
+                <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+              </div>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+              <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            </main>
+            <footer class="modal__footer">
+              <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                Aceptar
+              </button>
+              <button class="modal__btn col-3" data-micromodal-close
+                aria-label="Close this dialog window ">Cerrar</button>
+            </footer>
+
+          </div>
+        </div>
+      </div>
 
 
     <div class="collapse" id="collapseExample{{$item->id_materia_prima}}">
@@ -243,14 +273,33 @@
 
       </div>
 
-      <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_materia_prima}}" aria-hidden="true">
+  </form>
+</div>
+
+<div class="row d-flex align-items-center">
+
+  <div class="col-sm-6">
+    <a  data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
+      class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
+      informacion</a>
+  </div>
+
+  <div class="col-sm-6">
+    <form action="{{route('EliminarMateriaPrima', $item->id_materia_prima)}}" method="POST">
+      @csrf
+      @method('DELETE')
+      <button type="button" class="Eliminar text-danger btn btn-block bg-white"
+        data-micromodal-trigger="modal-2{{$item->id_materia_prima}}"><i class="fa fa-trash mr-1"></i> Eliminar
+        información</button>
+      <!-- Modal -->
+      <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
           <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
             <header class="modal__header">
               <div class="">
                 <div class="">
                   <p class="h4 font-weight-bold mb-2" id="">
-                    Editar Recurso
+                    Eliminar Recurso
                   </p>
                 </div>
               </div>
@@ -259,8 +308,7 @@
               </div>
             </header>
             <main class="modal__content" id="modal-1-content">
-              <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar los
-                datos anteriores</h6>
+              <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
               <button type="submit" class="btn btn-block">
                 Aceptar
               </button>
@@ -268,53 +316,11 @@
           </div>
         </div>
       </div>
-
-  </form>
-
-  <div class="row d-flex align-items-center">
-    <div class="col-sm-6">
-      <button type="button" data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
-        class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
-        informacion</button>
-    </div>
-
-    <div class="col-sm-6">
-      <form action="{{route('EliminarMateriaPrima', $item->id_materia_prima)}}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="button" class="Eliminar text-danger btn btn-block bg-white"
-          data-micromodal-trigger="modal-2{{$item->id_materia_prima}}"><i class="fa fa-trash mr-1"></i> Eliminar
-          información</button>
-        <!-- Modal -->
-        <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
-          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-              <header class="modal__header">
-                <div class="">
-                  <div class="">
-                    <p class="h4 font-weight-bold mb-2" id="">
-                      Eliminar Recurso
-                    </p>
-                  </div>
-                </div>
-                <div class="">
-                  <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-                </div>
-              </header>
-              <main class="modal__content" id="modal-1-content">
-                <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
-                <button type="submit" class="btn btn-block">
-                  Aceptar
-                </button>
-              </main>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-
+    </form>
   </div>
+
 </div>
+
 </div>
 @endforeach
 
@@ -345,5 +351,15 @@
     button.addEventListener('click', function () {
         MicroModal.show('modal-3');
     });
+</script>
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
 </script>
 @stop

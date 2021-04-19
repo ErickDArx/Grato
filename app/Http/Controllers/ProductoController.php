@@ -46,6 +46,7 @@ class ProductoController extends Controller
         ],[
             'nombre_producto.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
             'nombre_producto.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',
+            'nombre_producto.unique'=> 'El valor del campo: Nombre del producto, ya existe',
         ]);
         $agregar = new t_producto();
         $agregar->nombre_producto = $request->nombre_producto;
@@ -88,13 +89,14 @@ class ProductoController extends Controller
     public function update(Request $request, $id_producto)
     {
         request()->validate([
-            'nombre_producto' => 'required|string|min:3',
+            'nombre' => 'required|string|min:3|unique:t_producto,nombre_producto',
         ],[
-            'nombre_producto.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
-            'nombre_producto.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',
+            'nombre.required'=> 'El campo: Nombre del producto, no puede quedar vacio',
+            'nombre.min'=> 'El campo: Nombre del producto, debe tener minimo 3 caracteres',
+            'nombre.unique'=> 'El valor del campo: Nombre del producto, ya existe',
         ]);
         $edit = t_producto::findOrFail($id_producto);
-        $edit->nombre_producto = $request->nombre_producto;
+        $edit->nombre_producto = $request->nombre;
         $edit->save();
         return back()->with('edit','Todo salio bien');
     }

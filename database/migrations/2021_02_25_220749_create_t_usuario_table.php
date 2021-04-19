@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTUsuarioTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('t_usuario', function (Blueprint $table) {
@@ -27,12 +23,6 @@ class CreateTUsuarioTable extends Migration
         });
     }
 
-    /**Holaaaaaaaaaaaa
-     * 
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('t_usuario');

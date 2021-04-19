@@ -1,20 +1,16 @@
-{{-- Se llama a la plantilla creada --}}
+{{-- Extencion de plantilla --}}
 @extends('plantilla')
-{{-- Se llama a la variable titulo para otorgarle un valor --}}
+
+{{-- Se llama a la variables yield para otorgarle un valor --}}
 @section('titulo', 'Perfil')
 @section('Vista','Perfil')
-
 @section('Ruta','Perfil')
-
 @section('Icono','fa fa-user mr-2')
 
-@section('paginacion')
-@parent
-@stop
-
-{{-- Datos personales y actualizacion --}}
+{{-- Datos personales y edicion de datos --}}
 @section('contenido')
 @parent
+{{-- Formulario de informacion del usuario --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
    <div class="d-flex justify-content-center m-1 row align-items-center">
       <div class="col-sm-12">
@@ -95,7 +91,8 @@
                </div>
             </div>
 
-            <div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
+            {{-- Mensaje modal --}}
+            <div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                   <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                      <header class="modal__header">
@@ -111,19 +108,16 @@
                               data-micromodal-close></button>
                         </div>
                      </header>
-                     <main class="modal__content" id="modal-1-content">
-                        <div class="row">
-                           <div class="m-0 col-sm-10">
-                        <p class="m-0">
-                           Todos lo cambios realizados seran guardados si selecciona aceptar
-                        </p>
-                           </div>
+                     <main class="modal__content row" id="modal-1-content">
+                        <div class="col-sm-11 mt-2">
+                           <h5 class="m-0">
+                              Todos lo cambios realizados seran guardados si selecciona aceptar
+                           </h5>
                         </div>
 
                      </main>
-                     <footer class="modal__footer">
-                        <button type="submit" class="modal__btn modal__btn-primary col-3 mr-1"
-                           id="EnviarDatos">Aceptar</button>
+                     <footer class="">
+                        <button type="submit" class="modal__btn modal__btn-primary col-3 mr-1">Aceptar</button>
                         <button class="modal__btn col-3" data-micromodal-close
                            aria-label="Close this dialog window ">Cerrar</button>
                      </footer>
@@ -155,8 +149,8 @@
             <input name="correo" id="correo" type="text" class="form-control m-0" value="{{ auth()->user()->email }}" />
          </div>
          <div class="col-sm-6 mt-2">
-            <a  class="Correo col-sm-12 btn btn-dark btn-outline-dark"
-               data-micromodal-trigger="modal-1">Actualizar informacion</a>
+            <a class="Correo col-sm-12 btn btn-dark btn-outline-dark" data-micromodal-trigger="modal-5">Actualizar
+               informacion</a>
          </div>
          @error('correo')
          <div class="col-sm-12 fade show" role="alert">
@@ -167,7 +161,8 @@
          @enderror
       </div>
 
-      <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+      {{-- Mensaje modal --}}
+      <div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                <header class="modal__header">
@@ -182,12 +177,15 @@
                      <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
                   </div>
                </header>
-               <main class="modal__content" id="modal-1-content">
-                  <p>
-                     Todos lo cambios realizados seran guardados si selecciona aceptar
-                  </p>
+               <main class="modal__content row" id="modal-1-content">
+                  <div class="col-sm-11 mt-2">
+                     <h5 class="m-0">
+                        Todos lo cambios realizados seran guardados si selecciona aceptar
+                     </h5>
+                  </div>
+
                </main>
-               <footer class="modal__footer">
+               <footer class="">
                   <button type="submit" class="modal__btn modal__btn-primary col-3 mr-1">Aceptar</button>
                   <button class="modal__btn col-3" data-micromodal-close
                      aria-label="Close this dialog window ">Cerrar</button>
@@ -263,6 +261,7 @@
       </div>
    </form>
 </div>
+
 <script>
    $(document).ready(function () {$('.drawer').drawer();});
       MicroModal.init({
@@ -272,13 +271,14 @@
   
       var button = document.querySelector('.Personal');
       button.addEventListener('click', function () {
-          MicroModal.show('modal-3');
+          MicroModal.show('modal-5');
       });
       var button = document.querySelector('.Usuario');
       button.addEventListener('click', function () {
           MicroModal.show('modal-5');
       });
 </script>
+
 <script>
    window.onload=function(){
    var pos=window.name || 0;

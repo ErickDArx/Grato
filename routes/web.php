@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');
     Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
-    Route::put('/Asistentes', 'AsistenteController@update')->name('ActualizarAsistente');
+    Route::put('/Asistentes{id_usuario}', 'AsistenteController@update')->name('ActualizarAsistente');
     Route::delete('/Asistentes/{id_usuario}', 'AsistenteController@destroy')->name('EliminarAsistente');
 
 

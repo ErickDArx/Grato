@@ -42,6 +42,13 @@
                     <label for="">1.Nombre del producto a fabricar</label>
                     <input type="text" name="nombre_producto" class="form-control mb-2 mt-2" value="">
                   </div>
+                  @error('nombre_producto')
+                  <div class=" fade show m-2" role="alert">
+                    <div class="text-danger">
+                      <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('nombre_producto')}}</span>
+                    </div>
+                  </div>
+                  @enderror
                   <button type="submit" class="col-3 modal__btn modal__btn-primary col-12">Aceptar</button>
                   <button class="modal__btn col-12 mt-2 mb-0" data-micromodal-close
                     aria-label="Close this dialog window">Cerrar</button>
@@ -63,6 +70,18 @@
         });
 </script>
 
+@error('nombre')
+<div class="shadow m-2 card-body bg-white row" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('nombre')}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+@enderror
+
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('Productos')}}" method="GET" class="row m-2 d-flex align-items-center">
     @csrf
@@ -81,18 +100,6 @@
   </form>
 </div>
 
-@error('nombre_producto')
-<div class="shadow m-2 card-body bg-white row" style="border-radius: 0.5rem;">
-  <div class="col-sm-12">
-    <div class=" fade show" role="alert">
-      <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('nombre_producto')}}</span>
-      </div>
-    </div>
-  </div>
-</div>
-@enderror
-
 
 @stop
 
@@ -109,36 +116,44 @@
         </h5>
       </div>
       <div class="col-sm-6 mt-1 mb-1">
-        <input class="form-control" type="text" name="nombre_producto" id="" value="{{$item->nombre_producto}}">
-      </div>
-    </div>
+        <input class="form-control" type="text" name="nombre" id="" value="{{$item->nombre_producto}}">
 
-    <div class="modal micromodal-slide disabled" id="modal-3{{$item->id_producto}}" aria-hidden="true">
-      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-          <header class="modal__header">
-            <div class="">
-              <div class="">
-                <p class="h4 font-weight-bold mb-2" id="">
-                  Editar Recurso
-                </p>
-              </div>
-            </div>
-            <div class="">
-              <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-            </div>
-          </header>
-          <main class="modal__content" id="modal-1-content">
-            <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se actualizara y no se podran regresar los
-              datos anteriores</h6>
-            <button type="submit" class="btn btn-block">
-              Aceptar
-            </button>
-          </main>
         </div>
       </div>
-    </div>
+
+      <!-- Modal -->
+      <div class="modal micromodal-slide" id="modal-3{{$item->id_producto}}" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+              <div class="">
+                <div class="">
+                  <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                    <i class="fa fa-edit mr-2 "></i>Actualizar
+                  </p>
+                </div>
+              </div>
+              <div class="">
+                <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+              </div>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+              <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            </main>
+            <footer class="modal__footer">
+              <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                Aceptar
+              </button>
+              <button class="modal__btn col-3" data-micromodal-close
+                aria-label="Close this dialog window ">Cerrar</button>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+      
   </form>
+
   <div class="d-flex align-items-center justify-content-center row m-2 rounded">
     <div class="col-sm-6 mt-2">
       <button type="button" class="Actualizar text-primary btn m-0 btn-block bg-white"
@@ -159,8 +174,8 @@
               <header class="modal__header">
                 <div class="">
                   <div class="">
-                    <p class="h4 font-weight-bold mb-2" id="">
-                      Eliminar Recurso
+                    <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                      <i class="fa fa-trash mr-2 "></i>Eliminar
                     </p>
                   </div>
                 </div>
@@ -169,11 +184,16 @@
                 </div>
               </header>
               <main class="modal__content" id="modal-1-content">
-                <h6 class="mt-2 mb-2">Si usted da aceptar, el recurso se elimina permanentemente</h6>
-                <button type="submit" class="btn btn-block">
+                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+              </main>
+              <footer class="modal__footer">
+                <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
                   Aceptar
                 </button>
-              </main>
+                <button class="modal__btn col-3" data-micromodal-close
+                  aria-label="Close this dialog window ">Cerrar</button>
+              </footer>
+
             </div>
           </div>
         </div>
@@ -197,5 +217,15 @@
     button.addEventListener('click', function () {
         MicroModal.show('modal-3');
     });
+</script>
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
 </script>
 @stop

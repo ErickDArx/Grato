@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 {{-- CSS / JS / Iconografia / TOKEN / --}}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,10 +72,11 @@
                         <a class="dropdown-item" href="{{route('Principal')}}"><i class="fa fa-house-user mr-2"></i>ir
                             al menu principal</a>
                         <a class="dropdown-item text-dark" href="#" style=""
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                    class="text-danger fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
-        
-                        <form hidden id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                class="text-danger fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
+
+                        <form hidden id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
                             @csrf
                         </form>
                     </div>
@@ -175,6 +177,9 @@
 
     </main>
 
+
+
 </body>
+
 
 </html>
