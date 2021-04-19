@@ -83,8 +83,7 @@
                Modo acceso
             </div>
             <div class="col-sm-6">
-               <input readonly type="text" class="form-control" name="" id="nombre_usuario" @if(auth()->user()->rol
-               == 1) value="Administrador" @endif />
+               <input readonly type="text" class="form-control" name="" id="nombre_usuario" @if(auth()->user()->rol== 1) value="Administrador" @else  value="Asistente"  @endif />
             </div>
             <div class="col-sm-6">
 

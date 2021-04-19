@@ -23,8 +23,8 @@
     </div>
     <div class="col-sm-6 mb-2 d-flex align-items-center justify-content-center">
       <a href="{{route('Principal')}}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i> Regresar al
-         menu</a>
-   </div>
+        menu</a>
+    </div>
 
     {{-- Creacion de asistentes --}}
     <form style="letter-spacing: 0.4px" class="" id="asistentes" method="POST" action="{{ route('AgregarAsistente') }}">
@@ -89,7 +89,7 @@
             <input name="nombre_usuario" type="text" class="form-control" value="{{old('nombre_usuario')}}">
           </div>
         </div>
-        @error('nombre_susuario')
+        @error('nombre_usuario')
         <div class="col-sm-12 fade show mb-2" role="alert">
           <div class="text-danger">
             <span><i class="fa fa-exclamation mr-2 "></i>{{  $errors->first('nombre_usuario')}}</span>

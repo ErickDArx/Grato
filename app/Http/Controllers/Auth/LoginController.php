@@ -22,7 +22,14 @@ class LoginController extends Controller
     //Mostrar la vista que posee el formulario de acceso
     public function showLoginForm()
     {
-        return view('usuarios/Acceso');
+        if (Auth::check()) {
+            $producto = DB::table('t_producto')->count();
+            $operarios = DB::table('t_mano_de_obra')->count();
+            $cif = DB::table('t_valores')->get();
+            return view('Principal', compact('producto', 'operarios', 'cif'));
+        } else {
+            return view('usuarios/Acceso');
+        }
     }
 
     //funcion para autenticar aquellos usuarios existentes en el sistema

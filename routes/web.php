@@ -5,11 +5,10 @@
 // Este recibe los datos del login
 
 // Vista de Acceso
-Route::get('/', 'Auth\LoginController@index' , ['middleware' => 'auth', function (){
-
+Route::get('/', 'Auth\LoginController@index', ['middleware' => 'auth', function () {
 }])->name('acceso');
 // // Por medio del post, recolecta los datos y los envia al servidor, en este caso, al metodo login del controlador LoginController
-Route::post('/', 'Auth\LoginController@login', ['middleware' => 'auth', function (){
+Route::post('/', 'Auth\LoginController@login', ['middleware' => 'auth', function () {
 }])->name('login');
 // Para salir de una sesion ya iniciada, se accede a esta ruta
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
@@ -23,19 +22,6 @@ Route::middleware(['auth'])->group(function () {
     // Crud para la vista principal
     Route::get('/Principal', 'UsuarioController@principal')->name('Principal');
 
-    // Crud para la vista ManoObra
-    Route::get('/ManoObra', 'ManoObraController@index')->name('ManoObra');
-    Route::post('/Total', 'ManoObraController@store')->name('total');
-    Route::put('/Labores/{id_labor}', 'ManoObraController@labor')->name('ActualizarLabores');
-    Route::put('/Actualizar/{id_mano_de_obra}', 'ManoObraController@update')->name('ActualizarManoDeObra');
-    Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('EliminarManoDeObra');
-
-    // Crud para la vista Productos
-    Route::get('/Productos', 'ProductoController@index')->name('Productos');
-    Route::post('/Productos', 'ProductoController@store')->name('AgregarProducto');
-    Route::put('/Productos/{id_producto}', 'ProductoController@update')->name('ActualizarProducto');
-    Route::delete('/Productos/{id_producto}', 'ProductoController@destroy')->name('EliminarProducto');
-
     // Crud para la vista de Perfil
     Route::get('/Perfil', 'PerfilController@index')->name('Perfil');
     Route::post('/Perfil', 'PerfilController@store')->name('store');
@@ -44,33 +30,48 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Usuario/{id_usuario}', 'PerfilController@update_usuario')->name('actualizar_usuario');
     Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 
-    // Crud para la vista de Perfil
-    Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');
-    Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
-    Route::put('/Asistentes{id_usuario}', 'AsistenteController@update')->name('ActualizarAsistente');
-    Route::delete('/Asistentes/{id_usuario}', 'AsistenteController@destroy')->name('EliminarAsistente');
+    Route::middleware(['admin'])->group(function () {
+        // Crud para la vista Productos
+        Route::get('/Productos', 'ProductoController@index')->name('Productos');
+        Route::post('/Productos', 'ProductoController@store')->name('AgregarProducto');
+        Route::put('/Productos/{id_producto}', 'ProductoController@update')->name('ActualizarProducto');
+        Route::delete('/Productos/{id_producto}', 'ProductoController@destroy')->name('EliminarProducto');
+
+        // Crud para la vista ManoObra
+        Route::get('/ManoObra', 'ManoObraController@index')->name('ManoObra');
+        Route::post('/Total', 'ManoObraController@store')->name('total');
+        Route::put('/Labores/{id_labor}', 'ManoObraController@labor')->name('ActualizarLabores');
+        Route::put('/Actualizar/{id_mano_de_obra}', 'ManoObraController@update')->name('ActualizarManoDeObra');
+        Route::delete('/Eliminar/{id_mano_de_obra}', 'ManoObraController@delete')->name('EliminarManoDeObra');
+
+        // Crud para la vista de Asistentes
+        Route::get('/Asistentes', 'AsistenteController@index')->name('Asistentes');
+        Route::post('/Asistentes', 'AsistenteController@store')->name('AgregarAsistente');
+        Route::put('/Asistentes{id_usuario}', 'AsistenteController@update')->name('ActualizarAsistente');
+        Route::delete('/Asistentes/{id_usuario}', 'AsistenteController@destroy')->name('EliminarAsistente');
 
 
-    // Crud para la vista Equipo ----------------------------------
-    Route::get('/Equipo', 'EquiposController@index')->name('Equipo');
-    Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
-    Route::put('/Actualizando/{id_equipo}/Equipo', 'EquiposController@update')->name('ActualizarEquipo');
-    Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
-    Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
+        // Crud para la vista Equipo ----------------------------------
+        Route::get('/Equipo', 'EquiposController@index')->name('Equipo');
+        Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
+        Route::put('/Actualizando/{id_equipo}/Equipo', 'EquiposController@update')->name('ActualizarEquipo');
+        Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
+        Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
-    // Crud para la vista Viaticos
-    Route::get('/Viaticos', 'ViaticosController@index')->name('Viaticos');
-    Route::post('/Viaticos', 'ViaticosController@store')->name('AgregarViaticos');
-    Route::put('/Viaticos/{id_viatico}', 'ViaticosController@update')->name('ActualizarViaticos');
-    Route::delete('/Viaticos/{id_viatico}', 'ViaticosController@destroy')->name('EliminarViaticos');
+        // Crud para la vista Viaticos
+        Route::get('/Viaticos', 'ViaticosController@index')->name('Viaticos');
+        Route::post('/Viaticos', 'ViaticosController@store')->name('AgregarViaticos');
+        Route::put('/Viaticos/{id_viatico}', 'ViaticosController@update')->name('ActualizarViaticos');
+        Route::delete('/Viaticos/{id_viatico}', 'ViaticosController@destroy')->name('EliminarViaticos');
 
-    // Crud para la vista Materia prima
-    Route::get('/MateriaPrima', 'MateriaPrimaController@index')->name('materia');
-    Route::post('/MateriaPrima', 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
-    Route::put('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
-    Route::put('/MateriaPrima/{id_materia_prima}/calculando', 'MateriaPrimaController@edit')->name('EditarMateriaPrima');
-    Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
-
+        // Crud para la vista Materia prima
+        Route::get('/MateriaPrima', 'MateriaPrimaController@index')->name('materia');
+        Route::post('/MateriaPrima', 'MateriaPrimaController@store')->name('AgregarMateriaPrima');
+        Route::put('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@update')->name('ActualizarMateriaPrima');
+        Route::put('/MateriaPrima/{id_materia_prima}/calculando', 'MateriaPrimaController@edit')->name('EditarMateriaPrima');
+        Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
+    });
+    
     // Crud para la vista Pedidos
     Route::get('/Pedidos', 'PedidosController@index')->name('Pedidos');
     Route::post('/Pedidos', 'PedidosController@store')->name('Agregar');

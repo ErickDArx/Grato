@@ -14,9 +14,9 @@ class Roles
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $rol)
+    public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->rol == '1') {
+        if (auth()->check() && auth()->user()->rol == 1) {
             return $next($request);
         }
         return redirect('/Principal');

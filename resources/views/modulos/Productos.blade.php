@@ -10,6 +10,8 @@
 
 @section('contenido')
 @parent
+
+{{-- Titulo / Boton / Formulario --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="">
     <div class="container">
@@ -70,17 +72,18 @@
         });
 </script>
 
-@error('nombre')
-<div class="shadow m-2 card-body bg-white row" style="border-radius: 0.5rem;">
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="col-sm-12">
     <div class=" fade show" role="alert">
       <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('nombre')}}</span>
+        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
       </div>
     </div>
   </div>
 </div>
-@enderror
+@endif
 
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('Productos')}}" method="GET" class="row m-2 d-flex align-items-center">

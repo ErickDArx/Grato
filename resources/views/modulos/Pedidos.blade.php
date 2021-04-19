@@ -26,7 +26,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="row m-2 d-flex align-items-center">
     <div class="col-sm-6 border-bottom text-sm-left text-center">
-      <h5><i class="text-danger fa fa-angle-double-right mr-1"></i>{{$item->nombre_producto}}</h5>
+      <h5><i class="text-danger fa fa-angle-double-right mr-2"></i>{{$item->nombre_producto}}</h5>
 
     </div>
     <div class="col-sm-6 mt-sm-0 mt-3">

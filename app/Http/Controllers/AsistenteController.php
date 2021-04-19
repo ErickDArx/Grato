@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\t_usuario;
+use App\Http\Middleware\Roles;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -30,19 +31,20 @@ class AsistenteController extends Controller
         return view('usuarios/Asistentes', ['t_usuario' => $usuarios]);
     }
 
+    //funcion que almacena los datos de la tabla t_usuario
     public function store(Request $request)
     {
         // Validaciones y mensajes de validacion personalizados
         request()->validate([
-            'nombre_operario' => 'required | max:50 | regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'apellido_usuario' => 'required | max:50 | regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'segundo_apellido_usuario' => 'required | max:50 | regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'nombre_usuario' => 'required |unique:t_usuario,nombre_usuario| min:6 | max:20 | alpha_dash',
+            'nombre_operario' => 'required |alpha | regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'apellido_usuario' => 'required |alpha| regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundo_apellido_usuario' => 'required|alpha| regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'nombre_usuario' => 'required|unique:t_usuario,nombre_usuario|alpha_dash|min:6',
             'correo' => 'required | email | max:255 | unique:t_usuario,email',
             'password' => 'required | min:8 | max:16',
         ], [
             'nombre_operario.required' => 'El campo: Nombre del operario, no puede estar vacio',
-            'nombre_operario.alpha' => 'El campo: Nombre del operario, no puede tener espacio',
+            'nombre_operario.alpha' => 'El campo: Nombre del operario, no puede tener espacios ni numeros',
             'apellido_usuario.required' => 'El campo: Apellido del operario, no puede estar vacio',
             'segundo_apellido_usuario.required' => 'El campo: Segundo apellido del operario, no puede estar vacio',
             'nombre_usuario.required' => 'El campo: Nombre de usuario, no puede estar vacio',
