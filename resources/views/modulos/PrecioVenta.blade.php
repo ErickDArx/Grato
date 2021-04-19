@@ -12,12 +12,12 @@
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
     <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-            <h5 class="m-0 font-weight-bold">Costo Unitario</h5>
+            <h5 class="m-0 font-weight-bold">Costo Unitario Total</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
             @foreach ($t_totales as $item)
             @if ($item->id_producto == $producto->id_producto)
-            <input type="text" readonly class="form-control" value="{{$item->total}}">
+            <input type="text" readonly class="form-control" value="{{$item->total / $item->cantidad_producir}}">
             @endif
             @endforeach
         </div>
@@ -26,13 +26,55 @@
 
 {{-- Margen de utilidad --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
+    <form action="{{route('CostoTotalPV',$producto->id_producto)}}" method="POST">
+        @csrf
+        <div class="m-2 d-flex row align-items-center">
+            <div class="col-sm-6 mt-1 mb-1">
+                <h5 class="m-0 font-weight-bold">Margen de Utilidad</h5>
+            </div>
+            @foreach ($t_precio_venta as $item)
+                @if ($item->id_producto == $producto->id_producto)
+                <input type="text" class="form-control" value="{{$item->margen_utilidad}}" name="margen_utilidad">
+                @endif
+            @endforeach
+            <div class="col-sm-6 mt-1 mb-1">
+            </div>
+            <div class="col-sm-6 mt-1 mb-1">
+                <button type="submit" class="btn btn-dark">Aceptar</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+{{-- Precio de venta --}}
+<div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
     <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-            <h5 class="m-0 font-weight-bold">Margen de Utilidad</h5>
+            <h5 class="m-0 font-weight-bold">Precio de Venta</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
+            @foreach ($t_precio_venta as $item)
+                @if ($item->id_producto == $producto->id_producto)
+                <input type="text" class="form-control" value="{{$item->precio_venta}}" name="margen_utilidad">
+                @endif
+            @endforeach
 
-            <input type="text" class="form-control" value="" name="margen_utilidad">
+        </div>
+    </div>
+</div>
+
+{{-- Ganancia por unidad --}}
+<div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
+    <div class="m-2 d-flex row align-items-center">
+        <div class="col-sm-6 mt-1 mb-1">
+            <h5 class="m-0 font-weight-bold">Ganancia por Unidad</h5>
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+            @foreach ($t_precio_venta as $item)
+                @if ($item->id_producto == $producto->id_producto)
+                <input type="text" class="form-control" value="{{$item->ganancia_unidad}}" name="margen_utilidad">
+                @endif
+            @endforeach
 
         </div>
     </div>

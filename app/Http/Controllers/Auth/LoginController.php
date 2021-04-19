@@ -43,7 +43,7 @@ class LoginController extends Controller
             return redirect('/')->with('status', 'Datos Incorrectos!');
         }
     }
-    //Guardar la sesion del usuario
+    //Guardar la sesion del usuario y verificar que haya una session activa por usuario
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
@@ -62,11 +62,13 @@ class LoginController extends Controller
 
     protected $redirectTo = '/Principal';
 
+    // Decirle a Lavarel que haga la verificacion por medio del nombre de usuario
     public function username()
     {
         return 'nombre_usuario';
     }
 
+    //Verificar que el usuario este logeado
     public function index()
     {
         if (Auth::check()) {
@@ -76,6 +78,7 @@ class LoginController extends Controller
         }
     }
 
+    //Cerrar sesion
     public function logout(Request $request)
     {
         $this->guard()->logout();

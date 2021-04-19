@@ -4,8 +4,7 @@
 
 // Este recibe los datos del login
 
-use App\Http\Controllers\MesController;
-
+// Vista de Acceso
 Route::get('/', 'Auth\LoginController@index' , ['middleware' => 'auth', function (){
 
 }])->name('acceso');
@@ -100,6 +99,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
     Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
     Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
-    Route::post('{id_producto}/PrecioVenta/Agregar', 'CostoUnitarioController@precio')->name('PrecioVenta');
+    Route::post('PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
     Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
+
+    Route::get('PrecioVenta/{id_producto}', 'PrecioVentaController@index')->name('IndexPV');
+    Route::put('PrecioVenta/{id_producto}', 'PrecioVentaController@update')->name('AgregarCantidad');
+    Route::post('PrecioVenta/{id_producto}/Total', 'PrecioVentaController@store')->name('CostoTotalPV');
 });

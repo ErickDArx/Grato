@@ -127,9 +127,10 @@
 
 @section('contenido-2')
 @parent
+{{-- Lista de operarios --}}
 @foreach ($t_labores as $item)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-
+{{-- Actualizar operarios --}}
   <form action="{{route('ActualizarLabores',$item->id_labor)}}" method="POST">
     @csrf
     @method('PUT')

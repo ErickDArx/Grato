@@ -99,6 +99,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
+      $total->total_cantidad_producir;
       $total->save();
     }
 
@@ -251,22 +252,5 @@ class CostoUnitarioController extends Controller
     return back()->with('edit', 'Todo salio bien');
   }
 
-  public function precio(Request $request , $id_producto)
-  {
-    $costos = DB::table('t_totales')->get();
-    $producto = t_producto::findOrFail($id_producto);
-    $campo = t_precio_venta::where('id_producto', $id_producto)->first();
-    if ($campo) {
-      $total = t_precio_venta::findOrFail($id_producto);
-      $total->id_producto = $id_producto;
-      $total->save();
-    }
-    if (!$campo) {
-      $total = new t_precio_venta();
-      $total->id_producto = $id_producto;
-      $total->save();
-    }
-    return view('modulos/PrecioVenta', compact('producto'),['t_totales' => $costos]);
-  }
 
 }

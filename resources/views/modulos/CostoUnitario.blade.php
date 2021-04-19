@@ -396,8 +396,9 @@
 
 {{-- Cantidad por fabricar --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #006d36;">
-    <form action="{{route('PrecioVenta',$producto->id_producto)}}" method="POST">
+    <form action="{{route('AgregarCantidad',$producto->id_producto)}}" method="POST">
         @csrf
+        @method('PUT')
     <div class="m-2 d-flex row align-items-center">
         <div class="col-sm-12 mt-1 mb-1 border-bottom">
             <h5 class="font-weight-bold">Costo Unitario Total</h5>
@@ -406,10 +407,10 @@
             <label for="">Cantidad a producir</label>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
-            <input type="number" name="cantidad" class="form-control" id="">
+            <input type="number" name="cantidad" class="form-control" value="{{$item->cantidad_producir}}" id="">
         </div>
         <div class="col-sm-6 mt-1 mb-1">
-            <button class="btn btn-block btn-dark">Aceptar</button>
+            <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
         </div>
     </div>        
     </form>
