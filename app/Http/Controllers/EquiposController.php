@@ -14,11 +14,14 @@ use Carbon\Carbon;
 class EquiposController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $busqueda = $request->get('busqueda');
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
-        $equipos = DB::table('t_equipos')->get();
+        $equipos = t_equipos::orderBy('nombre_equipo','DESC')
+        ->Busqueda($busqueda)
+        ->paginate(6);
         $laborales = DB::table('t_labores')->get();
         return view('modulos/Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
@@ -27,7 +30,7 @@ class EquiposController extends Controller
     {
         request()->validate([
             'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
-            'precio' => 'required|numeric|min:6',
+            'precio' => 'required|numeric',
             'vida_util' => 'required|numeric',
             'porcentaje_utilizacion' => 'required|numeric',
         ]);

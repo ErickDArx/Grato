@@ -74,16 +74,17 @@
 
 @section('contenido-2')
 @parent
- {{-- Buscador --}}
- <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <form action="{{route('ManoObra')}}" method="GET" class="row m-2 d-flex align-items-center">
+{{-- Buscador --}}
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('CIF')}}" method="GET" class="row m-2 d-flex align-items-center">
     @csrf
 
-    <div class="col-sm-6 p-0">
-      <h6 class="m-0 font-weight-bold text-center"><i class="fa fa-list-ul"></i> Listado de CIF</h6>
+    <div class="col-sm-6 ">
+      <h6 class="font-weight-bold"><i class="fa fa-clipboard-list mr-1"></i> Listado de costos indirectos de fabricacion
+      </h6>
     </div>
 
-    <div class="input-group col-sm-6 mt-2">
+    <div class="input-group col-sm-6">
       <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
       <div class="input-group-append">
         <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
@@ -105,7 +106,8 @@
     @method('PUT')
     <div class="border-bottom m-2 d-flex align-items-center row">
       <div class="col-sm-6 mb-2 d-flex align-items-center">
-        <h5 class="m-0 card-title font-weight-bold mt-2"><i class="fa fa-quote-left"></i> Titulo del CIF</h5>
+        <h5 class="m-0 card-title font-weight-bold mt-2"><i class="fa fa-quote-left mr-1"></i> Titulo del CIF de la
+          cadena de produccion</i></h5>
       </div>
       <div class="col-sm-6 mt-2" id="nombre">
         <div class="input-group mb-3">
@@ -130,14 +132,15 @@
     <div class="m-2 justify-content-center row d-flex align-items-center">
 
       <div class="col-sm-6 mb-1">
-        <div class="modal micromodal-slide" id="modal-4{{$item->id_cif}}" aria-hidden="true">
+        <!-- Modal -->
+        <div class="modal micromodal-slide" id="modal-3{{$item->id_cif}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
               <header class="modal__header">
                 <div class="">
                   <div class="">
-                    <p class="h4 font-weight-bold mb-2" id="">
-                      Actualizacion de datos
+                    <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                      <i class="fa fa-edit mr-2 "></i>Actualizar
                     </p>
                   </div>
                 </div>
@@ -145,17 +148,23 @@
                   <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
                 </div>
               </header>
-              <main class="modal__content m-0" id="modal-1-content">
-                <h6 class="mt-3 mb-3">¿Esta seguro de actualizar los datos?</h6>
-                <button type="submit" class="btn btn-block btn-dark">
+              <main class="modal__content" id="modal-1-content">
+                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+              </main>
+              <footer class="modal__footer">
+                <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
                   Aceptar
                 </button>
-              </main>
+                <button class="modal__btn col-3" data-micromodal-close
+                  aria-label="Close this dialog window ">Cerrar</button>
+              </footer>
+
             </div>
           </div>
         </div>
 
-        <a href="#ID{{$item->id_cif}}" data-micromodal-trigger="modal-4{{$item->id_cif}}" class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit"></i> Editar
+        <a href="#" data-micromodal-trigger="modal-3{{$item->id_cif}}"
+          class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit"></i> Editar
           informacion</a>
   </form>
 
@@ -166,8 +175,39 @@
   <form action="{{route('EliminarCIF',$item->id_cif)}}" method="POST">
     @csrf
     @method('DELETE')
-    <button type="submit" class="text-danger bg-white btn btn-block"><i class="fa fa-trash"></i> Eliminar
-      informacion</button>
+    <a data-micromodal-trigger="modal-2{{$item->id_cif}}" class="text-danger bg-white btn btn-block"><i class="fa fa-trash"></i> Eliminar
+      informacion</a>
+
+    <!-- Modal -->
+    <div class="modal micromodal-slide" id="modal-2{{$item->id_cif}}" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <div class="">
+              <div class="">
+                <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                  <i class="fa fa-trash mr-2 "></i>Eliminar
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+            </div>
+          </header>
+          <main class="modal__content" id="modal-1-content">
+            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+          </main>
+          <footer class="modal__footer">
+            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+              Aceptar
+            </button>
+            <button class="modal__btn col-3" data-micromodal-close
+              aria-label="Close this dialog window ">Cerrar</button>
+          </footer>
+
+        </div>
+      </div>
+    </div>
   </form>
 
 </div>
@@ -178,6 +218,17 @@
 </div>
 
 @endforeach
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
+</script>
+
 <script>
   MicroModal.init({
         onShow: modal => console.info(`${modal.id} is shown`), // [1]
@@ -199,4 +250,5 @@
         MicroModal.show('modal-4');
     });
 </script>
+
 @stop

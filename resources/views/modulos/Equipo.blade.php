@@ -10,9 +10,10 @@
 
 @section('contenido')
 @parent
+{{-- Titulo / Modal / Boton --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="m-2 d-flex justify-content-center row align-items-center">
-    <div class="col-sm-6">
+    <div class="col-sm-6 text-sm-left text-center mb-1">
       <h4 class="font-weight-bold"><i class="fa fa-cogs mr-2"></i> Equipos</h4>
       <h6>Desglose de recursos</h6>
     </div>
@@ -102,6 +103,7 @@
     </div>
   </div>
 </div>
+{{-- Modal --}}
 <script>
   MicroModal.init();
   var button = document.querySelector('.Equipo');
@@ -114,8 +116,41 @@
 
 @section('contenido-2')
 @parent
-@foreach ($t_equipos as $item)
 
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
+ {{-- Buscador --}}
+ <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <form action="{{route('Equipo')}}" method="GET" class="row m-2 d-flex align-items-center">
+    @csrf
+
+    <div class="col-sm-6 ">
+      <h6 class="font-weight-bold"><i class="fa fa-clipboard-list mr-1"></i> Listado de equipos</h6>
+    </div>
+
+    <div class="input-group col-sm-6">
+      <input placeholder="" name="busqueda" type="text" value="" class="rounded form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark"><span class="fa fa-search icon"></span></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+@foreach ($t_equipos as $item)
+{{-- Listado de equipos --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
 
   <form action="{{route('ActualizarEquipo',$item->id_equipo)}}" method="POST">
@@ -249,7 +284,7 @@
     </div>
   </form>
   <div class="row m-2 d-flex align-items-center">
-    <div class="col-sm-6">
+    <div class="col-sm-6 mb-2">
 
       <button type="button" data-micromodal-trigger="modal-3{{$item->id_equipo}}"
         class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar informacion</button>
@@ -298,8 +333,15 @@
   </div>
 </div>
 
-
 @endforeach
+
+{{-- Paginacion --}}
+<div class="d-flex align-items-center justify-content-center">
+  <div class="mt-3">
+    {{ $t_equipos->render() }}
+  </div>
+</div>
+
 <script>
   MicroModal.init();
   var button = document.querySelector('.Eliminar');

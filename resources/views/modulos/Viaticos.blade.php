@@ -1,14 +1,16 @@
 @extends('plantilla')
 
 @section('titulo','Viaticos')
-
+@section('Ruta','Viaticos')
+@section('Vista','Viaticos')
+@section('Icono','fa fa-coins mr-2')
 @section('contenido')
 @parent
 {{-- Presentacion / Boton / Modal --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex justify-content-center row align-items-center">
+  <div class="m-2 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
-      <h4 class="font-weight-bold">Viaticos</h4>
+      <h4 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Viaticos</h4>
       <h6></h6>
     </div>
     <div class="col-sm-6">
@@ -32,7 +34,18 @@
                 @csrf
                 <div class="m-0 mb-2">
                   <label for="">1.Tipo de Vehículo</label>
-                  <input type="text" name="tipo_de_vehiculo" class="form-control" value="">
+                  <select type="text" name="tipo_de_vehiculo" class="form-control" value="">
+                    @php
+                    $viaticos = array('tipo'=>'Vehículo rural: Gasolina',
+                    'Vehículo rural: Diesel','Vehículo liviano: Gasolina',
+                    'Vehículo liviano: Gasolina (más de 1600 cc)',
+                    'Vehiulo liviano diesel','motocicletas');
+                    @endphp
+                    @foreach ($viaticos as $item)
+                    <option value="">{{$array[] = $item}}</option>
+                    @endforeach
+
+                  </select>
                 </div>
                 <div class="m-0 mb-2">
                   <label for="">2.Antiguedad Vehículo (años)</label>
@@ -66,6 +79,21 @@
 
 @section('contenido-2')
 @parent
+
+@php
+
+// 1	¢221,51	¢185,96	¢151,66	¢193,46	¢163,71	¢53,07
+// 2	¢207,68	¢172,64	¢143,77	¢181,79	¢153,09	¢51,68
+// 3	¢199,98	¢165,03	¢139,43	¢175,28	¢147,07	¢51,06
+// 4	¢195,95	¢160,85	¢137,21	¢171,87	¢143,81	¢51,06
+// 5	¢194,13	¢158,73	¢136,27	¢170,30	¢142,20	¢51,06
+// 6	¢193,62	¢157,83	¢136,09	¢169,85	¢141,59	¢51,06
+// 7	¢188,25	¢152,41	¢133,10	¢165,30	¢137,32	¢51,06
+// 8	¢183,58	¢147,64	¢130,50	¢161,33	¢133,57	¢51,06
+// 9	¢179,53	¢143,44	¢128,27	¢157,89	¢130,30	¢51,06
+// 10 y más	¢176,03	¢139,77	¢126,36	¢154,91	¢127,44	¢51,06
+@endphp
+
 {{-- Listado de viaticos / Actualizar / Eliminar --}}
 @foreach ($t_viaticos as $item)
 

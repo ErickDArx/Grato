@@ -44,7 +44,7 @@
             </button>
             @extends('layouts/menu')
 
-            <div class="col-sm-6 col-6 " style="">
+            <div class="col-sm-7 col-12" style="">
 
                 <div class="text-center text-sm-right font-weight-bolder">
                     <a class="h4 p-2 text-dark font-weight-bold" href="@yield('Ruta')"> <i class="@yield('Icono')"></i>
@@ -52,7 +52,7 @@
                 </div>
 
             </div>
-            <div class=" col-sm-6 col-6 text-sm-right text-center">
+            <div class="col-sm-5 mt-sm-0 mt-4 col-12 text-sm-right text-center">
                 @unless (Auth::check())
                 <p class="alert text-danger">
                     Usted no ha iniciado sesión aun!
@@ -129,11 +129,12 @@
                 <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
                         @php
-                            $date = \Carbon\Carbon::now();
+                        $date = \Carbon\Carbon::now();
                         @endphp
                         <h5 class="">{{ date('h:i a')}}</h5>
 
-                        <p class="text-gray m-0">{{ date('d') }} de {{ $date->formatLocalized('%B') }} del {{ date('Y') }}</p>
+                        <p class="text-gray m-0">{{ date('d') }} de {{ $date->formatLocalized('%B') }} del
+                            {{ date('Y') }}</p>
 
 
                     </div>
@@ -178,8 +179,6 @@
         </div>
 
     </main>
-
-
 
 </body>
 

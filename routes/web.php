@@ -78,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Crud para la vista Reportes
     Route::get('/Reportes', 'ReportesController@index')->name('Reportes');
-    Route::get('/Reportes/Descarga', 'ReportesController@pdf')->name('Reportes.pdf');
+    Route::get('/Reportes/Descarga/{id_producto}', 'ReportesController@pdf')->name('Reportes.pdf');
 
     // Crud para la vista principal CIF
     Route::get('/CIF', 'CifController@index')->name('CIF');

@@ -17,7 +17,8 @@ class PrecioVentaController extends Controller
         $totales = DB::table('t_totales')->get();
         $precio = DB::table('t_precio_venta')->get();
         $producto = t_producto::findOrFail($id_producto);
-        return view('modulos/PrecioVenta', compact('producto'), ['t_totales' => $totales , 't_precio_venta' => $precio]);
+
+        return view('modulos/PrecioVenta', compact('producto'), ['t_totales' => $totales, 't_precio_venta' => $precio]);
     }
 
     public function create()
@@ -40,7 +41,7 @@ class PrecioVentaController extends Controller
 
         $costos = t_precio_venta::findOrFail($id_producto);
         $costos->margen_utilidad = $request->margen_utilidad;
-        $costos->ganancia_unidad = ($cu * $request->margen_utilidad)/100;
+        $costos->ganancia_unidad = ($cu * $request->margen_utilidad) / 100;
         $costos->precio_venta = $cu + $costos->ganancia_unidad;
         $costos->save();
 
@@ -60,6 +61,13 @@ class PrecioVentaController extends Controller
     public function update(Request $request, $id_producto)
     {
         $totales = DB::table('t_totales')->get();
+
+        $campo = t_precio_venta::where('id_producto', $request->id_producto)->first();
+        if (!$campo) {
+            $precio =  new t_precio_venta();
+            $precio->id_producto = $id_producto;
+            $precio->save();
+        }
 
         $costos = t_totales::findOrFail($id_producto);
         $costos->cantidad_producir = $request->cantidad;
