@@ -44,15 +44,17 @@
             <div class="col-sm-6 mt-1 mb-1">
                 <h5 class="m-0 font-weight-bold">Margen de Utilidad</h5>
             </div>
+
+            <div class="col-sm-6 mt-1 mb-1">
             @foreach ($t_precio_venta as $item)
                 @if ($item->id_producto == $producto->id_producto)
-                <input type="text" class="form-control" value="{{$item->margen_utilidad}}" name="margen_utilidad">
+                <input required type="number" class="form-control" value="{{$item->margen_utilidad}}" name="margen_utilidad">
                 @endif
-            @endforeach
-            <div class="col-sm-6 mt-1 mb-1">
+            @endforeach                
             </div>
+            <div class="col-sm-6"></div>
             <div class="col-sm-6 mt-1 mb-1">
-                <button type="submit" class="btn btn-dark">Aceptar</button>
+                <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
             </div>
         </div>
     </form>

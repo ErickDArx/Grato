@@ -8,7 +8,6 @@ use App\t_totales;
 use App\t_producto;
 use App\t_precio_venta;
 
-
 class PrecioVentaController extends Controller
 {
 
@@ -19,11 +18,6 @@ class PrecioVentaController extends Controller
         $producto = t_producto::findOrFail($id_producto);
 
         return view('modulos/PrecioVenta', compact('producto'), ['t_totales' => $totales, 't_precio_venta' => $precio]);
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request, $id_producto)
@@ -39,23 +33,14 @@ class PrecioVentaController extends Controller
             }
         }
 
-        $costos = t_precio_venta::findOrFail($id_producto);
+        $costos =t_precio_venta::findOrFail($id_producto);
+        $costos->id_producto = $id_producto;
         $costos->margen_utilidad = $request->margen_utilidad;
         $costos->ganancia_unidad = ($cu * $request->margen_utilidad) / 100;
         $costos->precio_venta = $cu + $costos->ganancia_unidad;
         $costos->save();
 
         return back();
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request, $id_producto)
@@ -75,8 +60,4 @@ class PrecioVentaController extends Controller
         return redirect()->route('IndexPV', ['id_producto' => $id_producto]);
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -175,7 +175,8 @@
   <form action="{{route('EliminarCIF',$item->id_cif)}}" method="POST">
     @csrf
     @method('DELETE')
-    <a data-micromodal-trigger="modal-2{{$item->id_cif}}" class="text-danger bg-white btn btn-block"><i class="fa fa-trash"></i> Eliminar
+    <a data-micromodal-trigger="modal-2{{$item->id_cif}}" class="text-danger bg-white btn btn-block"><i
+        class="fa fa-trash"></i> Eliminar
       informacion</a>
 
     <!-- Modal -->

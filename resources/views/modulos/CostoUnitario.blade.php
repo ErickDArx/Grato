@@ -118,8 +118,8 @@
         </div>
 
         <div class="col-sm-6 col-12 mt-1 mb-1 d-flex justify-content-center align-items-center">
-            <div class="row d-flex">
-                <div class="col-sm-6 col-6 d-flex align-items-center">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-6 col-12 d-flex justify-content-center align-items-center">
                     <h6 class="font-weight-light"> Total en Colones</h6>
                 </div>
                 <div class="col-sm-6 col-6">
@@ -130,8 +130,6 @@
                     @endforeach
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -178,20 +176,19 @@
 @foreach ($t_mano_de_obra as $mo)
 @foreach ($t_costo_unitario as $cu)
 @if ( $cu->id_producto == $producto->id_producto && $mo->id_mano_de_obra == $cu->id_mano_de_obra)
-<div name="Operario" class="shadow m-2 card-body bg-white"
+<div name="Operario" class="shadow m-2 card-body bg-white d-flex align-items-center"
     style="border-radius: 0.5rem;border-left: 8px solid #ff8882;">
     <form action="{{route('ActualizarTotal',$mo->id_mano_de_obra)}}" method="POST">
         @csrf
         @method('PUT')
         <input hidden type="text" value="{{$producto->id_producto}}" name="id_producto">
         <div class="m-2 d-flex row align-items-center">
-            <div class="col-sm-6 mt-2 mb-2">
-                <label class="" for="">Operario</label>
-                <input readonly class="form-control" type="text"
-                    value="{{$mo->nombre_trabajador}} {{$mo->apellido_trabajador}}">
+            <div class="col-sm-12 mt-2 mb-2 border-bottom">
+                <h5><i class="fa fa-user-cog mr-1 text-dark"></i> {{$mo->nombre_trabajador}}
+                    {{$mo->apellido_trabajador}}</h5>
             </div>
             <div class="col-sm-6">
-                <label class="" for="">Tiempo trabajado</label>
+                <label class="" for="">Tiempo trabajado (minutos)</label>
                 <input class="form-control" type="number" value="{{$mo->tiempo_trabajado}}" name="tiempo_trabajado">
             </div>
             <div class="col-sm-6">
@@ -202,24 +199,95 @@
                 <label for="">Total</label>
                 <input readonly class="form-control" type="text" value="{{$mo->costo_minuto}}">
             </div>
-            <div class="col-sm-6">
-                <button id="#Operario" class="mt-3 bg-white btn btn-block text-danger">
-                    <i class="fa fa-trash mr-1"></i> Eliminar del desglose
-                </button>
+            <!-- Modal -->
+            <div class="modal micromodal-slide" id="modal-3{{$item->id_mano_de_obra}}" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                        <header class="modal__header">
+                            <div class="">
+                                <div class="">
+                                    <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                                        <i class="fa fa-edit mr-2 "></i>Actualizar
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button class="modal__close shadow-sm" aria-label="Close modal"
+                                    data-micromodal-close></button>
+                            </div>
+                        </header>
+                        <main class="modal__content" id="modal-1-content">
+                            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                        </main>
+                        <footer class="modal__footer">
+                            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                                Aceptar
+                            </button>
+                            <button class="modal__btn col-3" data-micromodal-close
+                                aria-label="Close this dialog window ">Cerrar</button>
+                        </footer>
+
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <button id="#Operario" class="mt-3 btn btn-block bg-white text-primary">
-                    <i class="fa fa-edit mr-1"></i> Actualizar informacion
-                </button>
+    </form>
+
+    <div class="col-sm-3 mt-3 d-flex align-items-center">
+        <a data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
+            class=" Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Editar</a>
+    </div>
+
+    <div class="col-sm-3 mt-3 d-flex align-items-center">
+        <a data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}" class="text-danger bg-white btn btn-block"><i
+                class="fa fa-trash mr-1"></i> Eliminar</a>
+    </div>
+
+
+    <form action="{{route('EOperario',$cu->id_costo_unitario)}}" method="POST">
+        {{ csrf_field() }}
+        @method('PUT')
+        <input hidden type="" name="id_mano_de_obra" value="">
+        <!-- Modal -->
+        <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <header class="modal__header">
+                        <div class="">
+                            <div class="">
+                                <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                                    <i class="fa fa-trash mr-2 "></i>Eliminar
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="modal__close shadow-sm" aria-label="Close modal"
+                                data-micromodal-close></button>
+                        </div>
+                    </header>
+                    <main class="modal__content" id="modal-1-content">
+                        <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                    </main>
+                    <footer class="modal__footer">
+                        <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                            Aceptar
+                        </button>
+                        <button class="modal__btn col-3" data-micromodal-close
+                            aria-label="Close this dialog window ">Cerrar</button>
+                    </footer>
+
+                </div>
             </div>
         </div>
     </form>
+
+
+</div>
+
 
 </div>
 @endif
 @endforeach
 @endforeach
-
 
 @stop
 
@@ -261,12 +329,11 @@
                 <option value="0">Seleccionar</option>
 
                 @foreach ($t_equipos as $item)
-                <option 
-                @foreach ($t_costo_unitario as $cu) 
-                @if ($cu->id_equipo == $item->id_equipo && $producto->id_producto == $cu->id_producto)
-                disabled
-                @endif
-                @endforeach
+                <option @foreach ($t_costo_unitario as $cu) @if ($cu->id_equipo == $item->id_equipo &&
+                    $producto->id_producto == $cu->id_producto)
+                    disabled
+                    @endif
+                    @endforeach
                     class="form-control" value="{{$item->id_equipo}}">{{$item->nombre_equipo}}</option>
                 @endforeach
 
@@ -294,37 +361,42 @@
     <form action="{{route('CostoEquipo',$mo->id_equipo)}}" method="POST">
         @csrf
         @method('PUT')
+        <input type="text" hidden name="id_producto" value="{{$producto->id_producto}}">
         <div class="m-2 d-flex row align-items-center">
             <div class="col-sm-12 mt-1 mb-1 border-bottom">
-
-                <h5>{{$mo->nombre_equipo}}</h5>
+                <h5><i class="fa fa-cogs mr-1 text-dark"></i> {{$mo->nombre_equipo}}</h5>
             </div>
+
             <div class="col-sm-6 mt-1 mb-1">
                 <label for="">Tiempo de uso del equipo</label>
                 <input type="number" class="form-control" value="{{$mo->tiempo_minutos}}" name="tiempo_minutos">
             </div>
+
             <div class="col-sm-6 mt-1">
                 <label for="">Costo por minuto</label>
                 <input type="text" class="form-control" readonly value="{{$mo->depreciacion_minuto}}">
             </div>
+
             <div class="col-sm-6 mt-1">
                 <label for="">Costo</label>
                 <input type="text" class="form-control" readonly value="{{$mo->costo}}">
             </div>
             <div class="col-sm-3">
                 <label class="" for=""></label>
-                <button type="submit" class="mt-2 btn-block btn btn-outline-primary"><i class="fa fa-edit mr-1"></i> Editar</button>
-                
+                <button type="submit" class="mt-2 btn-block btn btn-outline-primary"><i class="fa fa-edit mr-1"></i>
+                    Editar</button>
+
             </div>
             <div class="col-sm-3">
                 <label for=""></label>
-                <button type="submit" class="mt-2 btn-block btn btn-outline-danger"><i class="fa fa-trash mr-1"></i> Eliminar</button>
+                <button type="submit" class="mt-2 btn-block btn btn-outline-danger"><i class="fa fa-trash mr-1"></i>
+                    Eliminar</button>
             </div>
         </div>
     </form>
 
 </div>
-@endif    
+@endif
 @endforeach
 @endforeach
 
@@ -341,10 +413,10 @@
                 </div>
                 <div class="col-sm-6">
                     @php
-                        $sumaCIF = 0.00;
-                        foreach($t_valores as $item){
-                            $sumaCIF = $sumaCIF + $item->total;
-                        }
+                    $sumaCIF = 0.00;
+                    foreach($t_valores as $item){
+                    $sumaCIF = $sumaCIF + $item->total;
+                    }
                     @endphp
                     {{$sumaCIF}}
                 </div>
@@ -366,10 +438,10 @@
                 </div>
                 <div class="col-sm-6">
                     @php
-                        $sumaVI = 0.00;
-                        foreach($t_viaticos as $item){
-                            $sumaVI = $sumaVI + $item->total_km;
-                        }
+                    $sumaVI = 0.00;
+                    foreach($t_viaticos as $item){
+                    $sumaVI = $sumaVI + $item->total_km;
+                    }
                     @endphp
                     {{$sumaVI}}
                 </div>
@@ -399,21 +471,30 @@
     <form action="{{route('AgregarCantidad',$producto->id_producto)}}" method="POST">
         @csrf
         @method('PUT')
-    <div class="m-2 d-flex row align-items-center">
-        <div class="col-sm-12 mt-1 mb-1 border-bottom">
-            <h5 class="font-weight-bold">Costo Unitario Total</h5>
+        <div class="m-2 d-flex row align-items-center">
+            <div class="col-sm-12 mt-1 mb-1 border-bottom">
+                <h5 class="font-weight-bold">Costo Unitario Total</h5>
+            </div>
+            <div class="col-sm-12 mt-1">
+                <label for="">Cantidad a producir</label>
+            </div>
+
+            @foreach ($t_totales as $pv)
+            @if ($producto->id_producto == $pv->id_producto)
+            <div class="col-sm-6 mt-1 mb-1">
+                <input type="number" name="cantidad" class="form-control" value="{{$pv->cantidad_producir}}" id="">
+            </div>
+            @endif
+            @endforeach
+
+
+            <div class="col-sm-6 mt-1 mb-1">
+                <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
+            </div>
         </div>
-        <div class="col-sm-12 mt-1">
-            <label for="">Cantidad a producir</label>
-        </div>
-        <div class="col-sm-6 mt-1 mb-1">
-            <input type="number" name="cantidad" class="form-control" value="" id="">
-        </div>
-        <div class="col-sm-6 mt-1 mb-1">
-            <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
-        </div>
-    </div>        
     </form>
+
+
 
 </div>
 
@@ -426,4 +507,27 @@
     window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
     }
 </script>
+
+<script>
+    MicroModal.init({
+        onShow: modal => console.info(`${modal.id} is shown`), // [1]
+        onClose: modal => console.info(`${modal.id} is hidden`), // [2]
+    });
+
+    var button = document.querySelector('.Operario');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-1');
+    });
+
+    var button = document.querySelector('.Eliminar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-2');
+    });
+
+    var button = document.querySelector('.Actualizar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-4');
+    });
+</script>
+
 @stop

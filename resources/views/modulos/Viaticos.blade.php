@@ -265,6 +265,10 @@
         onShow: modal => console.info(`${modal.id} is shown`), // [1]
         onClose: modal => console.info(`${modal.id} is hidden`), // [2]
     });
+    var button = document.querySelector('.Viaticos');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-4');
+    });
   var button = document.querySelector('.Eliminar');
     button.addEventListener('click', function () {
         MicroModal.show('modal-2');
@@ -274,10 +278,6 @@
         MicroModal.show('modal-3');
     });
 
-    var button = document.querySelector('.Viaticos');
-    button.addEventListener('click', function () {
-        MicroModal.show('modal-4');
-    });
 </script>
 
 <script>

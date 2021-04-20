@@ -8,6 +8,7 @@ use App\t_producto;
 use App\t_totales;
 use App\t_equipos;
 use App\t_mano_de_obra;
+use App\t_precio_venta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,8 @@ class CostoUnitarioController extends Controller
     $cif = DB::table('t_valores')->get();
     $viaticos = DB::table('t_viaticos')->get();
     $resultados = DB::table('t_totales')->get();
-    
+    $precio = DB::table('t_precio_venta')->get();
+
     $sumaCIF = 0.00;
     $calculo = DB::table('t_valores')->get();
     foreach ($calculo as $item) {
@@ -81,7 +83,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0 ;
+      $total->cantidad_producir = 0;
       $total->save();
     }
     if ($campo) {
@@ -93,15 +95,20 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0 ;
+      $total->cantidad_producir = 0;
       $total->save();
     }
 
-    return view('modulos/CostoUnitario',compact('producto'),['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario' => $costos, 't_equipos' => $equipo, 't_valores' => $cif, 't_viaticos' => $viaticos, 't_totales' => $resultados, 't_materia_prima' => $recursos]);
+    return view(
+      'modulos/CostoUnitario',
+      compact('producto'),
+      ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario' => $costos, 't_equipos' => $equipo, 't_valores' => $cif, 't_viaticos' => $viaticos, 't_totales' => $resultados, 't_materia_prima' => $recursos, 't_precio_venta'=>$precio]
+    );
   }
 
   public function operario(Request $request, $id_producto)
   {
+
     request()->validate([
       'id_mano_de_obra' => 'required | numeric'
     ], [
@@ -215,9 +222,8 @@ class CostoUnitarioController extends Controller
       $total->save();
     }
 
-
     // Redirigir a la vista original 
-    return back()->with('agregar', 'El usuario se ha agregado');
+    return back();
   }
 
   public function costo(Request $request, $id_equipo)
@@ -238,8 +244,33 @@ class CostoUnitarioController extends Controller
       }
     }
 
-    return back()->with('edit', 'Todo salio bien');
+    $campo = t_totales::where('id_producto', $request->id_producto)->first();
+    if (!$campo) {
+      $costo = new t_costo_unitario();
+      $costo->id_producto = $request->id_producto;
+      $total = new t_totales();
+      $total->id_producto = $request->id_producto;
+      $total->total_equipos = $sumaEQ;
+      $total->total = $total->total_materia_prima + $total->total_mano_de_obra + $total->sumaEQ + $total->total_cif + $total->total_viaticos;
+      $total->save();
+    }
+    if ($campo) {
+      $total = t_totales::findOrFail($request->id_producto);
+      $total->id_producto = $request->id_producto;
+      $total->total_equipos = $sumaEQ;
+      $total->total = $total->total_materia_prima + $total->total_mano_de_obra + $total->sumaEQ + $total->total_cif + $total->total_viaticos;
+      $total->save();
+    }
+
+    return back();
   }
 
-
+  public function eoperario($id_costo_unitario)
+  {
+    $agregar = t_costo_unitario::findOrFail($id_costo_unitario);
+    $agregar->id_mano_de_obra = NULL;
+    $agregar->save();
+    // Redirigir a la vista original 
+    return back();
+  }
 }

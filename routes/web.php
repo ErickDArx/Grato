@@ -56,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/Equipo', 'EquiposController@index')->name('Equipo');
         Route::post('/Equipo', 'EquiposController@store')->name('AgregarEquipo');
         Route::put('/Actualizando/{id_equipo}/Equipo', 'EquiposController@update')->name('ActualizarEquipo');
-        Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
         Route::delete('/Equipo/{id_equipo}', 'EquiposController@destroy')->name('EliminarEquipo');
 
         // Crud para la vista Viaticos
@@ -102,9 +101,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
     Route::post('PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
     Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
+    Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
+
+    Route::put('/Eliminar/{id_mano_de_obra}', 'CostoUnitarioController@eoperario')->name('EOperario');
 
     //Vista precio de venta
     Route::get('PrecioVenta/{id_producto}', 'PrecioVentaController@index')->name('IndexPV');
-    Route::put('PrecioVenta/{id_producto}', 'PrecioVentaController@update')->name('AgregarCantidad');
+    Route::put('PrecioVenta/{id_producto}/MargenUtilidad', 'PrecioVentaController@update')->name('AgregarCantidad');
     Route::post('PrecioVenta/{id_producto}/Total', 'PrecioVentaController@store')->name('CostoTotalPV');
 });
