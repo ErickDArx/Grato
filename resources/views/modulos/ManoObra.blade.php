@@ -229,7 +229,7 @@
       <div class="m-1 d-flex align-items-center row border-bottom">
 
         <div class="col-sm-6 mb-2">
-          <h5 class="m-0 card-title font-weight-bold">Nombre del Colaborador(a)</h5>
+          <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-user-check mr-1"></i> Nombre del Colaborador(a)</h5>
         </div>
 
         <div class="col-sm-6 mb-2 m-0" id="">
@@ -322,7 +322,7 @@
       </div>
     </div>
     </form>
-    <div class="row d-flex align-items-center">
+    <div class="row d-flex align-items-center m-2">
       <div class="col-sm-6">
 
         <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"

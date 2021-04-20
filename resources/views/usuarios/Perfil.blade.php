@@ -59,7 +59,7 @@
             @error('apellido_usuario')
             <div class="col-sm-12 fade show" role="alert">
                <div class="text-danger">
-                  <span>{{  $errors->first('apellido_usuario')}}</span>
+                  <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('apellido_usuario')}}</span>
                </div>
             </div>
             @enderror
@@ -74,7 +74,7 @@
             @error('segundo_apellido_usuario')
             <div class="col-sm-12 fade show" role="alert">
                <div class="text-danger">
-                  <span>{{  $errors->first('segundo_apellido_usuario')}}</span>
+                  <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('segundo_apellido_usuario')}}</span>
                </div>
             </div>
             @enderror
@@ -274,7 +274,7 @@
           onShow: modal => console.info(`${modal.id} is shown`), // [1]
           onClose: modal => console.info(`${modal.id} is hidden`), // [2]
       });
-  
+
       var button = document.querySelector('.Personal');
       button.addEventListener('click', function () {
           MicroModal.show('modal-5');
