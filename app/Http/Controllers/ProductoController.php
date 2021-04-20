@@ -14,8 +14,6 @@ class ProductoController extends Controller
     {
 
         $busqueda = $request->get('busqueda');
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
         $materia = t_producto::orderBy('nombre_producto','ASC')
         ->busqueda($busqueda)
         ->paginate(6);
@@ -23,22 +21,6 @@ class ProductoController extends Controller
         return view('modulos/Productos', ['t_producto' => $materia]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate([
@@ -50,42 +32,13 @@ class ProductoController extends Controller
         ]);
         $agregar = new t_producto();
         $agregar->nombre_producto = $request->nombre_producto;
-        
+        $agregar->fecha = Carbon::now();
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
         return back()->with('agregar', 'se agrego sin problemas');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id_producto)
     {
         request()->validate([
@@ -97,16 +50,11 @@ class ProductoController extends Controller
         ]);
         $edit = t_producto::findOrFail($id_producto);
         $edit->nombre_producto = $request->nombre;
+        $edit->fecha = Carbon::now();
         $edit->save();
         return back()->with('edit','Todo salio bien');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id_producto)
     {
         $eliminar = t_producto::findOrFail($id_producto);

@@ -18,7 +18,6 @@ class PerfilController extends Controller
         return view('usuarios/Perfil');
     }
 
-
     // Funcion para actualizar la tarejta de Perfil
     public function update(Request $request, $id_usuario)
     {
@@ -75,5 +74,4 @@ class PerfilController extends Controller
         $eliminar->delete();
         return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
     }
-
 }

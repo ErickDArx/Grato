@@ -17,6 +17,7 @@ class CreateTProducto extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id_producto');
             $table->string('nombre_producto');
+            $table->dateTime('fecha');
         });
     }
 

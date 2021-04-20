@@ -9,10 +9,13 @@
     <div class="container">
       <div class="row d-flex align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-          <h4 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i> Seleccione el producto a realizar</h4>
+          <h4 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i> Seleccione el producto a realizar
+          </h4>
         </div>
-        <div class="col-sm-4 mt-1 mb-1">
-
+        <div class="col-sm-6 d-flex align-items-center justify-content-center">
+          <a href="{{route('Principal')}}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i>
+            Regresar al
+            menu</a>
         </div>
       </div>
     </div>
@@ -27,10 +30,11 @@
   <div class="row m-2 d-flex align-items-center">
     <div class="col-sm-6 border-bottom text-sm-left text-center">
       <h5><i class="text-danger fa fa-angle-double-right mr-2"></i>{{$item->nombre_producto}}</h5>
-
+      <h6><i class="text-primary fa fa-clock mr-1"></i> Creado {{ \Carbon\Carbon::parse($item->fecha)->diffForHumans() }} </h6>
     </div>
     <div class="col-sm-6 mt-sm-0 mt-3">
-      <a class="btn btn-block" type="submit" href="{{route('IndexCU' , $item->id_producto)}}"><i class="fa fa-plus mr-1"></i> Agregar informacion</a>
+      <a class="btn btn-block" type="submit" href="{{route('IndexCU' , $item->id_producto)}}"><i
+          class="fa fa-plus mr-1"></i> Agregar informacion</a>
     </div>
   </div>
 

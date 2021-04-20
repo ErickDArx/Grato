@@ -407,7 +407,7 @@
             <label for="">Cantidad a producir</label>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
-            <input type="number" name="cantidad" class="form-control" value="{{$item->cantidad_producir}}" id="">
+            <input type="number" name="cantidad" class="form-control" value="" id="">
         </div>
         <div class="col-sm-6 mt-1 mb-1">
             <button type="submit" class="btn btn-block btn-dark">Aceptar</button>

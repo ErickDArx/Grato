@@ -85,6 +85,7 @@
 </div>
 @endif
 
+{{-- Buscador / Titulo --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('Productos')}}" method="GET" class="row m-2 d-flex align-items-center">
     @csrf
@@ -115,46 +116,49 @@
     @method('PUT')
     <div class="m-1 d-flex align-items-center row ">
       <div class="col-sm-6">
-        <h5 class="font-weight-bold mt-2 mb-2"><i class="fa fa-clipboard-check mr-1"></i> Nombre del producto a fabricar
+        <h5 class="font-weight-bold mt-2 mb-2"><i class="fa fa-clipboard-check mr-1"></i> Producto a fabricar
+          <h6 class="mt-2">
+            <i class="text-primary fa fa-clock mr-1"></i> Creado {{ \Carbon\Carbon::parse($item->fecha)->diffForHumans() }} 
+          </h6>
         </h5>
       </div>
       <div class="col-sm-6 mt-1 mb-1">
         <input class="form-control" type="text" name="nombre" id="" value="{{$item->nombre_producto}}">
 
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal micromodal-slide" id="modal-3{{$item->id_producto}}" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <div class="">
+              <div class="">
+                <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                  <i class="fa fa-edit mr-2 "></i>Actualizar
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+            </div>
+          </header>
+          <main class="modal__content" id="modal-1-content">
+            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+          </main>
+          <footer class="modal__footer">
+            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+              Aceptar
+            </button>
+            <button class="modal__btn col-3" data-micromodal-close
+              aria-label="Close this dialog window ">Cerrar</button>
+          </footer>
+
         </div>
       </div>
+    </div>
 
-      <!-- Modal -->
-      <div class="modal micromodal-slide" id="modal-3{{$item->id_producto}}" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-            <header class="modal__header">
-              <div class="">
-                <div class="">
-                  <p class="h4 font-weight-bold mb-2 text-primary" id="">
-                    <i class="fa fa-edit mr-2 "></i>Actualizar
-                  </p>
-                </div>
-              </div>
-              <div class="">
-                <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-              </div>
-            </header>
-            <main class="modal__content" id="modal-1-content">
-              <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
-            </main>
-            <footer class="modal__footer">
-              <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
-                Aceptar
-              </button>
-              <button class="modal__btn col-3" data-micromodal-close
-                aria-label="Close this dialog window ">Cerrar</button>
-            </footer>
-
-          </div>
-        </div>
-      </div>
-      
   </form>
 
   <div class="d-flex align-items-center justify-content-center row m-2 rounded">

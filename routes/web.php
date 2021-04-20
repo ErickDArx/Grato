@@ -7,9 +7,11 @@
 // Vista de Acceso
 Route::get('/', 'Auth\LoginController@index', ['middleware' => 'auth', function () {
 }])->name('acceso');
+
 // // Por medio del post, recolecta los datos y los envia al servidor, en este caso, al metodo login del controlador LoginController
 Route::post('/', 'Auth\LoginController@login', ['middleware' => 'auth', function () {
 }])->name('login');
+
 // Para salir de una sesion ya iniciada, se accede a esta ruta
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -19,16 +21,15 @@ Auth::routes();
 // Este grupo de rutas, evita que se accedan a otros rutas sin antes logearse, de lo contrario redirecciona a la pagina de acceso
 Route::middleware(['auth'])->group(function () {
 
-    // Crud para la vista principal
+    // Vista principal
     Route::get('/Principal', 'UsuarioController@principal')->name('Principal');
 
     // Crud para la vista de Perfil
     Route::get('/Perfil', 'PerfilController@index')->name('Perfil');
-    Route::post('/Perfil', 'PerfilController@store')->name('store');
-    Route::put('/Update/{id_usuario}', 'PerfilController@update')->name('actualizar');
-    Route::put('/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
-    Route::put('/Usuario/{id_usuario}', 'PerfilController@update_usuario')->name('actualizar_usuario');
-    Route::delete('/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
+    Route::put('/Perfil/Actualizar/{id_usuario}', 'PerfilController@update')->name('actualizar');
+    Route::put('/Perfil/Correo/{id_usuario}', 'PerfilController@update_correo')->name('actualizar_correo');
+    Route::put('/Perfil/Usuario/{id_usuario}', 'PerfilController@update_usuario')->name('actualizar_usuario');
+    Route::delete('/Perfil/Eliminar/{id_usuario}', 'PerfilController@delete_asistente')->name('eliminar_asistente');
 
     Route::middleware(['admin'])->group(function () {
         // Crud para la vista Productos
@@ -72,14 +73,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/MateriaPrima/{id_materia_prima}', 'MateriaPrimaController@destroy')->name('EliminarMateriaPrima');
     });
     
-    // Crud para la vista Pedidos
+    // Vista Costo Unitario
     Route::get('/Pedidos', 'PedidosController@index')->name('Pedidos');
-    Route::post('/Pedidos', 'PedidosController@store')->name('Agregar');
-    Route::put('/Pedidos/{id_Pedido}', 'PedidosController@update')->name('ActualizarPedidos');
-    Route::delete('/Pedidos/{id_Pedido}', 'PedidosController@destroy')->name('EliminarPedidos');
 
-    // Crud para la vista Reportes
+    // Vista Reportes
     Route::get('/Reportes', 'ReportesController@index')->name('Reportes');
+    //Descargable
     Route::get('/Reportes/Descarga/{id_producto}', 'ReportesController@pdf')->name('Reportes.pdf');
 
     // Crud para la vista principal CIF
@@ -88,22 +87,23 @@ Route::middleware(['auth'])->group(function () {
     Route::put('Actualizando/CIF/{id_cif}', 'CifController@update')->name('ActualizarNombre');
     Route::delete('/Eliminando/{id_cif}', 'CifController@destroy')->name('EliminarCIF');
 
-    // Crud para la vista de cada CIF
-
-    Route::get('/mes/{id_cif}', 'MesController@edit')->name('IndexCIF');
+    // Crud para la vista de cada mes para un CIF
+    Route::get('/mes/{id_cif}', 'MesController@index')->name('IndexCIF');
     Route::post('/mes/{id_cif}/valores', 'MesController@valores')->name('AgregarValores');
-    Route::post('/{id_cif}/agregar', 'MesController@store')->name('AgregarMes');
+    Route::post('/{id_cif}/agregar/Mes', 'MesController@store')->name('AgregarMes');
     Route::put('/mes/{id_cif}/{id_mes}/Actualizar', 'MesController@mes')->name('ActualizarMes');
-    Route::delete('/mes/{id_cif}/{id_mes}', 'MesController@destroy')->name('EliminarMes');
-    Route::put('/mes/{id_cif}/Actualizar', 'MesController@update')->name('ActualizarValores');
+    Route::put('/mes/{id_cif}/Valores/Actualizar', 'MesController@update')->name('ActualizarValores');
+    Route::delete('/mes/{id_cif}/{id_mes}/Eliminar', 'MesController@destroy')->name('EliminarMes');
 
-    Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
-    Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
-    Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
-    Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
-    Route::post('PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
-    Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
+    //Crud para Costo Unitario
+    Route::get('/CostoUnitario/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
+    Route::post('/CostoUnitario/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
+    Route::post('/CostoUnitario{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
+    Route::post('CostoUnitario{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
+    Route::post('/CostoUnitario/PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
+    Route::put('/CostoUnitario/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
 
+    //Vista precio de venta
     Route::get('PrecioVenta/{id_producto}', 'PrecioVentaController@index')->name('IndexPV');
     Route::put('PrecioVenta/{id_producto}', 'PrecioVentaController@update')->name('AgregarCantidad');
     Route::post('PrecioVenta/{id_producto}/Total', 'PrecioVentaController@store')->name('CostoTotalPV');

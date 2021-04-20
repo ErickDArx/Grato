@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\t_cif;
 use App\t_mes;
 use Carbon\Carbon;
@@ -13,11 +14,13 @@ class CifController extends Controller
     // Funcion que muestra la vista y los modelos que se muestran
     public function index(Request $request)
     {
+        //Obtener el parametro enviado por el formulario
         $busqueda = $request->get('busqueda');
-        $cif = t_cif::orderBy('nombre_cif','ASC')
-        ->Busqueda($busqueda)
-        ->paginate(6);
-        return view('modulos/CIF' , ['t_cif' => $cif]);
+        //Obtener los datos de la tabla CIF
+        $cif = t_cif::orderBy('nombre_cif', 'ASC')
+            ->Busqueda($busqueda)
+            ->paginate(6);
+        return view('modulos/CIF', ['t_cif' => $cif]);
     }
 
     //Funcion que almacena el CIF y lo valida
@@ -26,7 +29,7 @@ class CifController extends Controller
         //Validaciones y mensajes personalizados
         request()->validate([
             'nombre_cif' => 'required | alpha | unique:t_cif,nombre_cif',
-        ],[
+        ], [
             'nombre_cif.required' => 'El campo: Titulo del CIF, no puede quedar vacio',
             'nombre_cif.alpha' => 'El campo: Titulo del CIF, solo puede contener letras',
             'nombre_cif.unique' => 'El valor del campo: Titulo del CIF ya se encuentra en uso',
@@ -47,7 +50,7 @@ class CifController extends Controller
         //Validaciones y mensajes personalizados
         request()->validate([
             'nombre_cif' => 'required | alpha | unique:t_cif,nombre_cif',
-        ],[
+        ], [
             'nombre_cif.required' => 'El campo: Titulo del CIF, no puede quedar vacio',
             'nombre_cif.alpha' => 'El campo: Titulo del CIF, solo puede contener letras',
             'nombre_cif.unique' => 'El valor del campo: Titulo del CIF ya se encuentra en uso',
