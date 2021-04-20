@@ -13,12 +13,20 @@ use GuzzleHttp\Client;
 
 class UsuarioController extends Controller
 {
-
+    //Funcion para la vista de la pagina principal
     public function principal()
     {
         $producto = DB::table('t_producto')->count();
         $operarios = DB::table('t_mano_de_obra')->count();
+        $materia = DB::table('t_materia_prima')->count();
+        $equipo= DB::table('t_equipos')->count();
+        $cif= DB::table('t_cif')->count();
+        $promedio= DB::table('t_valores')->get();
+        $viaticos= DB::table('t_viaticos');
+
         $cif = DB::table('t_valores')->get();
-        return view('Principal', compact('producto', 'operarios', 'cif'));
+        return view('Principal', 
+        compact('producto', 'operarios', 'cif',
+    'materia','equipo','promedio','viaticos'));
     }
 }

@@ -172,9 +172,54 @@
 
         </div>
 
+        {{-- Detectar errores y avisar al usuario --}}
+        @if ($errors->any())
+        <div class="errors">
+            @foreach ($errors->all() as $error)
+            <div style="transition: 0s !important" class="modal fade" id="staticBackdrop" tabindex="-100"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal__container">
+                        <header class="modal__header">
+                            <div class="">
+                                <div class="">
+                                    <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                                        <i class="fa fa-exclamation-circle mr-2 "></i>Por favor corriga los siguientes campos:
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" class="Close modal__close shadow-sm" aria-label="Close"
+                                    data-dismiss="modal">
+                                </button>
+                            </div>
+                        </header>
+                        <div class="modal-body">
+                            @foreach ($errors->all() as $error)
+                            <p><i class="fa fa-exclamation mr-2"></i> {{ $error }}</p>
+                            @endforeach
+                        </div>
+                        <footer class="modal__footer">
+                            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                                Aceptar
+                            </button>
+                            <button class="modal__btn col-3" data-micromodal-close
+                                aria-label="Close this dialog window ">Cerrar</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <script>
+                $('#staticBackdrop').modal('show'); // abrir
+                $('#staticBackdrop').modal('hide'); // cerrar
+            </script>
+            @endforeach
+        </div>
+        @endif
+
     </main>
-
 </body>
-
 
 </html>

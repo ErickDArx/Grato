@@ -40,10 +40,9 @@ class ViaticosController extends Controller
     public function update(Request $request, $id_viatico)
     {
         request()->validate([
-            'tipo_de_vehiculo' => 'required|string',
-            'antiguedad_vehiculo_años' => 'required|string',
-            'tarifa_km_recorrido' => 'required|numeric|min:1',
-            'km_recorridos' => 'required|numeric|min:1',
+            'ava' => 'required|numeric',
+            'tkr' => 'required|numeric|min:1',
+            'kr' => 'required|numeric|min:1',
         ],[
 
         ]);

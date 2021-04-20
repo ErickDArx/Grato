@@ -137,19 +137,6 @@
   </form>
 </div>
 
-{{-- Detectar errores y avisar al usuario --}}
-@if ($errors->any())
-<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="col-sm-12">
-    <div class=" fade show" role="alert">
-      <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-
 @stop
 
 @section('contenido-2')
@@ -171,13 +158,7 @@
         <input class="form-control" type="text" name="producto" value="{{$item->producto}}">
 
       </div>
-      @error('producto')
-      <div class="fade show mb-2" role="alert">
-        <div class="text-danger">
-          <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('producto')}}</span>
-        </div>
-      </div>
-      @enderror
+
       <div class="col-sm-6 mb-2">
         <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-arrow-right"></i> Para el producto</h5>
       </div>
@@ -236,26 +217,12 @@
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
           <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
-          @error('presentacion')
-          <div class="fade show mb-2" role="alert">
-            <div class="text-danger">
-              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('presentacion')}}</span>
-            </div>
-          </div>
-          @enderror
         </div>
         
 
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
           <input name="costo" class="form-control" type="number" value="{{$item->costo}}">
-          @error('costo')
-          <div class="fade show mb-2" role="alert">
-            <div class="text-danger">
-              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('costo')}}</span>
-            </div>
-          </div>
-          @enderror
         </div>
 
       </div>

@@ -33,7 +33,6 @@ class EquiposController extends Controller
             $agregar->vida_util = $request->vida_util;
             $agregar->porcentaje_utilizacion = $request-> porcentaje_utilizacion;
 
-
             $agregar->depreciacion_anual = $agregar->precio / $agregar->vida_util;
             $agregar->depreciacion_anual_real = ($agregar->depreciacion_anual * $agregar->porcentaje_utilizacion)/100;
             $agregar->depreciacion_mensual = $agregar->depreciacion_anual_real / 12;
@@ -51,16 +50,15 @@ class EquiposController extends Controller
     public function update(Request $request, $id_equipo)
     {
         request()->validate([
-            'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
-            'precio' => 'required|numeric',
-            'vida_util' => 'required|numeric|min:1',
-            'porcentaje_utilizacion' => 'required|numeric|min:1',
+            'precio_del_equipo' => 'required|numeric',
+            'vida_util_del_equipo' => 'required|numeric|min:1',
+            'porcentaje_utilizacion_del_equipo' => 'required|numeric|min:1',
         ]);
         $edit = t_equipos::findOrFail($id_equipo);
-        $edit->nombre_equipo = $request->nombre_equipo;
-        $edit->precio = $request->precio;
-        $edit->vida_util = $request->vida_util;
-        $edit->porcentaje_utilizacion = $request-> porcentaje_utilizacion;
+        $edit->nombre_equipo = $edit->nombre_equipo;
+        $edit->precio = $request->precio_del_equipo;
+        $edit->vida_util = $request->vida_util_del_equipo;
+        $edit->porcentaje_utilizacion = $request-> porcentaje_utilizacion_del_equipo;
         $edit->depreciacion_anual =  $edit->precio /  $edit->vida_util;
         $edit->depreciacion_anual_real = ( $edit->depreciacion_anual *  $edit->porcentaje_utilizacion)/100;
         $edit->depreciacion_mensual =  $edit->depreciacion_anual_real / 12;

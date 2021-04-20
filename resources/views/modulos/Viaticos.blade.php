@@ -151,8 +151,15 @@
 
         <div class="col-sm-6 mb-2">
           <h6 class="">Antiguedad del vehiculo (años)</h6>
-          <input name="ava" class="form-control" type="text"
-            value="{{$item->antiguedad_vehiculo_años}}">
+          <select type="text" name="ava" class="form-control" value="">
+            <option value="{{$item->antiguedad_vehiculo_años}}">{{$item->antiguedad_vehiculo_años}}</option>
+            @for ($i = 0; $i < 9; $i++) 
+            @if ($item->antiguedad_vehiculo_años != $i)
+              <option value="{{$i}}">{{$i}}</option>                
+            @endif
+
+              @endfor
+          </select>
         </div>
         <div class="col-sm-6 mb-2">
           <h6 class="">Tarifa por kilometro recorrido</h6>
@@ -205,6 +212,7 @@
         </div>
       </div>
     </div>
+
   </form>
 
 

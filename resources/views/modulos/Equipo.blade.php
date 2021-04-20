@@ -81,7 +81,8 @@
                 </div>
                 <div class="m-0 mb-2">
                   <label for="">4.Porcentaje de utilizacion</label>
-                  <input type="number" name="porcentaje_utilizacion" class="form-control" value="{{old('porcentaje_utilizacion')}}">
+                  <input type="number" name="porcentaje_utilizacion" class="form-control"
+                    value="{{old('porcentaje_utilizacion')}}">
                   @error('porcentaje_utilizacion')
                   <div class="fade show mb-2" role="alert">
                     <div class="text-danger">
@@ -118,18 +119,6 @@
 @section('contenido-2')
 @parent
 
-{{-- Detectar errores y avisar al usuario --}}
-@if ($errors->any())
-<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="col-sm-12">
-    <div class=" fade show" role="alert">
-      <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
 
 {{-- Buscador --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
@@ -166,11 +155,11 @@
       </div>
 
       <div class="col-sm-6 mb-2 m-0" id="">
-        <input class="form-control" type="text" name="nombre_equipo" readonly value="{{$item->nombre_equipo}}">
+        <input class="form-control" type="text" name="" readonly value="{{$item->nombre_equipo}}">
       </div>
 
       <div class="col-sm-12">
-        <button class=" mt-2 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+        <button class=" mt-2 mb-2 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
           data-target="#collapseExample{{$item->id_equipo}}" aria-expanded="false" aria-controls="collapseExample">
           Ver mas informacion
         </button>
@@ -183,12 +172,12 @@
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Precio</h6>
-          <input name="precio" class="form-control" type="text" value="{{$item->precio}}">
+          <input name="precio_del_equipo" class="form-control" type="text" value="{{$item->precio}}">
         </div>
         <div class="col-sm-6 mb-2">
           <div class="">
             <h6 class="card-title font-weight-bold mt-1">Vida util</h6>
-            <input name="vida_util" class="form-control" type="number" value="{{$item->vida_util}}">
+            <input name="vida_util_del_equipo" class="form-control" type="number" value="{{$item->vida_util}}">
           </div>
         </div>
       </div>
@@ -201,7 +190,7 @@
         </div>
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Porcentaje utilizacion</h6>
-          <input name="porcentaje_utilizacion" class="form-control" type="number"
+          <input name="porcentaje_utilizacion_del_equipo" class="form-control" type="number"
             value="{{$item->porcentaje_utilizacion}}">
         </div>
       </div>
@@ -284,6 +273,7 @@
       </div>
     </div>
   </form>
+
   <div class="row m-2 d-flex align-items-center">
     <div class="col-sm-6 mb-2">
 
@@ -344,6 +334,18 @@
     {{ $t_equipos->render() }}
   </div>
 </div>
+
+
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
+</script>
 
 <script>
   MicroModal.init();
