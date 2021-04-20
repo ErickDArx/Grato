@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sistema GratoCR" />
     <meta name="theme-color" content="#E23636">
-    <meta name="description" content="Plataforma oficial para la pyme GratoCR"/>
-    <meta property="og:description" content="Plataforma oficial para la pyme GratoCR"/>
-    <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales"/>
+    <meta name="description" content="Plataforma oficial para la pyme GratoCR" />
+    <meta property="og:description" content="Plataforma oficial para la pyme GratoCR" />
+    <meta name="keywords" content="PYME, gratocr, pastas, sistema, artesanales" />
     <meta property="og:url" content="sistema.gratocr.com" />
     <meta property="og:site_name" content="GratoCR">
     <meta property="og:image" content="/Grato/resources/media/Logo.png" />
@@ -19,8 +19,8 @@
     <link rel="icon" type="image/png" href="{{ asset('css/ravioles.svg') }}" />
     <title> @yield('titulo')Acceso - GratoCR </title>
     {!! htmlScriptTagJsApi([
-        'action' => 'homepage',
-        'custom_validation' => 'myCustomValidation'
+    'action' => 'homepage',
+    'custom_validation' => 'myCustomValidation'
     ]) !!}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -36,9 +36,9 @@
     <div class="loading"></div>
     <div class="loader"></div>
 
-        <main class="">
-            @yield('content')
-        </main>
+    <main class="">
+        @yield('content')
+    </main>
 
     <script>
         $(window).on("load", function() {
@@ -55,8 +55,7 @@
 		}else{
 			cambio.type = "password";
 			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}
-	}
+		}}
     </script>
 </body>
 

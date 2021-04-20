@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\t_equipos;
-use App\t_usuario;
-use App\t_producto;
-use App\t_totales;
-use App\t_labores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class EquiposController extends Controller
 {
@@ -17,8 +12,6 @@ class EquiposController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request->get('busqueda');
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
         $equipos = t_equipos::orderBy('nombre_equipo','DESC')
         ->Busqueda($busqueda)
         ->paginate(6);
@@ -31,8 +24,8 @@ class EquiposController extends Controller
         request()->validate([
             'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
             'precio' => 'required|numeric',
-            'vida_util' => 'required|numeric',
-            'porcentaje_utilizacion' => 'required|numeric',
+            'vida_util' => 'required|numeric|min:1',
+            'porcentaje_utilizacion' => 'required|numeric|min:1',
         ]);
             $agregar = new t_equipos();
             $agregar->nombre_equipo = $request->nombre_equipo;
@@ -52,11 +45,17 @@ class EquiposController extends Controller
             // Insertar en la base de datos
             $agregar->save();
             // Redirigir a la vista original 
-            return back()->with('agregar', 'El usuario se ha agregado');
+            return back();
     }
 
     public function update(Request $request, $id_equipo)
     {
+        request()->validate([
+            'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
+            'precio' => 'required|numeric',
+            'vida_util' => 'required|numeric|min:1',
+            'porcentaje_utilizacion' => 'required|numeric|min:1',
+        ]);
         $edit = t_equipos::findOrFail($id_equipo);
         $edit->nombre_equipo = $request->nombre_equipo;
         $edit->precio = $request->precio;
@@ -70,13 +69,13 @@ class EquiposController extends Controller
         $edit->depreciacion_hora =  $edit->depreciacion_diaria / $request->horas_laborales_dia; 
         $edit->depreciacion_minuto =  $edit->depreciacion_hora / 60;
         $edit->save();
-        return back()->with('Perfil','Todo salio bien');
+        return back();
     }
 
     public function destroy($id_equipo)
     {
         $eliminar = t_equipos::findOrFail($id_equipo);
         $eliminar->delete();
-        return back()->with('eliminar', 'fue eliminado exitosamente');
+        return back();
     }
 }

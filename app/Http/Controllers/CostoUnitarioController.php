@@ -7,13 +7,9 @@ use Illuminate\Http\Request;
 use App\t_producto;
 use App\t_totales;
 use App\t_equipos;
-use App\t_materia_prima;
 use App\t_mano_de_obra;
-use App\t_precio_venta;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Encryption\DecryptException;
 
 class CostoUnitarioController extends Controller
 {
@@ -21,19 +17,16 @@ class CostoUnitarioController extends Controller
   public function index($id_producto)
   {
 
-    date_default_timezone_set('America/Costa_Rica');
     $producto = t_producto::findOrFail($id_producto);
 
     $costos = DB::table('t_costo_unitario')->get();
     $productos = DB::table('t_producto')->get();
     $recursos = DB::table('t_materia_prima')->get();
-    $operario = DB::table('t_mano_de_obra')
-      ->get();
+    $operario = DB::table('t_mano_de_obra')->get();
     $equipo = DB::table('t_equipos')->get();
     $cif = DB::table('t_valores')->get();
     $viaticos = DB::table('t_viaticos')->get();
     $resultados = DB::table('t_totales')->get();
-
     
     $sumaCIF = 0.00;
     $calculo = DB::table('t_valores')->get();
@@ -104,16 +97,11 @@ class CostoUnitarioController extends Controller
       $total->save();
     }
 
-    return view(
-      'modulos/CostoUnitario',
-      compact('producto'),
-      ['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario' => $costos, 't_equipos' => $equipo, 't_valores' => $cif, 't_viaticos' => $viaticos, 't_totales' => $resultados, 't_materia_prima' => $recursos]
-    );
+    return view('modulos/CostoUnitario',compact('producto'),['t_materia_prima' => $recursos, 't_mano_de_obra' => $operario, 't_costo_unitario' => $costos, 't_equipos' => $equipo, 't_valores' => $cif, 't_viaticos' => $viaticos, 't_totales' => $resultados, 't_materia_prima' => $recursos]);
   }
 
   public function operario(Request $request, $id_producto)
   {
-
     request()->validate([
       'id_mano_de_obra' => 'required | numeric'
     ], [

@@ -14,9 +14,6 @@ class MateriaPrimaController extends Controller
 
     public function index(Request $request)
     {
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
-
         $busqueda = $request->get('busqueda');
         $materia = t_materia_prima::orderBy('id_materia_prima', 'DESC')
             ->busqueda($busqueda)
@@ -57,7 +54,7 @@ class MateriaPrimaController extends Controller
         // Redirigir a la vista original 
         return back()->with('edit', 'se agrego sin problemas');
     }
-    
+
     public function create()
     {
         //
@@ -69,11 +66,11 @@ class MateriaPrimaController extends Controller
             'producto' => 'required|string',
             'unidad_medida' => 'required',
             'presentacion' => 'required|numeric',
-            'costo' => 'required|numeric',            
-        ],[
-            'producto.required'=>'El campo: Nombre de la materia prima, no puede estar vacia',
-            'costo.required'=>'El campo: Costo de la materia prima, no puede estar vacia',
-            'presentacion.required'=>'El campo: Presentacion, no puede estar vacia',
+            'costo' => 'required|numeric',
+        ], [
+            'producto.required' => 'El campo: Nombre de la materia prima, no puede estar vacia',
+            'costo.required' => 'El campo: Costo de la materia prima, no puede estar vacia',
+            'presentacion.required' => 'El campo: Presentacion, no puede estar vacia',
 
         ]);
         $agregar = new t_materia_prima();
@@ -95,11 +92,11 @@ class MateriaPrimaController extends Controller
             'producto' => 'required|string',
             'unidad_medida' => 'required',
             'presentacion' => 'required|numeric|min:1',
-            'costo' => 'required|numeric',            
-        ],[
-            'producto.required'=>'El campo: Nombre del insumo, no puede estar vacia',
-            'costo.required'=>'El campo: Costo de la materia prima, no puede estar vacia',
-            'presentacion.required'=>'El campo: Presentacion, no puede estar vacia',
+            'costo' => 'required|numeric',
+        ], [
+            'producto.required' => 'El campo: Nombre del insumo, no puede estar vacia',
+            'costo.required' => 'El campo: Costo de la materia prima, no puede estar vacia',
+            'presentacion.required' => 'El campo: Presentacion, no puede estar vacia',
         ]);
 
         $edit = t_materia_prima::findOrFail($id_materia_prima);

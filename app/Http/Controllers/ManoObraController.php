@@ -39,8 +39,8 @@ class ManoObraController extends Controller
 
         // Validaciones
         request()->validate([
-            'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'apellido_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'nombre_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
+            'apellido_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
             'salario_mensual' => 'required|numeric',
         ]);
 

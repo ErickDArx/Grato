@@ -64,7 +64,7 @@
 </div>
 
 {{-- Formulario para ingresar los recibos --}}
-<form class="form-group mt-0 mb-0" action="{{route('AgregarMes',$cif->id_cif)}}"  method="POST">
+<form class="form-group mt-0 mb-0" action="{{route('AgregarMes',$cif->id_cif)}}" method="POST">
   @csrf
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex justify-content-center row align-items-center">
@@ -86,7 +86,7 @@
       <div class="col-sm-4">
         <div class="m-0 mb-2">
           <label for=""><i class="fa fa-money-bill-wave mr-2 "></i>2. Recibo de pago</label>
-          <input type="text" name="recibo_pagar" class="form-control" value="">
+          <input type="number" name="recibo_pagar" class="form-control" value="">
         </div>
         @error('recibo_pagar')
         <div class="fade show" role="alert">
@@ -160,11 +160,11 @@
 @if ($cif->id_cif == $item->id_cif && $item->fecha > date('Y') )
 {{-- Listar los recibos / Botones  --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex row align-items-center">
-    <form class="row m-2" action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
-      @csrf
-      @method('PUT')
 
+  <form class="row " action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="m-2 d-flex row align-items-center">
       <div class="col-sm-6">
         <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>
         <input type="" readonly class="form-control"
@@ -174,27 +174,84 @@
 
         <h6 class="m-0 mt-1 mb-1"><i class="fa fa-money-bill mr-2 "></i>Total a pagar (Colones)</h6>
         <input class="form-control" type="number" name="recibo_pagar" value="{{$item->recibo_pagar}}">
+        <!-- Modal -->
+        <div class="modal micromodal-slide" id="modal-3{{$item->id_mes}}" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+              <header class="modal__header">
+                <div class="">
+                  <div class="">
+                    <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                      <i class="fa fa-edit mr-2 "></i>Actualizar
+                    </p>
+                  </div>
+                </div>
+                <div class="">
+                  <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                </div>
+              </header>
+              <main class="modal__content" id="modal-1-content">
+                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+              </main>
+              <footer class="modal__footer">
+                <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                  Aceptar
+                </button>
+                <button class="modal__btn col-3" data-micromodal-close
+                  aria-label="Close this dialog window ">Cerrar</button>
+              </footer>
 
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-12 d-flex justify-content-center mt-2">
-        <button type="submit" href="Editar" class="bg-white text-primary btn btn-block border-0 ">
-          <i class="fa fa-edit mr-2 "></i>Editar informacion
-        </button>
-      </div>
-
-    </form>
-  </div>
-  <form class="row border-top" action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
-    @csrf
-    @method('DELETE')
-
-    <div class="col-sm-12 d-flex align-items-center">
-        <button type="submit" class="bg-white btn btn-block text-danger">
-          <i class="fa fa-trash mr-2 "></i>Borrar informacion
-        </button>
-    </div>
 
   </form>
+  <div class="col-sm-6 d-flex justify-content-center mt-2">
+    <a href="#" data-micromodal-trigger="modal-3{{$item->id_mes}}"
+      class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit"></i> Editar
+      informacion</a>
+  </div>
+  <div class="col-sm-6 d-flex justify-content-center mt-2">
+    <a data-micromodal-trigger="modal-2{{$item->id_mes}}" class="bg-white text-danger btn btn-block border-0 ">
+      <i class="fa fa-trash mr-2 "></i>Eliminar informacion
+    </a>
+  </div>
+</div>
+
+<form action="{{route('EliminarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+  @csrf
+  @method('DELETE')
+  <!-- Modal -->
+  <div class="modal micromodal-slide" id="modal-2{{$item->id_mes}}" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+        <header class="modal__header">
+          <div class="">
+            <div class="">
+              <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                <i class="fa fa-trash mr-2 "></i>Eliminar
+              </p>
+            </div>
+          </div>
+          <div class="">
+            <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+          </div>
+        </header>
+        <main class="modal__content" id="modal-1-content">
+          <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+        </main>
+        <footer class="modal__footer">
+          <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+            Aceptar
+          </button>
+          <button class="modal__btn col-3" data-micromodal-close aria-label="Close this dialog window ">Cerrar</button>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+</form>
 </div>
 @endif
 
@@ -206,15 +263,15 @@
 
 
 {{-- Vista del promedio sujeto a los meses del cif seleccionado --}}
-<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex row align-items-center">
-    <div class="col-sm-6">
-      <p class="m-0">Promedio</p>
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #132c33">
+  <div class="m-2 d-flex row align-items-center">
+    <div class="col-6">
+      <p class="m-0 font-weight-bold">Promedio</p>
     </div>
-    <div class="col-sm-6 text-center">
+    <div class="col-6 text-center">
       @foreach ($t_valores as $item)
       @if ($item->id_cif == $cif->id_cif)
-      ₡{{$item->promedio}}
+      <input class="form-control" readonly type="text" value="₡{{$item->promedio}}">
       @endif
       @endforeach
     </div>
@@ -226,7 +283,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="d-flex row align-items-center m-0">
     <div class="col-sm-6">
-      <h6 class="m-0 font-weight-bolder"><i class="fa fa-calculator mr-2 "></i>Calculos respectivos</h6>
+      <h6 class=" font-weight-bolder"><i class="fa fa-calculator mr-2 "></i>Calculos respectivos</h6>
     </div>
     <div class="col-sm-6">
       <a class="btn btn-outline-dark btn-block" data-toggle="collapse" href="#calculos" role="button"
@@ -241,15 +298,15 @@
   formulas que nos respaldo la dueña de la pyme --}}
 <div class="collapse" id="calculos">
 
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
+  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #126e82">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
         <h6 class="m-0">Porcentaje de utilizacion en la empresa</h6>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->porcentaje_utilizacion}}
+        <input class="form-control" readonly type="text" value="₡{{$item->porcentaje_utilizacion}}">
         @endif
         @endforeach
 
@@ -258,75 +315,84 @@
     </div>
   </div>
 
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
+  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #28b5b5">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
         <p class="m-0">Consumo de la empresa</p>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->consumo_empresa}}
+        
+        <input class="form-control" readonly type="text" value="₡{{$item->consumo_empresa}}">
         @endif
         @endforeach
       </div>
     </div>
   </div>
 
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
+  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #29bb89">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
         <p class="m-0">Porcentaje de produccion del producto por mes</p>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->porcentaje_produccion}}
+        
+        <input class="form-control" readonly type="text" value="₡{{$item->porcentaje_produccion}}">
+
         @endif
         @endforeach
       </div>
     </div>
   </div>
 
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
+  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
         <p class="m-0">Consumo de la produccion</p>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->consumo_produccion}}
+        
+        <input class="form-control" readonly type="text" value="₡{{$item->consumo_produccion}}">
+
         @endif
         @endforeach
       </div>
     </div>
   </div>
 
-  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
+  <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #387c6d">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
         <p class="m-0">Produccion promedio mensual</p>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->produccion_mensual}}
+        
+        <input class="form-control" readonly type="text" value="₡{{$item->produccion_mensual}}">
+
         @endif
         @endforeach
       </div>
     </div>
   </div>
 
-  <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex row align-items-center">
-      <div class="col-sm-6">
-        <p class="m-0">Total</p>
+  <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #007580">
+    <div class="m-2 d-flex row align-items-center">
+      <div class="col-6">
+        <p class="m-0 font-weight-bold">Total</p>
       </div>
-      <div class="col-sm-6 text-center">
+      <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        {{$item->total}}
+        
+        <input class="form-control" readonly type="text" value="₡{{$item->total}}">
+
         @endif
         @endforeach
       </div>
@@ -334,5 +400,37 @@
   </div>
 
 </div>
+
+<script>
+  MicroModal.init({
+        onShow: modal => console.info(`${modal.id} is shown`), // [1]
+        onClose: modal => console.info(`${modal.id} is hidden`), // [2]
+    });
+
+    var button = document.querySelector('.Operario');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-1');
+    });
+
+    var button = document.querySelector('.Eliminar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-2');
+    });
+
+    var button = document.querySelector('.Actualizar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-4');
+    });
+</script>
+
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
+</script>
 
 @stop

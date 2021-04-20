@@ -96,12 +96,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/mes/{id_cif}/{id_mes}/Eliminar', 'MesController@destroy')->name('EliminarMes');
 
     //Crud para Costo Unitario
-    Route::get('/CostoUnitario/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
-    Route::post('/CostoUnitario/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
-    Route::post('/CostoUnitario{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
-    Route::post('CostoUnitario{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
-    Route::post('/CostoUnitario/PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
-    Route::put('/CostoUnitario/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
+    Route::get('/{id_producto}', 'CostoUnitarioController@index')->name('IndexCU');
+    Route::post('/{id_producto}/guardando', 'CostoUnitarioController@store')->name('StoreCU');
+    Route::post('{id_producto}/guardando/operario', 'CostoUnitarioController@operario')->name('AgregarOperario');
+    Route::post('{id_producto}/guardando/equipo', 'CostoUnitarioController@equipo')->name('IngresarEquipo');
+    Route::post('PrecioVenta/{id_producto}/Ver', 'CostoUnitarioController@precio')->name('PrecioVenta');
+    Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
 
     //Vista precio de venta
     Route::get('PrecioVenta/{id_producto}', 'PrecioVentaController@index')->name('IndexPV');

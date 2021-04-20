@@ -3,7 +3,7 @@
 @section('titulo','Viaticos')
 @section('Ruta','Viaticos')
 @section('Vista','Viaticos')
-@section('Icono','fa fa-coins mr-2')
+@section('Icono','fa fa-car mr-2')
 @section('contenido')
 @parent
 {{-- Presentacion / Boton / Modal --}}
@@ -32,6 +32,7 @@
             <main class="modal__content" id="modal-1-content">
               <form class="form-group" method="POST" action="{{route('AgregarViaticos')}}">
                 @csrf
+
                 <div class="m-0 mb-2">
                   <label for="">1.Tipo de Vehículo</label>
                   <select type="text" name="tipo_de_vehiculo" class="form-control" value="">
@@ -42,22 +43,44 @@
                     'Vehiulo liviano diesel','motocicletas');
                     @endphp
                     @foreach ($viaticos as $item)
-                    <option value="">{{$array[] = $item}}</option>
+                    <option value="{{$array[] = $item}}">{{$array[] = $item}}</option>
                     @endforeach
 
                   </select>
                 </div>
+
                 <div class="m-0 mb-2">
                   <label for="">2.Antiguedad Vehículo (años)</label>
-                  <input type="text" name="antiguedad_vehiculo_años" class="form-control" value="">
+                  <select type="text" name="antiguedad_vehiculo_años" class="form-control" value="">
+                    @php
+                    $años = array('tipo'=>'0','1','2','4','5','6','7','8','9');
+                    @endphp
+                    @foreach ($años as $item)
+                    <option value="{{$array[] = $item}}">{{$array[] = $item}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="m-0 mb-2">
                   <label for="">3.Tarifa por kilometro recorrido</label>
                   <input type="text" name="tarifa_km_recorrido" class="form-control" value="">
+                  @error('tarifa_km_recorrido')
+                  <div class="fade show" role="alert">
+                    <div class="text-danger">
+                      <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('tarifa_km_recorrido')}}</span>
+                    </div>
+                  </div>
+                  @enderror
                 </div>
                 <div class="m-0 mb-2">
                   <label for="">4.kilometros recorridos</label>
                   <input type="text" name="km_recorridos" class="form-control" value="">
+                  @error('km_recorridos')
+                  <div class="fade show" role="alert">
+                    <div class="text-danger">
+                      <span><i class="fa fa-exclamation mr-1"></i> {{  $errors->first('km_recorridos')}}</span>
+                    </div>
+                  </div>
+                  @enderror
                 </div>
 
 
@@ -75,24 +98,23 @@
     </div>
   </div>
 </div>
+
+{{-- Detectar errores y avisar al usuario --}}
+@if ($errors->any())
+<div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+  <div class="col-sm-12">
+    <div class=" fade show" role="alert">
+      <div class="text-danger">
+        <span><i class="fa fa-exclamation mr-2"></i>Verifique bien los datos en el formulario</span>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 @stop
 
 @section('contenido-2')
 @parent
-
-@php
-
-// 1	¢221,51	¢185,96	¢151,66	¢193,46	¢163,71	¢53,07
-// 2	¢207,68	¢172,64	¢143,77	¢181,79	¢153,09	¢51,68
-// 3	¢199,98	¢165,03	¢139,43	¢175,28	¢147,07	¢51,06
-// 4	¢195,95	¢160,85	¢137,21	¢171,87	¢143,81	¢51,06
-// 5	¢194,13	¢158,73	¢136,27	¢170,30	¢142,20	¢51,06
-// 6	¢193,62	¢157,83	¢136,09	¢169,85	¢141,59	¢51,06
-// 7	¢188,25	¢152,41	¢133,10	¢165,30	¢137,32	¢51,06
-// 8	¢183,58	¢147,64	¢130,50	¢161,33	¢133,57	¢51,06
-// 9	¢179,53	¢143,44	¢128,27	¢157,89	¢130,30	¢51,06
-// 10 y más	¢176,03	¢139,77	¢126,36	¢154,91	¢127,44	¢51,06
-@endphp
 
 {{-- Listado de viaticos / Actualizar / Eliminar --}}
 @foreach ($t_viaticos as $item)
@@ -101,9 +123,10 @@
   <form action="{{route('ActualizarViaticos',$item->id_viatico)}}" method="POST">
     @csrf
     @method('PUT')
+
     <div class="m-1 d-flex align-items-center row border-bottom">
       <div class="col-sm-6 mb-2">
-        <h5 class="m-0 card-title font-weight-bold">Tipo de Vehículo</h5>
+        <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-car"></i> Tipo de Vehículo</h5>
       </div>
 
       <div class="col-sm-6 mb-2" id="nombre">
@@ -111,10 +134,13 @@
       </div>
     </div>
 
-    <button class="mt-4 mb-4 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
-      data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Ver mas informacion
-    </button>
+    <div class="m-3 row">
+      <button class="btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
+        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Ver mas información
+      </button>
+    </div>
+
 
     <div class="collapse" id="collapseExample">
 
@@ -125,12 +151,12 @@
 
         <div class="col-sm-6 mb-2">
           <h6 class="">Antiguedad del vehiculo (años)</h6>
-          <input name="antiguedad_vehiculo_años" class="form-control" type="text"
+          <input name="ava" class="form-control" type="text"
             value="{{$item->antiguedad_vehiculo_años}}">
         </div>
         <div class="col-sm-6 mb-2">
           <h6 class="">Tarifa por kilometro recorrido</h6>
-          <input name="tarifa_km_recorrido" class="form-control" type="text" value="{{$item->tarifa_km_recorrido}}">
+          <input name="tkr" class="form-control" type="text" value="{{$item->tarifa_km_recorrido}}">
         </div>
       </div>
 
@@ -138,44 +164,26 @@
         <div class="col-sm-6 mb-2">
           <div class="">
             <h6 class="">Kilometros recorridos (ida y vuelta)</h6>
-            <input name="km_recorridos" class="form-control" type="text" value="{{$item->km_recorridos}}">
+            <input name="kr" class="form-control" type="text" value="{{$item->km_recorridos}}">
           </div>
         </div>
         <div class="col-sm-6 mb-2">
           <div class="">
             <h6 class="">Costo total de kilometros</h6>
-            <input readonly name="total_km" class="form-control" type="text" value="{{$item->total_km}}">
+            <input readonly name="" class="form-control" type="text" value="{{$item->total_km}}">
           </div>
         </div>
       </div>
-
-
-      <div class="justify-content-centerborder m-0 mt-2 row d-flex align-items-center">
-        <div class="col-sm-6 mb-1">
-          {{-- <button type="submit" class="text-dark bg-white btn btn-block">Actualizar informacion</button> --}}
-        </div>
-      </div>
     </div>
-  </form>
-
-</div>
-
-{{-- <div class="col-sm-6 mt-1">
-
-  <form action="" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-micromodal-trigger="modal-2">Eliminar
-      información</button>
     <!-- Modal -->
-    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+    <div class="modal micromodal-slide" id="modal-3{{$item->id_viatico}}" aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
           <header class="modal__header">
             <div class="">
               <div class="">
-                <p class="h4 font-weight-bold mb-2" id="">
-                  Ingreso de equipo
+                <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                  <i class="fa fa-edit mr-2 "></i>Actualizar
                 </p>
               </div>
             </div>
@@ -184,39 +192,101 @@
             </div>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <button type="submit" class="btn btn-block">
+            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+          </main>
+          <footer class="modal__footer">
+            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
               Aceptar
             </button>
-          </main>
+            <button class="modal__btn col-3" data-micromodal-close
+              aria-label="Close this dialog window ">Cerrar</button>
+          </footer>
+
         </div>
       </div>
     </div>
   </form>
-</div> --}}
+
+
+  <div class="d-flex align-items-center justify-content-center row m-2 rounded">
+    <div class="col-sm-6 mt-2">
+      <a data-micromodal-trigger="modal-3{{$item->id_viatico}}"
+        class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
+        informacion</a>
+    </div>
+
+    <div class="col-sm-6">
+
+      <form action="{{route('EliminarViaticos',$item->id_viatico)}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="button" class="Eliminar text-danger btn m-0 btn-block bg-white"
+          data-micromodal-trigger="modal-2{{$item->id_viatico}}"><i class="fa fa-trash mr-2 "></i>Eliminar
+          información</button>
+        <!-- Modal -->
+        <div class="modal micromodal-slide" id="modal-2{{$item->id_viatico}}" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+              <header class="modal__header">
+                <div class="">
+                  <div class="">
+                    <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                      <i class="fa fa-trash mr-2 "></i>Eliminar
+                    </p>
+                  </div>
+                </div>
+                <div class="">
+                  <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                </div>
+              </header>
+              <main class="modal__content" id="modal-1-content">
+                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+              </main>
+              <footer class="modal__footer">
+                <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                  Aceptar
+                </button>
+                <button class="modal__btn col-3" data-micromodal-close
+                  aria-label="Close this dialog window ">Cerrar</button>
+              </footer>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
 
 @endforeach
 <script>
   MicroModal.init({
         onShow: modal => console.info(`${modal.id} is shown`), // [1]
         onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-        openTrigger: 'data-custom-open', // [3]
-        closeTrigger: 'data-custom-close', // [4]
-        openClass: 'is-open', // [5]
-        disableScroll: true, // [6]
-        disableFocus: false, // [7]
-        awaitOpenAnimation: false, // [8]
-        awaitCloseAnimation: false, // [9]
-        debugMode: false // [10]
+    });
+  var button = document.querySelector('.Eliminar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-2');
+    });
+    var button = document.querySelector('.Actualizar');
+    button.addEventListener('click', function () {
+        MicroModal.show('modal-3');
     });
 
     var button = document.querySelector('.Viaticos');
     button.addEventListener('click', function () {
         MicroModal.show('modal-4');
     });
+</script>
 
-    var button = document.querySelector('.Personal');
-    button.addEventListener('click', function () {
-        MicroModal.show('modal-2');
-    });
+<script>
+  window.onload=function(){
+  var pos=window.name || 0;
+  window.scrollTo(0,pos);
+  }
+  window.onunload=function(){
+  window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
+  }
 </script>
 @stop

@@ -56,7 +56,7 @@
               class="fa fa-pencil-alt mr-2"></i>Costo
             Unitario</a></li>
 
-        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{('Reportes') }}"><i
+        <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Reportes') }}"><i
               class="fa fa-copy mr-2"></i>Reportes</a></li>
 
         <li><a class="drawer-menu-item text-white btn btn-danger m-1 mb-5" href="#" style=""

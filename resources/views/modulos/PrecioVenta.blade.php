@@ -8,6 +8,18 @@
 @section('contenido')
 @parent
 
+{{-- Volver atras --}}
+<div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
+    <div class="m-2 d-flex row align-items-center">
+        <div class="col-sm-6 mt-1 mb-1">
+           <a class="btn btn-block text-dark" href="{{route('IndexCU' , $producto->id_producto)}}"><i class="fa fa-arrow-left mr-1"></i> Regresar atras</a>
+        </div>
+        <div class="col-sm-6 mt-1 mb-1">
+            <a class="btn btn-block text-dark" href="{{route('Reportes')}}"> Ir a reportes <i class="fa fa-arrow-right ml-1"></i></a>
+         </div>
+    </div>
+</div>
+
 {{-- Costo total --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c;">
     <div class="m-2 d-flex row align-items-center">

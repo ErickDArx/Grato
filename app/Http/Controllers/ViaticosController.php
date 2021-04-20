@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\t_viaticos;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ViaticosController extends Controller
@@ -12,30 +11,20 @@ class ViaticosController extends Controller
 
     public function index()
     {
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
         $Viaticos = DB::table('t_viaticos')->get();
         return view('modulos/Viaticos', ['t_viaticos' => $Viaticos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        request()->validate([
+            'tipo_de_vehiculo' => 'required|string',
+            'antiguedad_vehiculo_años' => 'required|string',
+            'tarifa_km_recorrido' => 'required|numeric|min:1',
+            'km_recorridos' => 'required|numeric|min:1',
+        ],[
+
+        ]);
         $agregar = new t_viaticos();
         $agregar->tipo_de_vehiculo = $request->tipo_de_vehiculo;
         $agregar->antiguedad_vehiculo_años = $request->antiguedad_vehiculo_años;
@@ -48,29 +37,28 @@ class ViaticosController extends Controller
         return back()->with('agregar', 'Viatico se ha agregado');
     }
 
-    public function show($id)
+    public function update(Request $request, $id_viatico)
     {
-        //
+        request()->validate([
+            'tipo_de_vehiculo' => 'required|string',
+            'antiguedad_vehiculo_años' => 'required|string',
+            'tarifa_km_recorrido' => 'required|numeric|min:1',
+            'km_recorridos' => 'required|numeric|min:1',
+        ],[
+
+        ]);
+        $edit = t_viaticos::findOrFail($id_viatico);
+        $edit->antiguedad_vehiculo_años = $request->ava;
+        $edit->tarifa_km_recorrido = $request->tkr;
+        $edit->km_recorridos = $request->kr;
+        $edit->save();
+        return back();
     }
 
-    public function edit($id)
+    public function destroy($id_viatico)
     {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $delete = t_viaticos::findOrFail($id_viatico);
+        $delete->destroy($id_viatico);
+        return back();
     }
 }

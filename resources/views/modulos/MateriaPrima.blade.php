@@ -42,7 +42,7 @@
                 @csrf
                 <div class="m-0 mb-2">
                   <label for="">1.Nombre de la materia prima</label>
-                  <input type="text" placeholder="" name="producto" class="form-control" value="">
+                  <input type="text" placeholder="" name="producto" class="form-control" value="{{old('producto')}}">
                 </div>
                 @error('producto')
                 <div class="fade show mb-2" role="alert">
@@ -72,7 +72,7 @@
                 @enderror
                 <div class="m-0 mb-2">
                   <label for="">3.Costo de la materia prima (Colones)</label>
-                  <input type="number" name="costo" class="form-control" value="">
+                  <input type="number" name="costo" class="form-control" value="{{old('costo')}}">
                 </div>
                 @error('costo')
                 <div class="fade show mb-2" role="alert">
@@ -83,7 +83,7 @@
                 @enderror
                 <div class="m-0 mb-2">
                   <label for="">4.Presentacion (Cantidad)</label>
-                  <input type="number" placeholder="" name="presentacion" class="form-control" value="">
+                  <input type="number" placeholder="" name="presentacion" class="form-control" value="{{old('presentacion')}}">
                 </div>
                 @error('presentacion')
                 <div class="fade show mb-2" role="alert">
@@ -117,6 +117,7 @@
 
   </div>
 </div>
+
 {{-- Buscador --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('materia')}}" method="GET" class="row m-2 d-flex align-items-center">
@@ -229,18 +230,25 @@
         </div>
       </div>
 
-
     <div class="collapse" id="collapseExample{{$item->id_materia_prima}}">
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
-          <input readonly name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
+          <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
+          <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
+          @error('presentacion')
+          <div class="fade show mb-2" role="alert">
+            <div class="text-danger">
+              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('presentacion')}}</span>
+            </div>
+          </div>
+          @enderror
         </div>
+        
 
         <div class="col-sm-6 mb-2">
           <h6 class="card-title font-weight-bold mt-1">Costo de materia prima</h6>
-          <input name="costo" class="form-control" type="text" value="{{$item->costo}}">
+          <input name="costo" class="form-control" type="number" value="{{$item->costo}}">
           @error('costo')
           <div class="fade show mb-2" role="alert">
             <div class="text-danger">
@@ -255,15 +263,8 @@
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
 
         <div class="col-sm-6 mb-2">
-          <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
-          <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
-          @error('presentacion')
-          <div class="fade show mb-2" role="alert">
-            <div class="text-danger">
-              <span><i class="fa fa-exclamation mr-1"></i>{{  $errors->first('presentacion')}}</span>
-            </div>
-          </div>
-          @enderror
+          <h6 class="card-title font-weight-bold mt-1">Unidad de medida</h6>
+          <input readonly name="unidad_medida" class="form-control" type="text" value="{{$item->unidad_medida}}">
         </div>
 
         <div class="col-sm-6 mb-2">

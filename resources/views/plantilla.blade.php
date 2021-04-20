@@ -53,11 +53,6 @@
 
             </div>
             <div class="col-sm-5 mt-sm-0 mt-4 col-12 text-sm-right text-center">
-                @unless (Auth::check())
-                <p class="alert text-danger">
-                    Usted no ha iniciado sesión aun!
-                </p>
-                @endunless
                 @auth
                 <div class="dropdown">
                     <a href="{{route('Perfil')}}" class="rounded text-gray dropdown-toggle" type="button"
@@ -66,14 +61,14 @@
                         {{ auth()->user()->nombre_operario }}
                         {{ auth()->user()->apellido_usuario }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{route('Perfil')}}"><i class="fa fa-user-circle mr-2"></i>Ir al
                             perfil</a>
                         <a class="dropdown-item" href="{{route('Principal')}}"><i class="fa fa-house-user mr-2"></i>ir
                             al menu principal</a>
                         <a class="dropdown-item text-dark" href="#" style=""
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                class="text-danger fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
+                                class="fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
 
                         <form hidden id="logout-form" action="{{ route('logout') }}" method="POST"
                             style="display: none;">
@@ -81,7 +76,6 @@
                         </form>
                     </div>
                 </div>
-
                 @endauth
             </div>
 
