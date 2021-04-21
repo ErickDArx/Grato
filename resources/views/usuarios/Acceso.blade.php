@@ -10,7 +10,7 @@
     @csrf
     <div>
         <div class="form-group text-center">
-            <h4 class="font-weight-bold">Ingreso al sistema</h4>
+            <h4 class="font-weight-bold">Ingreso al Sistema</h4>
         </div>
 
         @if ($errors->any())
@@ -49,7 +49,7 @@
                     </div>
                     @error('password')
                     <span class="invalid-feedback" role="alert">
-                        <strong>El campo: Contraseña no puede quedar vacio</strong>
+                        <strong>El campo: Contraseña no puede quedar vac&iacute;o</strong>
                     </span>
                     @enderror
                 </div>
@@ -58,7 +58,7 @@
 
             <button type="submit" class="btn btn-red shadow btn-block border-0" id="EnviarDatos">Acceder</button>
             <a type="button" class="btn btn-block btn-outline-dark border-0"
-                href="{{ route('password.request') }}">Olvide la contraseña</a>
+                href="{{ route('password.request') }}">Olvid&eacute; la contraseña</a>
 
         </div>
     </div>

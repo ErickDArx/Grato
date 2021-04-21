@@ -15,7 +15,7 @@
         <div class="col-sm-6 d-flex align-items-center justify-content-center">
           <a href="{{route('Principal')}}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i>
             Regresar al
-            menu</a>
+            men&uacute;</a>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="col-sm-6 mt-sm-0 mt-3">
       <a class="btn btn-block" type="submit" href="{{route('IndexCU' , $item->id_producto)}}"><i
-          class="fa fa-plus mr-1"></i> Agregar informacion</a>
+          class="fa fa-plus mr-1"></i> Agregar informaci&oacute;n</a>
     </div>
   </div>
 

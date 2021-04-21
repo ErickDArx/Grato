@@ -16,7 +16,7 @@
     {{-- Presentacion  --}}
     <div class="col-sm-6">
       <h4 class="font-weight-bold"><i class="fa fa-clipboard"></i> Materia Prima</h4>
-      <h6 class="text-gray">Desglose de insumos necesarios para la elaboracion de un producto</h6>
+      <h6 class="text-gray">Desglose de insumos necesarios para la elaboraci&oacute;n de un producto</h6>
     </div>
 
     <div class="col-sm-6">
@@ -82,7 +82,7 @@
                 </div>
                 @enderror
                 <div class="m-0 mb-2">
-                  <label for="">4.Presentacion (Cantidad)</label>
+                  <label for="">4.Presentaci&oacute;n (Cantidad)</label>
                   <input type="number" placeholder="" name="presentacion" class="form-control" value="{{old('presentacion')}}">
                 </div>
                 @error('presentacion')
@@ -177,7 +177,7 @@
       
       <button class="col-sm-12 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
         data-target="#collapseExample{{$item->id_materia_prima}}" aria-expanded="false" aria-controls="collapseExample">
-        Ver mas informacion
+        Ver mas informaci&oacute;n
       </button>
     </div>
       <!-- Modal -->
@@ -215,7 +215,7 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="card-title font-weight-bold mt-1">Presentacion</h6>
+          <h6 class="card-title font-weight-bold mt-1">Presentaci&oacute;n</h6>
           <input name="presentacion" class="form-control" type="number" value="{{$item->presentacion}}">
         </div>
         
@@ -249,7 +249,7 @@
   <div class="col-sm-6">
     <a  data-micromodal-trigger="modal-3{{$item->id_materia_prima}}"
       class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
-      informacion</a>
+      informaci&oacute;n</a>
   </div>
 
   <div class="col-sm-6">
@@ -258,7 +258,7 @@
       @method('DELETE')
       <button type="button" class="Eliminar text-danger btn btn-block bg-white"
         data-micromodal-trigger="modal-2{{$item->id_materia_prima}}"><i class="fa fa-trash mr-1"></i> Eliminar
-        información</button>
+        informaci&oacute;n</button>
       <!-- Modal -->
       <div class="modal micromodal-slide" id="modal-2{{$item->id_materia_prima}}" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
