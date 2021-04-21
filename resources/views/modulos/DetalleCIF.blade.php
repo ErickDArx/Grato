@@ -7,10 +7,10 @@
 
 {{-- Tarjeta de presentacion / Modal / Boton --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex justify-content-center row align-items-center">
+  <div class="m-2 d-flex justify-content-center row align-items-center">
 
     {{-- Titulo del CIF --}}
-    <div class="col-sm-8 mt-1 mb-1">
+    <div class="col-sm-6 mt-1 mb-1">
       <h4 class="font-weight-bold m-0"><i class="fa fa-coins mr-2 "></i>CIF : {{$cif->nombre_cif}}</h4>
     </div>
 
@@ -56,7 +56,7 @@
     </div>
 
     {{-- Boton para abrir el modal --}}
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <a href="#" class="Operario btn btn-block btn-dark">Valores Porcentuales</a>
     </div>
 
@@ -67,7 +67,7 @@
 <form class="form-group mt-0 mb-0" action="{{route('AgregarMes',$cif->id_cif)}}" method="POST">
   @csrf
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex justify-content-center row align-items-center">
+    <div class="m-2 d-flex justify-content-center row align-items-center">
 
       <div class="col-sm-4">
         <div class="m-0 mb-2">
@@ -122,7 +122,7 @@
 
 {{-- Titulo para el listado de recibos / Boton volver atras --}}
 <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="col-sm-8 d-flex align-items-center justify-content-center m-0 p-2 border rounded">
+  <div class="col-sm-8 d-flex align-items-center justify-content-center m-0 p-2 rounded">
     <h6 class="m-0 font-weight-bolder"><i class="fa fa-calendar mr-2 "></i>Listado de recibos del {{ date('Y')}}</h6>
   </div>
   <div class="col-sm-4 d-flex mt-1 justify-content-center align-items-center m-0">
@@ -161,7 +161,7 @@
 {{-- Listar los recibos / Botones  --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
 
-  <form class="row " action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+  <form class="row m-2" action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
     @csrf
     @method('PUT')
     <div class="m-2 d-flex row align-items-center">
@@ -323,7 +323,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->consumo_empresa}}">
         @endif
         @endforeach
@@ -339,7 +339,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->porcentaje_produccion}}">
 
         @endif
@@ -356,7 +356,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->consumo_produccion}}">
 
         @endif
@@ -373,7 +373,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->produccion_mensual}}">
 
         @endif
@@ -390,7 +390,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->total}}">
 
         @endif

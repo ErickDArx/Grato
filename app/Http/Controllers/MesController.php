@@ -95,7 +95,7 @@ class MesController extends Controller
         $calculo = DB::table('t_mes')->get();
         foreach ($calculo as $item) {
             if ($id_cif == $item->id_cif) {
-                if ($item->recibo_pagar >= 0 && $item->fecha > date('Y')) {
+                if ($item->recibo_pagar >= 0) {
                     $cantidad++;
                 }
                 $suma = ($item->recibo_pagar + $suma);
