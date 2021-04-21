@@ -418,7 +418,7 @@
                     $sumaCIF = $sumaCIF + $item->total;
                     }
                     @endphp
-                    {{$sumaCIF}}
+                    <input readonly class="form-control" type="text" value="{{$sumaCIF}}">
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                     $sumaVI = $sumaVI + $item->total_km;
                     }
                     @endphp
-                    {{$sumaVI}}
+                    <input readonly class="form-control" type="text" value="{{$sumaVI}}">
                 </div>
             </div>
         </div>
@@ -457,11 +457,19 @@
             <h5 class="m-0 font-weight-bold">Costo total</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5 class="font-weight-bold m-0">Total</h5>
+                </div>
+                <div class="col-sm-6">
             @foreach ($t_totales as $item)
             @if ($item->id_producto == $producto->id_producto)
-            <input class="form-control" type="text" value="{{$item->total}}">
+            <input readonly class="form-control" type="text" value="{{$item->total}}">
             @endif
             @endforeach
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

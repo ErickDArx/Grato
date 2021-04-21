@@ -17,8 +17,8 @@
 @parent
 
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex justify-content-center m-1 row align-items-center">
-        <div class="col-sm-6 d-flex align-items-center justify-content-center">
+    <div class="d-flex  m-1 row align-items-center">
+        <div class="col-sm-6 d-flex align-items-center text-sm-left text-center">
             <h4 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creación de asistentes</h4>
         </div>
         <div class="col-sm-6 mb-2 d-flex align-items-center justify-content-center">
@@ -31,7 +31,7 @@
         <form style="letter-spacing: 0.4px" class="" id="asistentes" method="POST"
             action="{{ route('AgregarAsistente') }}">
             @csrf
-            <div class=" row m-2 d-flex align-items-center">
+            <div class="row m-2 d-flex align-items-center">
 
 
                 <div class="font-weight-bold col-sm-6 mb-2">
@@ -131,6 +131,7 @@
                                 class="fa fa-eye-slash icon"></span> </button>
                     </div>
                 </div>
+                
                 @error('password')
                 <div class="col-sm-12 fade show mb-2" role="alert">
                     <div class="text-danger">
@@ -138,8 +139,8 @@
                     </div>
                 </div>
                 @enderror
-                <div class="col-sm-6">
-                </div>
+
+
             </div>
             {{-- Mensaje modal --}}
             <div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
@@ -175,6 +176,8 @@
                 </div>
             </div>
         </form>
+        <div class="col-sm-6">
+        </div>
         <div class="col-sm-6">
             <button type="submit" class="Personal btn btn-block btn-dark mt-2">Agregar asistente</button>
         </div>
