@@ -19,12 +19,12 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
     <div class="d-flex  m-1 row align-items-center">
         <div class="col-sm-6 d-flex align-items-center text-sm-left text-center">
-            <h4 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creación de asistentes</h4>
+            <h4 class="mt-2 font-weight-bold"><i class="fa fa-users mr-2 "></i>Creaci&oacute;n de asistentes</h4>
         </div>
         <div class="col-sm-6 mb-2 d-flex align-items-center justify-content-center">
             <a href="{{ route('Principal') }}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i>
                 Regresar al
-                menu</a>
+                men&uacute;</a>
         </div>
 
         {{-- Creacion de asistentes --}}
@@ -103,7 +103,7 @@
                 </div>
                 @enderror
                 <div class="font-weight-bold col-sm-6 mb-2">
-                    5.Correo Electronico
+                    5.Correo Electr&oacute;nico
                 </div>
                 <div class="col-sm-6 mb-2">
                     <div class="">
