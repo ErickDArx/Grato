@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('titulo', 'Página principal')
-@section('Vista','Menu Principal')
+@section('Vista','Menú Principal')
 
 @section('Ruta','Principal')
 
