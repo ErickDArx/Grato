@@ -6,14 +6,15 @@ use App\t_materia_prima;
 use App\t_totales;
 use App\t_producto;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class MateriaPrimaController extends Controller
 {
 
+    //Funcion para mostrar la vista de Materia Prima
     public function index(Request $request)
     {
+        //Generar la busqueda por medio de peticion get
         $busqueda = $request->get('busqueda');
         $materia = t_materia_prima::orderBy('id_materia_prima', 'DESC')
             ->busqueda($busqueda)
@@ -22,8 +23,10 @@ class MateriaPrimaController extends Controller
         return view('modulos/MateriaPrima', ['t_materia_prima' => $materia, 't_producto' => $producto]);
     }
 
+    //Funcion para editar la materia prima segun el ID
     public function edit(Request $request, $id_materia_prima)
     {
+        //Identificar si el ID exista
         $edit = t_materia_prima::findOrFail($id_materia_prima);
         $edit->cantidad = $request->cantidad;
         $edit->precio_um = ($edit->costo / $edit->presentacion);

@@ -145,7 +145,7 @@
             </div>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            <h6 class="col-12 mt-3">Si usted hace click en aceptar, los cambios se van a aplicar</h6>
           </main>
           <footer class="modal__footer">
             <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
@@ -191,7 +191,7 @@
                 </div>
               </header>
               <main class="modal__content" id="modal-1-content">
-                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                <h6 class="col-12 mt-3">Si usted hace click en aceptar, los cambios se van a aplicar</h6>
               </main>
               <footer class="modal__footer">
                 <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">

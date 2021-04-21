@@ -23,10 +23,19 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
-            $producto = DB::table('t_producto')->count();
-            $operarios = DB::table('t_mano_de_obra')->count();
-            $cif = DB::table('t_valores')->get();
-            return view('Principal', compact('producto', 'operarios', 'cif'));
+        //Obtener el conteo de datos
+        $producto = DB::table('t_producto')->count();
+        $operarios = DB::table('t_mano_de_obra')->count();
+        $materia = DB::table('t_materia_prima')->count();
+        $equipo= DB::table('t_equipos')->count();
+
+        // Obtener todos los datos
+        $promedio= DB::table('t_valores')->get();
+        $viaticos= DB::table('t_viaticos')->get();
+        $cif = DB::table('t_valores')->get();
+
+        //Retornar a la vista principal
+        return view('Principal', compact('producto', 'operarios', 'cif', 'materia','equipo','promedio','viaticos'));
         } else {
             return view('usuarios/Acceso');
         }
@@ -80,10 +89,20 @@ class LoginController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $producto = DB::table('t_producto')->count();
-            $operarios = DB::table('t_mano_de_obra')->count();
-            $cif = DB::table('t_valores')->get();
-            return view('Principal', compact('producto', 'operarios', 'cif'));
+        //Obtener el conteo de datos
+        $producto = DB::table('t_producto')->count();
+        $operarios = DB::table('t_mano_de_obra')->count();
+        $materia = DB::table('t_materia_prima')->count();
+        $equipo= DB::table('t_equipos')->count();
+
+        // Obtener todos los datos
+        $promedio= DB::table('t_valores')->get();
+        $viaticos= DB::table('t_viaticos')->get();
+        $cif = DB::table('t_valores')->get();
+
+        //Retornar a la vista principal
+        return view('Principal', compact('producto', 'operarios', 'cif', 'materia','equipo','promedio','viaticos'));
+
         } else {
             return view('usuarios/Acceso');
         }

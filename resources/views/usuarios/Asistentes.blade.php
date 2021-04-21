@@ -103,7 +103,7 @@
                 </div>
                 @enderror
                 <div class="font-weight-bold col-sm-6 mb-2">
-                    5.Correo Electr&oacute;nico
+                    5.Correo electr&oacute;nico
                 </div>
                 <div class="col-sm-6 mb-2">
                     <div class="">
@@ -209,6 +209,7 @@
 
 @section('contenido-4')
 @parent
+{{-- Visualizacion de los operarios --}}
 @foreach ($t_usuario as $item)
 @if ($item->id_usuario != auth()->user()->id_usuario)
 <div id="Listado" class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">

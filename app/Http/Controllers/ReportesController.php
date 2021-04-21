@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\t_costo_unitario;
 use App\t_equipos;
 use App\t_mano_de_obra;
 use App\t_materia_prima;
@@ -35,11 +36,12 @@ class ReportesController extends Controller
         $cif = t_valores::all();
         $viaticos = t_viaticos::all();
         $precio = t_precio_venta::all();
+        $costo = t_costo_unitario::all();
 
         $pdf = PDF::loadView('pdf/recursos', 
-        compact('recursos','producto','totales','operarios','equipos','cif','viaticos','precio'));
+        compact('costo','recursos','producto','totales','operarios','equipos','cif','viaticos','precio'));
 
-        return $pdf->download('Precio de Venta.pdf');
+        return $pdf->stream('Precio de Venta.pdf');
     }
 
 }

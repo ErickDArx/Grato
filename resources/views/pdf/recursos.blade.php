@@ -42,24 +42,16 @@
             </thead>
             <tbody>
                 @foreach($recursos as $item)
+                @if($item->id_producto == $producto->id_producto)
                 <tr>
                     <td>{{$item->producto}}</td>
                     <td>{{$item->cantidad}}</td>
                     <td>{{$item->precio}}</td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
-
-        {{-- <div class="col-12">
-            <h5 class="font-weight-bold">Total de materia prima
-            </h5>
-            @foreach ($totales as $item)
-            @if ($item->id_producto == $producto->id_producto)
-            {{$item->total_materia_prima}}
-        @endif
-        @endforeach
-        </div> --}}
 
         <h5 class="font-weight-bold mt-4">Listado de operarios</h5>
         <table class="table table-dark">
@@ -72,15 +64,18 @@
             </thead>
             <tbody>
                 @foreach($operarios as $item)
+                @foreach ($costo as $cu)
+                @if($cu->id_producto == $producto->id_producto && $cu->id_mano_de_obra == $item->id_mano_de_obra)
                 <tr>
                     <td>{{$item->nombre_trabajador}}</td>
                     <td>{{$item->tiempo_trabajado}}</td>
                     <td>{{$item->costo_minuto}}</td>
                 </tr>
+                @endif
+                @endforeach
                 @endforeach
             </tbody>
         </table>
-
 
         <h5 class="font-weight-bold mt-4">Listado de equipo</h5>
         <table class="table table-dark rounded">
@@ -93,11 +88,16 @@
             </thead>
             <tbody class="">
                 @foreach($equipos as $item)
+                @foreach ($costo as $cu)
+                @if($cu->id_producto == $producto->id_producto && $cu->id_equipo == $item->id_equipo)
                 <tr>
                     <td>{{$item->nombre_equipo}}</td>
                     <td>{{$item->tiempo_minutos}}</td>
                     <td>{{$item->costo}}</td>
                 </tr>
+                @endif
+                @endforeach
+
                 @endforeach
             </tbody>
         </table>
@@ -164,7 +164,7 @@
                     @if ($item->id_producto == $producto->id_producto)
                     <td>{{$item->margen_utilidad}}</td>
                     <td>{{$item->precio_venta}}</td>
-                    <td>{{$item->ganancia_unidad}}</td>                        
+                    <td>{{$item->ganancia_unidad}}</td>
                     @endif
 
                     @endforeach
@@ -186,4 +186,5 @@
         ');
     }
 </script> --}}
+
 </html>

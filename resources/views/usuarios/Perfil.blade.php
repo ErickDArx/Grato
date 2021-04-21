@@ -19,7 +19,7 @@
       </div>
       <div class="col-sm-6 d-flex align-items-center justify-content-center">
          <a href="{{route('Principal')}}" class="mt-2 btn btn-block text-dark"><i class="fa fa-arrow-left"></i> Regresar al
-            menu</a>
+            menú</a>
       </div>
    </div>
    <div class="">
@@ -35,7 +35,7 @@
          @endif
          <div class="row rounded mt-1 m-0 d-flex align-items-center">
             <div class="p-3 font-weight-bold col-sm-6">
-               Primer Nombre del operario(a)
+               Primer nombre del operario(a)
             </div>
             <div class="col-sm-6">
                <input type="text" class="form-control" name="nombre_operario"
@@ -80,7 +80,7 @@
             @enderror
 
             <div class="p-3 font-weight-bold col-sm-6">
-               Modo acceso
+               Rol del usuario
             </div>
             <div class="col-sm-6">
                <input readonly type="text" class="form-control" name="" id="nombre_usuario" @if(auth()->user()->rol== 1) value="Administrador" @else  value="Asistente"  @endif />
@@ -114,7 +114,7 @@
                   <main class="modal__content row" id="modal-1-content">
                      <div class="col-sm-11 mt-2">
                         <h5 class="m-0">
-                           Todos lo cambios realizados seran guardados si selecciona aceptar
+                           Todos lo cambios realizados serán guardados si selecciona aceptar
                         </h5>
                      </div>
 
@@ -185,7 +185,7 @@
                <main class="modal__content row" id="modal-1-content">
                   <div class="col-sm-11 mt-2">
                      <h5 class="m-0">
-                        Todos lo cambios realizados seran guardados si selecciona aceptar
+                        Todos lo cambios realizados serán guardados si selecciona aceptar
                      </h5>
                   </div>
 
@@ -252,7 +252,7 @@
                <main class="modal__content row" id="modal-1-content">
                   <div class="col-sm-11 mt-2">
                      <h5 class="m-0">
-                        Todos lo cambios realizados seran guardados si selecciona aceptar
+                        Todos lo cambios realizados serán guardados si selecciona aceptar
                      </h5>
                   </div>
 
