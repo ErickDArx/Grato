@@ -102,7 +102,7 @@
             <a href="{{route('Reportes.pdf',$producto->id_producto)}}" class="btn btn-dark btn-block"><i class="fa fa-file-pdf mr-2"></i> Crear reporte</a>
         </div>
         <div class="col-sm-6">
-            <a href="{{route('Principal')}}" class="btn btn-outline-dark btn-block"><i class="fa fa-home mr-2"></i> Ir al menú</a>
+            <a href="{{route('Principal')}}" class="btn btn-outline-dark btn-block"><i class="fa fa-home mr-2"></i> Ir al men&uacute;</a>
         </div>
     </div>
 </div>

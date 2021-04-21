@@ -9,7 +9,7 @@
       <div class="ml-4 mr-4" style="">
         <li class="">
           <a class="drawer-menu-item text-white btn m-1 btn-outline-gray" href="{{route('Principal') }}"><i
-              class="fa fa-home mr-2 "></i>Menú Principal</a>
+              class="fa fa-home mr-2 "></i>Men&uacute; Principal</a>
         </li>
 
         <li>
@@ -22,7 +22,7 @@
         @if ( auth()->user()->rol == 1)
         <li>
           <a class="drawer-menu-item btn btn-outline-gray-2 m-1" data-toggle="collapse" href="#menu" role="button"
-            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-border-all mr-2"></i>Modulos
+            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-border-all mr-2"></i>M&oacute;dulos
           </a>
         </li>
 
@@ -44,7 +44,7 @@
                   class="fas fa-coins mr-2 text-break"></i>Costos
                 Indirectos (CIF)</a></li>
             <li><a class="drawer-menu-item text-white  btn btn-outline-gray m-1" href="{{route('Viaticos') }}"><i
-                  class="fa fa-suitcase mr-2"></i>Viaticos</a></li>
+                  class="fa fa-suitcase mr-2"></i>Vi&aacute;ticos</a></li>
 
           </div>
 
@@ -58,7 +58,7 @@
 
         <li><a class="drawer-menu-item text-white btn btn-danger m-1 mb-5" href="#" style=""
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-              class="fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
+              class="fa fa-sign-out-alt mr-2"></i>Cerrar Sesi&oacute;n</a>
         </li>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -19,7 +19,7 @@
         <div class="col-sm-6 mt-2 mb-1 d-flex justify-content-center">
             <a class=" btn text-dark btn-block text-sm-right" href="{{route('Pedidos')}}"><i
                     class="fa fa-arrow-left"></i> Regresar
-                atrás</a>
+                atr&aacute;s</a>
         </div>
     </div>
 
@@ -94,7 +94,7 @@
             <div class="col-sm-6 mt-2">
                 <label for=""></label>
                 <button href="" type="submit" class="btn btn-block btn-outline-dark">Actualizar
-                    informacion</button>
+                    Informaci&oacute;n</button>
             </div>
 
             <input type="hidden" value="{{$item->unidad_medida}}" name="unidad_medida">
@@ -138,7 +138,7 @@
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #ff8882;">
         <div class="col-sm-6">
-            <label for=""><i class="fa fa-file-signature mr-1"></i> Seleccion de operarios</label>
+            <label for=""><i class="fa fa-file-signature mr-1"></i> Selecci&oacute;n de operarios</label>
             <select class="m-0 form-control" name="id_mano_de_obra" id="">
                 <option value="Sin determinar">Seleccionar</option>
 

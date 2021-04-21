@@ -73,7 +73,7 @@
 <div class="card-body m-2 shadow bg-white bordes">
   <div class="row m-2">
     <div class="col-12 d-flex align-items-center border-bottom">
-      <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Kilometraje de viaticos </h5>
+      <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Kilometraje de Vi&aacute;ticos </h5>
     </div>
     <div class="col-sm-12">
       <div class="card-body">
