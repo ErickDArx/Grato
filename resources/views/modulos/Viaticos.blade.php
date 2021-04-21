@@ -220,7 +220,7 @@
     <div class="col-sm-6 mt-2">
       <a data-micromodal-trigger="modal-3{{$item->id_viatico}}"
         class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
-        Informaci&oacute;n</a>
+        informaci&oacute;n</a>
     </div>
 
     <div class="col-sm-6">
@@ -230,7 +230,7 @@
         @method('DELETE')
         <button type="button" class="Eliminar text-danger btn m-0 btn-block bg-white"
           data-micromodal-trigger="modal-2{{$item->id_viatico}}"><i class="fa fa-trash mr-2 "></i>Eliminar
-          Informaci&oacute;n</button>
+          informaci&oacute;n</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_viatico}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>
