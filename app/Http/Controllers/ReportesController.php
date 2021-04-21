@@ -39,7 +39,7 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('pdf/recursos', 
         compact('recursos','producto','totales','operarios','equipos','cif','viaticos','precio'));
 
-        return $pdf->download('Precio de Venta $producto->nombre_producto.pdf');
+        return $pdf->download('Precio de Venta.pdf');
     }
 
 }
