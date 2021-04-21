@@ -273,4 +273,13 @@ class CostoUnitarioController extends Controller
     // Redirigir a la vista original 
     return back();
   }
+
+  public function eequipo($id_costo_unitario)
+  {
+    $agregar = t_costo_unitario::findOrFail($id_costo_unitario);
+    $agregar->id_equipo = NULL;
+    $agregar->save();
+    // Redirigir a la vista original 
+    return back();
+  }
 }

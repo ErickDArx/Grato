@@ -95,7 +95,7 @@ class MesController extends Controller
         $calculo = DB::table('t_mes')->get();
         foreach ($calculo as $item) {
             if ($id_cif == $item->id_cif) {
-                if ($item->recibo_pagar >= 0) {
+                if ($item->recibo_pagar >= 0 && $item->fecha > date('Y')) {
                     $cantidad++;
                 }
                 $suma = ($item->recibo_pagar + $suma);
@@ -136,7 +136,7 @@ class MesController extends Controller
         // Calculamos el promedio
         $calculo = DB::table('t_mes')->get();
         foreach ($calculo as $item) {
-            if ($id_cif == $item->id_cif) {
+            if ($id_cif == $item->id_cif && $item->fecha == now()->toDateString()) {
                 if ($item->recibo_pagar >= 0) {
                     $cantidad++;
                 }
