@@ -20,6 +20,8 @@ class CreateTManoDeObra extends Migration
             $table->decimal('salario_minuto',8,2);
             $table->decimal('salario_costo_extra',8,2);
             $table->decimal('salario_costo_hora_doble',8,2);
+            $table->integer('tiempo_trabajado')->nullable();
+            $table->decimal('costo_minuto',8,2)->nullable();
 
             // $table->unsignedDecimal('minutos_trabajados');
             // $table->unsignedDecimal('costo_minuto');

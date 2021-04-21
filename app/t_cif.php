@@ -11,4 +11,11 @@ class t_cif extends Model
     public $timestamps = false;
     protected $guarded = ['id_cif'];
     protected $primaryKey = "id_cif";
+
+    public function scopeBusqueda($query, $busqueda)
+    {
+        if ($busqueda) {
+            return $query->where('nombre_cif', 'LIKE', "%$busqueda%");
+        }
+    }
 }

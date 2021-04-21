@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\t_materia_prima;
+use App\t_precio_venta;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class ReportesController extends Controller
 {
@@ -15,17 +18,20 @@ class ReportesController extends Controller
      */
     public function index()
     {
+        $precio = t_precio_venta::all();
+        $precio = DB::table('t_precio_venta')->get();
         $recursos = t_materia_prima::all();
-        return view('modulos/Reportes', compact($recursos));
+        return view('modulos/Reportes', compact($recursos,$precio),['t_precio_venta'=>$precio]);
     }
 
-    public function pdf()
+    public function pdf($id_producto)
     {
+        $producto = $id_producto;
         $recursos = t_materia_prima::all();
 
-        $pdf = PDF::loadView('pdf/recursos', compact('recursos'));
+        $pdf = PDF::loadView('pdf/recursos', compact('recursos','producto'));
 
-        return $pdf->download('listado.pdf');
+        return $pdf->stream('Precio de Venta.pdf');
     }
 
     /**

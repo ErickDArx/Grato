@@ -27,6 +27,8 @@ class CreateTEquipos extends Migration
             $table->decimal('depreciacion_diaria',8,2);
             $table->decimal('depreciacion_hora',8,2);
             $table->decimal('depreciacion_minuto',8,2);
+            $table->integer('tiempo_minutos')->nullable();
+            $table->decimal('costo',8,2)->nullable();
 
 
         });

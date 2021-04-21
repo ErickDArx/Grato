@@ -15,37 +15,36 @@ class ManoObraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Buscador
+        $busqueda = $request->get('busqueda');
+        
+        // Zona horaria e idioma Español
         date_default_timezone_set('America/Costa_Rica');
         $date = Carbon::now()->locale('es_ES');
+
+        //Obtengo los datos de la base de datos
         $users = DB::table('t_usuario')->get();
-        $operarios = DB::table('t_mano_de_obra')->get();
+        $operarios = t_mano_de_obra::orderBy('nombre_trabajador', 'DESC')
+        ->busqueda($busqueda)
+        ->paginate(6);
+
         $laborales = DB::table('t_labores')->get();
         return view('modulos/ManoObra', ['t_usuario' => $users, 't_mano_de_obra' => $operarios, 't_labores' => $laborales]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // Ver aquello que se envia a la base de datos
-        // return $request->all();
-        if($request->ajax()){
+
+        // Validaciones
+        request()->validate([
+            'nombre_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
+            'apellido_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
+            'salario_mensual' => 'required|numeric',
+        ]);
+
+        // Agregar en la base de datos
         $agregar = new t_mano_de_obra();
         $agregar->nombre_trabajador = $request->nombre_trabajador;
         $agregar->apellido_trabajador = $request->apellido_trabajador;
@@ -58,73 +57,51 @@ class ManoObraController extends Controller
         $agregar->salario_costo_hora_doble = 100;
         $agregar->save();
         // Redirigir a la vista original 
-        // return back()->with('agregar', 'El usuario se ha agregado');
-        return response()->json($agregar->toArray());
-        }
+        return back()->with('agregar', 'El usuario se ha agregado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id_mano_de_obra)
     {
-        // if($request->ajax()){
+        request()->validate([
+            'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'apellido_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
+            'salario_mensual' => 'required|numeric',
+        ]);
+
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
-            $agregar->nombre_trabajador = $request->nombre_trabajador;
-            $agregar->apellido_trabajador = $request->apellido_trabajador;
-            $agregar->salario_mensual = $request->salario_mensual;
-            $agregar->salario_semanal = $request->salario_mensual / 4.33;
-            $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
-            $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
-            $agregar->salario_minuto = $agregar->salario_hora / 60;
-            $agregar->salario_costo_extra = 100;
-            $agregar->salario_costo_hora_doble = 100;
-            // Insertar en la base de datos
-            $agregar->save();
-            // Redirigir a la vista original 
-            return back()->with('agregar', 'El usuario se ha agregado');
-        //     return response()->json($agregar->toArray());
-        // }
+        $agregar->nombre_trabajador = $request->nombre_trabajador;
+        $agregar->apellido_trabajador = $request->apellido_trabajador;
+        $agregar->salario_mensual = $request->salario_mensual;
+        $agregar->salario_semanal = $request->salario_mensual / 4.33;
+        $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
+        $agregar->salario_hora = $agregar->salario_diario / $request->horas_laborales_dia;
+        $agregar->salario_minuto = $agregar->salario_hora / 60;
+        $agregar->salario_costo_extra = 100;
+        $agregar->salario_costo_hora_doble = 100;
+        $agregar->costo_minuto = $request->minutos * $agregar->salario_minuto;
+        // Insertar en la base de datos
+        $agregar->save();
+        // Redirigir a la vista original 
+        return back()->with('agregar', 'El usuario se ha agregado');
     }
+
 
     public function labor(Request $request, $id_labor)
     {
+        request()->validate([
+            'dias_laborales_semana' => 'required|numeric|min:1|max:7',
+            'horas_laborales_dia' => 'required|numeric',
+        ]);
         $editar = t_labores::findOrFail($id_labor);
         $editar->dias_laborales_semana = $request->dias_laborales_semana;
         $editar->horas_laborales_dia = $request->horas_laborales_dia;
         $editar->save();
+        
         return back()->with('editar', 'La actualizacion tuvo exito');
     }
 
     public function delete(Request $request, $id_mano_de_obra)
     {
-
         $eliminar = t_mano_de_obra::findOrFail($id_mano_de_obra);
         $eliminar->delete();
         // return response()->json([

@@ -23,6 +23,12 @@ class t_usuario extends AuthenticatableContract
 
     protected $guarded = ['id_usuario'];
 
+    public function scopeBusqueda($query, $busqueda)
+    {
+        if ($busqueda) {
+            return $query->where('nombre_operario', 'LIKE', "%$busqueda%");
+        }
+    }
 
 }
 

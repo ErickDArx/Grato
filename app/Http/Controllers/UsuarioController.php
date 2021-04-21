@@ -9,85 +9,24 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class UsuarioController extends Controller
 {
-
-    public function index()
-    {
-        $users = DB::table('users')->get();
-
-        return view('usuarios\Asistentes', ['users' => $users]);
-    }
-
+    //Funcion para la vista de la pagina principal
     public function principal()
     {
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
-        return view('Principal');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
+        $producto = DB::table('t_producto')->count();
+        $operarios = DB::table('t_mano_de_obra')->count();
+        $materia = DB::table('t_materia_prima')->count();
+        $equipo= DB::table('t_equipos')->count();
+        $cif= DB::table('t_cif')->count();
+        $promedio= DB::table('t_valores')->get();
+        $viaticos= DB::table('t_viaticos');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\t_usuario  $t_usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function show(t_usuario $t_usuario)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\t_usuario  $t_usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(t_usuario $t_usuario)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\t_usuario  $t_usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, t_usuario $t_usuario)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\t_usuario  $t_usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(t_usuario $t_usuario)
-    {
-        //
+        $cif = DB::table('t_valores')->get();
+        return view('Principal', 
+        compact('producto', 'operarios', 'cif',
+    'materia','equipo','promedio','viaticos'));
     }
 }

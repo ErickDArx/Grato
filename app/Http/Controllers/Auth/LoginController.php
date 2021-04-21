@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,14 @@ class LoginController extends Controller
     //Mostrar la vista que posee el formulario de acceso
     public function showLoginForm()
     {
-        return view('usuarios/Acceso');
+        if (Auth::check()) {
+            $producto = DB::table('t_producto')->count();
+            $operarios = DB::table('t_mano_de_obra')->count();
+            $cif = DB::table('t_valores')->get();
+            return view('Principal', compact('producto', 'operarios', 'cif'));
+        } else {
+            return view('usuarios/Acceso');
+        }
     }
 
     //funcion para autenticar aquellos usuarios existentes en el sistema
@@ -43,7 +51,7 @@ class LoginController extends Controller
             return redirect('/')->with('status', 'Datos Incorrectos!');
         }
     }
-    //Guardar la sesion del usuario
+    //Guardar la sesion del usuario y verificar que haya una session activa por usuario
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
@@ -62,20 +70,26 @@ class LoginController extends Controller
 
     protected $redirectTo = '/Principal';
 
+    // Decirle a Lavarel que haga la verificacion por medio del nombre de usuario
     public function username()
     {
         return 'nombre_usuario';
     }
 
+    //Verificar que el usuario este logeado
     public function index()
     {
         if (Auth::check()) {
-            return view('Principal');
+            $producto = DB::table('t_producto')->count();
+            $operarios = DB::table('t_mano_de_obra')->count();
+            $cif = DB::table('t_valores')->get();
+            return view('Principal', compact('producto', 'operarios', 'cif'));
         } else {
             return view('usuarios/Acceso');
         }
     }
 
+    //Cerrar sesion
     public function logout(Request $request)
     {
         $this->guard()->logout();

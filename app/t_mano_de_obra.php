@@ -12,4 +12,11 @@ class t_mano_de_obra extends Model
     protected $guarded = ['id_mano_de_obra'];
     protected $primaryKey = "id_mano_de_obra";
 
+
+    public function scopeBusqueda($query, $busqueda)
+    {
+        if ($busqueda) {
+            return $query->where('nombre_trabajador', 'LIKE', "%$busqueda%");
+        }
+    }
 }

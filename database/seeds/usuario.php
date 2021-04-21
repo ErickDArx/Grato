@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class usuario extends Seeder
 {
@@ -19,6 +21,11 @@ class usuario extends Seeder
             'password'=> bcrypt('estoesunaprueba'),
             'rol'=>1,
             'session_id'=> 'texto',
+        ]);
+
+        DB::table('t_labores')->insert([
+            'dias_laborales_semana'=>5,
+            'horas_laborales_dia'=>8.
         ]);
 
     }

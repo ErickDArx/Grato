@@ -33,11 +33,7 @@
                 <input required type="text" class="form-control @error('nombre_usuario') is-invalid @enderror"
                     name="nombre_usuario" value="{{ old('nombre_usuario') }}" id="nombre_usuario"
                     aria-describedby="usuario" autofocus placeholder="">
-                @error('nombre_usuario')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message  }}</strong>
-                </span>
-                @enderror
+
             </div>
 
             <div class="form-group text-left">

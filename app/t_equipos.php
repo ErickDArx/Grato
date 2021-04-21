@@ -12,4 +12,10 @@ class t_equipos extends Model
     protected $guarded = ['id_equipo'];
     protected $primaryKey = "id_equipo";
 
+    public function scopeBusqueda($query, $busqueda)
+    {
+        if ($busqueda) {
+            return $query->where('nombre_equipo', 'LIKE', "%$busqueda%");
+        }
+    }
 }
