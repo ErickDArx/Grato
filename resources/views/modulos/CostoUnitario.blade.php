@@ -493,6 +493,10 @@
                 <input type="number" name="cantidad" class="form-control" value="{{$pv->cantidad_producir}}" id="">
             </div>
             @endif
+
+            @if ($producto->id_producto != $pv->id_producto)
+            <input type="number" name="cantidad" class="form-control" value="{{$pv->cantidad_producir}}" id="">
+            @endif
             @endforeach
 
 

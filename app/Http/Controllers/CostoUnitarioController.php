@@ -83,7 +83,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0;
+      $total->cantidad_producir = $total->cantidad_producir;
       $total->save();
     }
     if ($campo) {
@@ -95,7 +95,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0;
+      $total->cantidad_producir = $total->cantidad_producir;
       $total->save();
     }
 
