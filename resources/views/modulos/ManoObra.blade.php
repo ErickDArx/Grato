@@ -327,7 +327,7 @@
 
         <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
           class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
-          informacion</button>
+          Informaci&oacute;n</button>
 
       </div>
       <div class="col-sm-6">

@@ -165,7 +165,7 @@
     <div class="col-sm-6 mt-2">
       <button type="button" class="Actualizar text-primary btn m-0 btn-block bg-white"
         data-micromodal-trigger="modal-3{{$item->id_producto}}"><i class="fa fa-edit mr-2 "></i>Actualizar
-        Informaci&oacute;n</button>
+        informaci&oacute;n</button>
     </div>
     <div class="col-sm-6 mt-2">
       <form action="{{route('EliminarProducto',$item->id_producto)}}" method="POST">
@@ -173,7 +173,7 @@
         @method('DELETE')
         <button type="button" class="Eliminar text-danger btn m-0 btn-block bg-white"
           data-micromodal-trigger="modal-2{{$item->id_producto}}"><i class="fa fa-trash mr-2 "></i>Eliminar
-          Informaci&oacute;n</button>
+          informaci&oacute;n</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_producto}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>

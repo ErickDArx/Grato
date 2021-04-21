@@ -165,7 +165,7 @@
 
         <a href="#" data-micromodal-trigger="modal-3{{$item->id_cif}}"
           class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit"></i> Editar
-          Informaci&oacute;n</a>
+          informaci&oacute;n</a>
   </form>
 
 </div>
@@ -177,7 +177,7 @@
     @method('DELETE')
     <a data-micromodal-trigger="modal-2{{$item->id_cif}}" class="text-danger bg-white btn btn-block"><i
         class="fa fa-trash"></i> Eliminar
-      Informaci&oacute;n</a>
+      informaci&oacute;n</a>
 
     <!-- Modal -->
     <div class="modal micromodal-slide" id="modal-2{{$item->id_cif}}" aria-hidden="true">
