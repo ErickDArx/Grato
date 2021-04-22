@@ -39,9 +39,9 @@ class ManoObraController extends Controller
 
         // Validaciones
         request()->validate([
-            'nombre_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
-            'apellido_trabajador' => 'required|string|min:3|unique:t_producto,nombre_producto',
-            'salario_mensual' => 'required|numeric',
+            'nombre_trabajador' => 'required|string|min:3|alpha',
+            'apellido_trabajador' => 'required|string|min:3|alpha',
+            'salario_mensual' => 'required|numeric|min:1|max:999999999',
         ]);
 
         // Agregar en la base de datos
@@ -63,9 +63,7 @@ class ManoObraController extends Controller
     public function update(Request $request, $id_mano_de_obra)
     {
         request()->validate([
-            'nombre_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'apellido_trabajador' => 'required|regex:/^[a-zA-Z\s]+$/u',
-            'salario_mensual' => 'required|numeric',
+            'salario_mensual' => 'required|numeric|min:1',
         ]);
 
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
@@ -90,7 +88,7 @@ class ManoObraController extends Controller
     {
         request()->validate([
             'dias_laborales_semana' => 'required|numeric|min:1|max:7',
-            'horas_laborales_dia' => 'required|numeric',
+            'horas_laborales_dia' => 'required|numeric|min:1',
         ]);
         $editar = t_labores::findOrFail($id_labor);
         $editar->dias_laborales_semana = $request->dias_laborales_semana;

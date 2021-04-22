@@ -544,7 +544,7 @@
 
 {{-- Cantidad por fabricar --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #006d36;">
-    <form action="{{route('AgregarCantidad',$producto->id_producto)}}" method="POST">
+    <form action="{{route('AgregarCantidad', $producto->id_producto)}}" method="POST">
         @csrf
         @method('PUT')
         <div class="m-2 d-flex row align-items-center">
@@ -555,16 +555,9 @@
                 <label for="">Cantidad a producir</label>
             </div>
 
-            @foreach ($t_totales as $pv)
-            @if ($pv->id_producto == $producto->id_producto)
             <div class="col-sm-6 mt-1 mb-1">
-                <input type="number" name="cantidad" class="form-control" value="{{$pv->cantidad_producir}}" id="">
+                <input type="number" name="cantidad" class="form-control">
             </div>
-            @endif
-
-            @endforeach
-
-
             <div class="col-sm-6 mt-1 mb-1">
                 <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
             </div>

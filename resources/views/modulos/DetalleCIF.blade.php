@@ -164,6 +164,10 @@
   <form class="row m-2" action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
     @csrf
     @method('PUT')
+    @php
+    setLocale(LC_ALL,'es_ES');
+    Carbon\Carbon::setLocale('es');
+    @endphp
     <div class="m-2 d-flex row align-items-center">
       <div class="col-sm-6">
         <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>

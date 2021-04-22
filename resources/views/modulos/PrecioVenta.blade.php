@@ -15,7 +15,7 @@
             <h5 class="font-weight-bold"><i class="fa fa-tag mr-1"></i> Precio de venta para {{$producto->nombre_producto}}</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
-            <a class="btn btn-block text-dark" href="{{route('IndexCU' , $producto->id_producto)}}"><i
+            <a class="btn btn-block text-dark" href="{{route('IndexCU' , encrypt($producto->id_producto))}}"><i
                     class="fa fa-arrow-left mr-1"></i> Regresar atras</a>
         </div>
     </div>

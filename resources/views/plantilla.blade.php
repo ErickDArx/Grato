@@ -123,7 +123,10 @@
                 <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
                         @php
+                        setLocale(LC_ALL,'es_ES');
+                        Carbon\Carbon::setLocale('es');
                         $date = \Carbon\Carbon::now();
+                        $date->diffForHumans();
                         @endphp
                         <h5 class="">{{ date('h:i a')}}</h5>
 

@@ -17,7 +17,7 @@ class CostoUnitarioController extends Controller
 
   public function index($id_producto)
   {
-
+    $id_producto = decrypt($id_producto);
     $producto = t_producto::findOrFail($id_producto);
 
     $costos = DB::table('t_costo_unitario')->get();
@@ -143,7 +143,7 @@ class CostoUnitarioController extends Controller
     }
 
     // Redirigir a la vista original 
-    return redirect()->route('IndexCU', ['id_producto' => $id_producto]);
+    return redirect()->route('IndexCU', ['id_producto' => encrypt($id_producto)]);
   }
 
   public function total(Request $request, $id_mano_de_obra)
@@ -206,8 +206,6 @@ class CostoUnitarioController extends Controller
 
     $campo = t_totales::where('id_producto', $request->id_producto)->first();
     if (!$campo) {
-      $costo = new t_costo_unitario();
-      $costo->id_producto = $request->id_producto;
       $total = new t_totales();
       $total->id_producto = $request->id_producto;
       $total->total_equipo = $sumaEQ;

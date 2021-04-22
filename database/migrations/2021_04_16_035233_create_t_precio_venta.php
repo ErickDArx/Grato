@@ -15,9 +15,9 @@ class CreateTPrecioVenta extends Migration
     {
         Schema::create('t_precio_venta', function (Blueprint $table) {
             $table->bigIncrements('id_precio_venta');
-            $table->decimal('margen_utilidad',8,2)->nullable();
-            $table->decimal('precio_venta',8,2)->nullable();
-            $table->decimal('ganancia_unidad',8,2)->nullable();
+            $table->bigInteger('margen_utilidad')->nullable();
+            $table->bigInteger('precio_venta')->nullable();
+            $table->bigInteger('ganancia_unidad')->nullable();
         });
 
         Schema::table('t_precio_venta', function($table) {

@@ -58,23 +58,20 @@ class MateriaPrimaController extends Controller
         return back()->with('edit', 'se agrego sin problemas');
     }
 
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request)
     {
         request()->validate([
             'producto' => 'required|string',
             'unidad_medida' => 'required',
-            'presentacion' => 'required|numeric',
-            'costo' => 'required|numeric',
+            'presentacion' => 'required|numeric|min:1',
+            'costo' => 'required|numeric|min:1',
+            'id_producto' => 'required'
         ], [
             'producto.required' => 'El campo: Nombre de la materia prima, no puede estar vacia',
             'costo.required' => 'El campo: Costo de la materia prima, no puede estar vacia',
             'presentacion.required' => 'El campo: Presentacion, no puede estar vacia',
-
+            'id_producto.required'=> 'Primero debes crear un producto' 
         ]);
         $agregar = new t_materia_prima();
         $agregar->producto = $request->producto;
@@ -95,7 +92,7 @@ class MateriaPrimaController extends Controller
             'producto' => 'required|string',
             'unidad_medida' => 'required',
             'presentacion' => 'required|numeric|min:1',
-            'costo' => 'required|numeric',
+            'costo' => 'required|numeric|min:1',
         ], [
             'producto.required' => 'El campo: Nombre del insumo, no puede estar vacia',
             'costo.required' => 'El campo: Costo de la materia prima, no puede estar vacia',
@@ -118,6 +115,7 @@ class MateriaPrimaController extends Controller
         return back()->with('edit', 'se agrego sin problemas');
     }
 
+    //Funcion para eliminar la materia prima segun el ID
     public function destroy($id_materia_prima)
     {
         $eliminar = t_materia_prima::findOrFail($id_materia_prima);

@@ -35,7 +35,7 @@
       <h6><i class="text-primary fa fa-clock mr-1"></i> Creado {{ \Carbon\Carbon::parse($item->fecha)->diffForHumans() }} </h6>
     </div>
     <div class="col-sm-6 mt-sm-0 mt-3">
-      <a class="btn btn-block" type="submit" href="{{route('IndexCU' , $item->id_producto)}}"><i
+      <a class="btn btn-block" type="submit" href="{{route('IndexCU' , encrypt($item->id_producto))}}"><i
           class="fa fa-plus mr-1"></i> Agregar informaci&oacute;n</a>
     </div>
   </div>

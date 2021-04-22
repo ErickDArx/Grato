@@ -13,15 +13,15 @@ class CreateTManoDeObra extends Migration
             $table->bigIncrements('id_mano_de_obra');
             $table->string('nombre_trabajador');
             $table->string('apellido_trabajador');
-            $table->decimal('salario_mensual',8,2);
-            $table->decimal('salario_semanal',8,2);
-            $table->decimal('salario_diario',8,2);
-            $table->decimal('salario_hora',8,2);
-            $table->decimal('salario_minuto',8,2);
-            $table->decimal('salario_costo_extra',8,2);
-            $table->decimal('salario_costo_hora_doble',8,2);
-            $table->integer('tiempo_trabajado')->nullable();
-            $table->decimal('costo_minuto',8,2)->nullable();
+            $table->bigInteger('salario_mensual');
+            $table->bigInteger('salario_semanal');
+            $table->bigInteger('salario_diario');
+            $table->bigInteger('salario_hora');
+            $table->bigInteger('salario_minuto');
+            $table->bigInteger('salario_costo_extra');
+            $table->bigInteger('salario_costo_hora_doble');
+            $table->bigInteger('tiempo_trabajado')->nullable();
+            $table->bigInteger('costo_minuto')->nullable();
 
             // $table->unsignedDecimal('minutos_trabajados');
             // $table->unsignedDecimal('costo_minuto');

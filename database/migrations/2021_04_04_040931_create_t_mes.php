@@ -16,7 +16,7 @@ class CreateTMes extends Migration
         Schema::create('t_mes', function (Blueprint $table) {
             $table->bigIncrements('id_mes');
             $table->date('fecha');
-            $table->decimal('recibo_pagar',8,2);
+            $table->bigInteger('recibo_pagar');
         });
 
         Schema::table('t_mes', function($table) {

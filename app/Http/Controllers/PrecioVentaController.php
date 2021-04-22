@@ -13,6 +13,7 @@ class PrecioVentaController extends Controller
 
     public function index(Request $request, $id_producto)
     {
+
         $totales = DB::table('t_totales')->get();
         $precio = DB::table('t_precio_venta')->get();
         $producto = t_producto::findOrFail($id_producto);
@@ -23,7 +24,7 @@ class PrecioVentaController extends Controller
     public function store(Request $request, $id_producto)
     {
         request()->validate([
-            'margen_utilidad' => 'required|numeric|min:1|max:100'
+            'margen_utilidad' => 'required|numeric|min:1'
         ]);
         $cu = 0;
         $totales = DB::table('t_totales')->get();
@@ -45,6 +46,10 @@ class PrecioVentaController extends Controller
 
     public function update(Request $request, $id_producto)
     {
+
+        request()->validate([
+            'cantidad'=>'required|min:1|numeric'
+        ]);
         $totales = DB::table('t_totales')->get();
 
         $campo = t_precio_venta::where('id_producto', $request->id_producto)->first();

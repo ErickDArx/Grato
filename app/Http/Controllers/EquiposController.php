@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class EquiposController extends Controller
 {
 
+    //Funcion para la vista Equipo y sus modelos relacionados
     public function index(Request $request)
     {
         $busqueda = $request->get('busqueda');
@@ -19,11 +20,12 @@ class EquiposController extends Controller
         return view('modulos/Equipo' , ['t_equipos' => $equipos,'t_labores' => $laborales]);
     }
 
+    //Funcion para almacenar el equipo
     public function store(Request $request)
     {
         request()->validate([
             'nombre_equipo' => 'required|unique:t_equipos,nombre_equipo|string|min:6',
-            'precio' => 'required|numeric',
+            'precio' => 'required|numeric|min:1',
             'vida_util' => 'required|numeric|min:1',
             'porcentaje_utilizacion' => 'required|numeric|min:1',
         ]);
@@ -47,10 +49,11 @@ class EquiposController extends Controller
             return back();
     }
 
+    //Funcion para actualizar el equipo segun el ID
     public function update(Request $request, $id_equipo)
     {
         request()->validate([
-            'precio_del_equipo' => 'required|numeric',
+            'precio_del_equipo' => 'required|numeric|min:1',
             'vida_util_del_equipo' => 'required|numeric|min:1',
             'porcentaje_utilizacion_del_equipo' => 'required|numeric|min:1',
         ]);
@@ -70,6 +73,7 @@ class EquiposController extends Controller
         return back();
     }
 
+    //Funcion para eliminar el equipo segun el ID
     public function destroy($id_equipo)
     {
         $eliminar = t_equipos::findOrFail($id_equipo);

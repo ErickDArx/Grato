@@ -15,13 +15,13 @@ class CreateTValores extends Migration
     {
         Schema::create('t_valores', function (Blueprint $table) {
             $table->bigIncrements('id_valores');
-            $table->decimal('porcentaje_utilizacion',8,2);
-            $table->decimal('consumo_empresa',8,2);
-            $table->decimal('porcentaje_produccion',8,2);
-            $table->decimal('consumo_produccion',8,2);
-            $table->decimal('produccion_mensual',8,2);
-            $table->decimal('promedio',8,2);
-            $table->decimal('total',8,2);
+            $table->bigInteger('porcentaje_utilizacion');
+            $table->bigInteger('consumo_empresa');
+            $table->bigInteger('porcentaje_produccion');
+            $table->bigInteger('consumo_produccion');
+            $table->bigInteger('produccion_mensual');
+            $table->bigInteger('promedio');
+            $table->bigInteger('total');
         });
 
         Schema::table('t_valores', function($table) {

@@ -20,9 +20,9 @@ class CreateTMateriaPrima extends Migration
             $table->string('unidad_medida');
             $table->integer('presentacion');
             $table->integer('cantidad')->nullable();
-            $table->decimal('costo', 8, 2);
-            $table->decimal('precio_um', 8, 2);
-            $table->decimal('precio', 8, 2)->nullable();
+            $table->bigInteger('costo');
+            $table->bigInteger('precio_um');
+            $table->bigInteger('precio')->nullable();
         });
 
         Schema::table('t_materia_prima', function($table) {
