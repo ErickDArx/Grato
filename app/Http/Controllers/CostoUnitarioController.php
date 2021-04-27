@@ -263,11 +263,12 @@ class CostoUnitarioController extends Controller
     return back();
   }
 
-  public function eoperario($id_costo_unitario)
+  public function eoperario(Request $request,$id_costo_unitario)
   {
     $agregar = t_costo_unitario::findOrFail($id_costo_unitario);
     $agregar->id_mano_de_obra = NULL;
     $agregar->save();
+
     // Redirigir a la vista original 
     return back();
   }

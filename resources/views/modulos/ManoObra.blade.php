@@ -36,7 +36,8 @@
                 @csrf
                 <div class="m-1">
                   <label for="">1.Nombre del operario</label>
-                  <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador" value="{{old('nombre_trabajador')}}">
+                  <input type="text" name="nombre_trabajador" class="form-control" id="nombre_trabajador"
+                    value="{{old('nombre_trabajador')}}">
                 </div>
                 @error('nombre_trabajador')
                 <div class="fade show" role="alert">
@@ -47,7 +48,8 @@
                 @enderror
                 <div class="m-1">
                   <label for="">2.Apellido del operario</label>
-                  <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador" value="{{old('apellido_trabajador')}}">
+                  <input type="text" name="apellido_trabajador" class="form-control" id="apellido_trabajador"
+                    value="{{old('apellido_trabajador')}}">
                 </div>
                 @error('apellido_trabajador')
                 <div class="fade show" role="alert">
@@ -58,7 +60,8 @@
                 @enderror
                 <div class="m-1">
                   <label for="">3.Salario mensual</label>
-                  <input type="number" name="salario_mensual" class="form-control" id="salario_mensual" value="{{old('salario_mensual')}}">
+                  <input type="number" name="salario_mensual" class="form-control" id="salario_mensual"
+                    value="{{old('salario_mensual')}}">
                 </div>
                 @error('salario_mensual')
                 <div class="fade show mb-2" role="alert">
@@ -96,7 +99,7 @@
 {{-- Lista de valores laborales --}}
 @foreach ($t_labores as $item)
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-{{-- Actualizar valores laborales --}}
+  {{-- Actualizar valores laborales --}}
   <form action="{{route('ActualizarLabores',$item->id_labor)}}" method="POST">
     @csrf
     @method('PUT')
@@ -167,7 +170,8 @@
 
     </div>
     <div class="col-sm-6">
-      <button class="ActualizarLabores btn btn-outline-dark btn-block" data-micromodal-trigger="modal-3{{$item->id_labor}}">Actualizar
+      <button class="ActualizarLabores btn btn-outline-dark btn-block"
+        data-micromodal-trigger="modal-3{{$item->id_labor}}">Actualizar
         los datos</button>
     </div>
   </div>
@@ -175,8 +179,8 @@
 </div>
 @endforeach
 
- {{-- Buscador --}}
- <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
+{{-- Buscador --}}
+<div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <form action="{{route('ManoObra')}}" method="GET" class="row m-2 d-flex align-items-center">
     @csrf
 
@@ -229,7 +233,8 @@
       <div class="m-1 d-flex align-items-center row border-bottom">
 
         <div class="col-sm-6 mb-2">
-          <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-user-check mr-1"></i> Nombre del Colaborador(a)</h5>
+          <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-user-check mr-1"></i> Nombre del Colaborador(a)
+          </h5>
         </div>
 
         <div class="col-sm-6 mb-2 m-0" id="">
@@ -291,64 +296,15 @@
         </div>
 
       </div>
-    <!-- Modal -->
-    <div class="modal micromodal-slide" id="modal-3{{$item->id_mano_de_obra}}" aria-hidden="true">
-      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-          <header class="modal__header">
-            <div class="">
-              <div class="">
-                <p class="h4 font-weight-bold mb-2 text-primary" id="">
-                  <i class="fa fa-edit mr-2 "></i>Actualizar
-                </p>
-              </div>
-            </div>
-            <div class="">
-              <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
-            </div>
-          </header>
-          <main class="modal__content" id="modal-1-content">
-            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
-          </main>
-          <footer class="modal__footer">
-            <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
-              Aceptar
-            </button>
-            <button class="modal__btn col-3" data-micromodal-close
-              aria-label="Close this dialog window ">Cerrar</button>
-          </footer>
-
-        </div>
-      </div>
-    </div>
-    </form>
-    <div class="row d-flex align-items-center m-2">
-      <div class="col-sm-6">
-
-        <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
-          class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
-          Informaci&oacute;n</button>
-
-      </div>
-      <div class="col-sm-6">
-        <form action="{{route('EliminarManoDeObra', $item->id_mano_de_obra)}}" method="POST" id="Eliminar">
-          @csrf
-          @method('DELETE')
-          <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
-            data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">
-            <i class="fa fa-trash mr-1"></i> Eliminar informaci&oacute;n
-          </button>
-          <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
-
       <!-- Modal -->
-      <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
+      <div class="modal micromodal-slide" id="modal-3{{$item->id_mano_de_obra}}" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
           <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
             <header class="modal__header">
               <div class="">
                 <div class="">
-                  <p class="h4 font-weight-bold mb-2 text-danger" id="">
-                    <i class="fa fa-trash mr-2 "></i>Eliminar
+                  <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                    <i class="fa fa-edit mr-2 "></i>Actualizar
                   </p>
                 </div>
               </div>
@@ -370,6 +326,55 @@
           </div>
         </div>
       </div>
+    </form>
+    <div class="row d-flex align-items-center m-2">
+      <div class="col-sm-6">
+
+        <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
+          class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
+          Informaci&oacute;n</button>
+
+      </div>
+      <div class="col-sm-6">
+        <form action="{{route('EliminarManoDeObra', $item->id_mano_de_obra)}}" method="POST" id="Eliminar">
+          @csrf
+          @method('DELETE')
+          <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
+            data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">
+            <i class="fa fa-trash mr-1"></i> Eliminar informaci&oacute;n
+          </button>
+          <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
+
+          <!-- Modal -->
+          <div class="modal micromodal-slide" id="modal-2{{$item->id_mano_de_obra}}" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+              <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                  <div class="">
+                    <div class="">
+                      <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                        <i class="fa fa-trash mr-2 "></i>Eliminar
+                      </p>
+                    </div>
+                  </div>
+                  <div class="">
+                    <button class="modal__close shadow-sm" aria-label="Close modal" data-micromodal-close></button>
+                  </div>
+                </header>
+                <main class="modal__content" id="modal-1-content">
+                  <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                </main>
+                <footer class="modal__footer">
+                  <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                    Aceptar
+                  </button>
+                  <button class="modal__btn col-3" data-micromodal-close
+                    aria-label="Close this dialog window ">Cerrar</button>
+                </footer>
+
+              </div>
+            </div>
+          </div>
         </form>
       </div>
 

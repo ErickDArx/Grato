@@ -123,11 +123,17 @@
                     <h6 class="font-weight-light"> Total en Colones</h6>
                 </div>
                 <div class="col-sm-6 col-6">
+                    @php
+                        $totalMO= 0;
+                    @endphp
                     @foreach ($t_totales as $item)
                     @if ($item->id_producto == $producto->id_producto)
-                    <input readonly class="form-control" type="text" value="₡{{$item->total_mano_de_obra}}">
+                    @php
+                        $totalMO = $item->total_mano_de_obra;
+                    @endphp
                     @endif
                     @endforeach
+                    <input readonly class="form-control" type="text" value="₡{{$totalMO}}">
                 </div>
             </div>
         </div>

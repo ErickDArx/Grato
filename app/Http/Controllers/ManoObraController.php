@@ -63,12 +63,10 @@ class ManoObraController extends Controller
     public function update(Request $request, $id_mano_de_obra)
     {
         request()->validate([
-            'salario_mensual' => 'required|numeric|min:1',
+            'salario_mensual' => 'required|numeric|min:1|max:999999999',
         ]);
 
         $agregar = t_mano_de_obra::findOrFail($id_mano_de_obra);
-        $agregar->nombre_trabajador = $request->nombre_trabajador;
-        $agregar->apellido_trabajador = $request->apellido_trabajador;
         $agregar->salario_mensual = $request->salario_mensual;
         $agregar->salario_semanal = $request->salario_mensual / 4.33;
         $agregar->salario_diario = $agregar->salario_semanal / $request->dias_laborales_semana;
@@ -80,7 +78,7 @@ class ManoObraController extends Controller
         // Insertar en la base de datos
         $agregar->save();
         // Redirigir a la vista original 
-        return back()->with('agregar', 'El usuario se ha agregado');
+        return back();
     }
 
 
