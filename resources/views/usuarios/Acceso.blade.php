@@ -28,12 +28,12 @@
         @endif
 
         <div class="m-3">
+
             <div class="form-group text-left">
                 <label class="font-weight-bold"> <i class="fa fa-user mr-2 "></i>Nombre de usuario</label>
                 <input required type="text" class="form-control @error('nombre_usuario') is-invalid @enderror"
                     name="nombre_usuario" value="{{ old('nombre_usuario') }}" id="nombre_usuario"
                     aria-describedby="usuario" autofocus placeholder="">
-
             </div>
 
             <div class="form-group text-left">

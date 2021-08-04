@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Estas datos no coinciden con nuestros registros.',
+    'failed' => 'Estos datos no coinciden con nuestros registros.',
     'throttle' => 'Demasiados intentos de acceso. Por favor inténtelo de nuevo en :seconds segundos.',
 
 ];
