@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\t_usuario;
-use App\Http\Middleware\Roles;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class AsistenteController extends Controller
 {
@@ -16,11 +14,6 @@ class AsistenteController extends Controller
     {
         //Busqueda del nombre
         $busqueda = $request->get('busqueda');
-
-        //Zona horaria e idioma español
-        date_default_timezone_set('America/Costa_Rica');
-        $date = Carbon::now()->locale('es_ES');
-        $date->diffForHumans();
 
         //Muestreme los datos de la tabla t_usuario, de forma que su sus nombre_operario de vean de forma descendiente
         //Ejecutar la busqueda

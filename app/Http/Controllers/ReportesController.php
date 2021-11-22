@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\t_costo_unitario;
+use App\t_equipos;
+use App\t_mano_de_obra;
 use App\t_materia_prima;
 use App\t_precio_venta;
+use App\t_producto;
+use App\t_totales;
+use App\t_valores;
+use App\t_viaticos;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,11 +18,6 @@ use Illuminate\Support\Facades\DB;
 
 class ReportesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $precio = t_precio_venta::all();
@@ -26,77 +28,20 @@ class ReportesController extends Controller
 
     public function pdf($id_producto)
     {
-        $producto = $id_producto;
+        $producto = t_producto::findOrFail($id_producto);
         $recursos = t_materia_prima::all();
+        $operarios = t_mano_de_obra::all();
+        $totales = t_totales::all();
+        $equipos = t_equipos::all();
+        $cif = t_valores::all();
+        $viaticos = t_viaticos::all();
+        $precio = t_precio_venta::all();
+        $costo = t_costo_unitario::all();
 
-        $pdf = PDF::loadView('pdf/recursos', compact('recursos','producto'));
+        $pdf = PDF::loadView('pdf/recursos', 
+        compact('costo','recursos','producto','totales','operarios','equipos','cif','viaticos','precio'));
 
         return $pdf->stream('Precio de Venta.pdf');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

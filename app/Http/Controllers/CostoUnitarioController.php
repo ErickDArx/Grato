@@ -17,7 +17,7 @@ class CostoUnitarioController extends Controller
 
   public function index($id_producto)
   {
-
+    $id_producto = decrypt($id_producto);
     $producto = t_producto::findOrFail($id_producto);
 
     $costos = DB::table('t_costo_unitario')->get();
@@ -83,7 +83,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0;
+      $total->cantidad_producir = $total->cantidad_producir;
       $total->save();
     }
     if ($campo) {
@@ -95,7 +95,7 @@ class CostoUnitarioController extends Controller
       $total->total_equipos = $sumaEQ;
       $total->total_viaticos = $sumaVI;
       $total->total = $sumaCIF + $sumaMP + $sumaMO + $sumaEQ + $sumaVI;
-      $total->cantidad_producir = 0;
+      $total->cantidad_producir = $total->cantidad_producir;
       $total->save();
     }
 
@@ -143,7 +143,7 @@ class CostoUnitarioController extends Controller
     }
 
     // Redirigir a la vista original 
-    return redirect()->route('IndexCU', ['id_producto' => $id_producto]);
+    return redirect()->route('IndexCU', ['id_producto' => encrypt($id_producto)]);
   }
 
   public function total(Request $request, $id_mano_de_obra)
@@ -206,8 +206,6 @@ class CostoUnitarioController extends Controller
 
     $campo = t_totales::where('id_producto', $request->id_producto)->first();
     if (!$campo) {
-      $costo = new t_costo_unitario();
-      $costo->id_producto = $request->id_producto;
       $total = new t_totales();
       $total->id_producto = $request->id_producto;
       $total->total_equipo = $sumaEQ;
@@ -269,6 +267,15 @@ class CostoUnitarioController extends Controller
   {
     $agregar = t_costo_unitario::findOrFail($id_costo_unitario);
     $agregar->id_mano_de_obra = NULL;
+    $agregar->save();
+    // Redirigir a la vista original 
+    return back();
+  }
+
+  public function eequipo($id_costo_unitario)
+  {
+    $agregar = t_costo_unitario::findOrFail($id_costo_unitario);
+    $agregar->id_equipo = NULL;
     $agregar->save();
     // Redirigir a la vista original 
     return back();

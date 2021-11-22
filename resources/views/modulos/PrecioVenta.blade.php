@@ -15,7 +15,7 @@
             <h5 class="font-weight-bold"><i class="fa fa-tag mr-1"></i> Precio de venta para {{$producto->nombre_producto}}</h5>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
-            <a class="btn btn-block text-dark" href="{{route('IndexCU' , $producto->id_producto)}}"><i
+            <a class="btn btn-block text-dark" href="{{route('IndexCU' , encrypt($producto->id_producto))}}"><i
                     class="fa fa-arrow-left mr-1"></i> Regresar atras</a>
         </div>
     </div>
@@ -102,7 +102,7 @@
             <a href="{{route('Reportes.pdf',$producto->id_producto)}}" class="btn btn-dark btn-block"><i class="fa fa-file-pdf mr-2"></i> Crear reporte</a>
         </div>
         <div class="col-sm-6">
-            <a href="{{route('Principal')}}" class="btn btn-outline-dark btn-block"><i class="fa fa-home mr-2"></i> Ir al menú</a>
+            <a href="{{route('Principal')}}" class="btn btn-outline-dark btn-block"><i class="fa fa-home mr-2"></i> Ir al men&uacute;</a>
         </div>
     </div>
 </div>

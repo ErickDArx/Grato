@@ -103,7 +103,7 @@
 
     <div class="m-2 d-flex align-items-center row mb-2">
       <div class="col-sm-6">
-        <h6 class="font-weight-bold m-0"><i class="fa fa-calendar-day mr-1"></i> Dias laborales por semana</h6>
+        <h6 class="font-weight-bold m-0"><i class="fa fa-calendar-day mr-1"></i> D&iacute;as laborales por semana</h6>
       </div>
       <div class="col-sm-6 mt-2">
         <input type="number" name="dias_laborales_semana" class="form-control" value="{{$item->dias_laborales_semana}}">
@@ -117,7 +117,7 @@
       </div>
 
       <div class="col-sm-6 mt-2">
-        <h6 class="font-weight-bold m-0"><i class="fa fa-hourglass-start mr-1"></i> Horas laborales por dia</h6>
+        <h6 class="font-weight-bold m-0"><i class="fa fa-hourglass-start mr-1"></i> Horas laborales por d&iacute;a</h6>
       </div>
       <div class="col-sm-6 mt-2">
         <input type="number" name="horas_laborales_dia" class="form-control" value="{{$item->horas_laborales_dia}}">
@@ -251,7 +251,7 @@
         <button class=" btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
           data-target="#collapseExample{{$item->id_mano_de_obra}}" aria-expanded="false"
           aria-controls="collapseExample">
-          Ver mas informacion
+          Ver mas informaci&oacute;n
         </button>
       </div>
 
@@ -327,7 +327,7 @@
 
         <button type="button" data-micromodal-trigger="modal-3{{$item->id_mano_de_obra}}"
           class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
-          informacion</button>
+          Informaci&oacute;n</button>
 
       </div>
       <div class="col-sm-6">
@@ -336,7 +336,7 @@
           @method('DELETE')
           <button type="button" class="Eliminar text-danger btn btn-block bg-white" data-toggle="modal"
             data-micromodal-trigger="modal-2{{$item->id_mano_de_obra}}">
-            <i class="fa fa-trash mr-1"></i> Eliminar informacion
+            <i class="fa fa-trash mr-1"></i> Eliminar informaci&oacute;n
           </button>
           <input type="text" hidden name="" id="id_mano_de_obra" value="{{$item->id_mano_de_obra}}">
 

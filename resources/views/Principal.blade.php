@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('titulo', 'Página principal')
-@section('Vista','Menu Principal')
+@section('Vista','Menú Principal')
 
 @section('Ruta','Principal')
 
@@ -73,7 +73,7 @@
 <div class="card-body m-2 shadow bg-white bordes">
   <div class="row m-2">
     <div class="col-12 d-flex align-items-center border-bottom">
-      <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Kilometraje de viaticos </h5>
+      <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Kilometraje de Vi&aacute;ticos </h5>
     </div>
     <div class="col-sm-12">
       <div class="card-body">
@@ -88,7 +88,10 @@
 <div class="card-body shadow bg-white bordes m-2">
   <div class="row m-2">
     <div class="col-sm-12 d-flex align-items-center border-bottom">
+      <div class="col-sm-6">
       <h5 class="font-weight-bold"><i class="fa fa-coins mr-1"></i> Costos indirectos de fabricación {{date('Y')}}</h5>
+
+      </div>
       <div class="col-sm-6">
         <div class="card-body">
           <h6>Total</h6>
@@ -106,26 +109,22 @@
       </div>
     </div>
 
-
-
     <div class="col-sm-12 d-flex align-items-center border-bottom">
       <div class="col-sm-6">
         <h5 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Viáticos {{date('Y')}}</h5>
-
       </div>
       <div class="col-sm-6">
         <div class="card-body">
           <h6>Total</h6>
           @php
-          $suma = 0;
+          $sumaV = 0;
           @endphp
-          @foreach ($promedio as $item)
+          @foreach ($viaticos as $item)
           @php
-          $suma = $item->total + $suma;
+          $sumaV = $sumaV = $item->total_km;
           @endphp
-
           @endforeach
-          <input type="text" readonly class="form-control" name="" value="{{$suma}}">
+          <input type="text" readonly class="form-control" name="" value="{{$sumaV}}">
         </div>
       </div>
     </div>

@@ -15,13 +15,13 @@ class CreateTTotales extends Migration
     {
         Schema::create('t_totales', function (Blueprint $table) {
             $table->bigIncrements('id_total');
-            $table->decimal('total_materia_prima',8,2)->nullable();
-            $table->decimal('total_mano_de_obra',8,2)->nullable();
-            $table->decimal('total_equipos',8,2)->nullable();
-            $table->decimal('total_cif',8,2)->nullable();
-            $table->decimal('total_viaticos',8,2)->nullable();
-            $table->integer('cantidad_producir')->nullable();
-            $table->decimal('total',8,2)->nullable();
+            $table->bigInteger('total_materia_prima')->nullable();
+            $table->bigInteger('total_mano_de_obra')->nullable();
+            $table->bigInteger('total_equipos')->nullable();
+            $table->bigInteger('total_cif')->nullable();
+            $table->bigInteger('total_viaticos')->nullable();
+            $table->bigInteger('cantidad_producir')->nullable();
+            $table->bigInteger('total')->nullable();
             $table->timestamps();
         });
 

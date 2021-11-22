@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\t_cif;
-use App\t_mes;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CifController extends Controller
 {

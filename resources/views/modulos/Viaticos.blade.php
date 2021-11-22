@@ -10,7 +10,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="m-2 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
-      <h4 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Viaticos</h4>
+      <h4 class="font-weight-bold"><i class="fa fa-car mr-1"></i> Vi&aacute;ticos</h4>
       <h6></h6>
     </div>
     <div class="col-sm-6">
@@ -21,7 +21,7 @@
               <div class="">
                 <div class="">
                   <p class="h4 font-weight-bold mb-2" id="">
-                    Ingreso de Viaticos
+                    Ingreso de Vi&aacute;ticos
                   </p>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 @csrf
 
                 <div class="m-0 mb-2">
-                  <label for="">1.Tipo de Vehículo</label>
+                  <label for="">1.Tipo de Veh&iacute;culo</label>
                   <select type="text" name="tipo_de_vehiculo" class="form-control" value="">
                     @php
                     $viaticos = array('tipo'=>'Vehículo rural: Gasolina',
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="m-0 mb-2">
-                  <label for="">2.Antiguedad Vehículo (años)</label>
+                  <label for="">2.Antigüedad Veh&iacute;culo (años)</label>
                   <select type="text" name="antiguedad_vehiculo_años" class="form-control" value="">
                     @php
                     $años = array('tipo'=>'0','1','2','4','5','6','7','8','9');
@@ -61,7 +61,7 @@
                   </select>
                 </div>
                 <div class="m-0 mb-2">
-                  <label for="">3.Tarifa por kilometro recorrido</label>
+                  <label for="">3.Tarifa por kil&oacute;metro recorrido</label>
                   <input type="text" name="tarifa_km_recorrido" class="form-control" value="">
                   @error('tarifa_km_recorrido')
                   <div class="fade show" role="alert">
@@ -72,7 +72,7 @@
                   @enderror
                 </div>
                 <div class="m-0 mb-2">
-                  <label for="">4.kilometros recorridos</label>
+                  <label for="">4.Kil&oacute;metros recorridos</label>
                   <input type="text" name="km_recorridos" class="form-control" value="">
                   @error('km_recorridos')
                   <div class="fade show" role="alert">
@@ -94,7 +94,7 @@
       </div>
 
       {{-- Aqui llamamos al modal --}}
-      <a href="#" class="Viaticos btn btn-block btn-dark">Ingresar viatico</a>
+      <a href="#" class="Viaticos btn btn-block btn-dark">Ingresar vi&aacute;tico</a>
     </div>
   </div>
 </div>
@@ -126,7 +126,7 @@
 
     <div class="m-1 d-flex align-items-center row border-bottom">
       <div class="col-sm-6 mb-2">
-        <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-car"></i> Tipo de Vehículo</h5>
+        <h5 class="m-0 card-title font-weight-bold"><i class="fa fa-car"></i> Tipo de Veh&iacute;culo</h5>
       </div>
 
       <div class="col-sm-6 mb-2" id="nombre">
@@ -137,7 +137,7 @@
     <div class="m-3 row">
       <button class="btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
         data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Ver mas información
+        Ver mas informaci&oacute;n
       </button>
     </div>
 
@@ -146,11 +146,11 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-12">
-          <h6 class="card-title font-weight-bold mt-1">Rubro del vehiculo</h6>
+          <h6 class="card-title font-weight-bold mt-1">Rubro del veh&iacute;culo</h6>
         </div>
 
         <div class="col-sm-6 mb-2">
-          <h6 class="">Antiguedad del vehiculo (años)</h6>
+          <h6 class="">Antigüedad del veh&iacute;culo (años)</h6>
           <select type="text" name="ava" class="form-control" value="">
             <option value="{{$item->antiguedad_vehiculo_años}}">{{$item->antiguedad_vehiculo_años}}</option>
             @for ($i = 0; $i < 9; $i++) 
@@ -162,7 +162,7 @@
           </select>
         </div>
         <div class="col-sm-6 mb-2">
-          <h6 class="">Tarifa por kilometro recorrido</h6>
+          <h6 class="">Tarifa por kil&oacute;metro recorrido</h6>
           <input name="tkr" class="form-control" type="text" value="{{$item->tarifa_km_recorrido}}">
         </div>
       </div>
@@ -170,13 +170,13 @@
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
           <div class="">
-            <h6 class="">Kilometros recorridos (ida y vuelta)</h6>
+            <h6 class="">Kil&oacute;metros recorridos (ida y vuelta)</h6>
             <input name="kr" class="form-control" type="text" value="{{$item->km_recorridos}}">
           </div>
         </div>
         <div class="col-sm-6 mb-2">
           <div class="">
-            <h6 class="">Costo total de kilometros</h6>
+            <h6 class="">Costo total de kil&oacute;metros</h6>
             <input readonly name="" class="form-control" type="text" value="{{$item->total_km}}">
           </div>
         </div>
@@ -220,7 +220,7 @@
     <div class="col-sm-6 mt-2">
       <a data-micromodal-trigger="modal-3{{$item->id_viatico}}"
         class="Actualizar bg-white btn btn-block text-primary"><i class="fa fa-edit mr-1"></i> Actualizar
-        informacion</a>
+        informaci&oacute;n</a>
     </div>
 
     <div class="col-sm-6">
@@ -230,7 +230,7 @@
         @method('DELETE')
         <button type="button" class="Eliminar text-danger btn m-0 btn-block bg-white"
           data-micromodal-trigger="modal-2{{$item->id_viatico}}"><i class="fa fa-trash mr-2 "></i>Eliminar
-          información</button>
+          informaci&oacute;n</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_viatico}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>

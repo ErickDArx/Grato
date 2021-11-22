@@ -24,6 +24,7 @@ class ProductoController extends Controller
     //Funcion para almacenar los productos en la base de datos
     public function store(Request $request)
     {
+        //Generar las validaciones
         request()->validate([
             'nombre_producto' => 'required|string|min:3|unique:t_producto,nombre_producto',
         ],[

@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\t_usuario;
-use App\t_producto;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class PerfilController extends Controller
 {
 
-    // Funcion que llama a la vista y envia los datos 
+    // Funcion que llama a la vista Perfil y envia los datos 
     // de los modelos seleccionados
     public function index()
     {
@@ -30,7 +27,6 @@ class PerfilController extends Controller
             'nombre_operario.required' => 'El campo no puede quedar vacio',
             'apellido_usuario' => 'El campo no puede quedar vacio',
             'segundo_apellido_usuario' => 'El campo no puede quedar vacio',
-
         ]);
         // Actualizar segun el ID del usuario
         $edit = t_usuario::findOrFail($id_usuario);
@@ -57,21 +53,30 @@ class PerfilController extends Controller
         return back();
     }
 
+    //Funcion para actualizar el correo electronico
     public function update_correo(Request $request, $id_usuario)
     {
+        //Validaciones para el correo
         request()->validate([
             'correo' => 'required|email|unique:t_usuario,email|max:255'
         ]);
+        //Hallar la id del usuario
         $edit = t_usuario::findOrFail($id_usuario);
         $edit->email = $request->correo;
+        //Guardar cambios
         $edit->save();
-        return back()->with('Perfil', 'Todo salio bien');
+        //Retornar a la vista original
+        return back();
     }
 
+    //Funcion para eliminar el usuario de acuerdo a su ID
     public function delete_asistente($id_usuario)
     {
+        //Verificamos si existe el ID
         $eliminar = t_usuario::findOrFail($id_usuario);
+        //Borrar el campo con el ID
         $eliminar->delete();
-        return back()->with('eliminar', 'El asistente fue eliminado exitosamente');
+        //Retornar a la vista original
+        return back();
     }
 }

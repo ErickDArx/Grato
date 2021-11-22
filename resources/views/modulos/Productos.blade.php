@@ -17,7 +17,7 @@
     <div class="container">
       <div class="row d-flex align-items-center">
         <div class="col-sm-6 mt-1 mb-1">
-          <h4 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i>Elaboracion de productos</h4>
+          <h4 class="font-weight-bold m-0"><i class="fa fa-check-square mr-1"></i>Elaboraci&oacute;n de productos</h4>
         </div>
         <div class="col-sm-6 mt-1 mb-1">
           <button class="Producto btn btn-dark btn-block">Ingresar nuevo producto</button>
@@ -78,7 +78,7 @@
   <div class="col-sm-12">
     <div class=" fade show" role="alert">
       <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+        <span><i class="fa fa-exclamation mr-1"></i>Verifiqu&eacute; bien los datos en el formulario</span>
       </div>
     </div>
   </div>
@@ -145,7 +145,7 @@
             </div>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+            <h6 class="col-12 mt-3">Si usted hace click en aceptar, los cambios se van a aplicar</h6>
           </main>
           <footer class="modal__footer">
             <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
@@ -165,7 +165,7 @@
     <div class="col-sm-6 mt-2">
       <button type="button" class="Actualizar text-primary btn m-0 btn-block bg-white"
         data-micromodal-trigger="modal-3{{$item->id_producto}}"><i class="fa fa-edit mr-2 "></i>Actualizar
-        información</button>
+        informaci&oacute;n</button>
     </div>
     <div class="col-sm-6 mt-2">
       <form action="{{route('EliminarProducto',$item->id_producto)}}" method="POST">
@@ -173,7 +173,7 @@
         @method('DELETE')
         <button type="button" class="Eliminar text-danger btn m-0 btn-block bg-white"
           data-micromodal-trigger="modal-2{{$item->id_producto}}"><i class="fa fa-trash mr-2 "></i>Eliminar
-          información</button>
+          informaci&oacute;n</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_producto}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -191,7 +191,7 @@
                 </div>
               </header>
               <main class="modal__content" id="modal-1-content">
-                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                <h6 class="col-12 mt-3">Si usted hace click en aceptar, los cambios se van a aplicar</h6>
               </main>
               <footer class="modal__footer">
                 <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">

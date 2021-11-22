@@ -19,11 +19,6 @@ class CreateTCif extends Migration
         });
     }
 
-    /**  perrrooooo
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('t_cif');

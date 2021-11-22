@@ -12,7 +12,7 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="m-2 d-flex justify-content-center row align-items-center">
     <div class="col-sm-6">
-      <h4 class="font-weight-bold mb-2"><i class="fa fa-coins"></i> Costos Indirectos de Fabricación</h4>
+      <h4 class="font-weight-bold mb-2"><i class="fa fa-coins"></i> Costos Indirectos de Fabricaci&oacute;n</h4>
     </div>
     <div class="col-sm-6">
       <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
@@ -34,7 +34,7 @@
               <form class="form-group" method="POST" action="{{route('AgregarCIF')}}">
                 @csrf
                 <div class="m-0 mb-2">
-                  <label for="">1.Titulo del CIF</label>
+                  <label for="">1.T&iacute;tulo del CIF</label>
                   <input type="text" name="nombre_cif" class="form-control" value="">
                   @error('nombre_cif')
                   <div class="fade show mb-2" role="alert">
@@ -63,7 +63,7 @@
   <div class="col-sm-12">
     <div class=" fade show" role="alert">
       <div class="text-danger">
-        <span><i class="fa fa-exclamation mr-1"></i>Verifique bien los datos en el formulario</span>
+        <span><i class="fa fa-exclamation mr-1"></i>Verifiqu&eacute; bien los datos en el formulario</span>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
     @csrf
 
     <div class="col-sm-6 ">
-      <h6 class="font-weight-bold"><i class="fa fa-clipboard-list mr-1"></i> Listado de costos indirectos de fabricacion
+      <h6 class="font-weight-bold"><i class="fa fa-clipboard-list mr-1"></i> Listado de costos indirectos de fabricaci&oacute;n
       </h6>
     </div>
 
@@ -106,8 +106,8 @@
     @method('PUT')
     <div class="border-bottom m-2 d-flex align-items-center row">
       <div class="col-sm-6 mb-2 d-flex align-items-center">
-        <h5 class="m-0 card-title font-weight-bold mt-2"><i class="fa fa-quote-left mr-1"></i> Titulo del CIF de la
-          cadena de produccion</i></h5>
+        <h5 class="m-0 card-title font-weight-bold mt-2"><i class="fa fa-quote-left mr-1"></i> T&iacute;tulo del CIF de la
+          cadena de producci&oacute;n</i></h5>
       </div>
       <div class="col-sm-6 mt-2" id="nombre">
         <div class="input-group mb-3">
@@ -115,7 +115,7 @@
           <div class="input-group-append">
             <a type="submit" href="{{route('IndexCIF' ,  encrypt($item->id_cif))}}"
               class="btn-dark btn border btn-block">Ver
-              detalle</a>
+              Detalle</a>
           </div>
         </div>
       </div>
@@ -165,7 +165,7 @@
 
         <a href="#" data-micromodal-trigger="modal-3{{$item->id_cif}}"
           class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit"></i> Editar
-          informacion</a>
+          informaci&oacute;n</a>
   </form>
 
 </div>
@@ -177,7 +177,7 @@
     @method('DELETE')
     <a data-micromodal-trigger="modal-2{{$item->id_cif}}" class="text-danger bg-white btn btn-block"><i
         class="fa fa-trash"></i> Eliminar
-      informacion</a>
+      informaci&oacute;n</a>
 
     <!-- Modal -->
     <div class="modal micromodal-slide" id="modal-2{{$item->id_cif}}" aria-hidden="true">

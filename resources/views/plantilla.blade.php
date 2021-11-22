@@ -65,10 +65,10 @@
                         <a class="dropdown-item" href="{{route('Perfil')}}"><i class="fa fa-user-circle mr-2"></i>Ir al
                             perfil</a>
                         <a class="dropdown-item" href="{{route('Principal')}}"><i class="fa fa-house-user mr-2"></i>ir
-                            al menu principal</a>
+                            al men&uacute; principal</a>
                         <a class="dropdown-item text-dark" href="#" style=""
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                class="fa fa-sign-out-alt mr-2"></i>Cerrar Sesion</a>
+                                class="fa fa-sign-out-alt mr-2"></i>Cerrar Sesi&oacute;n</a>
 
                         <form hidden id="logout-form" action="{{ route('logout') }}" method="POST"
                             style="display: none;">
@@ -123,7 +123,10 @@
                 <div class="card shadow m-2" style="border-radius: 0.5rem;">
                     <div class="card-body text-center">
                         @php
+                        setLocale(LC_ALL,'es_ES');
+                        Carbon\Carbon::setLocale('es');
                         $date = \Carbon\Carbon::now();
+                        $date->diffForHumans();
                         @endphp
                         <h5 class="">{{ date('h:i a')}}</h5>
 

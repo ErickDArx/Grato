@@ -7,10 +7,10 @@
 
 {{-- Tarjeta de presentacion / Modal / Boton --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="d-flex justify-content-center row align-items-center">
+  <div class="m-2 d-flex justify-content-center row align-items-center">
 
     {{-- Titulo del CIF --}}
-    <div class="col-sm-8 mt-1 mb-1">
+    <div class="col-sm-6 mt-1 mb-1">
       <h4 class="font-weight-bold m-0"><i class="fa fa-coins mr-2 "></i>CIF : {{$cif->nombre_cif}}</h4>
     </div>
 
@@ -35,15 +35,15 @@
               @csrf
 
               <div class="m-0 mb-2">
-                <label for="">1. Porcentaje de utilizacion en la empresa</label>
+                <label for="">1. Porcentaje de utilizaci&oacute;n en la empresa</label>
                 <input type="text" name="porcentaje_utilizacion" class="form-control" value="">
               </div>
               <div class="m-0 mb-2">
-                <label for="">2.Porcentaje de produccion del producto</label>
+                <label for="">2.Porcentaje de producci&oacute;n del producto</label>
                 <input type="text" name="porcentaje_produccion" class="form-control" value="">
               </div>
               <div class="m-0 mb-2">
-                <label for="">3.Produccion promedio mensual</label>
+                <label for="">3.Producci&oacute;n promedio mensual</label>
                 <input type="text" name="produccion_mensual" class="form-control" value="">
               </div>
               <button type="submit" class="modal__btn modal__btn-primary col-12">Aceptar</button>
@@ -56,8 +56,8 @@
     </div>
 
     {{-- Boton para abrir el modal --}}
-    <div class="col-sm-4">
-      <a href="#" class="Operario btn btn-block btn-dark">valores porcentuales</a>
+    <div class="col-sm-6">
+      <a href="#" class="Operario btn btn-block btn-dark">Valores Porcentuales</a>
     </div>
 
   </div>
@@ -67,7 +67,7 @@
 <form class="form-group mt-0 mb-0" action="{{route('AgregarMes',$cif->id_cif)}}" method="POST">
   @csrf
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-    <div class="d-flex justify-content-center row align-items-center">
+    <div class="m-2 d-flex justify-content-center row align-items-center">
 
       <div class="col-sm-4">
         <div class="m-0 mb-2">
@@ -122,7 +122,7 @@
 
 {{-- Titulo para el listado de recibos / Boton volver atras --}}
 <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
-  <div class="col-sm-8 d-flex align-items-center justify-content-center m-0 p-2 border rounded">
+  <div class="col-sm-8 d-flex align-items-center justify-content-center m-0 p-2 rounded">
     <h6 class="m-0 font-weight-bolder"><i class="fa fa-calendar mr-2 "></i>Listado de recibos del {{ date('Y')}}</h6>
   </div>
   <div class="col-sm-4 d-flex mt-1 justify-content-center align-items-center m-0">
@@ -161,9 +161,13 @@
 {{-- Listar los recibos / Botones  --}}
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
 
-  <form class="row " action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
+  <form class="row m-2" action="{{route('ActualizarMes', array($cif->id_cif ,$item->id_mes))}}" method="POST">
     @csrf
     @method('PUT')
+    @php
+    setLocale(LC_ALL,'es_ES');
+    Carbon\Carbon::setLocale('es');
+    @endphp
     <div class="m-2 d-flex row align-items-center">
       <div class="col-sm-6">
         <h6 class="m-0 mt-1 mb-1"><i class="fa fa-calendar-times mr-2 "></i>Fecha</h6>
@@ -214,7 +218,7 @@
   </div>
   <div class="col-sm-6 d-flex justify-content-center mt-2">
     <a data-micromodal-trigger="modal-2{{$item->id_mes}}" class="bg-white text-danger btn btn-block border-0 ">
-      <i class="fa fa-trash mr-2 "></i>Eliminar informacion
+      <i class="fa fa-trash mr-2 "></i>Eliminar Informaci&oacute;n
     </a>
   </div>
 </div>
@@ -283,12 +287,12 @@
 <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;">
   <div class="d-flex row align-items-center m-0">
     <div class="col-sm-6">
-      <h6 class=" font-weight-bolder"><i class="fa fa-calculator mr-2 "></i>Calculos respectivos</h6>
+      <h6 class=" font-weight-bolder"><i class="fa fa-calculator mr-2 "></i>C&aacute;lculos respectivos</h6>
     </div>
     <div class="col-sm-6">
       <a class="btn btn-outline-dark btn-block" data-toggle="collapse" href="#calculos" role="button"
         aria-expanded="false" aria-controls="collapseExample">
-        Ver mas informacion
+        Ver mas informaci&oacute;n
       </a>
     </div>
   </div>
@@ -301,7 +305,7 @@
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #126e82">
     <div class="m-2 d-flex row align-items-center">
       <div class="col-6">
-        <h6 class="m-0">Porcentaje de utilizacion en la empresa</h6>
+        <h6 class="m-0">Porcentaje de utilizaci&oacute;n en la empresa</h6>
       </div>
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
@@ -323,7 +327,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->consumo_empresa}}">
         @endif
         @endforeach
@@ -334,12 +338,12 @@
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #29bb89">
     <div class="m-2 d-flex row align-items-center">
       <div class="col-6">
-        <p class="m-0">Porcentaje de produccion del producto por mes</p>
+        <p class="m-0">Porcentaje de producci&oacute;n del producto por mes</p>
       </div>
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->porcentaje_produccion}}">
 
         @endif
@@ -351,12 +355,12 @@
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #1e6f5c">
     <div class="m-2 d-flex row align-items-center">
       <div class="col-6">
-        <p class="m-0">Consumo de la produccion</p>
+        <p class="m-0">Consumo de la producci&oacute;n</p>
       </div>
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->consumo_produccion}}">
 
         @endif
@@ -368,12 +372,12 @@
   <div class="shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #387c6d">
     <div class="m-2 d-flex row align-items-center">
       <div class="col-6">
-        <p class="m-0">Produccion promedio mensual</p>
+        <p class="m-0">Producci&oacute;n promedio mensual</p>
       </div>
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->produccion_mensual}}">
 
         @endif
@@ -390,7 +394,7 @@
       <div class="col-6 text-center">
         @foreach ($t_valores as $item)
         @if ($item->id_cif == $cif->id_cif)
-        
+
         <input class="form-control" readonly type="text" value="₡{{$item->total}}">
 
         @endif

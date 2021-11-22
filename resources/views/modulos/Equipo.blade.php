@@ -69,7 +69,7 @@
                   @enderror
                 </div>
                 <div class="m-0 mb-2">
-                  <label for="">3.Vida util</label>
+                  <label for="">3.Vida &uacute;til</label>
                   <input type="number" name="vida_util" class="form-control" value="{{old('vida_util')}}">
                   @error('vida_util')
                   <div class="fade show mb-2" role="alert">
@@ -80,7 +80,7 @@
                   @enderror
                 </div>
                 <div class="m-0 mb-2">
-                  <label for="">4.Porcentaje de utilizacion</label>
+                  <label for="">4.Porcentaje de utilizaci&oacute;n</label>
                   <input type="number" name="porcentaje_utilizacion" class="form-control"
                     value="{{old('porcentaje_utilizacion')}}">
                   @error('porcentaje_utilizacion')
@@ -161,7 +161,7 @@
       <div class="col-sm-12">
         <button class=" mt-2 mb-2 btn border-dark btn-outline-dark btn-block" type="button" data-toggle="collapse"
           data-target="#collapseExample{{$item->id_equipo}}" aria-expanded="false" aria-controls="collapseExample">
-          Ver mas informacion
+          Ver mas informaci&oacute;n
         </button>
       </div>
     </div>
@@ -176,7 +176,7 @@
         </div>
         <div class="col-sm-6 mb-2">
           <div class="">
-            <h6 class="card-title font-weight-bold mt-1">Vida util</h6>
+            <h6 class="card-title font-weight-bold mt-1">Vida &uacute;til</h6>
             <input name="vida_util_del_equipo" class="form-control" type="number" value="{{$item->vida_util}}">
           </div>
         </div>
@@ -184,12 +184,12 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="card-title font-weight-bold mt-1">Depreciacion anual</h6>
+          <h6 class="card-title font-weight-bold mt-1">Depreciaci&oacute;n anual</h6>
           <input name="depreciacion_anual" class="form-control" readonly type="text"
             value="{{$item->depreciacion_anual}}">
         </div>
         <div class="col-sm-6 mb-2">
-          <h6 class="card-title font-weight-bold mt-1">Porcentaje utilizacion</h6>
+          <h6 class="card-title font-weight-bold mt-1">Porcentaje utilizaci&oacute;n</h6>
           <input name="porcentaje_utilizacion_del_equipo" class="form-control" type="number"
             value="{{$item->porcentaje_utilizacion}}">
         </div>
@@ -197,13 +197,13 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion anual real</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n anual real</h6>
           <input name="depreciacion_anual_real" class="form-control" readonly type="text"
             value="{{$item->depreciacion_anual_real}}">
         </div>
 
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion mensual</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n mensual</h6>
           <input name="depreciacion_mensual" class="form-control" readonly type="text"
             value="{{$item->depreciacion_mensual}}">
         </div>
@@ -212,13 +212,13 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion semanal</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n semanal</h6>
           <input name="depreciacion_semanal" class="form-control" readonly type="text"
             value="{{$item->depreciacion_semanal}}">
         </div>
 
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion diaria</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n diaria</h6>
           <input name="depreciacion_diaria" class="form-control" readonly type="text"
             value="{{$item->depreciacion_diaria}}">
         </div>
@@ -227,13 +227,13 @@
 
       <div class="border-bottom mb-2 mt-2 m-1 row d-flex align-items-center">
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion en horas</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n en horas</h6>
           <input name="depreciacion_diaria" class="form-control" readonly type="text"
             value="{{$item->depreciacion_hora}}">
         </div>
 
         <div class="col-sm-6 mb-2">
-          <h6 class="font-weight-bold">Depreciacion en minutos</h6>
+          <h6 class="font-weight-bold">Depreciaci&oacute;n en minutos</h6>
           <input name="depreciacion_anual_real" class="form-control" readonly type="text"
             value="{{$item->depreciacion_minuto}}">
         </div>
@@ -279,7 +279,7 @@
 
       <button type="button" data-micromodal-trigger="modal-3{{$item->id_equipo}}"
         class="Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Actualizar
-        informacion</button>
+        informaci&oacute;n</button>
 
     </div>
     <div class="col-sm-6">
@@ -289,7 +289,7 @@
 
         <button type="button" class="Eliminar text-danger btn btn-block bg-white"
           data-micromodal-trigger="modal-2{{$item->id_equipo}}"><i class="fa fa-trash mr-1"></i> Eliminar
-          información</button>
+          informaci&oacute;n</button>
         <!-- Modal -->
         <div class="modal micromodal-slide" id="modal-2{{$item->id_equipo}}" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>

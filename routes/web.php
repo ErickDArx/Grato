@@ -103,7 +103,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Actualizar/{id_labor}/calculando', 'CostoUnitarioController@total')->name('ActualizarTotal');
     Route::put('/Actualizando/{id_equipo}', 'CostoUnitarioController@costo')->name('CostoEquipo');
 
-    Route::put('/Eliminar/{id_mano_de_obra}', 'CostoUnitarioController@eoperario')->name('EOperario');
+    Route::put('/Eliminar/Operario/{id_mano_de_obra}', 'CostoUnitarioController@eoperario')->name('EOperario');
+    Route::put('/Eliminar/Equipo/{id_equipo}', 'CostoUnitarioController@eequipo')->name('EEquipo');
 
     //Vista precio de venta
     Route::get('PrecioVenta/{id_producto}', 'PrecioVentaController@index')->name('IndexPV');

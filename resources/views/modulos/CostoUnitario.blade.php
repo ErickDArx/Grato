@@ -19,7 +19,7 @@
         <div class="col-sm-6 mt-2 mb-1 d-flex justify-content-center">
             <a class=" btn text-dark btn-block text-sm-right" href="{{route('Pedidos')}}"><i
                     class="fa fa-arrow-left"></i> Regresar
-                atrás</a>
+                atr&aacute;s</a>
         </div>
     </div>
 
@@ -94,7 +94,7 @@
             <div class="col-sm-6 mt-2">
                 <label for=""></label>
                 <button href="" type="submit" class="btn btn-block btn-outline-dark">Actualizar
-                    informacion</button>
+                    Informaci&oacute;n</button>
             </div>
 
             <input type="hidden" value="{{$item->unidad_medida}}" name="unidad_medida">
@@ -138,7 +138,7 @@
     @csrf
     <div class="row shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #ff8882;">
         <div class="col-sm-6">
-            <label for=""><i class="fa fa-file-signature mr-1"></i> Seleccion de operarios</label>
+            <label for=""><i class="fa fa-file-signature mr-1"></i> Selecci&oacute;n de operarios</label>
             <select class="m-0 form-control" name="id_mano_de_obra" id="">
                 <option value="Sin determinar">Seleccionar</option>
 
@@ -381,19 +381,87 @@
                 <label for="">Costo</label>
                 <input type="text" class="form-control" readonly value="{{$mo->costo}}">
             </div>
-            <div class="col-sm-3">
-                <label class="" for=""></label>
-                <button type="submit" class="mt-2 btn-block btn btn-outline-primary"><i class="fa fa-edit mr-1"></i>
-                    Editar</button>
+                <!-- Modal -->
+                <div class="modal micromodal-slide" id="modal-3{{$item->id_equipo}}" aria-hidden="true">
+                    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                            <header class="modal__header">
+                                <div class="">
+                                    <div class="">
+                                        <p class="h4 font-weight-bold mb-2 text-primary" id="">
+                                            <i class="fa fa-edit mr-2 "></i>Actualizar
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <button class="modal__close shadow-sm" aria-label="Close modal"
+                                        data-micromodal-close></button>
+                                </div>
+                            </header>
+                            <main class="modal__content" id="modal-1-content">
+                                <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                            </main>
+                            <footer class="modal__footer">
+                                <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                                    Aceptar
+                                </button>
+                                <button class="modal__btn col-3" data-micromodal-close
+                                    aria-label="Close this dialog window ">Cerrar</button>
+                            </footer>
+    
+                        </div>
+                    </div>
+                </div>
+    </form>
+    <div class="col-sm-3 mt-3 d-flex align-items-center">
+        <a data-micromodal-trigger="modal-3{{$item->id_equipo}}"
+            class=" Actualizar text-primary bg-white btn btn-block"><i class="fa fa-edit mr-1"></i> Editar</a>
+    </div>
 
-            </div>
-            <div class="col-sm-3">
-                <label for=""></label>
-                <button type="submit" class="mt-2 btn-block btn btn-outline-danger"><i class="fa fa-trash mr-1"></i>
-                    Eliminar</button>
+    <div class="col-sm-3 mt-3 d-flex align-items-center">
+        <a data-micromodal-trigger="modal-2{{$item->id_equipo}}" class="text-danger bg-white btn btn-block"><i
+                class="fa fa-trash mr-1"></i> Eliminar</a>
+    </div>
+
+    <form action="{{route('EEquipo',$item->id_costo_unitario)}}" method="POST">
+        {{ csrf_field() }}
+        @method('PUT')
+        <input hidden type="" name="id_mano_de_obra" value="">
+        <!-- Modal -->
+        <div class="modal micromodal-slide" id="modal-2{{$item->id_equipo}}" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <header class="modal__header">
+                        <div class="">
+                            <div class="">
+                                <p class="h4 font-weight-bold mb-2 text-danger" id="">
+                                    <i class="fa fa-trash mr-2 "></i>Eliminar
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="modal__close shadow-sm" aria-label="Close modal"
+                                data-micromodal-close></button>
+                        </div>
+                    </header>
+                    <main class="modal__content" id="modal-1-content">
+                        <h6 class="col-12 mt-3">Si usted da aceptar, los cambios se van a aplicar</h6>
+                    </main>
+                    <footer class="modal__footer">
+                        <button type="submit" class="col-3 modal__btn modal__btn-primary col-3 mr-1">
+                            Aceptar
+                        </button>
+                        <button class="modal__btn col-3" data-micromodal-close
+                            aria-label="Close this dialog window ">Cerrar</button>
+                    </footer>
+
+                </div>
             </div>
         </div>
+    
     </form>
+</div>
+
 
 </div>
 @endif
@@ -462,11 +530,11 @@
                     <h5 class="font-weight-bold m-0">Total</h5>
                 </div>
                 <div class="col-sm-6">
-            @foreach ($t_totales as $item)
-            @if ($item->id_producto == $producto->id_producto)
-            <input readonly class="form-control" type="text" value="{{$item->total}}">
-            @endif
-            @endforeach
+                    @foreach ($t_totales as $item)
+                    @if ($item->id_producto == $producto->id_producto)
+                    <input readonly class="form-control" type="text" value="{{$item->total}}">
+                    @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -476,7 +544,7 @@
 
 {{-- Cantidad por fabricar --}}
 <div class="borde-lineal shadow m-2 card-body bg-white" style="border-radius: 0.5rem;border-left: 8px solid #006d36;">
-    <form action="{{route('AgregarCantidad',$producto->id_producto)}}" method="POST">
+    <form action="{{route('AgregarCantidad', $producto->id_producto)}}" method="POST">
         @csrf
         @method('PUT')
         <div class="m-2 d-flex row align-items-center">
@@ -487,15 +555,9 @@
                 <label for="">Cantidad a producir</label>
             </div>
 
-            @foreach ($t_totales as $pv)
-            @if ($producto->id_producto == $pv->id_producto)
             <div class="col-sm-6 mt-1 mb-1">
-                <input type="number" name="cantidad" class="form-control" value="{{$pv->cantidad_producir}}" id="">
+                <input type="number" name="cantidad" class="form-control">
             </div>
-            @endif
-            @endforeach
-
-
             <div class="col-sm-6 mt-1 mb-1">
                 <button type="submit" class="btn btn-block btn-dark">Aceptar</button>
             </div>

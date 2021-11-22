@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTLabores extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('t_labores', function (Blueprint $table) {
